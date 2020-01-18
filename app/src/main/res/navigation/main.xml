@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/main"
+	app:startDestination="@id/tabFragment">
+	
+	<fragment
+		android:id="@+id/tabFragment"
+		android:name="com.tanzhi.android.wanandroid.TabFragment"
+		android:label="fragment_tab"
+		tools:layout="@layout/fragment_tab" >
+	<action
+		android:id="@+id/action_tab_to_login"
+		app:destination="@id/loginActivity"/>
+	</fragment>
+</navigation>
