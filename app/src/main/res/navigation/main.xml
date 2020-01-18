@@ -7,11 +7,17 @@
 	
 	<fragment
 		android:id="@+id/tabFragment"
-		android:name="com.tanzhi.android.wanandroid.TabFragment"
+		android:name="com.tainzhi.android.wanandroid.ui.TabFragment"
 		android:label="fragment_tab"
-		tools:layout="@layout/fragment_tab" >
-	<action
-		android:id="@+id/action_tab_to_login"
-		app:destination="@id/loginActivity"/>
+		tools:layout="@layout/fragment_tab">
+		<action
+			android:id="@+id/action_tab_to_login"
+			app:destination="@id/loginActivity" />
 	</fragment>
+	
+	<activity
+		android:id="@+id/loginActivity"
+		android:name="com.tainzhi.android.wanandroid.ui.LoginActivity"
+		android:label="activity_login"
+		tools:layout="@layout/activity_login"/>
 </navigation>

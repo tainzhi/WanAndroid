@@ -1,4 +1,4 @@
-package com.tanzhi.android.wanandroid
+package com.tainzhi.android.wanandroid
 
 import org.junit.Test
 

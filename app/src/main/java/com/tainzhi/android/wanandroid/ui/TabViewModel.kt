@@ -1,4 +1,4 @@
-package com.tanzhi.android.wanandroid
+package com.tainzhi.android.wanandroid.ui
 
 import androidx.lifecycle.ViewModel
 

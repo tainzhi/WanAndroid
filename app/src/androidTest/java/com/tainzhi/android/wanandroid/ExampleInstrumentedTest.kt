@@ -1,4 +1,4 @@
-package com.tanzhi.android.wanandroid
+package com.tainzhi.android.wanandroid
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

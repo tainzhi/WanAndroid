@@ -1,4 +1,4 @@
-package com.tanzhi.android.wanandroid
+package com.tainzhi.android.wanandroid.ui
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.tainzhi.android.wanandroid.R
 
 
 class TabFragment : Fragment() {
