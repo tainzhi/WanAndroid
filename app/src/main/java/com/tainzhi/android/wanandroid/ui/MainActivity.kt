@@ -3,11 +3,15 @@ package com.tainzhi.android.wanandroid.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.tainzhi.android.wanandroid.R
+import com.tainzhi.android.wanandroid.base.BaseActivity
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+    override fun getLayoutResId() = R.layout.activity_main
+
+    override fun initView() {
+    }
+
+    override fun initData() {
     }
 }
