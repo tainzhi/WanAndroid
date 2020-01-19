@@ -1,9 +1,7 @@
 package com.tainzhi.android.wanandroid.ui
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import com.tainzhi.android.wanandroid.R
-import com.tainzhi.android.wanandroid.base.BaseActivity
+import com.tainzhi.android.wanandroid.base.ui.BaseActivity
 
 class MainActivity : BaseActivity() {
 

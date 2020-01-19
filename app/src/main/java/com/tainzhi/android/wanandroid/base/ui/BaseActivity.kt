@@ -1,4 +1,4 @@
-package com.tainzhi.android.wanandroid.base
+package com.tainzhi.android.wanandroid.base.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

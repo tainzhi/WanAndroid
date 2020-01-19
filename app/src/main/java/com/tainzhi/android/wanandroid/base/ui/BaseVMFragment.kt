@@ -1,4 +1,4 @@
-package com.tainzhi.android.wanandroid.base
+package com.tainzhi.android.wanandroid.base.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import com.tainzhi.android.wanandroid.base.ui.BaseViewModel
 
 /**
  * @author:       tainzhi

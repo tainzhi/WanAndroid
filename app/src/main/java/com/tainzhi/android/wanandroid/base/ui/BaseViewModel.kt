@@ -1,4 +1,4 @@
-package com.tainzhi.android.wanandroid.base
+package com.tainzhi.android.wanandroid.base.ui
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

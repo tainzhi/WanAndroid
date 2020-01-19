@@ -2,10 +2,9 @@ package com.tainzhi.android.wanandroid.ui
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.tainzhi.android.wanandroid.R
-import com.tainzhi.android.wanandroid.base.BaseFragment
+import com.tainzhi.android.wanandroid.base.ui.BaseFragment
 import kotlinx.android.synthetic.main.fragment_tab.*
 
 
