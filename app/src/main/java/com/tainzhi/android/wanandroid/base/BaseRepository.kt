@@ -12,7 +12,7 @@ import java.io.IOException
  **/
 
 open class BaseRepository {
-    suspend fun <T: Any> apiCall(call: suspend () -> BaseResponse<T> ): BaseResponse<T> {
+    suspend fun <T: Any> apiCall(call: suspend () -> Response<T> ): Response<T> {
         return call.invoke()
     }
 
@@ -24,7 +24,7 @@ open class BaseRepository {
         }
     }
 
-    suspend fun <T: Any> executeRespons(response: BaseResponse<T>,
+    suspend fun <T: Any> executeRespons(response: Response<T>,
                                         successBlock: (suspend CoroutineScope.() -> Unit) ?= null,
                                         errorBlock: (suspend CoroutineScope.() -> Unit) ?= null):
             Result<T> {

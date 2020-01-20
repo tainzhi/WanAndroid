@@ -7,5 +7,5 @@ package com.tainzhi.android.wanandroid.base
  * @description:
  **/
 
-data class BaseResponse<out T>(val errorCode: Int, val errorMsg: String, val data: T ) {
+data class Response<out T>(val errorCode: Int, val errorMsg: String, val data: T ) {
 }
