@@ -32,4 +32,9 @@ class LoginRepository(val service: WanService): BaseRepository() {
             WanApp.current_user = user
         })
     }
+
+    private suspend fun requestRegister(userName:String, passWord: String): Result<User> {
+        val response = service.register(userName, passWord, passWord)
+        return executeRespons(response, {requestLogin(userName, passWord)})
+    }
 }
