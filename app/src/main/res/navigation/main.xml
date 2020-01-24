@@ -17,7 +17,7 @@
 	
 	<activity
 		android:id="@+id/loginActivity"
-		android:name="com.tainzhi.android.wanandroid.ui.LoginActivity"
+		android:name="com.tainzhi.android.wanandroid.ui.login.LoginActivity"
 		android:label="activity_login"
 		tools:layout="@layout/activity_login"/>
 </navigation>

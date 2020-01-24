@@ -24,7 +24,7 @@ open class BaseRepository {
         }
     }
 
-    suspend fun <T: Any> executeRespons(response: Response<T>,
+    suspend fun <T: Any> executeResponse(response: Response<T>,
                                         successBlock: (suspend CoroutineScope.() -> Unit) ?= null,
                                         errorBlock: (suspend CoroutineScope.() -> Unit) ?= null):
             Result<T> {

@@ -2,6 +2,7 @@ package com.tainzhi.android.wanandroid.base.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.ViewDataBinding
 import com.tainzhi.android.wanandroid.base.ui.BaseViewModel
 
 /**
@@ -14,6 +15,8 @@ import com.tainzhi.android.wanandroid.base.ui.BaseViewModel
 abstract class BaseVMActivity<VM : BaseViewModel>(useBinding: Boolean = false): AppCompatActivity
 () {
     private val _useBinding = useBinding
+    protected lateinit var binding: ViewDataBinding
+    lateinit var viewModel: VM
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +27,7 @@ abstract class BaseVMActivity<VM : BaseViewModel>(useBinding: Boolean = false): 
     }
 
     open fun getLayoutResId(): Int = 0
+    abstract fun initVM(): VM
     abstract fun initView()
     abstract fun initData()
     abstract fun startObserve()

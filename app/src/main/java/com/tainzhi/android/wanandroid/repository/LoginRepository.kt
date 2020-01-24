@@ -4,6 +4,7 @@ import com.google.gson.Gson
 import com.tainzhi.android.wanandroid.WanApp
 import com.tainzhi.android.wanandroid.api.WanService
 import com.tainzhi.android.wanandroid.base.BaseRepository
+import com.tainzhi.android.wanandroid.base.Result
 import com.tainzhi.android.wanandroid.bean.User
 import com.tainzhi.android.wanandroid.util.Preference
 
@@ -15,17 +16,18 @@ import com.tainzhi.android.wanandroid.util.Preference
  **/
 
 class LoginRepository(val service: WanService): BaseRepository() {
-    private val isLogin by Preference(Preference.IS_LOGIN, false)
-    private val userJson by Preference(Preference.USER_GSON, "")
+    private var isLogin by Preference(Preference.IS_LOGIN, false)
+    private var userJson by Preference(Preference.USER_GSON, "")
 
     suspend fun login(userName: String, passWord: String): Result<User> {
-        return safeApiCall(call = {request})
+        return safeApiCall(call = {requestLogin(userName, passWord)},
+                errorMsg = "登录失败！")
     }
 
     private suspend fun requestLogin(userName: String, passWord: String): Result<User> {
         val response = service.login(userName, passWord)
 
-        return executeRespons(response, {
+        return executeResponse(response, {
             val user = response.data
             isLogin = true
             userJson = Gson().toJson(user)
@@ -33,8 +35,13 @@ class LoginRepository(val service: WanService): BaseRepository() {
         })
     }
 
-    private suspend fun requestRegister(userName:String, passWord: String): Result<User> {
+    suspend fun register(userName:String, passWord: String): Result<User> {
         val response = service.register(userName, passWord, passWord)
-        return executeRespons(response, {requestLogin(userName, passWord)})
+        return executeResponse(response, {requestRegister(userName, passWord)})
+    }
+
+    private suspend fun requestRegister(userName: String, passWord: String): Result<User> {
+        val response = service.register(userName, passWord, passWord)
+        return executeResponse(response, {requestLogin(userName, passWord)})
     }
 }
