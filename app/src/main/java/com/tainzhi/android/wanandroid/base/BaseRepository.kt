@@ -16,11 +16,12 @@ open class BaseRepository {
         return call.invoke()
     }
 
-    suspend fun <T: Any> safeApiCall(call: suspend () -> Result<T>, errorMsg: String): Result<T> {
+    suspend fun <T: Any> safeApiCall(call: suspend () -> Result<T>, errorMessage: String):
+            Result<T> {
         return try {
             call()
         } catch (e: Exception) {
-            Result.Error(IOException(errorMsg, e))
+            Result.Error(IOException(errorMessage, e))
         }
     }
 

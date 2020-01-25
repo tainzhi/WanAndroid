@@ -16,18 +16,17 @@ import com.tainzhi.android.wanandroid.bean.Banner
 
 class HomeRepository: BaseRepository() {
     suspend fun getBanners(): Result<List<Banner>> {
-        return safeApiCall(call = { requestBanners() }, errorMsg = "")
+        return safeApiCall(call = { requestBanners() }, errorMessage = "")
     }
 
     private suspend fun requestBanners() : Result<List<Banner>> =
         executeResponse(WanClient.service.getBanner())
 
-    suspend fun getArticle(page: Int) : Result<ArticleList> {
-        return safeApiCall(call = { requestArticleList(page)}, errorMsg = "")
+    suspend fun getArticleList(page: Int) : Result<ArticleList> {
+        return safeApiCall(call = { requestArticleList(page)}, errorMessage = "")
     }
 
-    private suspend fun requestArticleList(page : Int) : Result<ArticleList> {
+    private suspend fun requestArticleList(page : Int) : Result<ArticleList> =
         executeResponse(WanClient.service.getHomeArticles(page))
-    }
 
 }
