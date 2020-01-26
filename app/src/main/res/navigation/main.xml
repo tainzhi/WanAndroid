@@ -13,6 +13,9 @@
 		<action
 			android:id="@+id/action_tab_to_login"
 			app:destination="@id/loginActivity" />
+		<action
+			android:id="@+id/action_tabFragment_to_browserActivity"
+			app:destination="@id/browserActivity" />
 	</fragment>
 	
 	<activity
@@ -20,4 +23,16 @@
 		android:name="com.tainzhi.android.wanandroid.ui.login.LoginActivity"
 		android:label="activity_login"
 		tools:layout="@layout/activity_login"/>
+
+	<activity
+		android:id="@+id/browserActivity"
+		android:name="com.tainzhi.android.wanandroid.ui.BrowserActivity"
+		android:label="activity_browser"
+		tools:layout="@layout/activity_browser">
+
+		<argument android:name="url"
+			app:argType="string"
+			android:defaultValue="www.wanandroid.com"/>
+
+	</activity>
 </navigation>

@@ -30,10 +30,10 @@
 		android:id="@+id/addFab"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_gravity="bottom|right"
-		android:layout_marginRight="20dp"
+		android:layout_gravity="bottom|end"
+		android:layout_marginEnd="20dp"
 		android:layout_marginBottom="20dp"
 		android:src="@drawable/ic_baseline_add_24"
-		android:visibility="gone"
+		android:visibility="gone"/>
 		app:layout_behavior=".view.ScrollAwareFABBehavior" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

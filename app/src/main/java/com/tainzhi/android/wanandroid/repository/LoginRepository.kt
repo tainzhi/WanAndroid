@@ -21,7 +21,7 @@ class LoginRepository(val service: WanService): BaseRepository() {
 
     suspend fun login(userName: String, passWord: String): Result<User> {
         return safeApiCall(call = {requestLogin(userName, passWord)},
-                errorMsg = "登录失败！")
+                errorMessage = "登录失败！")
     }
 
     private suspend fun requestLogin(userName: String, passWord: String): Result<User> {

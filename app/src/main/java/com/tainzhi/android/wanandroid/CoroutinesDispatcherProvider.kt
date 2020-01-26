@@ -13,7 +13,7 @@ import kotlinx.coroutines.Dispatchers.Main
  * @description:
  **/
 
-data class CoroutinesDispathcherProvider(
+data class CoroutinesDispatcherProvider(
         val main: CoroutineDispatcher = Dispatchers.Main,
         val computation: CoroutineDispatcher = Dispatchers.Default,
         val io: CoroutineDispatcher = Dispatchers.IO

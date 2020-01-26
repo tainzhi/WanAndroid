@@ -1,5 +1,6 @@
 package com.tainzhi.android.wanandroid.adapter
 
+import com.tainzhi.android.wanandroid.BR
 import com.tainzhi.android.wanandroid.R
 import com.tainzhi.android.wanandroid.bean.Article
 

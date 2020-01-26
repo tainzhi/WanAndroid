@@ -12,6 +12,7 @@ import com.tainzhi.android.wanandroid.adapter.HomeArticleAdapter
 import com.tainzhi.android.wanandroid.base.ui.BaseVMFragment
 import com.tainzhi.android.wanandroid.bean.Banner
 import com.tainzhi.android.wanandroid.ui.ArticleViewModel
+import com.tainzhi.android.wanandroid.ui.BrowserActivity
 import com.tainzhi.android.wanandroid.util.GlideImageLoader
 import com.tainzhi.android.wanandroid.util.Preference
 import com.tainzhi.android.wanandroid.util.dp2px
@@ -63,7 +64,8 @@ class HomeFragment : BaseVMFragment<ArticleViewModel>() {
         homeArticleAdapter.run {
             setOnItemClickListener { _, _, position ->
                 val bundle = bundleOf(BrowserActivity.URL to homeArticleAdapter.data[position].link)
-                androidx.navigation.Navigation.findNavController(homeRecycleView).navigate(R.id.action_tab_to_browser, bundle)
+                androidx.navigation.Navigation.findNavController(homeRecycleView).navigate(R.id
+                        .action_tabFragment_to_browserActivity, bundle)
             }
             onItemChildClickListener = this@HomeFragment.onItemChildClickListener
             if (headerLayoutCount > 0) removeAllHeaderView()
@@ -104,7 +106,8 @@ class HomeFragment : BaseVMFragment<ArticleViewModel>() {
             setImageLoader(GlideImageLoader())
             setOnBannerListener { position ->
                 run {
-                    Navigation.findNavController(banner).navigate(R.id.action_tab_to_browser, bundleOf(BrowserActivity.URL to bannerUrls[position]))
+                    Navigation.findNavController(banner).navigate(R.id.action_tabFragment_to_browserActivity, bundleOf
+                    (BrowserActivity.URL to bannerUrls[position]))
                 }
             }
         }

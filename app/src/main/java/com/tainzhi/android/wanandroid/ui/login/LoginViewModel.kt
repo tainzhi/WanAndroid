@@ -4,7 +4,7 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.tainzhi.android.wanandroid.CoroutinesDispathcherProvider
+import com.tainzhi.android.wanandroid.CoroutinesDispatcherProvider
 import com.tainzhi.android.wanandroid.base.ui.BaseViewModel
 import com.tainzhi.android.wanandroid.base.Result
 import com.tainzhi.android.wanandroid.bean.User
@@ -20,7 +20,7 @@ import kotlinx.coroutines.withContext
  **/
  
 class LoginViewModel(val repository: LoginRepository, val provider:
-CoroutinesDispathcherProvider): BaseViewModel() {
+CoroutinesDispatcherProvider): BaseViewModel() {
     val userName = ObservableField<String>("")
     val passWord = ObservableField<String>("")
 

@@ -47,7 +47,7 @@
 				android:inputType="textPassword"
 				android:singleLine="true"
 				android:text="@={viewModel.passWord}"
-				binding:afterTextChanged="@{viewModel.verifyInput}"/>
+				app:afterTextChanged="@{viewModel.verifyInput}"/>
 
 		</com.google.android.material.textfield.TextInputLayout>
 
