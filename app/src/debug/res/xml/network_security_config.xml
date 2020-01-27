@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true" >
+        <!--    <domain-config cleartextTrafficPermitted="true">-->
+        <!--        <domain includeSubdomains="true">182.254.116.117</domain>-->
+        <!--        <domain includeSubdomains="true">pingma.qq.com</domain>-->
+        <!--    </domain-config>-->
+
+        <trust-anchors>
+            <certificates
+                overridePins="true"
+                src="system" />
+            <certificates
+                overridePins="true"
+                src="user" />
+        </trust-anchors>
+    </base-config>
+</network-security-config>

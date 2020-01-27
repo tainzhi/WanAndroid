@@ -1,5 +1,6 @@
 package com.tainzhi.android.wanandroid.base
 
+import android.util.Log
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.BuildConfig
@@ -26,11 +27,11 @@ abstract class BaseRetorfitClient {
             if (BuildConfig.DEBUG) {
                 logging.level = HttpLoggingInterceptor.Level.BODY
             } else {
-                logging.level = HttpLoggingInterceptor.Level.BASIC
+                logging.level = HttpLoggingInterceptor.Level.BODY
             }
             builder.addInterceptor(logging)
                     .connectTimeout(TIME_OUT.toLong(), TimeUnit.SECONDS)
-            handleBuilder(builder)
+//            handleBuilder(builder)
             return builder.build()
         }
 

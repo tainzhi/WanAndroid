@@ -19,27 +19,28 @@ import java.io.File
  **/
 
 object WanClient : BaseRetorfitClient() {
+
     val service by lazy { getService(WanService::class.java, WanService.BASE_URL) }
 
-    private val cookieJar by lazy {
-        PersistentCookieJar(SetCookieCache(),
-                SharedPrefsCookiePersistor(WanApp.context))
-    }
+    private val cookieJar by lazy { PersistentCookieJar(SetCookieCache(),
+            SharedPrefsCookiePersistor(WanApp.CONTEXT)) }
 
-    override fun handleBuilder(buidler: OkHttpClient.Builder) {
-        val httpCacheDirectory = File(WanApp.context.cacheDir, "responses")
-        val cacheSize = 10 * 1024 * 1024L
+    override fun handleBuilder(builder: OkHttpClient.Builder) {
+
+        val httpCacheDirectory = File(WanApp.CONTEXT.cacheDir, "responses")
+        val cacheSize = 10 * 1024 * 1024L // 10 MiB
         val cache = Cache(httpCacheDirectory, cacheSize)
-        buidler.cache(cache)
+        builder.cache(cache)
+                .cookieJar(cookieJar)
                 .addInterceptor { chain ->
                     var request = chain.request()
-                    if (!NetworkUtils.isNetworkAvailable(WanApp.context)) {
+                    if (!NetworkUtils.isNetworkAvailable(WanApp.CONTEXT)) {
                         request = request.newBuilder()
                                 .cacheControl(CacheControl.FORCE_CACHE)
                                 .build()
                     }
                     val response = chain.proceed(request)
-                    if (!NetworkUtils.isNetworkAvailable(WanApp.context)) {
+                    if (!NetworkUtils.isNetworkAvailable(WanApp.CONTEXT)) {
                         val maxAge = 60 * 60
                         response.newBuilder()
                                 .removeHeader("Pragma")

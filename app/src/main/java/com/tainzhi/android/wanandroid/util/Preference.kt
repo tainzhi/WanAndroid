@@ -23,7 +23,7 @@ class Preference<T>(val name: String, private val default: T) : ReadWritePropert
     }
 
     private val prefs: SharedPreferences by lazy {
-        PreferenceManager.getDefaultSharedPreferences(WanApp.context)
+        PreferenceManager.getDefaultSharedPreferences(WanApp.CONTEXT)
     }
 
     override fun getValue(thisRef: Any?, property: KProperty<*>): T {

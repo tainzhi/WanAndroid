@@ -4,6 +4,7 @@
     package="com.tainzhi.android.wanandroid">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".WanApp"
@@ -13,8 +14,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWaring">
-        <activity android:name=".ui.BrowserActivity"></activity>
+        android:networkSecurityConfig="@xml/network_security_config"
+        tools:ignore="GoogleAppIndexingWaring"
+        tools:targetApi="n">
+        <activity android:name=".ui.BrowserActivity"/>
         <activity android:name=".ui.login.LoginActivity" />
         <activity android:name=".ui.MainActivity">
             <intent-filter>

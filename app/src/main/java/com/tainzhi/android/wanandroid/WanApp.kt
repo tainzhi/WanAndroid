@@ -18,7 +18,7 @@ import kotlin.properties.Delegates
 class WanApp : Application() {
 
     companion object {
-        var context: Context by Delegates.notNull()
+        var CONTEXT: Context by Delegates.notNull()
         lateinit var current_user: User
     }
 

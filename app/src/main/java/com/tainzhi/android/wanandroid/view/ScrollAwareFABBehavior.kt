@@ -18,6 +18,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
  **/
 
 
+// TODO: 2020/1/27 为什么不能使用 
 class ScrollAwareFABBehavior(context: Context, attrs: AttributeSet) : FloatingActionButton.Behavior() {
     private var mIsAnimatingOut = false
 
