@@ -10,7 +10,8 @@ import android.net.ConnectivityManager
  * @description:
  **/
 
-class NetworkUtils {
+class NetWorkUtils {
+
     companion object {
         fun isNetworkAvailable(context: Context): Boolean {
             val manager = context.applicationContext.getSystemService(

@@ -5,7 +5,7 @@ import com.franmontiel.persistentcookiejar.cache.SetCookieCache
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor
 import com.tainzhi.android.wanandroid.WanApp
 import com.tainzhi.android.wanandroid.base.BaseRetorfitClient
-import com.tainzhi.android.wanandroid.util.NetworkUtils
+import com.tainzhi.android.wanandroid.util.NetWorkUtils
 import okhttp3.Cache
 import okhttp3.CacheControl
 import okhttp3.OkHttpClient
@@ -34,13 +34,13 @@ object WanClient : BaseRetorfitClient() {
                 .cookieJar(cookieJar)
                 .addInterceptor { chain ->
                     var request = chain.request()
-                    if (!NetworkUtils.isNetworkAvailable(WanApp.CONTEXT)) {
+                    if (!NetWorkUtils.isNetworkAvailable(WanApp.CONTEXT)) {
                         request = request.newBuilder()
                                 .cacheControl(CacheControl.FORCE_CACHE)
                                 .build()
                     }
                     val response = chain.proceed(request)
-                    if (!NetworkUtils.isNetworkAvailable(WanApp.CONTEXT)) {
+                    if (!NetWorkUtils.isNetworkAvailable(WanApp.CONTEXT)) {
                         val maxAge = 60 * 60
                         response.newBuilder()
                                 .removeHeader("Pragma")
