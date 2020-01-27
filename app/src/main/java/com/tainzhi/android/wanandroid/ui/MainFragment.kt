@@ -24,12 +24,18 @@ class MainFragment : BaseFragment() {
     private val fragmentList = arrayListOf<Fragment>()
     private val homeFragment by lazy { HomeFragment() }
     private val squareFragment by lazy { SquareFragment() }
+    private val projectTypeFragment by lazy { ProjectTypeFragment.newInstance(0, true) } //最新项目
+    private val systemFragment by lazy { SystemFragment() } // 体系
+    private val navigationFragment by lazy { NavigationFragment() } // 导航
     private var onPageChangeCallback: ViewPager2.OnPageChangeCallback? = null
 
     init {
         fragmentList.run {
             add(homeFragment)
             add(squareFragment)
+            add(projectTypeFragment)
+            add(systemFragment)
+            add(navigationFragment)
         }
     }
 

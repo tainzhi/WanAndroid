@@ -1,0 +1,142 @@
+package com.tainzhi.android.wanandroid.ui
+
+import android.os.Bundle
+import androidx.core.os.bundleOf
+import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.chad.library.adapter.base.BaseQuickAdapter
+import com.tainzhi.android.wanandroid.BR
+import com.tainzhi.android.wanandroid.R
+import com.tainzhi.android.wanandroid.adapter.BaseBindAdapter
+import com.tainzhi.android.wanandroid.base.ui.BaseVMFragment
+import com.tainzhi.android.wanandroid.bean.Article
+import com.tainzhi.android.wanandroid.util.Preference
+import com.tainzhi.android.wanandroid.util.dp2px
+import com.tainzhi.android.wanandroid.view.CustomLoadMoreView
+import com.tainzhi.android.wanandroid.view.SpaceItemDecoration
+import kotlinx.android.synthetic.main.fragment_project_type.*
+import org.koin.androidx.viewmodel.ext.android.getViewModel
+
+/**
+ * @author:       tainzhi
+ * @mail:         qfq61@qq.com
+ * @date:         2020/1/28 上午6:00
+ * @description:  最新项目/项目分类
+ **/
+
+class ProjectTypeFragment : BaseVMFragment<ArticleViewModel>() {
+
+    private val isLogin by Preference(Preference.IS_LOGIN, false)
+    private val cid by lazy { arguments?.getInt(CID) }
+    private val isLated by lazy { arguments?.getBoolean(LASTED) }
+    private val projectAdapter by lazy { BaseBindAdapter<Article>(R.layout.item_project, BR.article) }
+
+    companion object {
+        private const val CID = "cid"
+        private const val LASTED = "lasted"
+
+        fun newInstance(cid: Int, isLasted: Boolean): ProjectTypeFragment {
+            val fragment = ProjectTypeFragment()
+            val bundle = Bundle()
+            bundle.putInt(CID, cid)
+            bundle.putBoolean(LASTED, isLasted)
+            fragment.arguments = bundle
+            return fragment
+        }
+    }
+
+    override fun getLayoutResId() = R.layout.fragment_project_type
+
+    override fun initVM(): ArticleViewModel = getViewModel()
+
+    override fun initView() {
+        initRecycleView()
+    }
+
+    override fun initData() {
+        refresh()
+    }
+
+    private fun initRecycleView() {
+        projectRefreshLayout.setOnRefreshListener { refresh() }
+        projectAdapter.run {
+            setOnItemClickListener { _, _, position ->
+                Navigation.findNavController(projectRecycleView)
+                        .navigate(R.id.action_tabFragment_to_browserActivity,
+                                bundleOf(BrowserActivity.URL to projectAdapter.data[position].link))
+            }
+            setLoadMoreView(CustomLoadMoreView())
+            setOnLoadMoreListener({ loadMore() }, projectRecycleView)
+            onItemChildClickListener = this@ProjectTypeFragment.onItemChildClickListener
+        }
+        projectRecycleView.run {
+            layoutManager = LinearLayoutManager(activity)
+            addItemDecoration(SpaceItemDecoration(projectRecycleView.dp2px(10)))
+            adapter = projectAdapter
+        }
+
+    }
+
+    private fun refresh() {
+        projectAdapter.setEnableLoadMore(false)
+        loadData(true)
+    }
+
+    private fun loadMore() {
+        loadData(false)
+    }
+
+    private fun loadData(isRefresh: Boolean) {
+        isLated?.run {
+            if (this) {
+                mViewModel.getLatestProjectList(isRefresh)
+            } else {
+                cid?.let {
+                    mViewModel.getProjectTypeDetailList(isRefresh, it)
+                }
+            }
+        }
+    }
+
+    override fun startObserve() {
+        mViewModel.uiState.observe(this@ProjectTypeFragment, Observer {
+            projectRefreshLayout.isRefreshing = it.showLoading
+
+            it.showSuccess?.let { list ->
+                projectAdapter.run {
+                    if (it.isRefresh) replaceData(list.datas)
+                    else addData(list.datas)
+                    setEnableLoadMore(true)
+                    loadMoreComplete()
+                }
+            }
+
+            if (it.showEnd) projectAdapter.loadMoreEnd()
+        })
+    }
+
+    private val onItemChildClickListener = BaseQuickAdapter.OnItemChildClickListener { _, view, position ->
+        when (view.id) {
+            R.id.articleStar -> {
+                if (isLogin) {
+
+                    projectAdapter.run {
+                        data[position].run {
+                            collect = !collect
+                            mViewModel.collectArticle(id, collect)
+                        }
+                        notifyDataSetChanged()
+                    }
+                } else {
+                    Navigation.findNavController(projectRecycleView)
+                            .navigate(R.id.action_tab_to_login)
+                }
+            }
+        }
+
+    }
+
+}
+ 
+ 
