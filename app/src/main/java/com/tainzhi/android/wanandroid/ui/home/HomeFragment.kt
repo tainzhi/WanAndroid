@@ -21,7 +21,7 @@ import com.tainzhi.android.wanandroid.view.CustomLoadMoreView
 import com.tainzhi.android.wanandroid.view.SpaceItemDecoration
 import com.youth.banner.BannerConfig
 import kotlinx.android.synthetic.main.fragment_home.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 
 /**
@@ -32,7 +32,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
  **/
 
 class HomeFragment : BaseVMFragment<ArticleViewModel>() {
-    private val mViewModel: ArticleViewModel by viewModel()
     private val isLogin by Preference(Preference.IS_LOGIN, false)
     private val homeArticleAdapter by lazy { HomeArticleAdapter() }
     private val bannerImages = mutableListOf<String>()
@@ -41,6 +40,8 @@ class HomeFragment : BaseVMFragment<ArticleViewModel>() {
     private val banner by lazy { com.youth.banner.Banner(activity) }
 
     override fun getLayoutResId() = R.layout.fragment_home
+
+    override fun initVM(): ArticleViewModel = getViewModel()
 
     override fun initView() {
 

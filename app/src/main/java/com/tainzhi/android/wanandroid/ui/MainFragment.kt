@@ -20,15 +20,16 @@ class MainFragment : BaseFragment() {
 
     private var isLogin by Preference(Preference.IS_LOGIN, false)
 
-//    private val titleList = arrayOf("首页", "广场", "最新项目", "体系", "导航")
-    private val titleList = arrayOf("首页")
+    private val titleList = arrayOf("首页", "广场", "最新项目", "体系", "导航")
     private val fragmentList = arrayListOf<Fragment>()
     private val homeFragment by lazy { HomeFragment() }
+    private val squareFragment by lazy { SquareFragment() }
     private var onPageChangeCallback: ViewPager2.OnPageChangeCallback? = null
 
     init {
         fragmentList.run {
             add(homeFragment)
+            add(squareFragment)
         }
     }
 

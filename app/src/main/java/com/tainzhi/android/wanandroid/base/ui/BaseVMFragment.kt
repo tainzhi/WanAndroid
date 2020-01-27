@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import com.tainzhi.android.wanandroid.base.ui.BaseViewModel
 
 /**
  * @author:       tainzhi
@@ -20,6 +19,7 @@ abstract class BaseVMFragment<VM: BaseViewModel>(useBinding: Boolean = false): F
 
     private val _useBinding = useBinding
     protected lateinit var mBinding: ViewDataBinding
+    protected lateinit var mViewModel: VM
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return if (_useBinding) {
@@ -30,6 +30,7 @@ abstract class BaseVMFragment<VM: BaseViewModel>(useBinding: Boolean = false): F
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        mViewModel = initVM()
         initView()
         initData()
         startObserve()
@@ -37,6 +38,7 @@ abstract class BaseVMFragment<VM: BaseViewModel>(useBinding: Boolean = false): F
     }
 
     abstract fun getLayoutResId(): Int
+    abstract fun initVM(): VM
     abstract fun initView()
     abstract fun initData()
     abstract fun startObserve()
