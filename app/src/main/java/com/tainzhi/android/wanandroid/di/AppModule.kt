@@ -6,6 +6,8 @@ import com.tainzhi.android.wanandroid.api.WanService
 import com.tainzhi.android.wanandroid.repository.*
 import com.tainzhi.android.wanandroid.ui.ArticleViewModel
 import com.tainzhi.android.wanandroid.ui.login.LoginViewModel
+import com.tainzhi.android.wanandroid.ui.navigation.NavigationViewModel
+import com.tainzhi.android.wanandroid.ui.system.SystemViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -19,6 +21,8 @@ import org.koin.dsl.module
 val viewModelModule = module {
     viewModel { LoginViewModel(get(), get()) }
     viewModel { ArticleViewModel(get(), get(), get(), get(), get()) }
+    viewModel { SystemViewModel(get(), get()) }
+    viewModel { NavigationViewModel(get()) }
 }
 
 val repositoryModule = module {

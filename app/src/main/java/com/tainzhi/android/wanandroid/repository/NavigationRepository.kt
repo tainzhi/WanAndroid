@@ -1,9 +1,9 @@
 package com.tainzhi.android.wanandroid.repository
 
-import androidx.navigation.Navigation
 import com.tainzhi.android.wanandroid.api.WanClient
 import com.tainzhi.android.wanandroid.base.BaseRepository
 import com.tainzhi.android.wanandroid.base.Result
+import com.tainzhi.android.wanandroid.bean.Navigation
 
 /**
  * @author:       tainzhi

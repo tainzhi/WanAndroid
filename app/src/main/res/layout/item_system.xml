@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.tainzhi.android.wanandroid.util.ExtKt" />
+
+        <variable
+            name="systemParent"
+            type="com.tainzhi.android.wanandroid.bean.SystemParent" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/systemParent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{systemParent.name}"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                tools:text="Parent" />
+
+            <TextView
+                android:id="@+id/systemChild"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/systemParent"
+                android:layout_marginTop="5dp"
+                android:text="@{ExtKt.transFormSystemChild(systemParent.children)}"
+                android:textColor="#323232"
+                android:textSize="12sp"
+                tools:text="Child" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/arrow_back" />
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

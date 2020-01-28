@@ -8,6 +8,8 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.tainzhi.android.wanandroid.R
 import com.tainzhi.android.wanandroid.base.ui.BaseFragment
 import com.tainzhi.android.wanandroid.ui.home.HomeFragment
+import com.tainzhi.android.wanandroid.ui.navigation.NavigationFragment
+import com.tainzhi.android.wanandroid.ui.system.SystemFragment
 import com.tainzhi.android.wanandroid.util.Preference
 import kotlinx.android.synthetic.main.fragment_main.*
 

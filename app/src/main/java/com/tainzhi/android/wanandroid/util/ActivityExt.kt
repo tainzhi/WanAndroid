@@ -10,6 +10,7 @@ import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
+import androidx.annotation.StringRes
 import androidx.core.content.getSystemService
 import androidx.fragment.app.Fragment
 import java.io.Serializable
@@ -23,6 +24,10 @@ import java.io.Serializable
 
 fun Context.toast(content: String, duration: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(this, content, duration).apply { show() }
+}
+
+fun Context.toast(@StringRes id: Int, duration: Int = Toast.LENGTH_SHORT) {
+    toast(getString(id), duration)
 }
 
 inline fun <reified T : Activity> Activity.startKtxActivity(
