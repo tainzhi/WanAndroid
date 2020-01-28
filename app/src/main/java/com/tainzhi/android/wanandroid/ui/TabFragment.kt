@@ -5,6 +5,8 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.tainzhi.android.wanandroid.R
 import com.tainzhi.android.wanandroid.base.ui.BaseFragment
+import com.tainzhi.android.wanandroid.ui.project.ProjectFragment
+import com.tainzhi.android.wanandroid.ui.search.SearchFragment
 import kotlinx.android.synthetic.main.fragment_tab.*
 
 
@@ -12,10 +14,16 @@ class TabFragment : BaseFragment() {
 
     private val fragmentList = arrayListOf<Fragment>()
     private val mainFragment by lazy { MainFragment() }
+    private val blogFragment by lazy { BlogFragment() }
+    private val searchFragment by lazy { SearchFragment() }
+    private val projectFragment by lazy { ProjectFragment() }
 
     init {
         fragmentList.run {
             add(mainFragment)
+            add(blogFragment)
+            add(searchFragment)
+            add(projectFragment)
         }
     }
 
