@@ -46,6 +46,7 @@ class MainFragment : BaseFragment() {
     override fun initView() {
         initViewPager()
         addFab.setOnClickListener {
+            // TODO: 2020/1/28 add login 
 //            if (!isLogin)  Navigation.findNavController(viewPager).navigate(R.id.action_tab_to_login)
 //            else Navigation.findNavController(viewPager).navigate(R.id.action_tab_to_share)
             Navigation.findNavController(viewPager).navigate(R.id.action_tab_to_login)}

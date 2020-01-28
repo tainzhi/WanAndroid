@@ -7,7 +7,7 @@ import com.tainzhi.android.wanandroid.BR
 import com.tainzhi.android.wanandroid.R
 import com.tainzhi.android.wanandroid.adapter.BaseBindAdapter
 import com.tainzhi.android.wanandroid.base.ui.BaseVMFragment
-import com.tainzhi.android.wanandroid.bean.Article
+import com.tainzhi.android.wanandroid.bean.SystemParent
 import com.tainzhi.android.wanandroid.ui.SystemTypeNormalActivity
 import com.tainzhi.android.wanandroid.util.dp2px
 import com.tainzhi.android.wanandroid.util.startKtxActivity
@@ -21,7 +21,7 @@ import org.koin.androidx.viewmodel.ext.android.getViewModel
  * 体系
  */
 class SystemFragment : BaseVMFragment<SystemViewModel>() {
-    private val systemAdapter by lazy { BaseBindAdapter<Article>(R.layout.item_system, BR.article) }
+    private val systemAdapter by lazy { BaseBindAdapter<SystemParent>(R.layout.item_system, BR.systemParent) }
 
     override fun getLayoutResId() = R.layout.fragment_system
 

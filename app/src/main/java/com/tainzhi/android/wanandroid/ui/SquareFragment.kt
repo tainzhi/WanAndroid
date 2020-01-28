@@ -16,7 +16,7 @@ import com.tainzhi.android.wanandroid.view.SpaceItemDecoration
 import kotlinx.android.synthetic.main.fragment_square.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
-class SquareFragment : BaseVMFragment<ArticleViewModel>() {
+class SquareFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
 
     private val squareAdapter by lazy { BaseBindAdapter<Article>(R.layout.item_square, BR.article) }
 
