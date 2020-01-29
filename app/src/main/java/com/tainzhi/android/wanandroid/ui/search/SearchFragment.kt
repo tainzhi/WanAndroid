@@ -23,7 +23,7 @@ import com.tainzhi.android.wanandroid.view.SpaceItemDecoration
 import com.zhy.view.flowlayout.FlowLayout
 import com.zhy.view.flowlayout.TagAdapter
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.search_fragment.*
+import kotlinx.android.synthetic.main.fragment_search.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class SearchFragment : BaseVMFragment<SearchViewModel>() {
@@ -35,7 +35,7 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
     private val webSitesList = mutableListOf<Hot>()
 
 
-    override fun getLayoutResId() = R.layout.search_fragment
+    override fun getLayoutResId() = R.layout.fragment_search
 
     override fun initView() {
         initTagLayout()
@@ -73,7 +73,7 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
             setOnLoadMoreListener({ loadMore() }, homeRecycleView)
         }
         searchRecycleView.adapter = searchAdapter
-        val emptyView = layoutInflater.inflate(R.layout.empty_view, searchRecycleView.parent as ViewGroup, false)
+        val emptyView = layoutInflater.inflate(R.layout.view_empty, searchRecycleView.parent as ViewGroup, false)
         val emptyTv = emptyView.findViewById<TextView>(R.id.emptyTv)
         emptyTv.text = getString(R.string.try_another_key)
         searchAdapter.emptyView = emptyView

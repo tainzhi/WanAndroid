@@ -17,6 +17,7 @@ class TabFragment : BaseFragment() {
     private val blogFragment by lazy { BlogFragment() }
     private val searchFragment by lazy { SearchFragment() }
     private val projectFragment by lazy { ProjectFragment() }
+    private val profileFragment by lazy { ProfileFragment() }
 
     init {
         fragmentList.run {
@@ -24,6 +25,7 @@ class TabFragment : BaseFragment() {
             add(blogFragment)
             add(searchFragment)
             add(projectFragment)
+            add(profileFragment)
         }
     }
 
@@ -31,6 +33,7 @@ class TabFragment : BaseFragment() {
 
     override fun initView() {
         initViewPager()
+        bottomNavigation.setOnNavigationItemSelectedListener(onNavigationItemSelected)
     }
 
 

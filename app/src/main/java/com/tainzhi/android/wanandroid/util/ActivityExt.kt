@@ -3,6 +3,7 @@ package com.tainzhi.android.wanandroid.util
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.View
@@ -28,6 +29,10 @@ fun Context.toast(content: String, duration: Int = Toast.LENGTH_SHORT) {
 
 fun Context.toast(@StringRes id: Int, duration: Int = Toast.LENGTH_SHORT) {
     toast(getString(id), duration)
+}
+
+fun Context.openBrowser(url: String) {
+    Intent(Intent.ACTION_VIEW, Uri.parse(url)).run { startActivity(this) }
 }
 
 inline fun <reified T : Activity> Activity.startKtxActivity(
