@@ -21,11 +21,11 @@ android {
         dataBinding = true
     }
 
-    defaultPublishConfig "debug"
-
     buildTypes {
         debug {
-            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        release {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }

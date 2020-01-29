@@ -1,8 +1,8 @@
 package com.tainzhi.android.wanandroid.base
 
+import com.tainzhi.android.wanandroid.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.koin.android.BuildConfig
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
@@ -24,13 +24,9 @@ abstract class BaseRetorfitClient {
         get() {
             val builder = OkHttpClient.Builder()
             val logging = HttpLoggingInterceptor()
-            // FIXME: 2020/1/27  在Android Studio 4.0 preview alwasy false, 这是一个bug
-            // 而在正式版上没有问题
             if (BuildConfig.DEBUG) {
                 logging.level = HttpLoggingInterceptor.Level.BODY
             } else {
-                // FIXME: 2020/1/27
-//                logging.level = HttpLoggingInterceptor.Level.NONE
                 logging.level = HttpLoggingInterceptor.Level.BASIC
             }
 
