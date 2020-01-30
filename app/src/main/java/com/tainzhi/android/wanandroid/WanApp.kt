@@ -24,6 +24,7 @@ class WanApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        CONTEXT = applicationContext
         startKoin {
             androidContext(this@WanApp)
             modules(appModule)

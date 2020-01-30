@@ -65,7 +65,7 @@ class HomeFragment : BaseVMFragment<ArticleViewModel>() {
         homeArticleAdapter.run {
             setOnItemClickListener { _, _, position ->
                 val bundle = bundleOf(BrowserActivity.URL to homeArticleAdapter.data[position].link)
-                androidx.navigation.Navigation.findNavController(homeRecycleView).navigate(R.id
+                Navigation.findNavController(homeRecycleView).navigate(R.id
                         .action_tabFragment_to_browserActivity, bundle)
             }
             onItemChildClickListener = this@HomeFragment.onItemChildClickListener
@@ -103,8 +103,9 @@ class HomeFragment : BaseVMFragment<ArticleViewModel>() {
 
         banner.run {
             layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, banner.dp2px(200))
-            setBannerStyle(BannerConfig.NUM_INDICATOR_TITLE)
+            setBannerStyle(BannerConfig.TITLE_BACKGROUND)
             setImageLoader(GlideImageLoader())
+            setDelayTime(3000)
             setOnBannerListener { position ->
                 run {
                     Navigation.findNavController(banner).navigate(R.id.action_tabFragment_to_browserActivity, bundleOf
@@ -156,8 +157,6 @@ class HomeFragment : BaseVMFragment<ArticleViewModel>() {
         }
         banner.setImages(bannerImages)
                 .setBannerTitles(bannerTitles)
-                .setBannerStyle(BannerConfig.NUM_INDICATOR_TITLE)
-                .setDelayTime(3000)
         banner.start()
     }
 
