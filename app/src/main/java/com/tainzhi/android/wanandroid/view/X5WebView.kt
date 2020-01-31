@@ -15,6 +15,11 @@ import com.tencent.smtt.sdk.WebViewClient
  **/
 
 class X5WebView : WebView {
+
+    constructor(arg0: Context?) : super(arg0) {
+        setBackgroundColor(85621)
+    }
+
     @SuppressLint("SetJavaScriptEnabled")
     constructor(arg0: Context?, arg1: AttributeSet?) : super(arg0, arg1) {
         /**
@@ -85,7 +90,10 @@ class X5WebView : WebView {
 //		canvas.restore();
 //		return ret;
 //	}
-    constructor(arg0: Context?) : super(arg0) {
-        setBackgroundColor(85621)
+
+    override fun destroy() {
+        loadDataWithBaseURL(null, "", "text/html", "utf-8", null)
+        clearHistory()
+        super.destroy()
     }
 }
