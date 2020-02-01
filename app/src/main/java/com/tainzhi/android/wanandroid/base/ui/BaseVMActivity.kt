@@ -2,8 +2,10 @@ package com.tainzhi.android.wanandroid.base.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.tainzhi.android.wanandroid.base.ui.BaseViewModel
+import com.tencent.smtt.utils.m
 
 /**
  * @author:       tainzhi
@@ -15,13 +17,20 @@ import com.tainzhi.android.wanandroid.base.ui.BaseViewModel
 abstract class BaseVMActivity<VM : BaseViewModel>(useBinding: Boolean = false): AppCompatActivity
 () {
     private val _useBinding = useBinding
-    protected lateinit var binding: ViewDataBinding
+    protected lateinit var mBinding: ViewDataBinding
     lateinit var viewModel: VM
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewModel = initVM()
         startObserve()
-        if (!_useBinding) setContentView(getLayoutResId())
+
+        if (_useBinding) {
+            mBinding = DataBindingUtil.setContentView<ViewDataBinding>(this, getLayoutResId())
+            mBinding.lifecycleOwner = this
+        } else {
+            setContentView(getLayoutResId())
+        }
         initView()
         initData()
     }

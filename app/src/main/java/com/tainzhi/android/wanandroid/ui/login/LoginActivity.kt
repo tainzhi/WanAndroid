@@ -9,22 +9,19 @@ import com.tainzhi.android.wanandroid.util.toast
 import kotlinx.android.synthetic.main.title_layout.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
-class LoginActivity : BaseVMActivity<LoginViewModel>() {
+class LoginActivity : BaseVMActivity<LoginViewModel>(useBinding = true) {
 
     override fun getLayoutResId() = R.layout.activity_login
 
     override fun initVM(): LoginViewModel = getViewModel()
 
     override fun initView() {
-        binding.lifecycleOwner = this
-        (binding as ActivityLoginBinding).viewModel = viewModel
         toolbar.setTitle(R.string.login)
         toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24)
+        toolbar.setNavigationOnClickListener { onBackPressed() }
     }
 
     override fun initData() {
-        viewModel = getViewModel()
-        toolbar.setNavigationOnClickListener { onBackPressed() }
     }
 
     override fun startObserve() {

@@ -34,7 +34,7 @@ CoroutinesDispatcherProvider): BaseViewModel() {
     private fun isInputValid(userName:String, passWord: String) = userName.isNotBlank() &&
             passWord.isNotBlank()
 
-    fun loginDataChanged() {
+    private fun loginDataChanged() {
         emitUiState(enableLoginButton = isInputValid(userName.get() ?: "",
                 passWord.get() ?: ""))
     }
