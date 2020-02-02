@@ -86,7 +86,7 @@ CoroutinesDispatcherProvider): BaseViewModel() {
         }
     }
 
-    val verifyInput: (String) -> Unit = {loginDataChanged()}
+    val verifyInput: () -> Unit = {loginDataChanged()}
 
     private fun showLoading(){
         emitUiState(true)

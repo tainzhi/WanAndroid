@@ -90,7 +90,7 @@ fun bindImage(
 }
 
 @BindingAdapter(value = ["afterTextChanged"])
-fun EditText.afterTextChanged(action: (String) -> Unit) {
+fun EditText.afterTextChanged(action: () -> Unit) {
     addTextChangedListener(object : TextWatcher {
         override fun afterTextChanged(s: Editable?) {
         }
@@ -99,7 +99,7 @@ fun EditText.afterTextChanged(action: (String) -> Unit) {
         }
 
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            action(s.toString())
+            action()
         }
     })
 }
