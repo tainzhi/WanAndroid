@@ -1,6 +1,7 @@
 package com.tainzhi.android.wanandroid.ui
 
 import android.text.Html
+import android.view.WindowManager
 import com.tainzhi.android.wanandroid.R
 import com.tainzhi.android.wanandroid.adapter.SplashAdapter
 import com.tainzhi.android.wanandroid.base.ui.BaseActivity
@@ -27,6 +28,8 @@ class SplashActivity : BaseActivity() {
     override fun getLayoutResId() = R.layout.activity_splash
 
     override fun initView() {
+        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN)
         splashRecyclerView.run {
             adapter = splashAdapter
             layoutManager = ScrollLinearLayoutManager(this@SplashActivity)

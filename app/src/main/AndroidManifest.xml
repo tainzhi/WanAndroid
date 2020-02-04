@@ -24,9 +24,7 @@
         <activity android:name=".ui.BrowserActivity" />
         <activity android:name=".ui.login.LoginActivity" />
         <activity android:name=".ui.MainActivity" />
-        <activity
-            android:name=".ui.SplashActivity"
-            android:theme="@style/AppTheme.FullScreen">
+        <activity android:name=".ui.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

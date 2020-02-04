@@ -71,8 +71,7 @@ dependencies {
     implementation Libs.cookietar
 
     implementation Libs.Glide.glide
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    annotationProcessor Libs.Glide.compiler
+    kapt Libs.Glide.compiler
 
     debugImplementation Libs.leakCanary
 
