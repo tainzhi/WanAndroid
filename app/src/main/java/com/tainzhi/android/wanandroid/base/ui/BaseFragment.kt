@@ -18,7 +18,7 @@ import kotlinx.coroutines.cancel
  **/
 
 @ExperimentalCoroutinesApi
-abstract class BaseFragment: Fragment(), CoroutineScope by MainScope() {
+abstract class BaseFragment : Fragment(), CoroutineScope by MainScope() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(getLayoutResId(), container, false)
     }

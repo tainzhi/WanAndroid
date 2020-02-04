@@ -4,8 +4,8 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/main"
 	app:startDestination="@id/tabFragment">
-	
-	<fragment
+
+<fragment
 		android:id="@+id/tabFragment"
 		android:name="com.tainzhi.android.wanandroid.ui.TabFragment"
 		android:label="fragment_tab"

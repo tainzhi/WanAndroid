@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">WanAndroid</string>
+    <string name="app_logo_html"><font color="#FF0000">Wan</font>Android</string>
     <string name="home">首页</string>
     <string name="blog">博客</string>
     <string name="search">搜索</string>

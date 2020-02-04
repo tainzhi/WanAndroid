@@ -20,10 +20,13 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWaring"
         tools:targetApi="n">
-        <activity android:name=".ui.SystemTypeNormalActivity"/>
+        <activity android:name=".ui.SystemTypeNormalActivity" />
         <activity android:name=".ui.BrowserActivity" />
         <activity android:name=".ui.login.LoginActivity" />
-        <activity android:name=".ui.MainActivity">
+        <activity android:name=".ui.MainActivity" />
+        <activity
+            android:name=".ui.SplashActivity"
+            android:theme="@style/AppTheme.FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
