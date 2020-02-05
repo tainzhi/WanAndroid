@@ -5,8 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.tainzhi.android.wanandroid.CoroutinesDispatcherProvider
-import com.tainzhi.android.wanandroid.base.ui.BaseViewModel
 import com.tainzhi.android.wanandroid.base.Result
+import com.tainzhi.android.wanandroid.base.ui.BaseViewModel
 import com.tainzhi.android.wanandroid.bean.User
 import com.tainzhi.android.wanandroid.repository.LoginRepository
 import kotlinx.coroutines.launch
@@ -18,9 +18,8 @@ import kotlinx.coroutines.withContext
  * @date:         2020/1/24 下午1:29
  * @description:
  **/
- 
-class LoginViewModel(val repository: LoginRepository, val provider:
-CoroutinesDispatcherProvider): BaseViewModel() {
+
+class LoginViewModel(val repository: LoginRepository, private val provider: CoroutinesDispatcherProvider) : BaseViewModel() {
     val userName = ObservableField<String>("")
     val passWord = ObservableField<String>("")
 

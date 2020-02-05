@@ -2,7 +2,7 @@ package com.tainzhi.android.wanandroid.util
 
 import android.annotation.SuppressLint
 import android.content.SharedPreferences
-import android.preference.PreferenceManager
+import androidx.preference.PreferenceManager
 import com.tainzhi.android.wanandroid.WanApp
 import java.io.*
 import kotlin.properties.ReadWriteProperty
@@ -31,7 +31,7 @@ class Preference<T>(val name: String, private val default: T) : ReadWritePropert
     }
 
     override fun setValue(thisRef: Any?, property: KProperty<*>, value: T) {
-        putValue(name, default)
+        putValue(name, value)
     }
 
     @SuppressLint("CommitPrefEdits")

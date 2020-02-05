@@ -36,7 +36,7 @@ class LoginActivity : BaseVMActivity<LoginViewModel>(useBinding = true) {
             uiState.observe(this@LoginActivity, Observer {
                 if (it.showProgress) showProgressDialog()
 
-                it.showProgress?.let {
+                it.showSuccess?.let {
                     dismissProgressDialog()
                     finish()
                 }
