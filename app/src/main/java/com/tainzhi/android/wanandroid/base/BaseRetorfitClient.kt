@@ -33,8 +33,7 @@ abstract class BaseRetorfitClient {
             builder.addInterceptor(logging)
                     .connectTimeout(TIME_OUT.toLong(), TimeUnit.SECONDS)
 
-            // FIXME: 2020/1/27  cache有问题，需要解决
-//            handleBuilder(builder)
+            handleBuilder(builder)
 
             return builder.build()
         }
