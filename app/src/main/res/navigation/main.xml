@@ -5,7 +5,7 @@
 	android:id="@+id/main"
 	app:startDestination="@id/tabFragment">
 
-<fragment
+	<fragment
 		android:id="@+id/tabFragment"
 		android:name="com.tainzhi.android.wanandroid.ui.TabFragment"
 		android:label="fragment_tab"
@@ -16,13 +16,22 @@
 		<action
 			android:id="@+id/action_tabFragment_to_browserActivity"
 			app:destination="@id/browserActivity" />
+		<action
+			android:id="@+id/action_tabFragment_to_collectFragment"
+			app:destination="@id/collectFragment" />
 	</fragment>
-	
+
+	<fragment
+		android:id="@+id/collectFragment"
+		android:name="com.tainzhi.android.wanandroid.ui.CollectFragment"
+		android:label="fragment_collect"
+		tools:layout="@layout/fragment_collect" />
+
 	<activity
 		android:id="@+id/loginActivity"
 		android:name="com.tainzhi.android.wanandroid.ui.login.LoginActivity"
 		android:label="activity_login"
-		tools:layout="@layout/activity_login"/>
+		tools:layout="@layout/activity_login" />
 
 	<activity
 		android:id="@+id/browserActivity"
@@ -30,9 +39,10 @@
 		android:label="activity_browser"
 		tools:layout="@layout/activity_browser">
 
-		<argument android:name="url"
-			app:argType="string"
-			android:defaultValue="www.wanandroid.com"/>
+		<argument
+			android:name="url"
+			android:defaultValue="www.wanandroid.com"
+			app:argType="string" />
 
 	</activity>
 </navigation>

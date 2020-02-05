@@ -18,7 +18,7 @@ class SystemTypeNormalActivity : BaseActivity() {
     override fun getLayoutResId() = R.layout.activity_system_type_normal
 
     override fun initView() {
-        mToolbar.run {
+        toolbar.run {
             title = systemParent.name
             setNavigationIcon(R.drawable.arrow_back)
         }
@@ -28,7 +28,7 @@ class SystemTypeNormalActivity : BaseActivity() {
 
 
     override fun initData() {
-        mToolbar.setNavigationOnClickListener { onBackPressed() }
+        toolbar.setNavigationOnClickListener { onBackPressed() }
     }
 
     private fun initViewPager() {

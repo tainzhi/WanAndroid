@@ -49,7 +49,10 @@ class ProfileFragment : BaseFragment() {
         thirdLib.setOnClickListener { showLicenseDialog() }
         developer.setOnClickListener { showMe() }
         loginLayout.setOnClickListener { if (!isLogin) Navigation.findNavController(loginLayout).navigate(R.id.action_tab_to_login) }
-//        collect.setOnClickListener { if (isLogin) Navigation.findNavController(loginLayout).navigate(R.id.action_tab_to_colect) }
+        collect.setOnClickListener {
+            if (isLogin) Navigation.findNavController(loginLayout)
+                    .navigate(R.id.action_tabFragment_to_collectFragment)
+        }
     }
 
     private fun refreshData() {
