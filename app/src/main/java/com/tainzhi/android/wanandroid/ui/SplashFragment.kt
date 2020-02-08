@@ -1,20 +1,21 @@
 package com.tainzhi.android.wanandroid.ui
 
+import android.content.Context
 import android.text.Html
 import android.view.WindowManager
 import com.tainzhi.android.wanandroid.R
 import com.tainzhi.android.wanandroid.adapter.SplashAdapter
-import com.tainzhi.android.wanandroid.base.ui.BaseActivity
+import com.tainzhi.android.wanandroid.base.ui.BaseFragment
 import com.tainzhi.android.wanandroid.binding.fromN
 import com.tainzhi.android.wanandroid.util.startKtxActivity
 import com.tainzhi.android.wanandroid.view.ScrollLinearLayoutManager
-import kotlinx.android.synthetic.main.activity_splash.*
+import kotlinx.android.synthetic.main.splash_splash.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @ExperimentalCoroutinesApi
-class SplashActivity : BaseActivity() {
+class SplashFragment : BaseFragment() {
 
     private val imageSrcId = arrayListOf(
             R.drawable.android_0,
@@ -25,14 +26,14 @@ class SplashActivity : BaseActivity() {
             R.drawable.android_5)
     private val splashAdapter by lazy { SplashAdapter(imageSrcId) }
 
-    override fun getLayoutResId() = R.layout.activity_splash
+    override fun getLayoutResId() = R.layout.splash_splash
 
     override fun initView() {
-        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+        activity?.window?.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN)
         splashRecyclerView.run {
             adapter = splashAdapter
-            layoutManager = ScrollLinearLayoutManager(this@SplashActivity)
+            layoutManager = ScrollLinearLayoutManager(activity as Context)
             smoothScrollToPosition(Integer.MAX_VALUE / 2)
         }
         splashLogoTv.text = if (fromN()) Html.fromHtml(getString(R.string.app_logo_html), Html.FROM_HTML_MODE_LEGACY)
@@ -55,7 +56,7 @@ class SplashActivity : BaseActivity() {
         // window.clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN)
         //        WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN)
         // 方法2：清楚全屏属性
-        window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
         super.finish()
     }
 }
