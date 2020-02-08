@@ -9,18 +9,9 @@
 		android:id="@+id/blog"
 		android:icon="@drawable/ic_baseline_blog_24"
 		android:title="@string/blog" />
-	
-	<item
-		android:id="@+id/search"
-		android:icon="@drawable/ic_baseline_search_24"
-		android:title="@string/search" />
 
 	<item
 		android:id="@+id/project"
 		android:icon="@drawable/ic_baseline_table_project_24"
 		android:title="@string/project"/>
-	<item
-		android:id="@+id/profile"
-		android:icon="@drawable/ic_baseline_user_24"
-		android:title="@string/me"/>
 </menu>
