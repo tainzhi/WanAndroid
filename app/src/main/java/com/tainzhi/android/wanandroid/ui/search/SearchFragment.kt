@@ -59,7 +59,7 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
 
     private fun refresh() {
         searchAdapter.setEnableLoadMore(false)
-        mViewModel.searchHot(true, key)
+        viewModel.searchHot(true, key)
     }
 
     private fun initAdapter() {
@@ -82,13 +82,13 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
     }
 
     private fun loadMore() {
-        mViewModel.searchHot(false, key)
+        viewModel.searchHot(false, key)
     }
 
     override fun initData() {
 //        searchToolbar.setNavigationOnClickListener { onBackPressed() }
-        mViewModel.getHotSearch()
-        mViewModel.getWebSites()
+        viewModel.getHotSearch()
+        viewModel.getWebSites()
     }
 
     private val onItemChildClickListener = BaseQuickAdapter.OnItemChildClickListener { _, view, position ->
@@ -98,7 +98,7 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
                     searchAdapter.run {
                         data[position].run {
                             collect = !collect
-                            mViewModel.collectArticle(id, collect)
+                            viewModel.collectArticle(id, collect)
                         }
                         notifyDataSetChanged()
                     }
@@ -153,7 +153,7 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
 
     private fun startSearch(key: String) {
         searchView.clearFocus()
-        mViewModel.searchHot(true, key)
+        viewModel.searchHot(true, key)
     }
 
     private val onQueryTextListener = object : SearchView.OnQueryTextListener {
@@ -171,7 +171,7 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
 
     override fun startObserve() {
 
-        mViewModel.uiState.observe(this, Observer {
+        viewModel.uiState.observe(this, Observer {
             searchRecycleView.visibility = if (it.showHot) View.GONE else View.VISIBLE
             hotContent.visibility = if (!it.showHot) View.GONE else View.VISIBLE
             searchRefreshLayout.isRefreshing = it.showLoading

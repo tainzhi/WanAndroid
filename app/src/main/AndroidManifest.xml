@@ -21,7 +21,6 @@
         tools:ignore="GoogleAppIndexingWaring"
         tools:targetApi="n">
         <activity android:name=".ui.SystemTypeNormalActivity" />
-        <activity android:name=".ui.login.LoginActivity" />
         <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

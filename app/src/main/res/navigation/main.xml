@@ -54,4 +54,12 @@
 	<action
 		android:id="@+id/action_global_browserFragment"
 		app:destination="@id/browserFragment" />
+
+	<fragment
+		android:id="@+id/splashFragment"
+		android:name="com.tainzhi.android.wanandroid.ui.SplashFragment"
+		android:label="SplashFragment" />
+	<action
+		android:id="@+id/action_global_splashFragment"
+		app:destination="@id/splashFragment" />
 </navigation>

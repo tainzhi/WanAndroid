@@ -86,7 +86,7 @@ class HomeFragment : BaseVMFragment<ArticleViewModel>() {
                     homeArticleAdapter.run {
                         data[position].run {
                             collect = !collect
-                            mViewModel.collectArticle(id, collect)
+                            viewModel.collectArticle(id, collect)
                         }
                         notifyDataSetChanged()
                     }
@@ -99,7 +99,7 @@ class HomeFragment : BaseVMFragment<ArticleViewModel>() {
     }
 
     private fun loadMore() {
-        mViewModel.getHomeArticleList(false)
+        viewModel.getHomeArticleList(false)
     }
 
     private fun initBanner() {
@@ -120,11 +120,11 @@ class HomeFragment : BaseVMFragment<ArticleViewModel>() {
 
     fun refresh() {
         homeArticleAdapter.setEnableLoadMore(false)
-        mViewModel.getHomeArticleList(true)
+        viewModel.getHomeArticleList(true)
     }
 
     override fun startObserve() {
-        mViewModel.apply {
+        viewModel.apply {
             mBanners.observe(this@HomeFragment, Observer { it ->
                 it?.let { setBanner(it) }
             })

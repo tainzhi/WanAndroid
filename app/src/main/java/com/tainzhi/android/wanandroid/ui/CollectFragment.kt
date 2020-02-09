@@ -23,7 +23,7 @@ class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
     override fun initVM(): ArticleViewModel = getViewModel()
 
     override fun initView() {
-        (mBinding as FragmentCollectBinding).viewModel = mViewModel
+        (mBinding as FragmentCollectBinding).viewModel = viewModel
         toolbar.setTitle(R.string.my_collect)
         toolbar.setNavigationIcon(R.drawable.arrow_back)
         toolbar.setNavigationOnClickListener { onDestroy() }
@@ -57,7 +57,7 @@ class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
     }
 
     private fun refresh() {
-        mViewModel.getCollectArticleList(true)
+        viewModel.getCollectArticleList(true)
     }
 
 
@@ -67,7 +67,7 @@ class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
                 articleAdapter.run {
                     data[position].run {
                         collect = !collect
-                        mViewModel.collectArticle(originId, collect)
+                        viewModel.collectArticle(originId, collect)
                     }
                     notifyItemRemoved(position)
                 }
@@ -76,12 +76,12 @@ class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
     }
 
     private fun loadMore() {
-        mViewModel.getCollectArticleList(false)
+        viewModel.getCollectArticleList(false)
     }
 
     override fun startObserve() {
 
-        mViewModel.apply {
+        viewModel.apply {
 
             uiState.observe(this@CollectFragment, Observer {
 

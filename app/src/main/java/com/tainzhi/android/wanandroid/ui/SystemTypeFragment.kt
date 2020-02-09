@@ -78,7 +78,7 @@ class SystemTypeFragment : BaseVMFragment<ArticleViewModel>() {
                     systemTypeAdapter.run {
                         data[position].run {
                             collect = !collect
-                            mViewModel.collectArticle(id, collect)
+                            viewModel.collectArticle(id, collect)
                         }
                         notifyDataSetChanged()
                     }
@@ -103,14 +103,14 @@ class SystemTypeFragment : BaseVMFragment<ArticleViewModel>() {
     private fun loadData(isRefresh: Boolean) {
         cid?.let {
             if (this.isBlog)
-                mViewModel.getBlogArticleList(isRefresh, it)
+                viewModel.getBlogArticleList(isRefresh, it)
             else
-                mViewModel.getSystemTypeArticleList(isRefresh, it)
+                viewModel.getSystemTypeArticleList(isRefresh, it)
         }
     }
 
     override fun startObserve() {
-        mViewModel.uiState.observe(this, Observer {
+        viewModel.uiState.observe(this, Observer {
             systemTypeRefreshLayout.isRefreshing = it.showLoading
 
             it.showSuccess?.let { list ->

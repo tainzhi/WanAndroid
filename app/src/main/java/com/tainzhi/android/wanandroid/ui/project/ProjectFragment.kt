@@ -28,8 +28,8 @@ open class ProjectFragment : BaseVMFragment<ProjectViewModel>() {
     override fun initData() {
 //        projectToolbar.setNavigationOnClickListener { onBackPressed() }
 
-        if (isBlog) mViewModel.getBlogType()
-        else mViewModel.getProjectTypeList()
+        if (isBlog) viewModel.getBlogType()
+        else viewModel.getProjectTypeList()
 
     }
 
@@ -59,7 +59,7 @@ open class ProjectFragment : BaseVMFragment<ProjectViewModel>() {
     }
 
     override fun startObserve() {
-        mViewModel.systemData.observe(this, Observer {
+        viewModel.systemData.observe(this, Observer {
             it?.run { getProjectTypeList(it) }
         })
     }

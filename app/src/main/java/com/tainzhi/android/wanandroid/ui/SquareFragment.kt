@@ -26,7 +26,7 @@ class SquareFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
 
     override fun initView() {
         mBinding.lifecycleOwner = this
-        (mBinding as FragmentSquareBinding).viewModel = mViewModel
+        (mBinding as FragmentSquareBinding).viewModel = viewModel
         initRecycleView()
     }
 
@@ -53,15 +53,15 @@ class SquareFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
     }
 
     private fun loadMore() {
-        mViewModel.getSquareArticleList(false)
+        viewModel.getSquareArticleList(false)
     }
 
     private fun refresh() {
-        mViewModel.getSquareArticleList(true)
+        viewModel.getSquareArticleList(true)
     }
 
     override fun startObserve() {
-        mViewModel.uiState.observe(this, Observer {
+        viewModel.uiState.observe(this, Observer {
 
             it.showSuccess?.let { list ->
                 squareAdapter.run {

@@ -91,17 +91,17 @@ class ProjectTypeFragment : BaseVMFragment<ArticleViewModel>() {
     private fun loadData(isRefresh: Boolean) {
         isLated?.run {
             if (this) {
-                mViewModel.getLatestProjectList(isRefresh)
+                viewModel.getLatestProjectList(isRefresh)
             } else {
                 cid?.let {
-                    mViewModel.getProjectTypeDetailList(isRefresh, it)
+                    viewModel.getProjectTypeDetailList(isRefresh, it)
                 }
             }
         }
     }
 
     override fun startObserve() {
-        mViewModel.uiState.observe(this@ProjectTypeFragment, Observer {
+        viewModel.uiState.observe(this@ProjectTypeFragment, Observer {
             projectRefreshLayout.isRefreshing = it.showLoading
 
             it.showSuccess?.let { list ->
@@ -125,7 +125,7 @@ class ProjectTypeFragment : BaseVMFragment<ArticleViewModel>() {
                     projectAdapter.run {
                         data[position].run {
                             collect = !collect
-                            mViewModel.collectArticle(id, collect)
+                            viewModel.collectArticle(id, collect)
                         }
                         notifyDataSetChanged()
                     }

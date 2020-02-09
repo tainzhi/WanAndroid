@@ -57,11 +57,11 @@ class NavigationFragment : BaseVMFragment<NavigationViewModel>() {
     }
 
     override fun initData() {
-        mViewModel.getNavigation()
+        viewModel.getNavigation()
     }
 
     override fun startObserve() {
-        mViewModel.run {
+        viewModel.run {
             navigationList.observe(this@NavigationFragment, Observer {
                 it?.run { getNavigation(it) }
             })

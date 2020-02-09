@@ -16,12 +16,17 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
 
+    private var isSplashFinish = false
     private val mainDestionIds = setOf(R.id.mainFragment, R.id.blogFragment, R.id.projectFragment)
 
     override fun getLayoutResId() = R.layout.activity_main
 
     override fun initView() {
         val navController = findNavController(R.id.main_nav_host_fragment)
+        if (!isSplashFinish) {
+            navController.navigate(R.id.action_global_splashFragment)
+            isSplashFinish = true
+        }
 
         val appBarConfig = AppBarConfiguration(mainDestionIds, main_drawer_layout)
         setSupportActionBar(toolbar)
