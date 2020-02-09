@@ -3,17 +3,18 @@
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/main"
-	app:startDestination="@id/homeFragment">
+	app:startDestination="@id/mainFragment">
 
 	<fragment
-		android:id="@+id/homeFragment"
-		android:name="com.tainzhi.android.wanandroid.ui.home.HomeFragment"
-		android:label="HomeFragment">
+		android:id="@+id/mainFragment"
+		android:name="com.tainzhi.android.wanandroid.ui.MainFragment"
+		android:label="fragment_main"
+		tools:layout="@layout/fragment_main">
 		<action
-			android:id="@+id/action_homeFragment_to_loginActivity"
+			android:id="@+id/action_mainFragment_to_loginActivity"
 			app:destination="@id/loginActivity" />
 		<action
-			android:id="@+id/action_homeFragment_to_collectFragment"
+			android:id="@+id/action_mainFragment_to_collectFragment"
 			app:destination="@id/collectFragment" />
 	</fragment>
 	<fragment

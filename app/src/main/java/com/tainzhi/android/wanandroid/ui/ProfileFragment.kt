@@ -50,11 +50,11 @@ class ProfileFragment : BaseFragment() {
         developer.setOnClickListener { showMe() }
         loginLayout.setOnClickListener {
             if (!isLogin) Navigation.findNavController(loginLayout)
-                    .navigate(R.id.action_homeFragment_to_loginActivity)
+                    .navigate(R.id.action_mainFragment_to_loginActivity)
         }
         collect.setOnClickListener {
             if (isLogin) Navigation.findNavController(loginLayout)
-                    .navigate(R.id.action_homeFragment_to_collectFragment)
+                    .navigate(R.id.action_mainFragment_to_collectFragment)
         }
     }
 

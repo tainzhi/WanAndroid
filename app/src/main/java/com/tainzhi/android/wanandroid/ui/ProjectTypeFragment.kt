@@ -131,7 +131,7 @@ class ProjectTypeFragment : BaseVMFragment<ArticleViewModel>() {
                     }
                 } else {
                     Navigation.findNavController(projectRecycleView)
-                            .navigate(R.id.action_homeFragment_to_loginActivity)
+                            .navigate(R.id.action_mainFragment_to_loginActivity)
                 }
             }
         }

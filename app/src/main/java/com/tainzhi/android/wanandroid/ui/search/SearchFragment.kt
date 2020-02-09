@@ -103,7 +103,8 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
                         notifyDataSetChanged()
                     }
                 } else {
-                    Navigation.findNavController(searchRecycleView).navigate(R.id.action_homeFragment_to_loginActivity)
+                    Navigation.findNavController(searchRecycleView).navigate(R.id
+                            .action_mainFragment_to_loginActivity)
                 }
             }
         }

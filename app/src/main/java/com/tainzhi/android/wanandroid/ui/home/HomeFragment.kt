@@ -91,7 +91,8 @@ class HomeFragment : BaseVMFragment<ArticleViewModel>() {
                         notifyDataSetChanged()
                     }
                 } else {
-                    Navigation.findNavController(homeRecycleView).navigate(R.id.action_homeFragment_to_loginActivity)
+                    Navigation.findNavController(homeRecycleView).navigate(R.id
+                            .action_mainFragment_to_loginActivity)
                 }
             }
         }
