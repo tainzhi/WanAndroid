@@ -31,9 +31,11 @@ class MainActivity : BaseActivity() {
         navController.addOnDestinationChangedListener { controller, destination, _ ->
             if (destination.id in mainDestionIds) {
                 main_bottom_nav.visible()
+                toolbar.visible()
 //                main_drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_OPEN)
             } else {
                 main_bottom_nav.gone()
+                toolbar.gone()
 //                main_drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
             }
         }

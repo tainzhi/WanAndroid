@@ -1,10 +1,10 @@
 package com.tainzhi.android.wanandroid.ui
 
 import android.graphics.Bitmap
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.tainzhi.android.wanandroid.R
 import com.tainzhi.android.wanandroid.base.ui.BaseFragment
@@ -13,6 +13,7 @@ import com.tencent.smtt.sdk.WebChromeClient
 import com.tencent.smtt.sdk.WebView
 import com.tencent.smtt.sdk.WebViewClient
 import kotlinx.android.synthetic.main.fragment_browser.*
+import kotlinx.android.synthetic.main.title_layout.*
 
 
 class BrowserFragment : BaseFragment() {
@@ -24,7 +25,9 @@ class BrowserFragment : BaseFragment() {
     override fun getLayoutResId() = R.layout.fragment_browser
 
     override fun initView() {
-        activity?.actionBar?.setTitle(R.string.is_loading)
+        toolbar.setTitle(R.string.is_loading)
+        toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24)
+        toolbar.setNavigationOnClickListener { onFinish() }
 
         progressBar.progressDrawable = this.resources
                 .getDrawable(R.drawable.color_progressbar, null)
@@ -63,13 +66,12 @@ class BrowserFragment : BaseFragment() {
                 override fun onProgressChanged(p0: WebView?, p1: Int) {
                     super.onProgressChanged(p0, p1)
                     progressBar.progress = p1
-                    Log.e("browser", p1.toString())
                 }
 
                 override fun onReceivedTitle(p0: WebView?, p1: String?) {
                     super.onReceivedTitle(p0, p1)
                     p1?.let {
-                        activity?.actionBar?.setTitle(p1)
+                        toolbar.title = p1
                     }
                 }
 
@@ -77,15 +79,10 @@ class BrowserFragment : BaseFragment() {
         }
     }
 
-//    override fun onBackPressed() {
-//        if (webView.canGoBack()) webView.goBack()
-//        else super.onBackPressed()
-//    }
-
-
-    override fun onDestroy() {
+    private fun onFinish() {
         webView.destroy()
         (webView.parent as LinearLayout).removeView(webView)
         super.onDestroy()
+        findNavController().popBackStack()
     }
 }
