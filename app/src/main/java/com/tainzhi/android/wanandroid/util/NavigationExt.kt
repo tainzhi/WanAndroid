@@ -1,4 +1,4 @@
-package com.tainzhi.android.wanandroid.view
+package com.tainzhi.android.wanandroid.util
 
 import android.content.Intent
 import android.util.SparseArray

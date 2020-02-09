@@ -18,7 +18,7 @@ import retrofit2.HttpException
 
 const val TOOL_URL = "http://www.wanandroid.com/tools"
 const val GITHUB_PAGE = "https://github.com/tainzhi/WanAndroid"
-const val ISSUE_URL = "https://github.com/lulululbj/wanandroid/issues"
+const val ISSUE_URL = "https://github.com/tainzhi/wanandroid/issues"
 
 suspend fun executeResponse(response: Response<Any>, successBlock: suspend CoroutineScope.() ->
 Unit,

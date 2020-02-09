@@ -7,7 +7,7 @@ import androidx.navigation.NavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.tainzhi.android.wanandroid.R
 import com.tainzhi.android.wanandroid.base.ui.BaseActivity
-import com.tainzhi.android.wanandroid.view.setupWithNavController
+import com.tainzhi.android.wanandroid.util.setupWithNavController
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
