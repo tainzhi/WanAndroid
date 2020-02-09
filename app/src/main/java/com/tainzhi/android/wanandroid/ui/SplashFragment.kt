@@ -44,19 +44,19 @@ class SplashFragment : BaseFragment() {
     override fun initData() {
         launch {
             delay(3000L)
-            finish()
+//            finish()
             startKtxActivity<MainActivity>()
         }
     }
 
-    override fun finish() {
-        // bug: 从全面屏切换到非全面屏，状态栏会闪烁
-        // 方法1：退出前属性设置非全面屏。这种虽然貌似能解决问题，但是这样切换会导致你的
-        //       Activity在从全屏变化为非全屏时无法适应主题的变化，而被切掉一块
-        // window.clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN)
-        //        WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN)
-        // 方法2：清楚全屏属性
-        activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
-        super.finish()
-    }
+//    override fun finish() {
+//        // bug: 从全面屏切换到非全面屏，状态栏会闪烁
+//        // 方法1：退出前属性设置非全面屏。这种虽然貌似能解决问题，但是这样切换会导致你的
+//        //       Activity在从全屏变化为非全屏时无法适应主题的变化，而被切掉一块
+//        // window.clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN)
+//        //        WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN)
+//        // 方法2：清楚全屏属性
+//        activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+//        super.finish()
+//    }
 }
