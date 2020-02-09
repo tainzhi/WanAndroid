@@ -20,8 +20,8 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWaring"
         tools:targetApi="n">
-        <activity android:name=".ui.SystemTypeNormalActivity" />
-        <activity android:name=".ui.MainActivity">
+        <activity android:name=".ui.MainActivity" />
+        <activity android:name=".ui.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
