@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 	<item
-		android:id="@+id/home"
+		android:id="@+id/homeFragment"
 		android:icon="@drawable/ic_baseline_home_24"
 		android:title="@string/home" />
-	
+
 	<item
-		android:id="@+id/blog"
+		android:id="@+id/blogFragment"
 		android:icon="@drawable/ic_baseline_blog_24"
 		android:title="@string/blog" />
 
 	<item
-		android:id="@+id/project"
+		android:id="@+id/projectFragment"
 		android:icon="@drawable/ic_baseline_table_project_24"
-		android:title="@string/project"/>
+		android:title="@string/project" />
 </menu>

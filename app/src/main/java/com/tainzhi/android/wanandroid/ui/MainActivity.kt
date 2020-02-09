@@ -1,8 +1,10 @@
 package com.tainzhi.android.wanandroid.ui
 
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.tainzhi.android.wanandroid.R
@@ -16,22 +18,38 @@ class MainActivity : BaseActivity() {
     override fun initView() {
         val navController = findNavController(R.id.main_nav_host_fragment)
         val appBarConfig = AppBarConfiguration.Builder(
-                R.id.homeFragment2,
-                R.id.blogFragment2,
-                R.id.projectFragment2
-        ).setDrawerLayout(main_drawer)
+                R.id.homeFragment,
+                R.id.blogFragment,
+                R.id.projectFragment
+        ).setDrawerLayout(main_drawer_layout)
                 .build()
         setSupportActionBar(toolbar)
         setupActionBarWithNavController(navController, appBarConfig)
-        main_bottom_nav.setupWithNavController(navController)
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        supportActionBar?.setHomeButtonEnabled(true)
+
+        val toggle = ActionBarDrawerToggle(
+                this, main_drawer_layout, toolbar, R.string.navigation_drawer_open, R.string
+                .navigation_drawer_close)
+        main_drawer_layout.addDrawerListener(toggle)
+        toggle.syncState()
+        main_drawer_nav_view.setupWithNavController(navController)
+
+        main_bottom_nav.run {
+            setupWithNavController(navController)
+            setOnNavigationItemSelectedListener { menuItem ->
+                NavigationUI.onNavDestinationSelected(menuItem, navController)
+            }
+        }
+
     }
 
     override fun initData() {
     }
 
     override fun onBackPressed() {
-        if (main_drawer.isDrawerOpen(GravityCompat.START)) {
-            main_drawer.closeDrawer(GravityCompat.START)
+        if (main_drawer_layout.isDrawerOpen(GravityCompat.START)) {
+            main_drawer_layout.closeDrawer(GravityCompat.START)
         } else {
             super.onBackPressed()
         }

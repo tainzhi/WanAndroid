@@ -43,9 +43,9 @@ class TabFragment : BaseFragment() {
     private val onNavigationItemSelected = BottomNavigationView.OnNavigationItemSelectedListener {
         when(it.itemId) {
             R.id.home -> switchFragment(0)
-            R.id.blog -> switchFragment(1)
+//            R.id.blog -> switchFragment(1)
 //            R.id.search -> switchFragment(2)
-            R.id.project -> switchFragment(3)
+//            R.id.project -> switchFragment(3)
 //            R.id.profile -> switchFragment(4)
         }
         true
