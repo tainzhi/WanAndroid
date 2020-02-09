@@ -14,7 +14,7 @@ class MainActivity : BaseActivity() {
     override fun getLayoutResId() = R.layout.activity_main
 
     override fun initView() {
-        val navController = findNavController(R.id.main_nav_host_fragmen)
+        val navController = findNavController(R.id.main_nav_host_fragment)
         val appBarConfig = AppBarConfiguration.Builder(
                 R.id.homeFragment2,
                 R.id.blogFragment2,
