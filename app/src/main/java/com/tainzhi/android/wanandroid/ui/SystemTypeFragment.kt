@@ -1,9 +1,9 @@
 package com.tainzhi.android.wanandroid.ui
 
 import android.os.Bundle
-import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.tainzhi.android.wanandroid.R
@@ -54,9 +54,10 @@ class SystemTypeFragment : BaseVMFragment<ArticleViewModel>() {
         systemTypeRefreshLayout.setOnRefreshListener { refresh() }
         systemTypeAdapter.run {
             setOnItemClickListener { _, _, position ->
-                Navigation.findNavController(systemTypeRecycleView).navigate(R.id
-                        .action_tabFragment_to_browserActivity, bundleOf
-                (BrowserActivity.URL to systemTypeAdapter.data[position].link))
+                val action = BrowserFragmentDirections.actionGlobalBrowserFragment(systemTypeAdapter
+                        .data[position]
+                        .link)
+                findNavController().navigate(action)
             }
             onItemChildClickListener = this@SystemTypeFragment.onItemChildClickListener
 
@@ -83,7 +84,7 @@ class SystemTypeFragment : BaseVMFragment<ArticleViewModel>() {
                     }
                 } else {
                     Navigation.findNavController(systemTypeRecycleView).navigate(R.id
-                            .action_tab_to_login)
+                            .action_homeFragment_to_loginActivity)
                 }
             }
         }

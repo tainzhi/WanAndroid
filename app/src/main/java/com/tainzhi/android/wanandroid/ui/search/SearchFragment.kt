@@ -5,19 +5,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.widget.SearchView
-import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.tainzhi.android.wanandroid.R
 import com.tainzhi.android.wanandroid.adapter.HomeArticleAdapter
 import com.tainzhi.android.wanandroid.base.ui.BaseVMFragment
 import com.tainzhi.android.wanandroid.bean.Hot
-import com.tainzhi.android.wanandroid.ui.BrowserActivity
+import com.tainzhi.android.wanandroid.ui.BrowserFragmentDirections
 import com.tainzhi.android.wanandroid.util.Preference
 import com.tainzhi.android.wanandroid.util.dp2px
-import com.tainzhi.android.wanandroid.util.startKtxActivity
 import com.tainzhi.android.wanandroid.view.CustomLoadMoreView
 import com.tainzhi.android.wanandroid.view.SpaceItemDecoration
 import com.zhy.view.flowlayout.FlowLayout
@@ -65,8 +65,10 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
     private fun initAdapter() {
         searchAdapter.run {
             setOnItemClickListener { _, _, position ->
-                Navigation.findNavController(searchRecycleView).navigate(R.id.action_tabFragment_to_browserActivity, bundleOf
-                (BrowserActivity.URL to searchAdapter.data[position].link))
+                val action = BrowserFragmentDirections.actionGlobalBrowserFragment(searchAdapter
+                        .data[position]
+                        .link)
+                findNavController().navigate(action)
             }
             onItemChildClickListener = this@SearchFragment.onItemChildClickListener
             setLoadMoreView(CustomLoadMoreView())
@@ -101,7 +103,7 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
                         notifyDataSetChanged()
                     }
                 } else {
-                    Navigation.findNavController(searchRecycleView).navigate(R.id.action_tab_to_login)
+                    Navigation.findNavController(searchRecycleView).navigate(R.id.action_homeFragment_to_loginActivity)
                 }
             }
         }
@@ -140,8 +142,9 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
                 }
             }
 
-            setOnTagClickListener { _, position, parent ->
-                parent.context.startKtxActivity<BrowserActivity>(value = BrowserActivity.URL to webSitesList[position].link)
+            setOnTagClickListener { _, position, _ ->
+                val action = BrowserFragmentDirections.actionGlobalBrowserFragment(webSitesList[position].link)
+                findNavController().navigate(action)
                 true
             }
         }

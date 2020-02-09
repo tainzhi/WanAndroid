@@ -48,10 +48,13 @@ class ProfileFragment : BaseFragment() {
         feedback.setOnClickListener { showFeedBackMenu() }
         thirdLib.setOnClickListener { showLicenseDialog() }
         developer.setOnClickListener { showMe() }
-        loginLayout.setOnClickListener { if (!isLogin) Navigation.findNavController(loginLayout).navigate(R.id.action_tab_to_login) }
+        loginLayout.setOnClickListener {
+            if (!isLogin) Navigation.findNavController(loginLayout)
+                    .navigate(R.id.action_homeFragment_to_loginActivity)
+        }
         collect.setOnClickListener {
             if (isLogin) Navigation.findNavController(loginLayout)
-                    .navigate(R.id.action_tabFragment_to_collectFragment)
+                    .navigate(R.id.action_homeFragment_to_collectFragment)
         }
     }
 

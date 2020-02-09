@@ -49,7 +49,8 @@ class MainFragment : BaseFragment() {
             // TODO: 2020/1/28 add login 
 //            if (!isLogin)  Navigation.findNavController(viewPager).navigate(R.id.action_tab_to_login)
 //            else Navigation.findNavController(viewPager).navigate(R.id.action_tab_to_share)
-            Navigation.findNavController(viewPager).navigate(R.id.action_tab_to_login)}
+            Navigation.findNavController(viewPager).navigate(R.id.action_homeFragment_to_loginActivity)
+        }
     }
 
     override fun initData() {

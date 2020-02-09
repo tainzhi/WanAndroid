@@ -5,30 +5,26 @@ import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.navigation.fragment.navArgs
 import com.tainzhi.android.wanandroid.R
-import com.tainzhi.android.wanandroid.base.ui.BaseActivity
+import com.tainzhi.android.wanandroid.base.ui.BaseFragment
 import com.tainzhi.android.wanandroid.view.X5WebView
 import com.tencent.smtt.sdk.WebChromeClient
 import com.tencent.smtt.sdk.WebView
 import com.tencent.smtt.sdk.WebViewClient
-import kotlinx.android.synthetic.main.activity_browser.*
-import kotlinx.android.synthetic.main.title_layout.*
+import kotlinx.android.synthetic.main.fragment_browser.*
 
 
-class BrowserActivity : BaseActivity() {
-
-    companion object {
-        const val URL = "url"
-    }
+class BrowserFragment : BaseFragment() {
 
     private lateinit var webView: X5WebView
 
-    override fun getLayoutResId() = R.layout.activity_browser
+    private val args: BrowserFragmentArgs by navArgs()
+
+    override fun getLayoutResId() = R.layout.fragment_browser
 
     override fun initView() {
-        toolbar.setTitle(R.string.is_loading)
-        toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24)
-        toolbar.setNavigationOnClickListener { onBackPressed() }
+        activity?.actionBar?.setTitle(R.string.is_loading)
 
         progressBar.progressDrawable = this.resources
                 .getDrawable(R.drawable.color_progressbar, null)
@@ -39,7 +35,7 @@ class BrowserActivity : BaseActivity() {
     }
 
     override fun initData() {
-        intent?.extras?.getString(URL).let {
+        args.url.let {
             webView.loadUrl(it)
         }
     }
@@ -47,7 +43,7 @@ class BrowserActivity : BaseActivity() {
     private fun initWebView() {
         val params = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT)
-        webView = X5WebView(applicationContext)
+        webView = X5WebView(activity?.applicationContext)
         webView.run {
             layoutParams = params
 
@@ -72,17 +68,20 @@ class BrowserActivity : BaseActivity() {
 
                 override fun onReceivedTitle(p0: WebView?, p1: String?) {
                     super.onReceivedTitle(p0, p1)
-                    p1?.let { toolbar.title = p1 }
+                    p1?.let {
+                        activity?.actionBar?.setTitle(p1)
+                    }
                 }
 
             }
         }
     }
 
-    override fun onBackPressed() {
-        if (webView.canGoBack()) webView.goBack()
-        else super.onBackPressed()
-    }
+//    override fun onBackPressed() {
+//        if (webView.canGoBack()) webView.goBack()
+//        else super.onBackPressed()
+//    }
+
 
     override fun onDestroy() {
         webView.destroy()

@@ -4,8 +4,6 @@
     android:layout_height="fill_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/title_layout" />
-
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyleHorizontal"

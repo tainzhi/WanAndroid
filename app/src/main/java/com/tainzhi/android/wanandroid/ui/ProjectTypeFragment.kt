@@ -1,9 +1,9 @@
 package com.tainzhi.android.wanandroid.ui
 
 import android.os.Bundle
-import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.tainzhi.android.wanandroid.BR
@@ -62,9 +62,10 @@ class ProjectTypeFragment : BaseVMFragment<ArticleViewModel>() {
         projectRefreshLayout.setOnRefreshListener { refresh() }
         projectAdapter.run {
             setOnItemClickListener { _, _, position ->
-                Navigation.findNavController(projectRecycleView)
-                        .navigate(R.id.action_tabFragment_to_browserActivity,
-                                bundleOf(BrowserActivity.URL to projectAdapter.data[position].link))
+                val action = BrowserFragmentDirections.actionGlobalBrowserFragment(projectAdapter
+                        .data[position]
+                        .link)
+                findNavController().navigate(action)
             }
             setLoadMoreView(CustomLoadMoreView())
             setOnLoadMoreListener({ loadMore() }, projectRecycleView)
@@ -130,7 +131,7 @@ class ProjectTypeFragment : BaseVMFragment<ArticleViewModel>() {
                     }
                 } else {
                     Navigation.findNavController(projectRecycleView)
-                            .navigate(R.id.action_tab_to_login)
+                            .navigate(R.id.action_homeFragment_to_loginActivity)
                 }
             }
         }

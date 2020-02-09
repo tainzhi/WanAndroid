@@ -3,13 +3,13 @@ package com.tainzhi.android.wanandroid.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
-import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.tainzhi.android.wanandroid.R
 import com.tainzhi.android.wanandroid.bean.Article
 import com.tainzhi.android.wanandroid.bean.Navigation
-import com.tainzhi.android.wanandroid.ui.BrowserActivity
+import com.tainzhi.android.wanandroid.ui.BrowserFragmentDirections
 import com.zhy.view.flowlayout.FlowLayout
 import com.zhy.view.flowlayout.TagAdapter
 import com.zhy.view.flowlayout.TagFlowLayout
@@ -39,8 +39,10 @@ class NavigationAdapter(layoutResId: Int = R.layout.item_navigation) :
             }
 
             setOnTagClickListener { view, position, _ ->
-                androidx.navigation.Navigation.findNavController(view).navigate(R.id.action_tabFragment_to_browserActivity,
-                        bundleOf(BrowserActivity.URL to item.articles[position].link))
+                val action = BrowserFragmentDirections.actionGlobalBrowserFragment(item
+                        .articles[position]
+                        .link)
+                view.findNavController().navigate(action)
                 true
             }
         }

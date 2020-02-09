@@ -10,6 +10,26 @@ import android.view.View
  * @description:
  **/
 
+/**
+ * Set view visible
+ */
+fun View.visible() {
+    visibility = View.VISIBLE
+}
+
+/**
+ * Set view invisible
+ */
+fun View.invisible() {
+    visibility = View.INVISIBLE
+}
+
+/**
+ * Set view gone
+ */
+fun View.gone() {
+    visibility = View.GONE
+}
 
 fun Context.dp2px(dp: Int): Int {
     val scale = resources.displayMetrics.density

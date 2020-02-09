@@ -1,6 +1,7 @@
 package com.tainzhi.android.wanandroid.ui
 
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.tainzhi.android.wanandroid.R
@@ -8,7 +9,6 @@ import com.tainzhi.android.wanandroid.adapter.HomeArticleAdapter
 import com.tainzhi.android.wanandroid.base.ui.BaseVMFragment
 import com.tainzhi.android.wanandroid.databinding.FragmentCollectBinding
 import com.tainzhi.android.wanandroid.util.dp2px
-import com.tainzhi.android.wanandroid.util.startKtxActivity
 import com.tainzhi.android.wanandroid.util.toast
 import com.tainzhi.android.wanandroid.view.CustomLoadMoreView
 import com.tainzhi.android.wanandroid.view.SpaceItemDecoration
@@ -44,8 +44,10 @@ class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
         articleAdapter.run {
             //            showStar(false)
             setOnItemClickListener { _, _, position ->
-                startKtxActivity<BrowserActivity>(value = BrowserActivity.URL to articleAdapter.data[position].link)
-//                Navigation.findNavController(collectRecycleView).navigate(R.id.action_collect_to_browser, bundleOf(BrowserActivity.URL to articleAdapter.data[position].link))
+                val action = BrowserFragmentDirections.actionGlobalBrowserFragment(articleAdapter
+                        .data[position]
+                        .link)
+                findNavController().navigate(action)
             }
             onItemChildClickListener = itemChildClickListener
             setLoadMoreView(CustomLoadMoreView())

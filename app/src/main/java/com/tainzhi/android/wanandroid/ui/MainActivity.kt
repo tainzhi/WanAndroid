@@ -9,24 +9,34 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.tainzhi.android.wanandroid.R
 import com.tainzhi.android.wanandroid.base.ui.BaseActivity
+import com.tainzhi.android.wanandroid.util.gone
+import com.tainzhi.android.wanandroid.util.visible
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
+
+    private val mainDestionIds = setOf(R.id.homeFragment, R.id.blogFragment, R.id.projectFragment)
 
     override fun getLayoutResId() = R.layout.activity_main
 
     override fun initView() {
         val navController = findNavController(R.id.main_nav_host_fragment)
-        val appBarConfig = AppBarConfiguration.Builder(
-                R.id.homeFragment,
-                R.id.blogFragment,
-                R.id.projectFragment
-        ).setDrawerLayout(main_drawer_layout)
-                .build()
+
+        val appBarConfig = AppBarConfiguration(mainDestionIds, main_drawer_layout)
         setSupportActionBar(toolbar)
         setupActionBarWithNavController(navController, appBarConfig)
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
         supportActionBar?.setHomeButtonEnabled(true)
+
+        navController.addOnDestinationChangedListener { controller, destination, _ ->
+            if (destination.id in mainDestionIds) {
+                main_bottom_nav.visible()
+//                main_drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_OPEN)
+            } else {
+                main_bottom_nav.gone()
+//                main_drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+            }
+        }
 
         val toggle = ActionBarDrawerToggle(
                 this, main_drawer_layout, toolbar, R.string.navigation_drawer_open, R.string

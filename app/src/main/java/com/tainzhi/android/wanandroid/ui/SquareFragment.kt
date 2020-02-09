@@ -1,6 +1,7 @@
 package com.tainzhi.android.wanandroid.ui
 
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tainzhi.android.wanandroid.BR
 import com.tainzhi.android.wanandroid.R
@@ -9,7 +10,6 @@ import com.tainzhi.android.wanandroid.base.ui.BaseVMFragment
 import com.tainzhi.android.wanandroid.bean.Article
 import com.tainzhi.android.wanandroid.databinding.FragmentSquareBinding
 import com.tainzhi.android.wanandroid.util.dp2px
-import com.tainzhi.android.wanandroid.util.startKtxActivity
 import com.tainzhi.android.wanandroid.util.toast
 import com.tainzhi.android.wanandroid.view.CustomLoadMoreView
 import com.tainzhi.android.wanandroid.view.SpaceItemDecoration
@@ -37,7 +37,10 @@ class SquareFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
     private fun initRecycleView() {
         squareAdapter.run {
             setOnItemClickListener { _, _, position ->
-                startKtxActivity<BrowserActivity>(value = BrowserActivity.URL to squareAdapter.data[position].link)
+                val action = BrowserFragmentDirections.actionGlobalBrowserFragment(squareAdapter
+                        .data[position]
+                        .link)
+                findNavController().navigate(action)
             }
             setLoadMoreView(CustomLoadMoreView())
             setOnLoadMoreListener({ loadMore() }, squareRecycleView)

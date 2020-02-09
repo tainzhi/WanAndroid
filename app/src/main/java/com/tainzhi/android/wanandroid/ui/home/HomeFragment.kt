@@ -2,9 +2,10 @@ package com.tainzhi.android.wanandroid.ui.home
 
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.tainzhi.android.wanandroid.R
@@ -12,7 +13,7 @@ import com.tainzhi.android.wanandroid.adapter.HomeArticleAdapter
 import com.tainzhi.android.wanandroid.base.ui.BaseVMFragment
 import com.tainzhi.android.wanandroid.bean.Banner
 import com.tainzhi.android.wanandroid.ui.ArticleViewModel
-import com.tainzhi.android.wanandroid.ui.BrowserActivity
+import com.tainzhi.android.wanandroid.ui.BrowserFragmentDirections
 import com.tainzhi.android.wanandroid.util.GlideImageLoader
 import com.tainzhi.android.wanandroid.util.Preference
 import com.tainzhi.android.wanandroid.util.dp2px
@@ -64,9 +65,10 @@ class HomeFragment : BaseVMFragment<ArticleViewModel>() {
         }
         homeArticleAdapter.run {
             setOnItemClickListener { _, _, position ->
-                val bundle = bundleOf(BrowserActivity.URL to homeArticleAdapter.data[position].link)
-                Navigation.findNavController(homeRecycleView).navigate(R.id
-                        .action_tabFragment_to_browserActivity, bundle)
+                val action = BrowserFragmentDirections.actionGlobalBrowserFragment(homeArticleAdapter
+                        .data[position]
+                        .link)
+                findNavController().navigate(action)
             }
             onItemChildClickListener = this@HomeFragment.onItemChildClickListener
             if (headerLayoutCount > 0) removeAllHeaderView()
@@ -89,7 +91,7 @@ class HomeFragment : BaseVMFragment<ArticleViewModel>() {
                         notifyDataSetChanged()
                     }
                 } else {
-                    Navigation.findNavController(homeRecycleView).navigate(R.id.action_tab_to_login)
+                    Navigation.findNavController(homeRecycleView).navigate(R.id.action_homeFragment_to_loginActivity)
                 }
             }
         }
@@ -108,8 +110,8 @@ class HomeFragment : BaseVMFragment<ArticleViewModel>() {
             setDelayTime(3000)
             setOnBannerListener { position ->
                 run {
-                    Navigation.findNavController(banner).navigate(R.id.action_tabFragment_to_browserActivity, bundleOf
-                    (BrowserActivity.URL to bannerUrls[position]))
+                    val action = BrowserFragmentDirections.actionGlobalBrowserFragment(bannerUrls[position])
+                    findNavController().navigate(action)
                 }
             }
         }

@@ -8,7 +8,14 @@
 	<fragment
 		android:id="@+id/homeFragment"
 		android:name="com.tainzhi.android.wanandroid.ui.home.HomeFragment"
-		android:label="HomeFragment" />
+		android:label="HomeFragment">
+		<action
+			android:id="@+id/action_homeFragment_to_loginActivity"
+			app:destination="@id/loginActivity" />
+		<action
+			android:id="@+id/action_homeFragment_to_collectFragment"
+			app:destination="@id/collectFragment" />
+	</fragment>
 	<fragment
 		android:id="@+id/blogFragment"
 		android:name="com.tainzhi.android.wanandroid.ui.BlogFragment"
@@ -18,21 +25,6 @@
 		android:name="com.tainzhi.android.wanandroid.ui.project.ProjectFragment"
 		android:label="ProjectFragment" />
 
-	<fragment
-		android:id="@+id/tabFragment"
-		android:name="com.tainzhi.android.wanandroid.ui.TabFragment"
-		android:label="fragment_tab"
-		tools:layout="@layout/fragment_tab">
-		<action
-			android:id="@+id/action_tab_to_login"
-			app:destination="@id/loginActivity" />
-		<action
-			android:id="@+id/action_tabFragment_to_browserActivity"
-			app:destination="@id/browserActivity" />
-		<action
-			android:id="@+id/action_tabFragment_to_collectFragment"
-			app:destination="@id/collectFragment" />
-	</fragment>
 
 	<fragment
 		android:id="@+id/collectFragment"
@@ -46,16 +38,19 @@
 		android:label="activity_login"
 		tools:layout="@layout/activity_login" />
 
-	<activity
-		android:id="@+id/browserActivity"
-		android:name="com.tainzhi.android.wanandroid.ui.BrowserActivity"
-		android:label="activity_browser"
-		tools:layout="@layout/activity_browser">
+	<fragment
+		android:id="@+id/browserFragment"
+		android:name="com.tainzhi.android.wanandroid.ui.BrowserFragment"
+		android:label="fragment_browser"
+		tools:layout="@layout/fragment_browser">
 
 		<argument
 			android:name="url"
 			android:defaultValue="www.wanandroid.com"
 			app:argType="string" />
 
-	</activity>
+	</fragment>
+	<action
+		android:id="@+id/action_global_browserFragment"
+		app:destination="@id/browserFragment" />
 </navigation>
