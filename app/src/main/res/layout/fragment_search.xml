@@ -10,7 +10,9 @@
         android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="?attr/colorPrimary">
+        android:background="?attr/colorPrimary"
+        app:searchHintIcon="@drawable/search"
+        app:searchIcon="@drawable/search">
 
     </androidx.appcompat.widget.SearchView>
 

@@ -1,70 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res-auto"
-	xmlns:tools="http://schemas.android.com/tools"
-	android:id="@+id/main"
-	app:startDestination="@id/mainFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    app:startDestination="@id/mainFragment">
 
-	<fragment
-		android:id="@+id/mainFragment"
-		android:name="com.tainzhi.android.wanandroid.ui.MainFragment"
-		android:label="MainFragment"
-		tools:layout="@layout/fragment_main">
-		<action
-			android:id="@+id/action_mainFragment_to_loginActivity"
-			app:destination="@id/loginActivity" />
-		<action
-			android:id="@+id/action_mainFragment_to_collectFragment"
-			app:destination="@id/collectFragment" />
-		<action
-			android:id="@+id/action_systemFragment_to_systemTypeNormalFragment"
-			app:destination="@id/systemTypeNormalFragment" />
-	</fragment>
-	<fragment
-		android:id="@+id/blogFragment"
-		android:name="com.tainzhi.android.wanandroid.ui.BlogFragment"
-		android:label="BlogFragment" />
-	<fragment
-		android:id="@+id/projectFragment"
-		android:name="com.tainzhi.android.wanandroid.ui.project.ProjectFragment"
-		android:label="ProjectFragment" />
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.tainzhi.android.wanandroid.ui.MainFragment"
+        android:label="@string/home"
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_mainFragment_to_loginActivity"
+            app:destination="@id/loginActivity" />
+        <action
+            android:id="@+id/action_mainFragment_to_collectFragment"
+            app:destination="@id/collectFragment" />
+        <action
+            android:id="@+id/action_systemFragment_to_systemTypeNormalFragment"
+            app:destination="@id/systemTypeNormalFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/blogFragment"
+        android:name="com.tainzhi.android.wanandroid.ui.BlogFragment"
+        android:label="@string/blog" />
+    <fragment
+        android:id="@+id/projectFragment"
+        android:name="com.tainzhi.android.wanandroid.ui.project.ProjectFragment"
+        android:label="@string/project" />
 
 
-	<fragment
-		android:id="@+id/collectFragment"
-		android:name="com.tainzhi.android.wanandroid.ui.CollectFragment"
-		android:label="fragment_collect"
-		tools:layout="@layout/fragment_collect" />
+    <fragment
+        android:id="@+id/collectFragment"
+        android:name="com.tainzhi.android.wanandroid.ui.CollectFragment"
+        android:label="fragment_collect"
+        tools:layout="@layout/fragment_collect" />
 
-	<activity
-		android:id="@+id/loginActivity"
-		android:name="com.tainzhi.android.wanandroid.ui.login.LoginActivity"
-		android:label="activity_login"
-		tools:layout="@layout/activity_login" />
+    <activity
+        android:id="@+id/loginActivity"
+        android:name="com.tainzhi.android.wanandroid.ui.login.LoginActivity"
+        android:label="activity_login"
+        tools:layout="@layout/activity_login" />
 
-	<fragment
-		android:id="@+id/browserFragment"
-		android:name="com.tainzhi.android.wanandroid.ui.BrowserFragment"
-		android:label="fragment_browser"
-		tools:layout="@layout/fragment_browser">
+    <fragment
+        android:id="@+id/browserFragment"
+        android:name="com.tainzhi.android.wanandroid.ui.BrowserFragment"
+        android:label="fragment_browser"
+        tools:layout="@layout/fragment_browser">
 
-		<argument
-			android:name="url"
-			android:defaultValue="www.wanandroid.com"
-			app:argType="string" />
+        <argument
+            android:name="url"
+            android:defaultValue="www.wanandroid.com"
+            app:argType="string" />
 
-	</fragment>
-	<action
-		android:id="@+id/action_global_browserFragment"
-		app:destination="@id/browserFragment" />
+    </fragment>
+    <action
+        android:id="@+id/action_global_browserFragment"
+        app:destination="@id/browserFragment" />
 
-	<fragment
-		android:id="@+id/systemTypeNormalFragment"
-		android:name="com.tainzhi.android.wanandroid.ui.SystemTypeNormalFragment"
-		android:label="SystemTypeNormalFragment"
-		tools:layout="@layout/fragment_system_type_normal">
-		<argument
-			android:name="article_list"
-			app:argType="com.tainzhi.android.wanandroid.bean.SystemParent" />
-	</fragment>
+    <fragment
+        android:id="@+id/systemTypeNormalFragment"
+        android:name="com.tainzhi.android.wanandroid.ui.SystemTypeNormalFragment"
+        android:label="SystemTypeNormalFragment"
+        tools:layout="@layout/fragment_system_type_normal">
+        <argument
+            android:name="article_list"
+            app:argType="com.tainzhi.android.wanandroid.bean.SystemParent" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.tainzhi.android.wanandroid.ui.search.SearchFragment"
+        android:label="SearchFragment"
+        tools:layout="@layout/fragment_search" />
 </navigation>
