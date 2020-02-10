@@ -2,8 +2,6 @@ package com.tainzhi.android.wanandroid.ui
 
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -15,6 +13,7 @@ import com.tainzhi.android.wanandroid.base.ui.BaseActivity
 import com.tainzhi.android.wanandroid.util.gone
 import com.tainzhi.android.wanandroid.util.visible
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.main_drawer_nav_content_layout.*
 
 class MainActivity : BaseActivity() {
 
@@ -64,10 +63,10 @@ class MainActivity : BaseActivity() {
     }
 
     private fun initNavigationView() {
-        val navHeader = main_drawer_nav_view.inflateHeaderView(R.layout.main_drawer_nav_header)
-        val userIcon = navHeader.findViewById<ImageView>(R.id.user_icon)
-        val userName = navHeader.findViewById<TextView>(R.id.userNameEt)
-        userIcon.setOnClickListener {
+//        val navHeader = main_drawer_nav_view.inflateHeaderView(R.layout.main_drawer_nav_content_layout)
+//        val userIcon = navHeader.findViewById<ImageView>(R.id.user_icon)
+//        val userName = navHeader.findViewById<TextView>(R.id.userNameEt)
+        user_icon.setOnClickListener {
             navController.navigate(R.id.action_mainFragment_to_loginFragment)
         }
     }
