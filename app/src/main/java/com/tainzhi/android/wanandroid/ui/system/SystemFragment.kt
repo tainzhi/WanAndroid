@@ -1,6 +1,7 @@
 package com.tainzhi.android.wanandroid.ui.system
 
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.tainzhi.android.wanandroid.BR
@@ -8,9 +9,8 @@ import com.tainzhi.android.wanandroid.R
 import com.tainzhi.android.wanandroid.adapter.BaseBindAdapter
 import com.tainzhi.android.wanandroid.base.ui.BaseVMFragment
 import com.tainzhi.android.wanandroid.bean.SystemParent
-import com.tainzhi.android.wanandroid.ui.SystemTypeNormalActivity
+import com.tainzhi.android.wanandroid.ui.MainFragmentDirections
 import com.tainzhi.android.wanandroid.util.dp2px
-import com.tainzhi.android.wanandroid.util.startKtxActivity
 import com.tainzhi.android.wanandroid.util.toast
 import com.tainzhi.android.wanandroid.view.SpaceItemDecoration
 import kotlinx.android.synthetic.main.fragment_system.*
@@ -44,7 +44,9 @@ class SystemFragment : BaseVMFragment<SystemViewModel>() {
         }
 
         systemAdapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener { _, _, position ->
-            startKtxActivity<SystemTypeNormalActivity>(value = SystemTypeNormalActivity.ARTICLE_LIST to systemAdapter.data[position])
+            val action = MainFragmentDirections.actionSystemFragmentToSystemTypeNormalFragment(systemAdapter
+                    .data[position])
+            findNavController().navigate(action)
         }
 
         systemRefreshLayout.setOnRefreshListener { refresh() }

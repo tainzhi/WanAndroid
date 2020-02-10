@@ -65,7 +65,7 @@ class BrowserFragment : BaseFragment() {
             webChromeClient = object : WebChromeClient() {
                 override fun onProgressChanged(p0: WebView?, p1: Int) {
                     super.onProgressChanged(p0, p1)
-                    progressBar.progress = p1
+                    progressBar?.progress = p1
                 }
 
                 override fun onReceivedTitle(p0: WebView?, p1: String?) {
@@ -82,7 +82,6 @@ class BrowserFragment : BaseFragment() {
     private fun onFinish() {
         webView.destroy()
         (webView.parent as LinearLayout).removeView(webView)
-        super.onDestroy()
         findNavController().popBackStack()
     }
 }

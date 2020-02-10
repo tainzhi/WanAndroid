@@ -8,7 +8,7 @@
 	<fragment
 		android:id="@+id/mainFragment"
 		android:name="com.tainzhi.android.wanandroid.ui.MainFragment"
-		android:label="fragment_main"
+		android:label="MainFragment"
 		tools:layout="@layout/fragment_main">
 		<action
 			android:id="@+id/action_mainFragment_to_loginActivity"
@@ -16,6 +16,9 @@
 		<action
 			android:id="@+id/action_mainFragment_to_collectFragment"
 			app:destination="@id/collectFragment" />
+		<action
+			android:id="@+id/action_systemFragment_to_systemTypeNormalFragment"
+			app:destination="@id/systemTypeNormalFragment" />
 	</fragment>
 	<fragment
 		android:id="@+id/blogFragment"
@@ -54,4 +57,14 @@
 	<action
 		android:id="@+id/action_global_browserFragment"
 		app:destination="@id/browserFragment" />
+
+	<fragment
+		android:id="@+id/systemTypeNormalFragment"
+		android:name="com.tainzhi.android.wanandroid.ui.SystemTypeNormalFragment"
+		android:label="SystemTypeNormalFragment"
+		tools:layout="@layout/fragment_system_type_normal">
+		<argument
+			android:name="article_list"
+			app:argType="com.tainzhi.android.wanandroid.bean.SystemParent" />
+	</fragment>
 </navigation>
