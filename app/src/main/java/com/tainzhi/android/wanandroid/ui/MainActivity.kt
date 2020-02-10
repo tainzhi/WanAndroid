@@ -49,7 +49,6 @@ class MainActivity : BaseActivity() {
                 .navigation_drawer_close)
         main_drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
-        main_drawer_nav_view.setupWithNavController(navController)
 
         main_bottom_nav.run {
             setupWithNavController(navController)
@@ -63,12 +62,15 @@ class MainActivity : BaseActivity() {
     }
 
     private fun initNavigationView() {
-//        val navHeader = main_drawer_nav_view.inflateHeaderView(R.layout.main_drawer_nav_content_layout)
-//        val userIcon = navHeader.findViewById<ImageView>(R.id.user_icon)
-//        val userName = navHeader.findViewById<TextView>(R.id.userNameEt)
+        main_drawer_nav_view.setupWithNavController(navController)
         user_icon.setOnClickListener {
             navController.navigate(R.id.action_mainFragment_to_loginFragment)
         }
+        collections.setOnClickListener { navController.navigate(R.id.action_mainFragment_to_collectFragment) }
+        browseHistory.setOnClickListener { navController.navigate(R.id
+                .action_mainFragment_to_historyFragment)}
+        otherInfo.setOnClickListener { navController.navigate(R.id
+                .action_mainFragment_to_otherInfoFragment) }
     }
 
     override fun initData() {

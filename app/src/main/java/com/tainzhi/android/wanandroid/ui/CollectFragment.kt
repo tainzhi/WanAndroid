@@ -26,7 +26,7 @@ class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
         (mBinding as FragmentCollectBinding).viewModel = viewModel
         toolbar.setTitle(R.string.my_collect)
         toolbar.setNavigationIcon(R.drawable.arrow_back)
-        toolbar.setNavigationOnClickListener { onDestroy() }
+        toolbar.setNavigationOnClickListener { findNavController().popBackStack() }
 
         collectRecycleView.run {
             layoutManager = LinearLayoutManager(activity)

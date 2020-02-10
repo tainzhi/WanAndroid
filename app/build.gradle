@@ -76,6 +76,8 @@ dependencies {
 
     implementation Libs.Glide.glide
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
     kapt Libs.Glide.compiler
 
     debugImplementation Libs.leakCanary

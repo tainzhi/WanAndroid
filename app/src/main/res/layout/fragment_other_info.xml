@@ -5,51 +5,7 @@
     android:orientation="vertical"
     android:gravity="bottom">
 
-    <TextView
-        android:id="@+id/titleTv"
-        android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:gravity="center"
-        android:textColor="@color/white"
-        android:textSize="18sp" />
-
-
-    <LinearLayout
-        android:id="@+id/loginLayout"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_marginTop="20dp"
-        android:padding="10dp"
-        android:clickable="true">
-
-        <ImageView
-            android:id="@+id/icon"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_user" />
-
-        <TextView
-            android:id="@+id/loginTv"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:padding="4dp"
-            android:gravity="center_vertical"
-            android:text="登录/注册"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:layout_marginLeft="20dp"/>
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/collect"
-        style="@style/About_Tv"
-        android:layout_marginTop="20dp"
-        android:text="@string/my_collect" />
-
-    <View style="@style/Line" />
+    <include layout="@layout/title_layout" />
 
     <TextView
         android:id="@+id/license"

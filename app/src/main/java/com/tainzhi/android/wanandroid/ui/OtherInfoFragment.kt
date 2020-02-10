@@ -4,41 +4,30 @@ import android.content.Intent
 import android.net.Uri
 import android.view.Gravity
 import android.view.MenuItem
-import android.view.View
 import androidx.appcompat.widget.PopupMenu
-import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
-import com.bumptech.glide.Glide
-import com.google.gson.Gson
 import com.tainzhi.android.wanandroid.BuildConfig
 import com.tainzhi.android.wanandroid.R
 import com.tainzhi.android.wanandroid.base.ui.BaseFragment
-import com.tainzhi.android.wanandroid.bean.User
 import com.tainzhi.android.wanandroid.util.GITHUB_PAGE
 import com.tainzhi.android.wanandroid.util.ISSUE_URL
-import com.tainzhi.android.wanandroid.util.Preference
 import com.tainzhi.android.wanandroid.util.openBrowser
 import de.psdev.licensesdialog.LicensesDialog
 import de.psdev.licensesdialog.licenses.ApacheSoftwareLicense20
 import de.psdev.licensesdialog.model.Notice
-import kotlinx.android.synthetic.main.fragment_profile.*
+import kotlinx.android.synthetic.main.fragment_other_info.*
+import kotlinx.android.synthetic.main.title_layout.*
 
-class ProfileFragment : BaseFragment() {
-
-    private var isLogin by Preference(Preference.IS_LOGIN, false)
-    private var userJson by Preference(Preference.USER_GSON, "")
-
-    override fun getLayoutResId() = R.layout.fragment_profile
+class OtherInfoFragment : BaseFragment() {
+    override fun getLayoutResId() = R.layout.fragment_other_info
 
     override fun initView() {
-        titleTv.text = getString(R.string.me)
+        toolbar.setTitle(R.string.other_info)
+        toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24)
+        toolbar.setNavigationOnClickListener { findNavController().popBackStack() }
         versionName.text = BuildConfig.VERSION_NAME
-    }
-
-    override fun onResume() {
-        super.onResume()
-        refreshData()
     }
 
     override fun initData() {
@@ -48,26 +37,6 @@ class ProfileFragment : BaseFragment() {
         feedback.setOnClickListener { showFeedBackMenu() }
         thirdLib.setOnClickListener { showLicenseDialog() }
         developer.setOnClickListener { showMe() }
-        loginLayout.setOnClickListener {
-            if (!isLogin) Navigation.findNavController(loginLayout)
-                    .navigate(R.id.action_mainFragment_to_loginFragment)
-        }
-        collect.setOnClickListener {
-            if (isLogin) Navigation.findNavController(loginLayout)
-                    .navigate(R.id.action_mainFragment_to_collectFragment)
-        }
-    }
-
-    private fun refreshData() {
-        if (isLogin) {
-            val user = Gson().fromJson<User>(userJson, User::class.java)
-            Glide.with(icon).load(user.icon).error(R.drawable.ic_user).into(icon)
-            loginTv.text = user.username
-            collect.visibility = View.VISIBLE
-        } else {
-            loginTv.text = "登录/注册"
-            collect.visibility = View.GONE
-        }
     }
 
     private fun showOwnLicense() {
