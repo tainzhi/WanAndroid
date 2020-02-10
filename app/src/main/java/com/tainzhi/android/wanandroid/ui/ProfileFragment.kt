@@ -50,7 +50,7 @@ class ProfileFragment : BaseFragment() {
         developer.setOnClickListener { showMe() }
         loginLayout.setOnClickListener {
             if (!isLogin) Navigation.findNavController(loginLayout)
-                    .navigate(R.id.action_mainFragment_to_loginActivity)
+                    .navigate(R.id.action_mainFragment_to_loginFragment)
         }
         collect.setOnClickListener {
             if (isLogin) Navigation.findNavController(loginLayout)
@@ -61,7 +61,7 @@ class ProfileFragment : BaseFragment() {
     private fun refreshData() {
         if (isLogin) {
             val user = Gson().fromJson<User>(userJson, User::class.java)
-            Glide.with(icon).load(user.icon).error(R.drawable.ic_dynamic_user).into(icon)
+            Glide.with(icon).load(user.icon).error(R.drawable.ic_user).into(icon)
             loginTv.text = user.username
             collect.visibility = View.VISIBLE
         } else {

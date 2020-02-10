@@ -50,7 +50,7 @@ class MainFragment : BaseFragment() {
 //            if (!isLogin)  Navigation.findNavController(viewPager).navigate(R.id.action_tab_to_login)
 //            else Navigation.findNavController(viewPager).navigate(R.id.action_tab_to_share)
             Navigation.findNavController(viewPager).navigate(R.id
-                    .action_mainFragment_to_loginActivity)
+                    .action_mainFragment_to_loginFragment)
         }
     }
 

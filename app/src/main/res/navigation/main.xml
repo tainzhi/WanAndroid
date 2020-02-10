@@ -11,8 +11,8 @@
         android:label="@string/home"
         tools:layout="@layout/fragment_main">
         <action
-            android:id="@+id/action_mainFragment_to_loginActivity"
-            app:destination="@id/loginActivity" />
+            android:id="@+id/action_mainFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
         <action
             android:id="@+id/action_mainFragment_to_collectFragment"
             app:destination="@id/collectFragment" />
@@ -39,11 +39,11 @@
         android:label="fragment_collect"
         tools:layout="@layout/fragment_collect" />
 
-    <activity
-        android:id="@+id/loginActivity"
-        android:name="com.tainzhi.android.wanandroid.ui.login.LoginActivity"
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.tainzhi.android.wanandroid.ui.login.LoginFragment"
         android:label="activity_login"
-        tools:layout="@layout/activity_login" />
+        tools:layout="@layout/fragment_login" />
 
     <fragment
         android:id="@+id/browserFragment"

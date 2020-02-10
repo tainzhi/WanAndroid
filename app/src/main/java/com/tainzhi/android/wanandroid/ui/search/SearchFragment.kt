@@ -104,7 +104,7 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
                     }
                 } else {
                     Navigation.findNavController(searchRecycleView).navigate(R.id
-                            .action_mainFragment_to_loginActivity)
+                            .action_mainFragment_to_loginFragment)
                 }
             }
         }

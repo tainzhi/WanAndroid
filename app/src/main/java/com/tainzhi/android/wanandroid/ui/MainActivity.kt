@@ -2,9 +2,12 @@ package com.tainzhi.android.wanandroid.ui
 
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.*
 import com.tainzhi.android.wanandroid.R
@@ -15,12 +18,14 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
 
+    private lateinit var navController: NavController
+
     private val mainDestionIds = setOf(R.id.mainFragment, R.id.blogFragment, R.id.projectFragment)
 
     override fun getLayoutResId() = R.layout.activity_main
 
     override fun initView() {
-        val navController = findNavController(R.id.main_nav_host_fragment)
+        navController = findNavController(R.id.main_nav_host_fragment)
 
         val appBarConfig = AppBarConfiguration(mainDestionIds, main_drawer_layout)
         setSupportActionBar(toolbar)
@@ -54,6 +59,17 @@ class MainActivity : BaseActivity() {
             }
         }
 
+        initNavigationView()
+
+    }
+
+    private fun initNavigationView() {
+        val navHeader = main_drawer_nav_view.inflateHeaderView(R.layout.main_drawer_nav_header)
+        val userIcon = navHeader.findViewById<ImageView>(R.id.user_icon)
+        val userName = navHeader.findViewById<TextView>(R.id.userNameEt)
+        userIcon.setOnClickListener {
+            navController.navigate(R.id.action_mainFragment_to_loginFragment)
+        }
     }
 
     override fun initData() {
