@@ -25,9 +25,9 @@ class NavigationFragment : BaseVMFragment<NavigationViewModel>() {
     override fun initVM(): NavigationViewModel = getViewModel()
 
     override fun initView() {
-        navigationRecycleView.run {
+        navigationRecyclerView.run {
             layoutManager = linearLayoutManager
-            addItemDecoration(SpaceItemDecoration(navigationRecycleView.dp2px(10)))
+            addItemDecoration(SpaceItemDecoration(navigationRecyclerView.dp2px(10)))
             adapter = navigationAdapter
         }
 
@@ -49,8 +49,8 @@ class NavigationFragment : BaseVMFragment<NavigationViewModel>() {
         val firstPotion = linearLayoutManager.findFirstVisibleItemPosition()
         val lastPosition = linearLayoutManager.findLastVisibleItemPosition()
         when {
-            position <= firstPotion || position >= lastPosition -> navigationRecycleView.smoothScrollToPosition(position)
-            else -> navigationRecycleView.run {
+            position <= firstPotion || position >= lastPosition -> navigationRecyclerView.smoothScrollToPosition(position)
+            else -> navigationRecyclerView.run {
                 smoothScrollBy(0, this.getChildAt(position - firstPotion).top - this.dp2px(8))
             }
         }

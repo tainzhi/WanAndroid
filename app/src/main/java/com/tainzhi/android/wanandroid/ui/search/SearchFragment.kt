@@ -40,9 +40,9 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
     override fun initView() {
         initTagLayout()
 
-        searchRecycleView.run {
+        searchRecyclerView.run {
             layoutManager = LinearLayoutManager(context)
-            addItemDecoration(SpaceItemDecoration(searchRecycleView.dp2px(10)))
+            addItemDecoration(SpaceItemDecoration(searchRecyclerView.dp2px(10)))
 
         }
         initAdapter()
@@ -72,10 +72,10 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
             }
             onItemChildClickListener = this@SearchFragment.onItemChildClickListener
             setLoadMoreView(CustomLoadMoreView())
-            setOnLoadMoreListener({ loadMore() }, homeRecycleView)
+            setOnLoadMoreListener({ loadMore() }, homeRecyclerView)
         }
-        searchRecycleView.adapter = searchAdapter
-        val emptyView = layoutInflater.inflate(R.layout.view_empty, searchRecycleView.parent as ViewGroup, false)
+        searchRecyclerView.adapter = searchAdapter
+        val emptyView = layoutInflater.inflate(R.layout.view_empty, searchRecyclerView.parent as ViewGroup, false)
         val emptyTv = emptyView.findViewById<TextView>(R.id.emptyTv)
         emptyTv.text = getString(R.string.try_another_key)
         searchAdapter.emptyView = emptyView
@@ -103,7 +103,7 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
                         notifyDataSetChanged()
                     }
                 } else {
-                    Navigation.findNavController(searchRecycleView).navigate(R.id
+                    Navigation.findNavController(searchRecyclerView).navigate(R.id
                             .action_mainFragment_to_loginFragment)
                 }
             }
@@ -172,7 +172,7 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
     override fun startObserve() {
 
         viewModel.uiState.observe(this, Observer {
-            searchRecycleView.visibility = if (it.showHot) View.GONE else View.VISIBLE
+            searchRecyclerView.visibility = if (it.showHot) View.GONE else View.VISIBLE
             hotContent.visibility = if (!it.showHot) View.GONE else View.VISIBLE
             searchRefreshLayout.isRefreshing = it.showLoading
 

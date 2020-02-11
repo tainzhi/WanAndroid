@@ -46,7 +46,7 @@ class HomeFragment : BaseVMFragment<ArticleViewModel>() {
 
     override fun initView() {
 
-        initRecycleView()
+        initRecyclerView()
         initBanner()
 
         homeRefreshLayout.run {
@@ -58,10 +58,10 @@ class HomeFragment : BaseVMFragment<ArticleViewModel>() {
         refresh()
     }
 
-    private fun initRecycleView() {
-        homeRecycleView.run {
+    private fun initRecyclerView() {
+        homeRecyclerView.run {
             layoutManager = LinearLayoutManager(activity)
-            addItemDecoration(SpaceItemDecoration(homeRecycleView.dp2px(10)))
+            addItemDecoration(SpaceItemDecoration(homeRecyclerView.dp2px(10)))
         }
         homeArticleAdapter.run {
             setOnItemClickListener { _, _, position ->
@@ -74,9 +74,9 @@ class HomeFragment : BaseVMFragment<ArticleViewModel>() {
             if (headerLayoutCount > 0) removeAllHeaderView()
             addHeaderView(banner)
             setLoadMoreView(CustomLoadMoreView())
-            setOnLoadMoreListener({ loadMore() }, homeRecycleView)
+            setOnLoadMoreListener({ loadMore() }, homeRecyclerView)
         }
-        homeRecycleView.adapter = homeArticleAdapter
+        homeRecyclerView.adapter = homeArticleAdapter
     }
 
     private val onItemChildClickListener = BaseQuickAdapter.OnItemChildClickListener { _, view, position ->
@@ -91,7 +91,7 @@ class HomeFragment : BaseVMFragment<ArticleViewModel>() {
                         notifyDataSetChanged()
                     }
                 } else {
-                    Navigation.findNavController(homeRecycleView).navigate(R.id
+                    Navigation.findNavController(homeRecyclerView).navigate(R.id
                             .action_mainFragment_to_loginFragment)
                 }
             }

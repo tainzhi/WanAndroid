@@ -51,14 +51,14 @@ class ProjectTypeFragment : BaseVMFragment<ArticleViewModel>() {
     override fun initVM(): ArticleViewModel = getViewModel()
 
     override fun initView() {
-        initRecycleView()
+        initRecyclerView()
     }
 
     override fun initData() {
         refresh()
     }
 
-    private fun initRecycleView() {
+    private fun initRecyclerView() {
         projectRefreshLayout.setOnRefreshListener { refresh() }
         projectAdapter.run {
             setOnItemClickListener { _, _, position ->
@@ -68,12 +68,12 @@ class ProjectTypeFragment : BaseVMFragment<ArticleViewModel>() {
                 findNavController().navigate(action)
             }
             setLoadMoreView(CustomLoadMoreView())
-            setOnLoadMoreListener({ loadMore() }, projectRecycleView)
+            setOnLoadMoreListener({ loadMore() }, projectRecyclerView)
             onItemChildClickListener = this@ProjectTypeFragment.onItemChildClickListener
         }
-        projectRecycleView.run {
+        projectRecyclerView.run {
             layoutManager = LinearLayoutManager(activity)
-            addItemDecoration(SpaceItemDecoration(projectRecycleView.dp2px(10)))
+            addItemDecoration(SpaceItemDecoration(projectRecyclerView.dp2px(10)))
             adapter = projectAdapter
         }
 
@@ -130,7 +130,7 @@ class ProjectTypeFragment : BaseVMFragment<ArticleViewModel>() {
                         notifyDataSetChanged()
                     }
                 } else {
-                    Navigation.findNavController(projectRecycleView)
+                    Navigation.findNavController(projectRecyclerView)
                             .navigate(R.id.action_mainFragment_to_loginFragment)
                 }
             }

@@ -24,9 +24,9 @@ class MainActivity : BaseActivity() {
     override fun getLayoutResId() = R.layout.activity_main
 
     override fun initView() {
-        navController = findNavController(R.id.main_nav_host_fragment)
+        navController = findNavController(R.id.mainNavHostFragment)
 
-        val appBarConfig = AppBarConfiguration(mainDestionIds, main_drawer_layout)
+        val appBarConfig = AppBarConfiguration(mainDestionIds, mainDrawerLayout)
         setSupportActionBar(toolbar)
         setupActionBarWithNavController(navController, appBarConfig)
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
@@ -34,23 +34,23 @@ class MainActivity : BaseActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if (destination.id in mainDestionIds) {
-                main_bottom_nav.visible()
+                mainBottomNavigation.visible()
                 toolbar.visible()
-                main_drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+                mainDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
             } else {
-                main_bottom_nav.gone()
+                mainBottomNavigation.gone()
                 toolbar.gone()
-                main_drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+                mainDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
             }
         }
 
         val toggle = ActionBarDrawerToggle(
-                this, main_drawer_layout, toolbar, R.string.navigation_drawer_open, R.string
+                this, mainDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string
                 .navigation_drawer_close)
-        main_drawer_layout.addDrawerListener(toggle)
+        mainDrawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
-        main_bottom_nav.run {
+        mainBottomNavigation.run {
             setupWithNavController(navController)
             setOnNavigationItemSelectedListener { menuItem ->
                 NavigationUI.onNavDestinationSelected(menuItem, navController)
@@ -62,23 +62,27 @@ class MainActivity : BaseActivity() {
     }
 
     private fun initNavigationView() {
-        main_drawer_nav_view.setupWithNavController(navController)
-        user_icon.setOnClickListener {
+        mainDrawerLayoutNavigation.setupWithNavController(navController)
+        userImage.setOnClickListener {
             navController.navigate(R.id.action_mainFragment_to_loginFragment)
         }
-        collections.setOnClickListener { navController.navigate(R.id.action_mainFragment_to_collectFragment) }
-        browseHistory.setOnClickListener { navController.navigate(R.id
-                .action_mainFragment_to_historyFragment)}
-        otherInfo.setOnClickListener { navController.navigate(R.id
-                .action_mainFragment_to_otherInfoFragment) }
+        myCollection.setOnClickListener { navController.navigate(R.id.action_mainFragment_to_collectFragment) }
+        browseHistory.setOnClickListener {
+            navController.navigate(R.id
+                    .action_mainFragment_to_historyFragment)
+        }
+        otherInfo.setOnClickListener {
+            navController.navigate(R.id
+                    .action_mainFragment_to_otherInfoFragment)
+        }
     }
 
     override fun initData() {
     }
 
     override fun onBackPressed() {
-        if (main_drawer_layout.isDrawerOpen(GravityCompat.START)) {
-            main_drawer_layout.closeDrawer(GravityCompat.START)
+        if (mainDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            mainDrawerLayout.closeDrawer(GravityCompat.START)
         } else {
             super.onBackPressed()
         }
@@ -90,7 +94,7 @@ class MainActivity : BaseActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val navController = findNavController(R.id.main_nav_host_fragment)
+        val navController = findNavController(R.id.mainNavHostFragment)
         return super.onOptionsItemSelected(item) || item.onNavDestinationSelected(navController)
     }
 }

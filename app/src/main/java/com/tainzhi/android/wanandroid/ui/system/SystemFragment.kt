@@ -28,18 +28,18 @@ class SystemFragment : BaseVMFragment<SystemViewModel>() {
     override fun initVM(): SystemViewModel = getViewModel()
 
     override fun initView() {
-        initRecycleView()
+        initRecyclerView()
     }
 
     override fun initData() {
         refresh()
     }
 
-    private fun initRecycleView() {
+    private fun initRecyclerView() {
 
-        systemRecycleView.run {
+        systemRecyclerView.run {
             layoutManager = LinearLayoutManager(activity)
-            addItemDecoration(SpaceItemDecoration(systemRecycleView.dp2px(10)))
+            addItemDecoration(SpaceItemDecoration(systemRecyclerView.dp2px(10)))
             adapter = systemAdapter
         }
 

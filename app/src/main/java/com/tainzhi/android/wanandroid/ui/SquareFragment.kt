@@ -27,14 +27,14 @@ class SquareFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
     override fun initView() {
         mBinding.lifecycleOwner = this
         (mBinding as FragmentSquareBinding).viewModel = viewModel
-        initRecycleView()
+        initRecyclerView()
     }
 
     override fun initData() {
         refresh()
     }
 
-    private fun initRecycleView() {
+    private fun initRecyclerView() {
         squareAdapter.run {
             setOnItemClickListener { _, _, position ->
                 val action = BrowserFragmentDirections.actionGlobalBrowserFragment(squareAdapter
@@ -43,11 +43,11 @@ class SquareFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
                 findNavController().navigate(action)
             }
             setLoadMoreView(CustomLoadMoreView())
-            setOnLoadMoreListener({ loadMore() }, squareRecycleView)
+            setOnLoadMoreListener({ loadMore() }, squareRecyclerView)
         }
-        squareRecycleView.run {
+        squareRecyclerView.run {
             layoutManager = LinearLayoutManager(activity)
-            addItemDecoration(SpaceItemDecoration(squareRecycleView.dp2px(10)))
+            addItemDecoration(SpaceItemDecoration(squareRecyclerView.dp2px(10)))
             adapter = squareAdapter
         }
     }
@@ -77,9 +77,9 @@ class SquareFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
 
             it.needLogin?.let { needLogin ->
                 // TODO: 2020/1/28 登录相关的 
-                //                if (needLogin) Navigation.findNavController(squareRecycleView).navigate(R.id.action_tab_to_login)
-//                if (needLogin) Navigation.findNavController(squareRecycleView).navigate(R.id.action_tab_to_login)
-//                else Navigation.findNavController(squareRecycleView).navigate(R.id.action_tab_to_share)
+                //                if (needLogin) Navigation.findNavController(squareRecyclerView).navigate(R.id.action_tab_to_login)
+//                if (needLogin) Navigation.findNavController(squareRecyclerView).navigate(R.id.action_tab_to_login)
+//                else Navigation.findNavController(squareRecyclerView).navigate(R.id.action_tab_to_share)
             }
 
             it.showError?.let { message ->

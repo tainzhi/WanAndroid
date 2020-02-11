@@ -3,17 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:ignore="ContentDescription">
 
     <ImageView
-        android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="@dimen/nav_header_height"
         android:src="@drawable/side_nav_bar"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/user_icon"
+        android:id="@+id/userImage"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginTop="30dp"
@@ -24,28 +24,28 @@
         app:srcCompat="@drawable/ic_user" />
 
     <TextView
-        android:id="@+id/user_name_tv"
+        android:id="@+id/userName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="16dp"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:text="登录/注册"
+        android:text="@string/login_or_register"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="@+id/user_icon"
+        app:layout_constraintEnd_toEndOf="@+id/userImage"
         app:layout_constraintHorizontal_bias="0.473"
-        app:layout_constraintStart_toStartOf="@+id/user_icon"
-        app:layout_constraintTop_toBottomOf="@+id/user_icon" />
+        app:layout_constraintStart_toStartOf="@+id/userImage"
+        app:layout_constraintTop_toBottomOf="@+id/userImage" />
 
     <TextView
-        android:id="@+id/collections"
+        android:id="@+id/myCollection"
         android:layout_width="150dp"
         android:layout_height="40dp"
         android:layout_marginTop="212dp"
         android:drawableStart="@drawable/ic_baseline_collections_24"
         android:gravity="center"
-        android:text="我的收藏"
+        android:text="@string/my_myCollection"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.329"
         app:layout_constraintStart_toStartOf="parent"
@@ -57,10 +57,10 @@
         android:layout_height="40dp"
         android:drawableStart="@drawable/ic_baseline_history_24"
         android:gravity="center"
-        android:text="浏览历史"
-        app:layout_constraintEnd_toEndOf="@+id/collections"
-        app:layout_constraintStart_toStartOf="@+id/collections"
-        app:layout_constraintTop_toBottomOf="@id/collections" />
+        android:text="@string/browse_history"
+        app:layout_constraintEnd_toEndOf="@+id/myCollection"
+        app:layout_constraintStart_toStartOf="@+id/myCollection"
+        app:layout_constraintTop_toBottomOf="@id/myCollection" />
 
     <TextView
         android:id="@+id/otherInfo"
@@ -68,13 +68,13 @@
         android:layout_height="40dp"
         android:drawableStart="@drawable/ic_baseline_info_24"
         android:gravity="center"
-        android:text="其他信息"
-        app:layout_constraintEnd_toEndOf="@+id/collections"
-        app:layout_constraintStart_toStartOf="@+id/collections"
+        android:text="@string/other_info"
+        app:layout_constraintEnd_toEndOf="@+id/myCollection"
+        app:layout_constraintStart_toStartOf="@+id/myCollection"
         app:layout_constraintTop_toBottomOf="@id/browseHistory" />
 
     <Button
-        android:id="@+id/log_out_btn"
+        android:id="@+id/logout"
         android:layout_width="120dp"
         android:layout_height="40dp"
         android:layout_marginBottom="52dp"

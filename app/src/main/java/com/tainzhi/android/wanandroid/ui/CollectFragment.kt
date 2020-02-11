@@ -28,9 +28,9 @@ class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
         toolbar.setNavigationIcon(R.drawable.arrow_back)
         toolbar.setNavigationOnClickListener { findNavController().popBackStack() }
 
-        collectRecycleView.run {
+        collectRecyclerView.run {
             layoutManager = LinearLayoutManager(activity)
-            addItemDecoration(SpaceItemDecoration(collectRecycleView.dp2px(10)))
+            addItemDecoration(SpaceItemDecoration(collectRecyclerView.dp2px(10)))
         }
 
         initAdapter()
@@ -51,9 +51,9 @@ class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
             }
             onItemChildClickListener = itemChildClickListener
             setLoadMoreView(CustomLoadMoreView())
-            setOnLoadMoreListener({ loadMore() }, collectRecycleView)
+            setOnLoadMoreListener({ loadMore() }, collectRecyclerView)
         }
-        collectRecycleView.adapter = articleAdapter
+        collectRecyclerView.adapter = articleAdapter
     }
 
     private fun refresh() {

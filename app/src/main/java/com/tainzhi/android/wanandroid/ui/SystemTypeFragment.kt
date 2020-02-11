@@ -41,7 +41,7 @@ class SystemTypeFragment : BaseVMFragment<ArticleViewModel>() {
     override fun getLayoutResId() = R.layout.fragment_system_type
 
     override fun initView() {
-        initRecycleView()
+        initRecyclerView()
     }
 
     override fun initVM(): ArticleViewModel = getViewModel()
@@ -50,7 +50,7 @@ class SystemTypeFragment : BaseVMFragment<ArticleViewModel>() {
         refresh()
     }
 
-    private fun initRecycleView() {
+    private fun initRecyclerView() {
         systemTypeRefreshLayout.setOnRefreshListener { refresh() }
         systemTypeAdapter.run {
             setOnItemClickListener { _, _, position ->
@@ -62,11 +62,11 @@ class SystemTypeFragment : BaseVMFragment<ArticleViewModel>() {
             onItemChildClickListener = this@SystemTypeFragment.onItemChildClickListener
 
             setLoadMoreView(CustomLoadMoreView())
-            setOnLoadMoreListener({ loadMore() }, systemTypeRecycleView)
+            setOnLoadMoreListener({ loadMore() }, systemTypeRecyclerView)
         }
-        systemTypeRecycleView.run {
+        systemTypeRecyclerView.run {
             layoutManager = LinearLayoutManager(context)
-            addItemDecoration(SpaceItemDecoration(systemTypeRecycleView.dp2px(10)))
+            addItemDecoration(SpaceItemDecoration(systemTypeRecyclerView.dp2px(10)))
             adapter = systemTypeAdapter
         }
     }
@@ -83,7 +83,7 @@ class SystemTypeFragment : BaseVMFragment<ArticleViewModel>() {
                         notifyDataSetChanged()
                     }
                 } else {
-                    Navigation.findNavController(systemTypeRecycleView).navigate(R.id
+                    Navigation.findNavController(systemTypeRecyclerView).navigate(R.id
                             .action_mainFragment_to_loginFragment)
                 }
             }

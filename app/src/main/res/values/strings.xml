@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="TypographyEllipsis">
     <string name="app_name">WanAndroid</string>
     <string name="app_logo_html"><font color="#FF0000">Wan</font>Android</string>
     <string name="home">首页</string>
@@ -50,4 +50,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="logout">退出登录</string>
     <string name="other_info">其他信息</string>
+    <string name="my_myCollection">我的收藏</string>
+    <string name="login_or_register">登录/注册</string>
+    <string name="browse_history">浏览历史</string>
 </resources>
