@@ -1,5 +1,6 @@
 package com.tainzhi.android.wanandroid.bean
 
+import androidx.room.Entity
 import java.io.Serializable
 
 /**
@@ -9,6 +10,7 @@ import java.io.Serializable
  * @description:
  **/
 
+@Entity(primaryKeys = ["id"])
 data class Article( val id: Int,
                     val originId: Int,
                     val title: String,
