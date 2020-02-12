@@ -29,7 +29,7 @@
 				android:layout_height="wrap_content"
 				android:singleLine="true"
 				android:text="@={viewModel.userName}"
-				app:afterTextChanged="@{viewModel.verifyInput}"/>
+				afterTextChanged="@{viewModel.verifyInput}" />
 
 		</com.google.android.material.textfield.TextInputLayout>
 
@@ -46,7 +46,7 @@
 				android:inputType="textPassword"
 				android:singleLine="true"
 				android:text="@={viewModel.passWord}"
-				app:afterTextChanged="@{viewModel.verifyInput}"/>
+				afterTextChanged="@{viewModel.verifyInput}" />
 
 		</com.google.android.material.textfield.TextInputLayout>
 

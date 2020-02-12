@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:binding="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
 
@@ -20,8 +19,8 @@
             android:id="@+id/collectRefreshLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            binding:isRefresh="@{viewModel.uiState.showLoading}"
-            binding:onRefresh="@{viewModel.refreshCollect}">
+            isRefresh="@{viewModel.uiState.showLoading}"
+            onRefresh="@{viewModel.refreshCollect}">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/collectRecyclerView"

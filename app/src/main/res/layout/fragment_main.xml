@@ -1,38 +1,40 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:tools="http://schemas.android.com/tools"
-	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	xmlns:app="http://schemas.android.com/apk/res-auto"
-	tools:context="com.tainzhi.android.wanandroid.ui.MainFragment">
-	
-	<com.google.android.material.appbar.AppBarLayout
-		android:layout_width="match_parent"
-		android:layout_height="?actionBarSize"
-		android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-		<com.google.android.material.tabs.TabLayout
-			android:id="@+id/tabLayout"
-			android:layout_width="match_parent"
-			android:layout_height="?actionBarSize"
-			app:tabIndicatorColor="#ADBE107E"
-			app:tabMode="fixed"
-			app:tabTextAppearance="@style/TextAppearance.Design.Tab" />
-	
-	</com.google.android.material.appbar.AppBarLayout>
-	
-	
-	<androidx.viewpager2.widget.ViewPager2
-		android:id="@+id/viewPager"
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-	
-	<com.google.android.material.floatingactionbutton.FloatingActionButton
-		android:id="@+id/addFab"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_gravity="bottom|end"
-		android:layout_marginEnd="20dp"
-		android:layout_marginBottom="20dp"
-		android:src="@drawable/ic_baseline_add_24"
-		android:visibility="gone"/>
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.tainzhi.android.wanandroid.ui.MainFragment">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            app:tabIndicatorColor="#ADBE107E"
+            app:tabMode="fixed"
+            app:tabTextAppearance="@style/TextAppearance.Design.Tab" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addFab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="40dp"
+        android:src="@drawable/ic_baseline_add_24"
+        android:visibility="gone"
+        tools:visibility="visible" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -57,7 +57,7 @@ class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
     }
 
     private fun refresh() {
-        viewModel.getCollectArticleList(true)
+        viewModel.getCollectArticleList(false)
     }
 
 

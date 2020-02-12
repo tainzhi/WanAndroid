@@ -34,8 +34,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:imageUrl="@{viewModel.user.icon}"
-            app:imagePlaceholder="@{appR.drawable.ic_user}"
+            imagePlaceholder="@{appR.drawable.ic_user}"
+            imageUrl="@{viewModel.user.icon}"
+            android:clickable="@{!viewModel.isLogin}"
             app:srcCompat="@drawable/ic_user"
             tools:src="@drawable/ic_user" />
 
@@ -49,6 +50,8 @@
             android:text="@{viewModel.isLogin ? viewModel.user.nickname : @string/login_or_register}"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="@color/white"
+            android:clickable="@{!viewModel.isLogin}"
+            tools:text="@string/login_or_register"
             app:layout_constraintEnd_toEndOf="@+id/userImage"
             app:layout_constraintHorizontal_bias="0.473"
             app:layout_constraintStart_toStartOf="@+id/userImage"
