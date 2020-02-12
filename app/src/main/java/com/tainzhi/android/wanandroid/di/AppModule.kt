@@ -5,6 +5,7 @@ import com.tainzhi.android.wanandroid.api.WanClient
 import com.tainzhi.android.wanandroid.api.WanService
 import com.tainzhi.android.wanandroid.repository.*
 import com.tainzhi.android.wanandroid.ui.ArticleViewModel
+import com.tainzhi.android.wanandroid.ui.MainActivityViewModel
 import com.tainzhi.android.wanandroid.ui.login.LoginViewModel
 import com.tainzhi.android.wanandroid.ui.navigation.NavigationViewModel
 import com.tainzhi.android.wanandroid.ui.project.ProjectViewModel
@@ -27,6 +28,7 @@ val viewModelModule = module {
     viewModel { NavigationViewModel(get()) }
     viewModel { ProjectViewModel(get()) }
     viewModel { SearchViewModel(get(), get()) }
+    viewModel { MainActivityViewModel()}
 }
 
 val repositoryModule = module {

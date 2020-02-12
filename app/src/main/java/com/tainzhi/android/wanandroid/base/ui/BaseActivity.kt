@@ -2,6 +2,8 @@ package com.tainzhi.android.wanandroid.base.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
@@ -13,10 +15,18 @@ import kotlinx.coroutines.cancel
  * @description:
  **/
 
-abstract class BaseActivity : AppCompatActivity(), CoroutineScope by MainScope() {
+abstract class BaseActivity(useBinding: Boolean = false) : AppCompatActivity(), CoroutineScope by MainScope() {
+    private val _useBinding = useBinding
+    protected lateinit var mBinding: ViewDataBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(getLayoutResId())
+        if (_useBinding) {
+            mBinding = DataBindingUtil.setContentView<ViewDataBinding>(this, getLayoutResId())
+            mBinding.lifecycleOwner = this
+        } else {
+            setContentView(getLayoutResId())
+        }
         initView()
         initData()
     }

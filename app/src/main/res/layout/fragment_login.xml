@@ -60,7 +60,6 @@
 			android:layout_marginTop="20dp"
 			android:background="@color/colorPrimary"
 			android:text="@string/login"
-			android:enabled="@{viewModel.uiState.enableLoginButton}"
 			android:textColor="@color/white"
 			android:textSize="16sp"
 			android:onClick="@{() -> viewModel.login()}"/>

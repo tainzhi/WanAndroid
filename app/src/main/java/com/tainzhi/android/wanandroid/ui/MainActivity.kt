@@ -9,13 +9,15 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.*
 import com.tainzhi.android.wanandroid.R
-import com.tainzhi.android.wanandroid.base.ui.BaseActivity
+import com.tainzhi.android.wanandroid.base.ui.BaseVMActivity
+import com.tainzhi.android.wanandroid.databinding.ActivityMainBinding
 import com.tainzhi.android.wanandroid.util.gone
 import com.tainzhi.android.wanandroid.util.visible
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.main_drawer_nav_content_layout.*
+import org.koin.androidx.viewmodel.ext.android.getViewModel
 
-class MainActivity : BaseActivity() {
+class MainActivity : BaseVMActivity<MainActivityViewModel>(useBinding = true) {
 
     private lateinit var navController: NavController
 
@@ -24,6 +26,7 @@ class MainActivity : BaseActivity() {
     override fun getLayoutResId() = R.layout.activity_main
 
     override fun initView() {
+
         navController = findNavController(R.id.mainNavHostFragment)
 
         val appBarConfig = AppBarConfiguration(mainDestionIds, mainDrawerLayout)
@@ -61,6 +64,11 @@ class MainActivity : BaseActivity() {
 
     }
 
+    override fun initVM(): MainActivityViewModel = getViewModel()
+
+    override fun startObserve() {
+    }
+
     private fun initNavigationView() {
         mainDrawerLayoutNavigation.setupWithNavController(navController)
         userImage.setOnClickListener {
@@ -78,6 +86,7 @@ class MainActivity : BaseActivity() {
     }
 
     override fun initData() {
+        (mBinding as ActivityMainBinding).viewModel = viewModel
     }
 
     override fun onBackPressed() {
@@ -94,6 +103,7 @@ class MainActivity : BaseActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        viewModel.update()
         val navController = findNavController(R.id.mainNavHostFragment)
         return super.onOptionsItemSelected(item) || item.onNavDestinationSelected(navController)
     }

@@ -1,90 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:ignore="ContentDescription">
+<layout>
 
-    <ImageView
+    <data>
+        <import type="com.tainzhi.android.wanandroid.ui.MainActivityViewModel"/>
+        <variable
+            name="viewModel"
+            type="MainActivityViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/nav_header_height"
-        android:src="@drawable/side_nav_bar"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent"
+        tools:ignore="ContentDescription">
 
-    <ImageView
-        android:id="@+id/userImage"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="30dp"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_user" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/nav_header_height"
+            android:src="@drawable/side_nav_bar"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/userName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="16dp"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:text="@string/login_or_register"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="@+id/userImage"
-        app:layout_constraintHorizontal_bias="0.473"
-        app:layout_constraintStart_toStartOf="@+id/userImage"
-        app:layout_constraintTop_toBottomOf="@+id/userImage" />
+        <ImageView
+            android:id="@+id/userImage"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="30dp"
+            android:paddingTop="@dimen/nav_header_vertical_spacing"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:imageUrl="@{viewModel.user.icon}"
+            app:srcCompat="@drawable/ic_user" />
 
-    <TextView
-        android:id="@+id/myCollection"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="212dp"
-        android:drawableStart="@drawable/ic_baseline_collections_24"
-        android:gravity="center"
-        android:text="@string/my_myCollection"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.329"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/userName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:paddingTop="@dimen/nav_header_vertical_spacing"
+            android:text="@{viewModel.isLogin ? viewModel.user.username : @string/login_or_register}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="@+id/userImage"
+            app:layout_constraintHorizontal_bias="0.473"
+            app:layout_constraintStart_toStartOf="@+id/userImage"
+            app:layout_constraintTop_toBottomOf="@+id/userImage" />
 
-    <TextView
-        android:id="@+id/browseHistory"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:drawableStart="@drawable/ic_baseline_history_24"
-        android:gravity="center"
-        android:text="@string/browse_history"
-        app:layout_constraintEnd_toEndOf="@+id/myCollection"
-        app:layout_constraintStart_toStartOf="@+id/myCollection"
-        app:layout_constraintTop_toBottomOf="@id/myCollection" />
+        <TextView
+            android:id="@+id/myCollection"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="212dp"
+            android:drawableStart="@drawable/ic_baseline_collections_24"
+            android:gravity="center"
+            android:text="@string/my_myCollection"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.329"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibleUnless="@{viewModel.isLogin}" />
 
-    <TextView
-        android:id="@+id/otherInfo"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:drawableStart="@drawable/ic_baseline_info_24"
-        android:gravity="center"
-        android:text="@string/other_info"
-        app:layout_constraintEnd_toEndOf="@+id/myCollection"
-        app:layout_constraintStart_toStartOf="@+id/myCollection"
-        app:layout_constraintTop_toBottomOf="@id/browseHistory" />
+        <TextView
+            android:id="@+id/browseHistory"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:drawableStart="@drawable/ic_baseline_history_24"
+            android:gravity="center"
+            android:text="@string/browse_history"
+            app:layout_constraintEnd_toEndOf="@+id/myCollection"
+            app:layout_constraintStart_toStartOf="@+id/myCollection"
+            app:layout_constraintTop_toBottomOf="@id/myCollection"
+            app:visibleUnless="@{viewModel.isLogin}" />
 
-    <Button
-        android:id="@+id/logout"
-        android:layout_width="120dp"
-        android:layout_height="40dp"
-        android:layout_marginBottom="52dp"
-        android:background="@drawable/side_nav_bar"
-        android:text="@string/logout"
-        android:textColor="@color/white"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:visibility="visible" />
+        <TextView
+            android:id="@+id/otherInfo"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:drawableStart="@drawable/ic_baseline_info_24"
+            android:gravity="center"
+            android:text="@string/other_info"
+            app:layout_constraintEnd_toEndOf="@+id/myCollection"
+            app:layout_constraintStart_toStartOf="@+id/myCollection"
+            app:layout_constraintTop_toBottomOf="@id/browseHistory" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/logout"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="52dp"
+            android:background="@drawable/side_nav_bar"
+            android:text="@string/logout"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:visibleUnless="@{viewModel.isLogin}"
+            tools:visibility="visible" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
