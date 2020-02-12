@@ -18,7 +18,7 @@ class LoginFragment : BaseVMFragment<LoginViewModel>(useBinding = true) {
 
     override fun getLayoutResId() = R.layout.fragment_login
 
-    override fun initVM(): LoginViewModel = getViewModel()
+    override fun initVM(): LoginViewModel = activity!!.getViewModel()
 
     override fun initView() {
         toolbar.setTitle(R.string.login)
