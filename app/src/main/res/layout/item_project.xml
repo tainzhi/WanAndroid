@@ -26,9 +26,9 @@
 
             <ImageView
                 android:id="@+id/projectImg"
-                imagePlaceholder="@{appR.mipmap.ic_launcher_round}"
                 android:layout_width="120dp"
                 android:layout_height="200dp"
+                app:imagePlaceholder="@{appR.mipmap.ic_launcher_round}"
                 app:imageUrl="@{article.envelopePic}" />
 
             <RelativeLayout

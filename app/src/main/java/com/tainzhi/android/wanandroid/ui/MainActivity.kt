@@ -11,13 +11,14 @@ import androidx.navigation.ui.*
 import com.tainzhi.android.wanandroid.R
 import com.tainzhi.android.wanandroid.base.ui.BaseVMActivity
 import com.tainzhi.android.wanandroid.databinding.ActivityMainBinding
+import com.tainzhi.android.wanandroid.ui.login.LoginViewModel
 import com.tainzhi.android.wanandroid.util.gone
 import com.tainzhi.android.wanandroid.util.visible
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.main_drawer_nav_content_layout.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
-class MainActivity : BaseVMActivity<MainActivityViewModel>(useBinding = true) {
+class MainActivity : BaseVMActivity<LoginViewModel>(useBinding = true) {
 
     private lateinit var navController: NavController
 
@@ -64,7 +65,7 @@ class MainActivity : BaseVMActivity<MainActivityViewModel>(useBinding = true) {
 
     }
 
-    override fun initVM(): MainActivityViewModel = getViewModel()
+    override fun initVM(): LoginViewModel = getViewModel()
 
     override fun startObserve() {
     }
@@ -83,10 +84,14 @@ class MainActivity : BaseVMActivity<MainActivityViewModel>(useBinding = true) {
             navController.navigate(R.id
                     .action_mainFragment_to_otherInfoFragment)
         }
+        logout.setOnClickListener {
+            viewModel.logout()
+            mainDrawerLayout.closeDrawers()
+        }
     }
 
     override fun initData() {
-        (mBinding as ActivityMainBinding).viewModel = viewModel
+        (mBinding as ActivityMainBinding).include.viewModel = viewModel
     }
 
     override fun onBackPressed() {
@@ -103,7 +108,6 @@ class MainActivity : BaseVMActivity<MainActivityViewModel>(useBinding = true) {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        viewModel.update()
         val navController = findNavController(R.id.mainNavHostFragment)
         return super.onOptionsItemSelected(item) || item.onNavDestinationSelected(navController)
     }

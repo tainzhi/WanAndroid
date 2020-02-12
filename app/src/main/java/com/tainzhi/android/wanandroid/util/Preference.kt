@@ -2,7 +2,6 @@ package com.tainzhi.android.wanandroid.util
 
 import android.annotation.SuppressLint
 import android.content.SharedPreferences
-import android.util.Log
 import androidx.preference.PreferenceManager
 import com.tainzhi.android.wanandroid.WanApp
 import java.io.*
@@ -21,6 +20,11 @@ class Preference<T>(val name: String, private val default: T) : ReadWritePropert
     companion object {
         const val IS_LOGIN = "is_login"
         const val USER_GSON = "user_gson"
+
+        fun clearAll() {
+            val prefs = PreferenceManager.getDefaultSharedPreferences(WanApp.CONTEXT)
+            prefs.edit().clear().apply()
+        }
     }
 
     private val prefs: SharedPreferences by lazy {
@@ -32,7 +36,6 @@ class Preference<T>(val name: String, private val default: T) : ReadWritePropert
     }
 
     override fun setValue(thisRef: Any?, property: KProperty<*>, value: T) {
-        Log.d("qfq", "setValue, $value")
         putValue(name, value)
     }
 
@@ -58,7 +61,6 @@ class Preference<T>(val name: String, private val default: T) : ReadWritePropert
             is Float -> getFloat(name, default)
             else -> deSerialization(getString(name, serialize(default))!!)
         }
-        Log.d("qfq", "getValue, $res")
         return res as T
     }
 

@@ -1,6 +1,5 @@
 package com.tainzhi.android.wanandroid.repository
 
-import android.util.Log
 import com.google.gson.Gson
 import com.tainzhi.android.wanandroid.WanApp
 import com.tainzhi.android.wanandroid.api.WanService
@@ -31,7 +30,6 @@ class LoginRepository(val service: WanService): BaseRepository() {
         return executeResponse(response, {
             val user = response.data
             isLogin = true
-            Log.d("qfq", "isLogin")
             userJson = Gson().toJson(user)
             WanApp.current_user = user
         })

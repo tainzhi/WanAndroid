@@ -2,10 +2,14 @@
 <layout>
 
     <data>
-        <import type="com.tainzhi.android.wanandroid.ui.MainActivityViewModel"/>
+
+        <import
+            alias="appR"
+            type="com.tainzhi.android.wanandroid.R" />
+
         <variable
             name="viewModel"
-            type="MainActivityViewModel" />
+            type="com.tainzhi.android.wanandroid.ui.login.LoginViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -31,7 +35,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:imageUrl="@{viewModel.user.icon}"
-            app:srcCompat="@drawable/ic_user" />
+            app:imagePlaceholder="@{appR.drawable.ic_user}"
+            app:srcCompat="@drawable/ic_user"
+            tools:src="@drawable/ic_user" />
 
         <TextView
             android:id="@+id/userName"
@@ -40,7 +46,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="16dp"
             android:paddingTop="@dimen/nav_header_vertical_spacing"
-            android:text="@{viewModel.isLogin ? viewModel.user.username : @string/login_or_register}"
+            android:text="@{viewModel.isLogin ? viewModel.user.nickname : @string/login_or_register}"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="@+id/userImage"
@@ -98,6 +104,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:visibleUnless="@{viewModel.isLogin}"
             tools:visibility="visible" />
+        android:onClick="@{() -> viewModel.logout()}"
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
