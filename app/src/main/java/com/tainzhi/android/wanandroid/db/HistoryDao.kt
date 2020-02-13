@@ -22,8 +22,8 @@ abstract class HistoryDao {
     abstract fun insert(historyBrowseBean: HistoryBrowseBean)
 
     // Coroutine不支持LiveData
-    @Query("SELECT * FROM BROWSE_HISTORY")
-    abstract suspend fun getAll(): List<HistoryBrowseBean>
+    @Query("SELECT * FROM BROWSE_HISTORY ORDER BY 1 DESC")
+    abstract suspend fun getBrowseHistory(): List<HistoryBrowseBean>
 
     @Query("DELETE FROM BROWSE_HISTORY")
     abstract suspend fun deleteBrowseHistory()
@@ -33,7 +33,7 @@ abstract class HistoryDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract fun insertSearchKey(historySearchBean: HistorySearchBean)
 
-    @Query("SELECT * FROM SEARCH_HISTORY")
+    @Query("SELECT * FROM SEARCH_HISTORY ORDER BY 1 DESC ")
     abstract suspend fun getSearchHistory(): List<HistorySearchBean>
 
     @Query("DELETE FROM SEARCH_HISTORY")

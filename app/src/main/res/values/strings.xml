@@ -54,5 +54,6 @@
     <string name="login_or_register">登录/注册</string>
     <string name="browse_history">浏览历史</string>
     <string name="everyone_searching">大家都在搜</string>
+    <string name="search_history">历史搜索</string>
     <string name="commonly_used_sites">常用网站</string>
 </resources>

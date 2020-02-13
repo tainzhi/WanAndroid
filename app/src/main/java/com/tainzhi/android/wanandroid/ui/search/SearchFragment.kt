@@ -31,6 +31,7 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
     private val isLogin by Preference(Preference.IS_LOGIN, false)
     private val searchAdapter by lazy { HomeArticleAdapter() }
     private var key = ""
+    private val searchHistoryList = mutableListOf<String>()
     private val hotList = mutableListOf<Hot>()
     private val webSitesList = mutableListOf<Hot>()
 
@@ -86,7 +87,7 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
     }
 
     override fun initData() {
-//        searchToolbar.setNavigationOnClickListener { onBackPressed() }
+        viewModel.getSearchHistory()
         viewModel.getHotSearch()
         viewModel.getWebSites()
     }
@@ -112,6 +113,27 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
 
 
     private fun initTagLayout() {
+
+        searchHistoryTagLayout.run {
+            adapter = object : TagAdapter<String>(searchHistoryList) {
+                override fun getCount() = searchHistoryList.size
+
+                override fun getView(parent: FlowLayout, position: Int, t: String?): View {
+                    val tv = LayoutInflater.from(parent.context).inflate(R.layout.tag,
+                            parent, false) as TextView
+                    tv.text = t
+                    return tv
+                }
+            }
+
+            setOnTagClickListener { _, position, _ ->
+                key = searchHistoryList[position]
+                startSearch(key)
+                true
+            }
+
+        }
+
         hotTagLayout.run {
             adapter = object : TagAdapter<Hot>(hotList) {
                 override fun getCount() = hotList.size
@@ -153,6 +175,7 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
 
     private fun startSearch(key: String) {
         searchView.clearFocus()
+        viewModel.insertSearchHistory(key)
         viewModel.searchHot(true, key)
     }
 
@@ -186,6 +209,12 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
             }
 
             if (it.showEnd) searchAdapter.loadMoreEnd()
+
+            it.showSearchHistory?.let { data ->
+                searchHistoryList.clear()
+                searchHistoryList.addAll(data)
+                searchHistoryTagLayout.adapter.notifyDataChanged()
+            }
 
             it.showHotSearch?.let { data ->
                 hotList.clear()

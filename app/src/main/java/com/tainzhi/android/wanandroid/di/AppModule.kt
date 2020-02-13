@@ -32,7 +32,7 @@ val viewModelModule = module {
     viewModel { SystemViewModel(get(), get()) }
     viewModel { NavigationViewModel(get()) }
     viewModel { ProjectViewModel(get()) }
-    viewModel { SearchViewModel(get(), get()) }
+    viewModel { SearchViewModel(get(), get(), get()) }
 }
 
 val repositoryModule = module {

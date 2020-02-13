@@ -7,6 +7,8 @@ import com.tainzhi.android.wanandroid.base.Result
 import com.tainzhi.android.wanandroid.base.ui.BaseViewModel
 import com.tainzhi.android.wanandroid.bean.ArticleList
 import com.tainzhi.android.wanandroid.bean.Hot
+import com.tainzhi.android.wanandroid.db.HistoryDao
+import com.tainzhi.android.wanandroid.db.HistorySearchBean
 import com.tainzhi.android.wanandroid.repository.CollectRepository
 import com.tainzhi.android.wanandroid.repository.SearchRepository
 import kotlinx.coroutines.Dispatchers
@@ -14,7 +16,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class SearchViewModel(private val searchRepository: SearchRepository,
-                      private val collectRepository: CollectRepository) : BaseViewModel() {
+                      private val collectRepository: CollectRepository,
+                      private val historyDao: HistoryDao
+) : BaseViewModel() {
 
     private var currentPage = 0
 
@@ -50,6 +54,19 @@ class SearchViewModel(private val searchRepository: SearchRepository,
         }
     }
 
+    fun getSearchHistory() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val searchHistory = historyDao.getSearchHistory()
+            emitArticleUiState(showHot = true, showSearchHistory = searchHistory.)
+        }
+    }
+
+    fun insertSearchHistory(key: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            historyDao.insertSearchKey(HistorySearchBean(0, key))
+        }
+    }
+
 
     fun getWebSites() {
         viewModelScope.launch(Dispatchers.Main) {
@@ -74,7 +91,6 @@ class SearchViewModel(private val searchRepository: SearchRepository,
         }
     }
 
-
     private fun emitArticleUiState(
             showHot: Boolean = false,
             showLoading: Boolean = false,
@@ -83,9 +99,11 @@ class SearchViewModel(private val searchRepository: SearchRepository,
             showEnd: Boolean = false,
             isRefresh: Boolean = false,
             showWebSites: List<Hot>? = null,
-            showHotSearch: List<Hot>? = null
+            showHotSearch: List<Hot>? = null,
+            showSearchHistory: List<String>? = null
     ) {
-        val uiModel = SearchUiModel(showHot, showLoading, showError, showSuccess, showEnd, isRefresh, showWebSites, showHotSearch)
+        val uiModel = SearchUiModel(showHot, showLoading, showError, showSuccess, showEnd,
+                isRefresh, showWebSites, showHotSearch, showSearchHistory)
         _uiState.value = uiModel
     }
 
@@ -98,7 +116,8 @@ class SearchViewModel(private val searchRepository: SearchRepository,
             val showEnd: Boolean, // 加载更多
             val isRefresh: Boolean, // 刷新
             val showWebSites: List<Hot>?,
-            val showHotSearch: List<Hot>?
+            val showHotSearch: List<Hot>?,
+            val showSearchHistory: List<String>?
     )
 
 }
