@@ -37,7 +37,7 @@ class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
     }
 
     override fun initData() {
-        refresh()
+        viewModel.getCollectArticleList(true)
     }
 
     private fun initAdapter() {
@@ -55,11 +55,6 @@ class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
         }
         collectRecyclerView.adapter = articleAdapter
     }
-
-    private fun refresh() {
-        viewModel.getCollectArticleList(false)
-    }
-
 
     private val itemChildClickListener = BaseQuickAdapter.OnItemChildClickListener { _, view, position ->
         when (view.id) {
@@ -85,10 +80,12 @@ class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
 
             uiState.observe(this@CollectFragment, Observer {
 
+                collectRefreshLayout.isRefreshing = it.showLoading
+
                 it.showSuccess?.let { list ->
-                    articleAdapter.setEnableLoadMore(false)
                     list.datas.forEach { it.collect = true }
                     articleAdapter.run {
+                        setEnableLoadMore(false)
                         if (it.isRefresh) replaceData(list.datas)
                         else addData(list.datas)
                         setEnableLoadMore(true)

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -17,16 +18,17 @@
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/collectRefreshLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             isRefresh="@{viewModel.uiState.showLoading}"
-            onRefresh="@{viewModel.refreshCollect}">
+            onRefresh="@{() -> viewModel.getCollectArticleList(true)}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/collectRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="20dp"
+                tools:listitem="@layout/item_article">
 
             </androidx.recyclerview.widget.RecyclerView>
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
