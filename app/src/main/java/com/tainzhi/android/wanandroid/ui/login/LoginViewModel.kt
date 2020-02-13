@@ -10,6 +10,7 @@ import com.tainzhi.android.wanandroid.CoroutinesDispatcherProvider
 import com.tainzhi.android.wanandroid.base.Result
 import com.tainzhi.android.wanandroid.base.ui.BaseViewModel
 import com.tainzhi.android.wanandroid.bean.User
+import com.tainzhi.android.wanandroid.db.HistoryDao
 import com.tainzhi.android.wanandroid.repository.LoginRepository
 import com.tainzhi.android.wanandroid.util.Preference
 import kotlinx.coroutines.launch
@@ -22,7 +23,11 @@ import kotlinx.coroutines.withContext
  * @description:
  **/
 
-class LoginViewModel(val repository: LoginRepository, private val provider: CoroutinesDispatcherProvider) : BaseViewModel() {
+class LoginViewModel(
+        val repository: LoginRepository,
+        private val provider: CoroutinesDispatcherProvider,
+        private val historyDao: HistoryDao
+) : BaseViewModel() {
     private var _isLogin by Preference(Preference.IS_LOGIN, false)
     private var _user by Preference(Preference.USER_GSON, "")
 
@@ -50,7 +55,7 @@ class LoginViewModel(val repository: LoginRepository, private val provider: Coro
 
     val registerUser: MutableLiveData<User> = MutableLiveData()
 
-    private fun isInputValid(userName:String, passWord: String) = userName.isNotBlank() &&
+    private fun isInputValid(userName: String, passWord: String) = userName.isNotBlank() &&
             passWord.isNotBlank()
 
     private fun loginDataChanged() {
@@ -81,9 +86,9 @@ class LoginViewModel(val repository: LoginRepository, private val provider: Coro
 
     fun register() {
         viewModelScope.launch(provider.computation) {
-            if (userName.get().isNullOrBlank() || passWord.get().isNullOrBlank())  return@launch
+            if (userName.get().isNullOrBlank() || passWord.get().isNullOrBlank()) return@launch
 
-            withContext(provider.main) { showLoading()}
+            withContext(provider.main) { showLoading() }
 
             val result = repository.register(userName.get() ?: "", passWord.get() ?: "")
             withContext(provider.main) {
@@ -96,18 +101,18 @@ class LoginViewModel(val repository: LoginRepository, private val provider: Coro
         }
     }
 
-    private inline fun <T: Any> checkResult(result: Result<T>, success: (T) -> Unit, error:
+    private inline fun <T : Any> checkResult(result: Result<T>, success: (T) -> Unit, error:
     (String?) -> Unit) {
         if (result is Result.Success) {
             success(result.data)
-        } else if (result is Result.Error){
+        } else if (result is Result.Error) {
             error(result.exception.message)
         }
     }
 
-    val verifyInput: () -> Unit = {loginDataChanged()}
+    val verifyInput: () -> Unit = { loginDataChanged() }
 
-    private fun showLoading(){
+    private fun showLoading() {
         emitUiState(true)
     }
 
@@ -138,9 +143,12 @@ class LoginViewModel(val repository: LoginRepository, private val provider: Coro
         mIsLogin.value = false
         mUser.value = null
         Preference.clearAll()
+
+        viewModelScope.launch(provider.computation) {
+            historyDao.deleteAll()
+        }
     }
 }
-
 
 data class LoginUiModel(
         val showProgress: Boolean,

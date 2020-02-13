@@ -2,7 +2,7 @@ package com.tainzhi.android.wanandroid.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.tainzhi.android.wanandroid.bean.User
+import androidx.room.TypeConverters
 
 /**
  * @author:       tainzhi
@@ -13,14 +13,13 @@ import com.tainzhi.android.wanandroid.bean.User
 
 
 @Database(
-        entities = [
-            User::class,
-            Repo::class,
-            Contributor::class,
-            RepoSearchResult::class],
+        entities = arrayOf(
+                HistorySearchBean::class,
+                HistoryBrowseBean::class),
         version = 1,
-        exportSchema =  false
+        exportSchema = false
 )
+@TypeConverters(Converters::class)
 abstract class WanAppDB : RoomDatabase() {
     abstract fun historyDao(): HistoryDao
 }

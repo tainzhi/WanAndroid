@@ -1,11 +1,6 @@
 package com.tainzhi.android.wanandroid.db
 
-import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
-import com.tainzhi.android.wanandroid.bean.Article
+import androidx.room.*
 
 /**
  * @author:       tainzhi
@@ -16,9 +11,31 @@ import com.tainzhi.android.wanandroid.bean.Article
 
 @Dao
 abstract class HistoryDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract fun insert(article: Article)
+    @Transaction
+    open suspend fun deleteAll() {
+        deleteBrowseHistory()
+        deleteSearchHistory()
+    }
 
-    @Query("SELECT * FROM History")
-    abstract suspend fun getAll(): LiveData<List<Article>>
+    // browse history
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    abstract fun insert(historyBrowseBean: HistoryBrowseBean)
+
+    // Coroutine不支持LiveData
+    @Query("SELECT * FROM BROWSE_HISTORY")
+    abstract suspend fun getAll(): List<HistoryBrowseBean>
+
+    @Query("DELETE FROM BROWSE_HISTORY")
+    abstract suspend fun deleteBrowseHistory()
+
+
+    // Search history
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    abstract fun insertSearchKey(historySearchBean: HistorySearchBean)
+
+    @Query("SELECT * FROM SEARCH_HISTORY")
+    abstract suspend fun getSearchHistory(): List<HistorySearchBean>
+
+    @Query("DELETE FROM SEARCH_HISTORY")
+    abstract suspend fun deleteSearchHistory()
 }
