@@ -1,30 +1,24 @@
 package com.tainzhi.android.wanandroid.ui.history
 
-import androidx.lifecycle.ViewModelProviders
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import com.tainzhi.android.wanandroid.R
+import com.tainzhi.android.wanandroid.base.ui.BaseVMFragment
+import org.koin.androidx.viewmodel.ext.android.getViewModel
 
-class HistoryFragment : Fragment() {
+class HistoryFragment : BaseVMFragment<HistoryViewModel>() {
 
-    companion object {
-        fun newInstance() = HistoryFragment()
+    override fun getLayoutResId() = R.layout.fragment_history
+
+    override fun initVM(): HistoryViewModel = getViewModel()
+
+    override fun initView() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    private lateinit var viewModel: HistoryViewModel
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_history, container, false)
+    override fun initData() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(HistoryViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun startObserve() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
-
 }

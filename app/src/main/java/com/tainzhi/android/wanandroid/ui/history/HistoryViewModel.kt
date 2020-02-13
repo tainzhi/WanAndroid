@@ -1,7 +1,7 @@
 package com.tainzhi.android.wanandroid.ui.history
 
-import androidx.lifecycle.ViewModel
+import com.tainzhi.android.wanandroid.base.ui.BaseViewModel
 
-class HistoryViewModel : ViewModel() {
+class HistoryViewModel : BaseViewModel() {
     // TODO: Implement the ViewModel
 }
