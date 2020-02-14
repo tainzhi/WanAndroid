@@ -9,7 +9,7 @@ import com.tainzhi.android.wanandroid.base.ui.BaseViewModel
 import com.tainzhi.android.wanandroid.bean.Article
 import com.tainzhi.android.wanandroid.bean.ArticleList
 import com.tainzhi.android.wanandroid.bean.Banner
-import com.tainzhi.android.wanandroid.db.HistoryBrowseBean
+import com.tainzhi.android.wanandroid.bean.BrowseHistory
 import com.tainzhi.android.wanandroid.db.HistoryDao
 import com.tainzhi.android.wanandroid.repository.*
 import kotlinx.coroutines.Dispatchers
@@ -76,7 +76,7 @@ class ArticleViewModel(
     fun insertBrowseHistory(article: Article) {
         launch() {
             withContext(Dispatchers.Default) {
-                historyDao.insert(HistoryBrowseBean(0, 0, article))
+                historyDao.insertBrowseHistory(BrowseHistory(0, 0, article))
             }
         }
     }

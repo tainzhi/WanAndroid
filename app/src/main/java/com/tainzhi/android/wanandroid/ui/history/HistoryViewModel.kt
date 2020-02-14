@@ -3,7 +3,7 @@ package com.tainzhi.android.wanandroid.ui.history
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.tainzhi.android.wanandroid.base.ui.BaseViewModel
-import com.tainzhi.android.wanandroid.db.HistoryBrowseBean
+import com.tainzhi.android.wanandroid.bean.BrowseHistory
 import com.tainzhi.android.wanandroid.db.HistoryDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -16,36 +16,36 @@ class HistoryViewModel(
 
     val uiState = _uiState
 
-    fun getBrowseHistory() {
+    fun getBrowseHistory(isRefresh: Boolean = false) {
         viewModelScope.launch(Dispatchers.Default) {
             withContext(Dispatchers.Main) {
-                emitHistoryUIState(showLoading = true)
+                emitHistoryUIState(showLoading = true, isRefresh = isRefresh)
             }
             val browseHistory = historyDao.getBrowseHistory()
 
             withContext(Dispatchers.Main) {
-                emitHistoryUIState(showLoading = false, showSuccess = browseHistory)
+                emitHistoryUIState(showLoading = false, showSuccesses = browseHistory, isRefresh = isRefresh)
             }
         }
     }
 
     fun refresh() {
-        getBrowseHistory()
+        getBrowseHistory(isRefresh = true)
     }
 
     private fun emitHistoryUIState(
             showLoading: Boolean = false,
-            showSuccess: List<HistoryBrowseBean>? = null,
+            showSuccesses: List<BrowseHistory>? = null,
             isRefresh: Boolean = false
     ) {
-        val historyUiModel = HistoryUiModel(showLoading, showSuccess, isRefresh)
+        val historyUiModel = HistoryUiModel(showLoading, showSuccesses, isRefresh)
         _uiState.value = historyUiModel
     }
 }
 
 data class HistoryUiModel(
         val showLoading: Boolean,
-        val showSuccess: List<HistoryBrowseBean>?,
+        val showSuccesses: List<BrowseHistory>?,
 //        val showEnd: Boolean, // 加载更多
         val isRefresh: Boolean // 刷新
 )

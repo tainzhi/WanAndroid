@@ -7,8 +7,8 @@ import com.tainzhi.android.wanandroid.base.Result
 import com.tainzhi.android.wanandroid.base.ui.BaseViewModel
 import com.tainzhi.android.wanandroid.bean.ArticleList
 import com.tainzhi.android.wanandroid.bean.Hot
+import com.tainzhi.android.wanandroid.bean.SearchHistory
 import com.tainzhi.android.wanandroid.db.HistoryDao
-import com.tainzhi.android.wanandroid.db.HistorySearchBean
 import com.tainzhi.android.wanandroid.repository.CollectRepository
 import com.tainzhi.android.wanandroid.repository.SearchRepository
 import kotlinx.coroutines.Dispatchers
@@ -66,7 +66,7 @@ class SearchViewModel(private val searchRepository: SearchRepository,
 
     fun insertSearchHistory(key: String) {
         viewModelScope.launch(Dispatchers.Default) {
-            historyDao.insertSearchKey(HistorySearchBean(0, key))
+            historyDao.insertSearchKey(SearchHistory(0, key))
         }
     }
 

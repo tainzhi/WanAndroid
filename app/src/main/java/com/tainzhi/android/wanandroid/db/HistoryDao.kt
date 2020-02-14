@@ -1,6 +1,8 @@
 package com.tainzhi.android.wanandroid.db
 
 import androidx.room.*
+import com.tainzhi.android.wanandroid.bean.BrowseHistory
+import com.tainzhi.android.wanandroid.bean.SearchHistory
 
 /**
  * @author:       tainzhi
@@ -19,11 +21,11 @@ abstract class HistoryDao {
 
     // browse history
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract fun insert(historyBrowseBean: HistoryBrowseBean)
+    abstract fun insertBrowseHistory(browseHistory: BrowseHistory)
 
     // Coroutine不支持LiveData
     @Query("SELECT * FROM BROWSE_HISTORY ORDER BY 1 DESC")
-    abstract suspend fun getBrowseHistory(): List<HistoryBrowseBean>
+    abstract suspend fun getBrowseHistory(): List<BrowseHistory>
 
     @Query("DELETE FROM BROWSE_HISTORY")
     abstract suspend fun deleteBrowseHistory()
@@ -31,10 +33,10 @@ abstract class HistoryDao {
 
     // Search history
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract fun insertSearchKey(historySearchBean: HistorySearchBean)
+    abstract fun insertSearchKey(searchHistory: SearchHistory)
 
     @Query("SELECT * FROM SEARCH_HISTORY ORDER BY 1 DESC ")
-    abstract suspend fun getSearchHistory(): List<HistorySearchBean>
+    abstract suspend fun getSearchHistory(): List<SearchHistory>
 
     @Query("DELETE FROM SEARCH_HISTORY")
     abstract suspend fun deleteSearchHistory()

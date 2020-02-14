@@ -9,6 +9,7 @@ import com.tainzhi.android.wanandroid.base.ui.BaseVMFragment
 import com.tainzhi.android.wanandroid.databinding.FragmentHistoryBinding
 import com.tainzhi.android.wanandroid.ui.BrowserFragmentDirections
 import com.tainzhi.android.wanandroid.util.dp2px
+import com.tainzhi.android.wanandroid.view.CustomLoadMoreView
 import com.tainzhi.android.wanandroid.view.SpaceItemDecoration
 import kotlinx.android.synthetic.main.fragment_history.*
 import kotlinx.android.synthetic.main.fragment_system_type_normal.*
@@ -37,7 +38,7 @@ class HistoryFragment : BaseVMFragment<HistoryViewModel>(useBinding = true) {
     }
 
     override fun initData() {
-        viewModel.getBrowseHistory()
+        viewModel.getBrowseHistory(isRefresh = false)
     }
 
     private fun initAdapter() {
@@ -48,7 +49,7 @@ class HistoryFragment : BaseVMFragment<HistoryViewModel>(useBinding = true) {
                         .link)
                 findNavController().navigate(action)
             }
-//            setLoadMoreView(CustomLoadMoreView())
+            setLoadMoreView(CustomLoadMoreView())
 //            setOnLoadMoreListener({ loadMore() }, collectRecyclerView)
         }
         historyRecyclerView.adapter = historyAdapter
@@ -57,8 +58,14 @@ class HistoryFragment : BaseVMFragment<HistoryViewModel>(useBinding = true) {
     override fun startObserve() {
         viewModel.apply {
             uiState.observe(this@HistoryFragment, Observer {
-                it.showSuccess?.let { list ->
-                    historyAdapter.addData(list.map { it.article })
+                it.showSuccesses?.let { list ->
+                    historySwipeRefreshLayout.isRefreshing = it.showLoading
+
+                    historyAdapter.run {
+                        val articleList = list.map { it.article }
+                        if (it.isRefresh) replaceData(articleList)
+                        else addData(articleList)
+                    }
                 }
             })
         }

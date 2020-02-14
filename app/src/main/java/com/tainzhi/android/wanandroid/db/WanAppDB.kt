@@ -3,6 +3,8 @@ package com.tainzhi.android.wanandroid.db
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.tainzhi.android.wanandroid.bean.BrowseHistory
+import com.tainzhi.android.wanandroid.bean.SearchHistory
 
 /**
  * @author:       tainzhi
@@ -14,8 +16,8 @@ import androidx.room.TypeConverters
 
 @Database(
         entities = arrayOf(
-                HistorySearchBean::class,
-                HistoryBrowseBean::class),
+                SearchHistory::class,
+                BrowseHistory::class),
         version = 1,
         exportSchema = false
 )

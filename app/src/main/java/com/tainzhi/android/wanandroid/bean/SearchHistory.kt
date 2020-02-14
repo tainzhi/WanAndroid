@@ -1,4 +1,4 @@
-package com.tainzhi.android.wanandroid.db
+package com.tainzhi.android.wanandroid.bean
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -11,7 +11,7 @@ import androidx.room.PrimaryKey
  **/
 
 @Entity(tableName = "search_history")
-data class HistorySearchBean(
+data class SearchHistory(
         @PrimaryKey(autoGenerate = true) val id: Int,
         val searchKey: String
 )
