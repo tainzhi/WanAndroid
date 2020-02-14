@@ -31,7 +31,10 @@ class HistoryFragment : BaseVMFragment<HistoryViewModel>(useBinding = true) {
     override fun initView() {
         toolbar.setTitle(R.string.browse_history)
         toolbar.setNavigationIcon(R.drawable.arrow_back)
-        toolbar.setNavigationOnClickListener { findNavController().popBackStack() }
+        toolbar.setNavigationOnClickListener {
+            findNavController().popBackStack(R.id
+                    .mainFragment, false)
+        }
 
         (mBinding as FragmentHistoryBinding).viewModel = viewModel
         historyRecyclerView.run {

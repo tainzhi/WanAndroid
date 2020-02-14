@@ -13,6 +13,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestListener
 import com.tainzhi.android.wanandroid.R
+import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * @author:       tainzhi
@@ -102,4 +104,9 @@ fun EditText.afterTextChanged(action: () -> Unit) {
             action()
         }
     })
+}
+
+@BindingAdapter(value = ["dateText"])
+fun convertDateToString(textView: TextView, date: Date) {
+    textView.text = SimpleDateFormat.getInstance().format(date)
 }

@@ -5,6 +5,7 @@
 
     <data>
 
+        <import type="java.text.SimpleDateFormat" />
         <variable
             name="browseHistory"
             type="com.tainzhi.android.wanandroid.bean.BrowseHistory" />
@@ -39,7 +40,7 @@
             app:layout_constraintTop_toTopOf="@id/_iv_user"
             tools:text="tainzhi" />
         todo
-        ?? 和 ?:又有点儿问题
+        ?? 和 ?:有点儿问题, 无法解析出来
         android:text="@{browseHistory.article.author ?? `分享者：` + browseHistory.article.shareUser}"
 
         <TextView
@@ -80,11 +81,10 @@
             android:id="@+id/articleTime"
             style="@style/Article_text"
             android:layout_marginStart="8dp"
-            android:includeFontPadding="false"
-            android:text="1小时前"
+            dateText="@{browseHistory.date}"
             app:layout_constraintBottom_toBottomOf="@+id/_iv_time"
             app:layout_constraintStart_toEndOf="@+id/_iv_time"
-            app:layout_constraintTop_toBottomOf="@+id/articleTitle"
+            app:layout_constraintTop_toTopOf="@id/_iv_time"
             tools:text="@tools:sample/date/hhmmss" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

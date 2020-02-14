@@ -15,6 +15,7 @@ import com.tainzhi.android.wanandroid.repository.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.*
 
 /**
  * @author:       tainzhi
@@ -76,7 +77,7 @@ class ArticleViewModel(
     fun insertBrowseHistory(article: Article) {
         launch() {
             withContext(Dispatchers.Default) {
-                historyDao.insertBrowseHistory(BrowseHistory(0, 0, article))
+                historyDao.insertBrowseHistory(BrowseHistory(0, Date(), article))
             }
         }
     }
