@@ -3,9 +3,11 @@ package com.tainzhi.android.wanandroid.ui.history
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.tainzhi.android.wanandroid.BR
 import com.tainzhi.android.wanandroid.R
-import com.tainzhi.android.wanandroid.adapter.HomeArticleAdapter
+import com.tainzhi.android.wanandroid.adapter.BaseBindAdapter
 import com.tainzhi.android.wanandroid.base.ui.BaseVMFragment
+import com.tainzhi.android.wanandroid.bean.BrowseHistory
 import com.tainzhi.android.wanandroid.databinding.FragmentHistoryBinding
 import com.tainzhi.android.wanandroid.ui.BrowserFragmentDirections
 import com.tainzhi.android.wanandroid.util.dp2px
@@ -17,7 +19,10 @@ import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class HistoryFragment : BaseVMFragment<HistoryViewModel>(useBinding = true) {
 
-    private val historyAdapter by lazy { HomeArticleAdapter() }
+    private val historyAdapter by lazy {
+        BaseBindAdapter<BrowseHistory>(R.layout
+                .item_search_history, BR.browseHistory)
+    }
 
     override fun getLayoutResId() = R.layout.fragment_history
 
@@ -45,8 +50,7 @@ class HistoryFragment : BaseVMFragment<HistoryViewModel>(useBinding = true) {
         historyAdapter.run {
             setOnItemClickListener { _, _, position ->
                 val action = BrowserFragmentDirections.actionGlobalBrowserFragment(historyAdapter
-                        .data[position]
-                        .link)
+                        .data[position].article.link)
                 findNavController().navigate(action)
             }
             setLoadMoreView(CustomLoadMoreView())
@@ -62,9 +66,8 @@ class HistoryFragment : BaseVMFragment<HistoryViewModel>(useBinding = true) {
                     historySwipeRefreshLayout.isRefreshing = it.showLoading
 
                     historyAdapter.run {
-                        val articleList = list.map { it.article }
-                        if (it.isRefresh) replaceData(articleList)
-                        else addData(articleList)
+                        if (it.isRefresh) replaceData(list)
+                        else addData(list)
                     }
                 }
             })

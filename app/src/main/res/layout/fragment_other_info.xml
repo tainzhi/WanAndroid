@@ -11,8 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingLeft="@dimen/item_pading_left_right"
-        android:paddingRight="@dimen/item_pading_left_right">
+        android:paddingLeft="@dimen/item_padding_left_right"
+        android:paddingRight="@dimen/item_padding_left_right">
 
         <TextView
             android:id="@+id/license"

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="browseHistory"
+            type="com.tainzhi.android.wanandroid.bean.BrowseHistory" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:background="@color/white"
+        android:paddingStart="@dimen/item_padding_left_right"
+        android:paddingEnd="@dimen/item_padding_left_right">
+
+        <ImageView
+            android:id="@+id/_iv_user"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:background="@color/black"
+            android:src="@drawable/ic_user"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/articleAuthor"
+            style="@style/Article_text"
+            android:layout_marginStart="8dp"
+            android:includeFontPadding="false"
+            android:text="@{browseHistory.article.shareUser}"
+            app:layout_constraintBottom_toBottomOf="@id/_iv_user"
+            app:layout_constraintStart_toEndOf="@id/_iv_user"
+            app:layout_constraintTop_toTopOf="@id/_iv_user"
+            tools:text="tainzhi" />
+        todo
+        ?? 和 ?:又有点儿问题
+        android:text="@{browseHistory.article.author ?? `分享者：` + browseHistory.article.shareUser}"
+
+        <TextView
+            android:id="@+id/articleTag"
+            style="@style/Article_text"
+            android:layout_marginStart="@dimen/item_padding_left_right"
+            android:includeFontPadding="false"
+            android:text="@{browseHistory.article.superChapterName+`/`+ browseHistory.article.chapterName}"
+            app:layout_constraintBottom_toBottomOf="@+id/_iv_user"
+            app:layout_constraintStart_toEndOf="@+id/articleAuthor"
+            app:layout_constraintTop_toTopOf="@+id/_iv_user"
+            tools:text="Android" />
+
+        <TextView
+            android:id="@+id/articleTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:textColor="#1c1c1e"
+            android:textSize="16sp"
+            app:htmlText="@{browseHistory.article.title}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/_iv_user"
+            tools:text="@tools:sample/full_names" />
+
+        <ImageView
+            android:id="@+id/_iv_time"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/ic_baseline_history_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/articleTitle" />
+
+        <TextView
+            android:id="@+id/articleTime"
+            style="@style/Article_text"
+            android:layout_marginStart="8dp"
+            android:includeFontPadding="false"
+            android:text="1小时前"
+            app:layout_constraintBottom_toBottomOf="@+id/_iv_time"
+            app:layout_constraintStart_toEndOf="@+id/_iv_time"
+            app:layout_constraintTop_toBottomOf="@+id/articleTitle"
+            tools:text="@tools:sample/date/hhmmss" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -4,5 +4,5 @@
     <dimen name="nav_horizontal_margin">16dp</dimen>
     <dimen name="nav_vertical_margin">16dp</dimen>
     <dimen name="nav_header_vertical_spacing">8dp</dimen>
-    <dimen name="item_pading_left_right">20dp</dimen>
+    <dimen name="item_padding_left_right">20dp</dimen>
 </resources>

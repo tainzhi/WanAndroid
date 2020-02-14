@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
         android:background="?attr/colorPrimary"
-        android:paddingStart="@dimen/item_pading_left_right"
+        android:paddingStart="@dimen/item_padding_left_right"
         app:searchHintIcon="@drawable/search"
         app:searchIcon="@drawable/search"
         tools:ignore="RtlSymmetry">
