@@ -1,5 +1,7 @@
 package com.tainzhi.android.wanandroid.ui.history
 
+import android.view.ViewGroup
+import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,12 +31,8 @@ class HistoryFragment : BaseVMFragment<HistoryViewModel>(useBinding = true) {
     override fun initVM(): HistoryViewModel = getViewModel()
 
     override fun initView() {
-        toolbar.setTitle(R.string.browse_history)
-        toolbar.setNavigationIcon(R.drawable.arrow_back)
-        toolbar.setNavigationOnClickListener {
-            findNavController().popBackStack(R.id
-                    .mainFragment, false)
-        }
+
+        initToolbar()
 
         (mBinding as FragmentHistoryBinding).viewModel = viewModel
         historyRecyclerView.run {
@@ -43,6 +41,24 @@ class HistoryFragment : BaseVMFragment<HistoryViewModel>(useBinding = true) {
         }
 
         initAdapter()
+    }
+
+    private fun initToolbar() {
+        toolbar.setTitle(R.string.browse_history)
+        toolbar.setNavigationIcon(R.drawable.arrow_back)
+        toolbar.setNavigationOnClickListener {
+            findNavController().popBackStack(R.id
+                    .mainFragment, false)
+        }
+        toolbar.inflateMenu(R.menu.delete_menu)
+        toolbar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.deleteAll -> viewModel.deleteBrowseHistory()
+                else -> Unit
+
+            }
+            false
+        }
     }
 
     override fun initData() {
@@ -60,6 +76,12 @@ class HistoryFragment : BaseVMFragment<HistoryViewModel>(useBinding = true) {
 //            setOnLoadMoreListener({ loadMore() }, collectRecyclerView)
         }
         historyRecyclerView.adapter = historyAdapter
+
+        val emptyView = layoutInflater.inflate(R.layout.view_empty, historyRecyclerView.parent as
+                ViewGroup, false)
+        val emptyTv = emptyView.findViewById<TextView>(R.id.emptyTv)
+        emptyTv.text = getString(R.string.no_history)
+        historyAdapter.emptyView = emptyView
     }
 
     override fun startObserve() {
@@ -67,11 +89,16 @@ class HistoryFragment : BaseVMFragment<HistoryViewModel>(useBinding = true) {
             uiState.observe(this@HistoryFragment, Observer {
                 it.showSuccesses?.let { list ->
                     historySwipeRefreshLayout.isRefreshing = it.showLoading
+                    historyAdapter.setNewData(list)
 
-                    historyAdapter.run {
-                        if (it.isRefresh) replaceData(list)
-                        else addData(list)
-                    }
+//                    historyAdapter.run {
+//                        if (it.isRefresh) replaceData(list)
+//                        else addData(list)
+//                    }
+                }
+                if (it.isDelete) {
+                    historySwipeRefreshLayout.isRefreshing = false
+                    historyAdapter.setNewData(null)
                 }
             })
         }

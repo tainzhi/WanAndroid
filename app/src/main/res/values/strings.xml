@@ -56,4 +56,6 @@
     <string name="everyone_searching">大家都在搜</string>
     <string name="search_history">历史搜索</string>
     <string name="commonly_used_sites">常用网站</string>
+    <string name="deleteAll">清空</string>
+    <string name="no_history">没有记录</string>
 </resources>

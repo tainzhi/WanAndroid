@@ -29,6 +29,18 @@ class HistoryViewModel(
         }
     }
 
+    fun deleteBrowseHistory() {
+        viewModelScope.launch(Dispatchers.Default) {
+            withContext(Dispatchers.Main) {
+                emitHistoryUIState(showLoading = true)
+            }
+            historyDao.deleteBrowseHistory()
+            withContext(Dispatchers.Main) {
+                emitHistoryUIState(showLoading = false, isDelete = true)
+            }
+        }
+    }
+
     fun refresh() {
         getBrowseHistory(isRefresh = true)
     }
@@ -36,9 +48,10 @@ class HistoryViewModel(
     private fun emitHistoryUIState(
             showLoading: Boolean = false,
             showSuccesses: List<BrowseHistory>? = null,
-            isRefresh: Boolean = false
+            isRefresh: Boolean = false,
+            isDelete: Boolean = false
     ) {
-        val historyUiModel = HistoryUiModel(showLoading, showSuccesses, isRefresh)
+        val historyUiModel = HistoryUiModel(showLoading, showSuccesses, isRefresh, isDelete)
         _uiState.value = historyUiModel
     }
 }
@@ -47,5 +60,6 @@ data class HistoryUiModel(
         val showLoading: Boolean,
         val showSuccesses: List<BrowseHistory>?,
 //        val showEnd: Boolean, // 加载更多
-        val isRefresh: Boolean // 刷新
+        val isRefresh: Boolean, // 刷新,
+        val isDelete: Boolean
 )
