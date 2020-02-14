@@ -9,6 +9,7 @@ import com.tainzhi.android.wanandroid.db.HistoryDao
 import com.tainzhi.android.wanandroid.db.WanAppDB
 import com.tainzhi.android.wanandroid.repository.*
 import com.tainzhi.android.wanandroid.ui.ArticleViewModel
+import com.tainzhi.android.wanandroid.ui.history.HistoryViewModel
 import com.tainzhi.android.wanandroid.ui.login.LoginViewModel
 import com.tainzhi.android.wanandroid.ui.navigation.NavigationViewModel
 import com.tainzhi.android.wanandroid.ui.project.ProjectViewModel
@@ -33,6 +34,7 @@ val viewModelModule = module {
     viewModel { NavigationViewModel(get()) }
     viewModel { ProjectViewModel(get()) }
     viewModel { SearchViewModel(get(), get(), get()) }
+    viewModel { HistoryViewModel(get()) }
 }
 
 val repositoryModule = module {
