@@ -65,6 +65,7 @@ class HomeFragment : BaseVMFragment<ArticleViewModel>() {
         }
         homeArticleAdapter.run {
             setOnItemClickListener { _, _, position ->
+                viewModel.insertBrowseHistory(homeArticleAdapter.data[position])
                 val action = BrowserFragmentDirections.actionGlobalBrowserFragment(homeArticleAdapter
                         .data[position]
                         .link)

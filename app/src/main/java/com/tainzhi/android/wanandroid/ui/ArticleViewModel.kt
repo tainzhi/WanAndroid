@@ -1,13 +1,16 @@
 package com.tainzhi.android.wanandroid.ui
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.liveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
-import com.tainzhi.android.wanandroid.base.ui.BaseViewModel
 import com.tainzhi.android.wanandroid.base.Result
+import com.tainzhi.android.wanandroid.base.ui.BaseViewModel
+import com.tainzhi.android.wanandroid.bean.Article
 import com.tainzhi.android.wanandroid.bean.ArticleList
 import com.tainzhi.android.wanandroid.bean.Banner
+import com.tainzhi.android.wanandroid.db.HistoryBrowseBean
+import com.tainzhi.android.wanandroid.db.HistoryDao
 import com.tainzhi.android.wanandroid.repository.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -25,7 +28,8 @@ class ArticleViewModel(
         private val homeRepository: HomeRepository,
         private val projectRepository: ProjectRepository,
         private val collectRepository: CollectRepository,
-        private val systemRepository: SystemRepository
+        private val systemRepository: SystemRepository,
+        private val historyDao: HistoryDao
 ) : BaseViewModel() {
 
     sealed class ArticleType {
@@ -65,6 +69,14 @@ class ArticleViewModel(
             withContext(Dispatchers.IO) {
                 if (boolean) collectRepository.collectArticle(articleId)
                 else collectRepository.unCollectArticle(articleId)
+            }
+        }
+    }
+
+    fun insertBrowseHistory(article: Article) {
+        launch() {
+            withContext(Dispatchers.Default) {
+                historyDao.insert(HistoryBrowseBean(0, 0, article))
             }
         }
     }
