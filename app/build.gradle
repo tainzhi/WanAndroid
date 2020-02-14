@@ -6,6 +6,32 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: "androidx.navigation.safeargs.kotlin"
 
+// get git commit counts, ie 73
+def gitVersionCode() {
+    def cmd = 'git rev-list HEAD --first-parent --count'
+    cmd.execute().text.trim().toInteger()
+}
+
+// after you run `git tag`, then you can retrieve it
+def gitVersionTag() {
+    def cmd = 'git describe --tags'
+    def version = cmd.execute().text.trim()
+
+    def pattern = "-(\\d+)-g"
+    def matcher = version =~ pattern
+    if (matcher) {
+        version = version.substring(0, matcher.start()) + "." + matcher[0][1]
+    } else {
+        version = version + ".0"
+    }
+    return version
+}
+
+//生成打包时间
+def releaseTime() {
+    return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
+}
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -14,8 +40,8 @@ android {
         applicationId "com.tanzhi.android.wanandroid"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 1
-        versionName "v1.0"
+        versionCode gitVersionCode()
+        versionName gitVersionTag()
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
