@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -13,7 +14,8 @@
         android:background="?attr/colorPrimary"
         android:paddingStart="@dimen/item_pading_left_right"
         app:searchHintIcon="@drawable/search"
-        app:searchIcon="@drawable/search">
+        app:searchIcon="@drawable/search"
+        tools:ignore="RtlSymmetry">
 
     </androidx.appcompat.widget.SearchView>
 
@@ -53,7 +55,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="20dp"
                     android:text="@string/search_history"
-                    android:textSize="16sp" />
+                    style="@style/Search_Tag_Text" />
 
                 <com.zhy.view.flowlayout.TagFlowLayout
                     android:id="@+id/searchHistoryTagLayout"
@@ -70,7 +72,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="20dp"
                     android:text="@string/everyone_searching"
-                    android:textSize="16sp" />
+                    style="@style/Search_Tag_Text" />
 
                 <com.zhy.view.flowlayout.TagFlowLayout
                     android:id="@+id/hotTagLayout"
@@ -87,7 +89,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="20dp"
                     android:text="@string/commonly_used_sites"
-                    android:textSize="16sp" />
+                    style="@style/Search_Tag_Text" />
 
                 <com.zhy.view.flowlayout.TagFlowLayout
                     android:id="@+id/webTagLayout"

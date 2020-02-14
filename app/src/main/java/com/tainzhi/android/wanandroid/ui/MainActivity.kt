@@ -7,7 +7,10 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import androidx.navigation.ui.*
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.tainzhi.android.wanandroid.R
 import com.tainzhi.android.wanandroid.base.ui.BaseVMActivity
 import com.tainzhi.android.wanandroid.databinding.ActivityMainBinding
@@ -111,7 +114,9 @@ class MainActivity : BaseVMActivity<LoginViewModel>(useBinding = true) {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val navController = findNavController(R.id.mainNavHostFragment)
-        return super.onOptionsItemSelected(item) || item.onNavDestinationSelected(navController)
+        if (item.itemId == R.id.searchFragment) {
+            findNavController(R.id.mainNavHostFragment).navigate(R.id.searchFragment)
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

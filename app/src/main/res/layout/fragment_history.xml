@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     tools:context=".HistoryFragment">
 
     <data>
@@ -12,16 +11,24 @@
             type="com.tainzhi.android.wanandroid.ui.history.HistoryViewModel" />
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include layout="@layout/title_layout" />
+        <include
+            android:id="@+id/include"
+            layout="@layout/title_layout" />
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            id
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-    </LinearLayout>
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

@@ -22,7 +22,7 @@
             android:padding="10dp">
 
             <TextView
-                android:id="@+id/systemParent"
+                android:id="@+id/systemParentTV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@{systemParent.name}"
@@ -34,7 +34,7 @@
                 android:id="@+id/systemChild"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/systemParent"
+                android:layout_below="@id/systemParentTV"
                 android:layout_marginTop="5dp"
                 android:text="@{ExtKt.transFormSystemChild(systemParent.children)}"
                 android:textColor="#323232"

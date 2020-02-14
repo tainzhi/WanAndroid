@@ -55,14 +55,17 @@ class SearchViewModel(private val searchRepository: SearchRepository,
     }
 
     fun getSearchHistory() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.Default) {
             val searchHistory = historyDao.getSearchHistory()
-            emitArticleUiState(showHot = true, showSearchHistory = searchHistory.)
+            withContext(Dispatchers.Main) {
+                emitArticleUiState(showHot = true, showSearchHistory = searchHistory.map { it.searchKey })
+            }
+
         }
     }
 
     fun insertSearchHistory(key: String) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.Default) {
             historyDao.insertSearchKey(HistorySearchBean(0, key))
         }
     }
