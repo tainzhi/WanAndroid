@@ -35,6 +35,7 @@ class HistoryFragment : BaseVMFragment<HistoryViewModel>(useBinding = true) {
         initToolbar()
 
         (mBinding as FragmentHistoryBinding).viewModel = viewModel
+
         historyRecyclerView.run {
             layoutManager = LinearLayoutManager(activity)
             addItemDecoration(SpaceItemDecoration(historyRecyclerView.dp2px(10)))
@@ -88,7 +89,7 @@ class HistoryFragment : BaseVMFragment<HistoryViewModel>(useBinding = true) {
         viewModel.apply {
             uiState.observe(this@HistoryFragment, Observer {
                 it.showSuccesses?.let { list ->
-                    historySwipeRefreshLayout.isRefreshing = it.showLoading
+                    //                    historySwipeRefreshLayout.isRefreshing = it.showLoading
 //                    historyAdapter.setNewData(list)
 
                     historyAdapter.run {

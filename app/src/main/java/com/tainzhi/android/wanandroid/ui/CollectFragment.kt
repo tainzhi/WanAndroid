@@ -23,10 +23,11 @@ class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
     override fun initVM(): ArticleViewModel = getViewModel()
 
     override fun initView() {
-        (mBinding as FragmentCollectBinding).viewModel = viewModel
         toolbar.setTitle(R.string.my_collect)
         toolbar.setNavigationIcon(R.drawable.arrow_back)
         toolbar.setNavigationOnClickListener { findNavController().popBackStack() }
+
+        (mBinding as FragmentCollectBinding).viewModel = viewModel
 
         collectRecyclerView.run {
             layoutManager = LinearLayoutManager(activity)
@@ -79,8 +80,6 @@ class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
         viewModel.apply {
 
             uiState.observe(this@CollectFragment, Observer {
-
-                collectRefreshLayout.isRefreshing = it.showLoading
 
                 it.showSuccess?.let { list ->
                     list.datas.forEach { it.collect = true }

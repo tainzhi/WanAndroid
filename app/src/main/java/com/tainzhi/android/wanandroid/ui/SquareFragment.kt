@@ -25,7 +25,6 @@ class SquareFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
     override fun initVM(): ArticleViewModel = getViewModel()
 
     override fun initView() {
-        mBinding.lifecycleOwner = this
         (mBinding as FragmentSquareBinding).viewModel = viewModel
         initRecyclerView()
     }
