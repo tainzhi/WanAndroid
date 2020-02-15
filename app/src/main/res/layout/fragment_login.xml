@@ -62,6 +62,7 @@
 			android:text="@string/login"
 			android:textColor="@color/white"
 			android:textSize="16sp"
+			android:enabled="@{viewModel.uiState.enableLoginButton}"
 			android:onClick="@{() -> viewModel.login()}"/>
 
 		<TextView

@@ -146,6 +146,7 @@ class LoginViewModel(
 
         viewModelScope.launch(provider.computation) {
             historyDao.deleteAll()
+            repository.logout()
         }
     }
 }

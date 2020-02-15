@@ -20,8 +20,12 @@ class LoginRepository(val service: WanService): BaseRepository() {
     private var userJson by Preference(Preference.USER_GSON, "")
 
     suspend fun login(userName: String, passWord: String): Result<User> {
-        return safeApiCall(call = {requestLogin(userName, passWord)},
+        return safeApiCall(call = { requestLogin(userName, passWord) },
                 errorMessage = "登录失败！")
+    }
+
+    suspend fun logout() {
+        apiCall { service.logOut() }
     }
 
     private suspend fun requestLogin(userName: String, passWord: String): Result<User> {
