@@ -17,15 +17,11 @@ class HistoryViewModel(
     val uiState = _uiState
 
     fun getBrowseHistory(isRefresh: Boolean = false) {
-        viewModelScope.launch(Dispatchers.Default) {
-            withContext(Dispatchers.Main) {
-                emitHistoryUIState(showLoading = true, isRefresh = isRefresh)
-            }
+        viewModelScope.launch {
+            emitHistoryUIState(showLoading = true, isRefresh = isRefresh)
             val browseHistory = historyDao.getBrowseHistory()
 
-            withContext(Dispatchers.Main) {
-                emitHistoryUIState(showLoading = false, showSuccesses = browseHistory, isRefresh = isRefresh)
-            }
+            emitHistoryUIState(showLoading = false, showSuccesses = browseHistory, isRefresh = isRefresh)
         }
     }
 

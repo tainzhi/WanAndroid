@@ -10,7 +10,7 @@ import java.util.*
  * @description:
  **/
 
-class Converters {
+class DateConverters {
     @TypeConverter
     fun fromTimestamp(value: Long?): Date? {
         return value?.let { Date(it) }

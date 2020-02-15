@@ -89,12 +89,12 @@ class HistoryFragment : BaseVMFragment<HistoryViewModel>(useBinding = true) {
             uiState.observe(this@HistoryFragment, Observer {
                 it.showSuccesses?.let { list ->
                     historySwipeRefreshLayout.isRefreshing = it.showLoading
-                    historyAdapter.setNewData(list)
+//                    historyAdapter.setNewData(list)
 
-//                    historyAdapter.run {
-//                        if (it.isRefresh) replaceData(list)
-//                        else addData(list)
-//                    }
+                    historyAdapter.run {
+                        if (it.isRefresh) replaceData(list)
+                        else addData(list)
+                    }
                 }
                 if (it.isDelete) {
                     historySwipeRefreshLayout.isRefreshing = false

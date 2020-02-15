@@ -21,7 +21,7 @@ import com.tainzhi.android.wanandroid.bean.SearchHistory
         version = 1,
         exportSchema = false
 )
-@TypeConverters(Converters::class)
+@TypeConverters(DateConverters::class, ListConverters::class)
 abstract class WanAppDB : RoomDatabase() {
     abstract fun historyDao(): HistoryDao
 }
