@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.activity.OnBackPressedCallback
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.tainzhi.android.wanandroid.R
@@ -27,7 +28,7 @@ class BrowserFragment : BaseFragment() {
     override fun initView() {
         toolbar.setTitle(R.string.is_loading)
         toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24)
-        toolbar.setNavigationOnClickListener { onFinish() }
+        toolbar.setNavigationOnClickListener { onBack() }
 
         progressBar.progressDrawable = this.resources
                 .getDrawable(R.drawable.color_progressbar, null)
@@ -35,6 +36,14 @@ class BrowserFragment : BaseFragment() {
         initWebView()
 
         browserLinearLayout.addView(webView)
+
+
+        val callback = requireActivity().onBackPressedDispatcher
+                .addCallback(object : OnBackPressedCallback(true) {
+                    override fun handleOnBackPressed() {
+                        onBack()
+                    }
+                })
     }
 
     override fun initData() {
@@ -79,9 +88,14 @@ class BrowserFragment : BaseFragment() {
         }
     }
 
-    private fun onFinish() {
-        webView.destroy()
-        (webView.parent as LinearLayout).removeView(webView)
-        findNavController().popBackStack()
+    private fun onBack() {
+        // 如果可以放回上次浏览网页
+        if (webView.canGoBack()) {
+            webView.goBack()
+        } else {
+            webView.destroy()
+            (webView.parent as LinearLayout).removeView(webView)
+            findNavController().popBackStack()
+        }
     }
 }
