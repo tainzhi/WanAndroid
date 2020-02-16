@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestListener
 import com.tainzhi.android.wanandroid.R
+import com.tainzhi.android.wanandroid.bean.Article
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -109,4 +110,9 @@ fun EditText.afterTextChanged(action: () -> Unit) {
 @BindingAdapter(value = ["dateText"])
 fun convertDateToString(textView: TextView, date: Date) {
     textView.text = SimpleDateFormat.getInstance().format(date)
+}
+
+@BindingAdapter(value = ["articleAuthor"])
+fun getArticleAuthor(textView: TextView, article: Article) {
+    textView.text = if (article.author.isNullOrBlank()) "分享者：${article.shareUser}" else article.author
 }

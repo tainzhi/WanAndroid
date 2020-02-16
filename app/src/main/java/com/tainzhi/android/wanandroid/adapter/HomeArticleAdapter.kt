@@ -25,8 +25,5 @@ class HomeArticleAdapter(layoutResId: Int = R.layout.item_article): BaseBindAdap
         if (showStar) helper.setImageResource(R.id.articleStar, if (item.collect) R.drawable
                 .timeline_like_pressed else R.drawable.timeline_like_normal)
         else helper.setVisible(R.id.articleStar, false)
-
-        helper.setText(R.id.articleAuthor, if (item.author.isBlank()) "分享者：${item.shareUser}"
-        else item.author)
     }
 }
