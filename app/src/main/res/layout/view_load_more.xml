@@ -16,16 +16,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="?android:attr/progressBarStyleSmall"
-            android:layout_marginRight="@dimen/dp_4"
+            android:layout_marginEnd="@dimen/dp_4"
             android:indeterminateDrawable="@drawable/brvah_sample_footer_loading_progress"/>
 
         <TextView
             android:id="@+id/loading_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dp_4"
+            android:layout_marginStart="@dimen/dp_4"
             android:text="@string/brvah_loading"
-            android:textColor="#0dddb8"
+            android:textColor="@color/colorPrimary"
             android:textSize="@dimen/sp_14"/>
     </LinearLayout>
 
@@ -41,7 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textColor="#0dddb8"
+            android:textColor="@color/colorPrimary"
             android:text="@string/brvah_load_failed"/>
 
     </FrameLayout>
