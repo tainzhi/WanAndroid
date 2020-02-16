@@ -13,7 +13,7 @@
         android:id="@+id/squareRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        onRefresh="@{() -> viewModel.getSquareArticleList(true)"
+        onRefresh="@{() -> viewModel.getSquareArticleList(true)}"
         isRefresh="@{viewModel.uiState.showLoading}">
 
         <androidx.recyclerview.widget.RecyclerView

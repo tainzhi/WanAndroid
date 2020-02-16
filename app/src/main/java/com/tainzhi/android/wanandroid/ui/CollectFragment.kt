@@ -38,7 +38,7 @@ class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
     }
 
     override fun initData() {
-        viewModel.getCollectArticleList(true)
+        refresh()
     }
 
     private fun initAdapter() {
@@ -71,6 +71,11 @@ class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
         }
     }
 
+    private fun refresh() {
+        articleAdapter.setEnableLoadMore(false)
+        viewModel.getCollectArticleList(true)
+    }
+
     private fun loadMore() {
         viewModel.getCollectArticleList(false)
     }
@@ -84,7 +89,6 @@ class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
                 it.showSuccess?.let { list ->
                     list.datas.forEach { it.collect = true }
                     articleAdapter.run {
-                        setEnableLoadMore(false)
                         if (it.isRefresh) replaceData(list.datas)
                         else addData(list.datas)
                         setEnableLoadMore(true)

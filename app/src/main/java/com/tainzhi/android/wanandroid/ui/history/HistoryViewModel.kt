@@ -1,5 +1,6 @@
 package com.tainzhi.android.wanandroid.ui.history
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.tainzhi.android.wanandroid.base.ui.BaseViewModel
@@ -14,14 +15,15 @@ class HistoryViewModel(
 ) : BaseViewModel() {
     private val _uiState = MutableLiveData<HistoryUiModel>()
 
-    val uiState = _uiState
+    val uiState: LiveData<HistoryUiModel>
+        get() = _uiState
+
 
     // ture refresh， false: load more
     fun getBrowseHistory(isRefresh: Boolean = false) {
         viewModelScope.launch {
             emitHistoryUIState(showLoading = true, isRefresh = isRefresh)
             val browseHistory = historyDao.getBrowseHistory()
-
             emitHistoryUIState(showLoading = false, showSuccesses = browseHistory, isRefresh = isRefresh)
         }
     }

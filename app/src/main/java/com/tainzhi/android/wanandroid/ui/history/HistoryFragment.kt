@@ -1,5 +1,6 @@
 package com.tainzhi.android.wanandroid.ui.history
 
+import android.util.Log
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.lifecycle.Observer
@@ -72,6 +73,7 @@ class HistoryFragment : BaseVMFragment<HistoryViewModel>(useBinding = true) {
                         .data[position].article.link)
                 findNavController().navigate(action)
             }
+            setEnableLoadMore(false)
             setLoadMoreView(CustomLoadMoreView())
             setOnLoadMoreListener({ loadMore() }, historyRecyclerView)
         }
@@ -85,6 +87,7 @@ class HistoryFragment : BaseVMFragment<HistoryViewModel>(useBinding = true) {
     }
 
     private fun refresh() {
+        historyAdapter.setEnableLoadMore(false)
         viewModel.getBrowseHistory(isRefresh = true)
     }
 
@@ -95,9 +98,10 @@ class HistoryFragment : BaseVMFragment<HistoryViewModel>(useBinding = true) {
     override fun startObserve() {
         viewModel.apply {
             uiState.observe(viewLifecycleOwner, Observer {
+                Log.d("qfq", "observer, adapter.size=${historyAdapter.data.size}")
+                Log.d("qfq", "${it}")
                 it.showSuccesses?.let { list ->
                     historyAdapter.run {
-                        setEnableLoadMore(false)
                         if (it.isRefresh) replaceData(list)
                         else addData(list)
                         setEnableLoadMore(true)

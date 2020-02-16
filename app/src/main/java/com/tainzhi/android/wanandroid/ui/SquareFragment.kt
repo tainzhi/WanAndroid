@@ -56,6 +56,7 @@ class SquareFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
     }
 
     private fun refresh() {
+        squareAdapter.setEnableLoadMore(false)
         viewModel.getSquareArticleList(true)
     }
 
@@ -64,7 +65,6 @@ class SquareFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
 
             it.showSuccess?.let { list ->
                 squareAdapter.run {
-                    setEnableLoadMore(false)
                     if (it.isRefresh) replaceData(list.datas)
                     else addData(list.datas)
                     setEnableLoadMore(true)
