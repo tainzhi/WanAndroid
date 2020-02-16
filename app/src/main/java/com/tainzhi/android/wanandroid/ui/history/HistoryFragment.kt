@@ -22,8 +22,7 @@ import org.koin.androidx.viewmodel.ext.android.getViewModel
 class HistoryFragment : BaseVMFragment<HistoryViewModel>(useBinding = true) {
 
     private val historyAdapter by lazy {
-        BaseBindAdapter<BrowseHistory>(R.layout
-                .item_search_history, BR.browseHistory)
+        BaseBindAdapter<BrowseHistory>(R.layout.item_search_history, BR.browseHistory)
     }
 
     override fun getLayoutResId() = R.layout.fragment_history
@@ -74,7 +73,7 @@ class HistoryFragment : BaseVMFragment<HistoryViewModel>(useBinding = true) {
                 findNavController().navigate(action)
             }
             setLoadMoreView(CustomLoadMoreView())
-//            setOnLoadMoreListener({ loadMore() }, collectRecyclerView)
+            setOnLoadMoreListener({ loadMore() }, historyRecyclerView)
         }
         historyRecyclerView.adapter = historyAdapter
 
@@ -85,6 +84,10 @@ class HistoryFragment : BaseVMFragment<HistoryViewModel>(useBinding = true) {
         historyAdapter.emptyView = emptyView
     }
 
+    private fun loadMore() {
+
+    }
+
     override fun startObserve() {
         viewModel.apply {
             uiState.observe(this@HistoryFragment, Observer {
@@ -93,12 +96,15 @@ class HistoryFragment : BaseVMFragment<HistoryViewModel>(useBinding = true) {
 //                    historyAdapter.setNewData(list)
 
                     historyAdapter.run {
+                        setEnableLoadMore(false)
                         if (it.isRefresh) replaceData(list)
                         else addData(list)
+                        setEnableLoadMore(true)
+                        loadMoreComplete()
                     }
                 }
                 if (it.isDelete) {
-                    historySwipeRefreshLayout.isRefreshing = false
+//                    historySwipeRefreshLayout.isRefreshing = false
                     historyAdapter.setNewData(null)
                 }
             })

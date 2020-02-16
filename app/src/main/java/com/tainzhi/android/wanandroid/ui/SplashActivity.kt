@@ -23,7 +23,7 @@ class SplashActivity : BaseActivity() {
             R.drawable.android_3,
             R.drawable.android_4,
             R.drawable.android_5)
-    private val splashAdapter by lazy { SplashAdapter(imageSrcId) }
+    private val splashAdapter by lazy { SplashAdapter(imageSrcId.shuffled()) }
 
     override fun getLayoutResId() = R.layout.activity_splash
 
@@ -42,7 +42,7 @@ class SplashActivity : BaseActivity() {
 
     override fun initData() {
         launch {
-            delay(3000L)
+            delay(2000L)
             finish()
             startKtxActivity<MainActivity>()
         }

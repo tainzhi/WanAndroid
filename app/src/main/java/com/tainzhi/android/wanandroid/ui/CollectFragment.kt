@@ -38,7 +38,7 @@ class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
     }
 
     override fun initData() {
-        viewModel.getCollectArticleList(true)
+        viewModel.getCollectArticleList(false)
     }
 
     private fun initAdapter() {

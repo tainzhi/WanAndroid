@@ -55,6 +55,7 @@ val databaseModule = module {
     fun provideDatabase(application: Application): WanAppDB {
         return Room
                 .databaseBuilder(application, WanAppDB::class.java, DB_NAME)
+//                .allowMainThreadQueries()
                 .build()
     }
 

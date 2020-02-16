@@ -45,9 +45,10 @@ class HistoryViewModel(
             showLoading: Boolean = false,
             showSuccesses: List<BrowseHistory>? = null,
             isRefresh: Boolean = false,
+            showEnd: Boolean = false,
             isDelete: Boolean = false
     ) {
-        val historyUiModel = HistoryUiModel(showLoading, showSuccesses, isRefresh, isDelete)
+        val historyUiModel = HistoryUiModel(showLoading, showSuccesses, isRefresh, showEnd, isDelete)
         _uiState.value = historyUiModel
     }
 }
@@ -57,5 +58,6 @@ data class HistoryUiModel(
         val showSuccesses: List<BrowseHistory>?,
 //        val showEnd: Boolean, // 加载更多
         val isRefresh: Boolean, // 刷新,
+        val showEnd: Boolean,
         val isDelete: Boolean
 )

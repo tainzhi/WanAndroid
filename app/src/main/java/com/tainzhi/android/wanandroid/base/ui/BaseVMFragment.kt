@@ -24,7 +24,7 @@ abstract class BaseVMFragment<VM: BaseViewModel>(useBinding: Boolean = false): F
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return if (_useBinding) {
             mBinding = DataBindingUtil.inflate(inflater, getLayoutResId(), container, false)
-            mBinding.lifecycleOwner = this
+            mBinding.lifecycleOwner = viewLifecycleOwner
             mBinding.root
         } else
             inflater.inflate(getLayoutResId(), container, false)
