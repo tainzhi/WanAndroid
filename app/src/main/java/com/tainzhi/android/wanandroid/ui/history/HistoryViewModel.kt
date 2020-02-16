@@ -16,6 +16,7 @@ class HistoryViewModel(
 
     val uiState = _uiState
 
+    // ture refresh， false: load more
     fun getBrowseHistory(isRefresh: Boolean = false) {
         viewModelScope.launch {
             emitHistoryUIState(showLoading = true, isRefresh = isRefresh)

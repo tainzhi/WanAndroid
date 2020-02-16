@@ -62,7 +62,7 @@ class HistoryFragment : BaseVMFragment<HistoryViewModel>(useBinding = true) {
     }
 
     override fun initData() {
-        viewModel.getBrowseHistory(isRefresh = false)
+        refresh()
     }
 
     private fun initAdapter() {
@@ -84,17 +84,18 @@ class HistoryFragment : BaseVMFragment<HistoryViewModel>(useBinding = true) {
         historyAdapter.emptyView = emptyView
     }
 
-    private fun loadMore() {
+    private fun refresh() {
+        viewModel.getBrowseHistory(isRefresh = true)
+    }
 
+    private fun loadMore() {
+        viewModel.getBrowseHistory(isRefresh = false)
     }
 
     override fun startObserve() {
         viewModel.apply {
-            uiState.observe(this@HistoryFragment, Observer {
+            uiState.observe(viewLifecycleOwner, Observer {
                 it.showSuccesses?.let { list ->
-                    //                    historySwipeRefreshLayout.isRefreshing = it.showLoading
-//                    historyAdapter.setNewData(list)
-
                     historyAdapter.run {
                         setEnableLoadMore(false)
                         if (it.isRefresh) replaceData(list)
@@ -104,7 +105,6 @@ class HistoryFragment : BaseVMFragment<HistoryViewModel>(useBinding = true) {
                     }
                 }
                 if (it.isDelete) {
-//                    historySwipeRefreshLayout.isRefreshing = false
                     historyAdapter.setNewData(null)
                 }
             })

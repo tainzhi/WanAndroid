@@ -101,7 +101,7 @@ class ProjectTypeFragment : BaseVMFragment<ArticleViewModel>() {
     }
 
     override fun startObserve() {
-        viewModel.uiState.observe(this@ProjectTypeFragment, Observer {
+        viewModel.uiState.observe(viewLifecycleOwner, Observer {
             projectRefreshLayout.isRefreshing = it.showLoading
 
             it.showSuccess?.let { list ->

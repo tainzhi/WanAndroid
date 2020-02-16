@@ -194,7 +194,7 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
 
     override fun startObserve() {
 
-        viewModel.uiState.observe(this, Observer {
+        viewModel.uiState.observe(viewLifecycleOwner, Observer {
             searchRecyclerView.visibility = if (it.showHot) View.GONE else View.VISIBLE
             hotContent.visibility = if (!it.showHot) View.GONE else View.VISIBLE
             searchRefreshLayout.isRefreshing = it.showLoading

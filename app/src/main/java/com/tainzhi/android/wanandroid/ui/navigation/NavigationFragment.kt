@@ -62,7 +62,7 @@ class NavigationFragment : BaseVMFragment<NavigationViewModel>() {
 
     override fun startObserve() {
         viewModel.run {
-            navigationList.observe(this@NavigationFragment, Observer {
+            navigationList.observe(viewLifecycleOwner, Observer {
                 it?.run { getNavigation(it) }
             })
         }

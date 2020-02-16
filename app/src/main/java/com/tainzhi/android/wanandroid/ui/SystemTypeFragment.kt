@@ -110,7 +110,7 @@ class SystemTypeFragment : BaseVMFragment<ArticleViewModel>() {
     }
 
     override fun startObserve() {
-        viewModel.uiState.observe(this, Observer {
+        viewModel.uiState.observe(viewLifecycleOwner, Observer {
             systemTypeRefreshLayout.isRefreshing = it.showLoading
 
             it.showSuccess?.let { list ->

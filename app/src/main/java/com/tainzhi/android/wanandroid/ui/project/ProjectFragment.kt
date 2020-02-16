@@ -59,7 +59,7 @@ open class ProjectFragment : BaseVMFragment<ProjectViewModel>() {
     }
 
     override fun startObserve() {
-        viewModel.systemData.observe(this, Observer {
+        viewModel.systemData.observe(viewLifecycleOwner, Observer {
             it?.run { getProjectTypeList(it) }
         })
     }

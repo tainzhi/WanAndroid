@@ -58,7 +58,7 @@ class SystemFragment : BaseVMFragment<SystemViewModel>() {
 
     override fun startObserve() {
         viewModel.run {
-            uiState.observe(this@SystemFragment, Observer {
+            uiState.observe(viewLifecycleOwner, Observer {
                 systemRefreshLayout.isRefreshing = it.showLoading
 
                 it.showSuccess?.let { list -> systemAdapter.replaceData(list) }

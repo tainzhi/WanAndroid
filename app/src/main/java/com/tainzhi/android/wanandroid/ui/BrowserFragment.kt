@@ -94,7 +94,7 @@ class BrowserFragment : BaseFragment() {
             webView.goBack()
         } else {
             webView.destroy()
-            (webView.parent as LinearLayout).removeView(webView)
+            (webView.parent as? LinearLayout)?.removeView(webView)
             findNavController().popBackStack()
         }
     }

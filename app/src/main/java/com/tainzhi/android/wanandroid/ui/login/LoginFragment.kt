@@ -32,13 +32,13 @@ class LoginFragment : BaseVMFragment<LoginViewModel>(useBinding = true) {
 
     override fun startObserve() {
         viewModel.apply {
-            registerUser.observe(this@LoginFragment, Observer {
+            registerUser.observe(viewLifecycleOwner, Observer {
                 it?.run {
                     viewModel.login()
                 }
             })
 
-            uiState.observe(this@LoginFragment, Observer {
+            uiState.observe(viewLifecycleOwner, Observer {
                 if (it.showProgress) {
                     showProgressDialog()
                     dismissKeyboard(userNameEt.windowToken)

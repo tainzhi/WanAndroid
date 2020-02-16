@@ -38,7 +38,7 @@ class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
     }
 
     override fun initData() {
-        viewModel.getCollectArticleList(false)
+        viewModel.getCollectArticleList(true)
     }
 
     private fun initAdapter() {
@@ -79,7 +79,7 @@ class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
 
         viewModel.apply {
 
-            uiState.observe(this@CollectFragment, Observer {
+            uiState.observe(viewLifecycleOwner, Observer {
 
                 it.showSuccess?.let { list ->
                     list.datas.forEach { it.collect = true }

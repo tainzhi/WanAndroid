@@ -60,7 +60,7 @@ class SquareFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
     }
 
     override fun startObserve() {
-        viewModel.uiState.observe(this, Observer {
+        viewModel.uiState.observe(viewLifecycleOwner, Observer {
 
             it.showSuccess?.let { list ->
                 squareAdapter.run {

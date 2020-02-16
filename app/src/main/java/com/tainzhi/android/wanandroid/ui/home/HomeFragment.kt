@@ -126,11 +126,11 @@ class HomeFragment : BaseVMFragment<ArticleViewModel>() {
 
     override fun startObserve() {
         viewModel.apply {
-            mBanners.observe(this@HomeFragment, Observer { it ->
+            mBanners.observe(viewLifecycleOwner, Observer { it ->
                 it?.let { setBanner(it) }
             })
 
-            uiState.observe(this@HomeFragment, Observer {
+            uiState.observe(viewLifecycleOwner, Observer {
 
                 homeRefreshLayout.isRefreshing = it.showLoading
 
