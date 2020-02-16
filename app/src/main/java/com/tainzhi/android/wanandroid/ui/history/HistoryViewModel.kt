@@ -24,7 +24,8 @@ class HistoryViewModel(
         viewModelScope.launch {
             emitHistoryUIState(showLoading = true, isRefresh = isRefresh)
             val browseHistory = historyDao.getBrowseHistory()
-            emitHistoryUIState(showLoading = false, showSuccesses = browseHistory, isRefresh = isRefresh)
+            emitHistoryUIState(showLoading = false, showSuccesses = browseHistory, isRefresh =
+            isRefresh, showEnd = true)
         }
     }
 

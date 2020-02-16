@@ -111,6 +111,9 @@ class HistoryFragment : BaseVMFragment<HistoryViewModel>(useBinding = true) {
                 if (it.isDelete) {
                     historyAdapter.setNewData(null)
                 }
+                if (it.showEnd) {
+                    historyAdapter.loadMoreEnd()
+                }
             })
         }
     }
