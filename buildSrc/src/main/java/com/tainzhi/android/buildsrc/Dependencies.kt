@@ -56,11 +56,10 @@ object Libs {
         const val preference = "androidx.preference:preference:1.1.0"
 
         object Navigation {
-            private const val version = "2.2.0-rc02"
-            private const val nav_safe_args_gradle_plugin_version = "2.3.0-alpha01"
+            private const val version = "2.3.0-alpha01"
             const val fragment = "androidx.navigation:navigation-fragment-ktx:$version"
             const val ui = "androidx.navigation:navigation-ui-ktx:$version"
-            const val safeArgs = "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_safe_args_gradle_plugin_version"
+            const val safeArgs = "androidx.navigation:navigation-safe-args-gradle-plugin:$version"
         }
 
         object Fragment {
@@ -88,7 +87,7 @@ object Libs {
             private const val version = "2.2.0"
             const val extensions = "androidx.lifecycle:lifecycle-extensions:$version"
             const val viewmodelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:$version"
-            const val livedata = "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0-rc03"
+            const val livedata = "androidx.lifecycle:lifecycle-livedata-ktx:$version"
         }
 
         object Room {
