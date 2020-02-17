@@ -68,7 +68,7 @@ class LoginFragment : BaseVMFragment<LoginViewModel>(useBinding = true) {
     }
 
     private fun finish() {
-        findNavController().popBackStack()
+        findNavController().popBackStack(R.id.mainFragment, false)
     }
 
     private fun dismissKeyboard(windowToken: IBinder) {
