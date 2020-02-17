@@ -93,7 +93,7 @@ class HomeFragment : BaseVMFragment<ArticleViewModel>() {
                     }
                 } else {
                     Navigation.findNavController(homeRecyclerView).navigate(R.id
-                            .action_mainFragment_to_loginFragment)
+                            .action_main_to_login)
                 }
             }
         }

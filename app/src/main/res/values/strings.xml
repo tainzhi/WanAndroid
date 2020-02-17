@@ -15,6 +15,7 @@
     <string name="try_another_key">换个关键词试试！</string>
     <string name="username">用户名</string>
     <string name="password">密码</string>
+    <string name="re_password">确认密码</string>
     <string name="login">登录</string>
     <string name="please_input_username">请输入用户名</string>
     <string name="please_input_psw">请输入密码</string>
@@ -58,4 +59,5 @@
     <string name="commonly_used_sites">常用网站</string>
     <string name="deleteAll">清空</string>
     <string name="no_history">没有记录</string>
+    <string name="go_to_register">没有账号?那么就去注册一个吧</string>
 </resources>

@@ -84,7 +84,7 @@ class SystemTypeFragment : BaseVMFragment<ArticleViewModel>() {
                     }
                 } else {
                     Navigation.findNavController(systemTypeRecyclerView).navigate(R.id
-                            .action_mainFragment_to_loginFragment)
+                            .action_main_to_login)
                 }
             }
         }

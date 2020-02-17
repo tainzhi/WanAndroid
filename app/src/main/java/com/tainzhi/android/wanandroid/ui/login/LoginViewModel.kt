@@ -46,6 +46,8 @@ class LoginViewModel(
 
     val userName = ObservableField<String>("")
     val passWord = ObservableField<String>("")
+    val rePassWord = ObservableField<String>("")
+    val errorHint = ObservableField<String>("")
 
 
     private val _uiState = MutableLiveData<LoginUiModel>()
@@ -55,12 +57,11 @@ class LoginViewModel(
 
     val registerUser: MutableLiveData<User> = MutableLiveData()
 
-    private fun isInputValid(userName: String, passWord: String) = userName.isNotBlank() &&
-            passWord.isNotBlank()
+    private fun isInputValid(input: String) = input.isNotBlank()
 
     private fun loginDataChanged() {
-        emitUiState(enableLoginButton = isInputValid(userName.get() ?: "",
-                passWord.get() ?: ""))
+        emitUiState(enableLoginButton = isInputValid(userName.get() ?: "") &&
+                isInputValid(passWord.get() ?: ""))
     }
 
     fun login() {
@@ -111,6 +112,19 @@ class LoginViewModel(
     }
 
     val verifyInput: () -> Unit = { loginDataChanged() }
+
+    val verifyRegisterInput: () -> Unit = {
+        if (passWord.get().equals(rePassWord.get())) {
+            errorHint.set("")
+        } else {
+            errorHint.set("两次输入密码不一致")
+
+        }
+        emitUiState(enableLoginButton = isInputValid(userName.get() ?: "") &&
+                isInputValid(passWord.get() ?: "") &&
+                isInputValid(rePassWord.get() ?: "") &&
+                isInputValid(errorHint.get() ?: ""))
+    }
 
     private fun showLoading() {
         emitUiState(true)

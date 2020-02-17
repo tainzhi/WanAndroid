@@ -5,14 +5,16 @@
     android:id="@+id/main"
     app:startDestination="@id/mainFragment">
 
+    <include app:graph="@navigation/login" />
+
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.tainzhi.android.wanandroid.ui.MainFragment"
         android:label="@string/home"
         tools:layout="@layout/fragment_main">
         <action
-            android:id="@+id/action_mainFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            android:id="@+id/action_main_to_login"
+            app:destination="@id/login" />
         <action
             android:id="@+id/action_mainFragment_to_collectFragment"
             app:destination="@id/collectFragment" />
@@ -44,12 +46,6 @@
         android:name="com.tainzhi.android.wanandroid.ui.CollectFragment"
         android:label="fragment_collect"
         tools:layout="@layout/fragment_collect" />
-
-    <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.tainzhi.android.wanandroid.ui.login.LoginFragment"
-        android:label="activity_login"
-        tools:layout="@layout/fragment_login" />
 
     <fragment
         android:id="@+id/browserFragment"

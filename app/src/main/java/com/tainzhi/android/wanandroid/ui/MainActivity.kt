@@ -76,10 +76,10 @@ class MainActivity : BaseVMActivity<LoginViewModel>(useBinding = true) {
     private fun initNavigationView() {
         mainDrawerLayoutNavigation.setupWithNavController(navController)
         userName.setOnClickListener {
-            navController.navigate(R.id.loginFragment)
+            navController.navigate(R.id.action_main_to_login)
         }
         userImage.setOnClickListener {
-            navController.navigate(R.id.loginFragment)
+            navController.navigate(R.id.action_main_to_login)
         }
         myCollection.setOnClickListener {
             navController.navigate(R.id.collectFragment)

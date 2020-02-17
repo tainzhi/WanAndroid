@@ -4,7 +4,7 @@ import android.graphics.Bitmap
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import androidx.activity.OnBackPressedCallback
+import androidx.activity.addCallback
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.tainzhi.android.wanandroid.R
@@ -38,12 +38,7 @@ class BrowserFragment : BaseFragment() {
         browserLinearLayout.addView(webView)
 
 
-        val callback = requireActivity().onBackPressedDispatcher
-                .addCallback(object : OnBackPressedCallback(true) {
-                    override fun handleOnBackPressed() {
-                        onBack()
-                    }
-                })
+        requireActivity().onBackPressedDispatcher.addCallback { onBack() }
     }
 
     override fun initData() {
