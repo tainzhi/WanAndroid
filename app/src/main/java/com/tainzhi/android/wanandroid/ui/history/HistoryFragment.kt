@@ -1,6 +1,5 @@
 package com.tainzhi.android.wanandroid.ui.history
 
-import android.util.Log
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.lifecycle.Observer
@@ -69,6 +68,8 @@ class HistoryFragment : BaseVMFragment<HistoryViewModel>(useBinding = true) {
     private fun initAdapter() {
         historyAdapter.run {
             setOnItemClickListener { _, _, position ->
+                viewModel.insertBrowseHistory(historyAdapter.data[position].article)
+
                 val action = BrowserFragmentDirections.actionGlobalBrowserFragment(historyAdapter
                         .data[position].article.link)
                 findNavController().navigate(action)
@@ -98,8 +99,6 @@ class HistoryFragment : BaseVMFragment<HistoryViewModel>(useBinding = true) {
     override fun startObserve() {
         viewModel.apply {
             uiState.observe(viewLifecycleOwner, Observer {
-                Log.d("qfq", "observer, adapter.size=${historyAdapter.data.size}")
-                Log.d("qfq", "${it}")
                 it.showSuccesses?.let { list ->
                     historyAdapter.run {
                         if (it.isRefresh) replaceData(list)

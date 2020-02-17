@@ -36,6 +36,8 @@ class SquareFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
     private fun initRecyclerView() {
         squareAdapter.run {
             setOnItemClickListener { _, _, position ->
+                viewModel.insertBrowseHistory(squareAdapter.data[position])
+
                 val action = BrowserFragmentDirections.actionGlobalBrowserFragment(squareAdapter
                         .data[position]
                         .link)

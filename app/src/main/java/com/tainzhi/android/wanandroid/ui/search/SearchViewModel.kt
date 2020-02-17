@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.tainzhi.android.wanandroid.base.Result
 import com.tainzhi.android.wanandroid.base.ui.BaseViewModel
+import com.tainzhi.android.wanandroid.bean.Article
 import com.tainzhi.android.wanandroid.bean.ArticleList
 import com.tainzhi.android.wanandroid.bean.Hot
 import com.tainzhi.android.wanandroid.bean.SearchHistory
@@ -70,6 +71,13 @@ class SearchViewModel(private val searchRepository: SearchRepository,
         }
     }
 
+    fun insertBrowseHistory(article: Article) {
+        launch() {
+            withContext(Dispatchers.Default) {
+                historyDao.insertBrowseHistory(article)
+            }
+        }
+    }
 
     fun getWebSites() {
         viewModelScope.launch(Dispatchers.Main) {

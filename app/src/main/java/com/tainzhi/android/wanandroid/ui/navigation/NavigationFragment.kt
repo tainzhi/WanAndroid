@@ -1,12 +1,14 @@
 package com.tainzhi.android.wanandroid.ui.navigation
 
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tainzhi.android.wanandroid.R
 import com.tainzhi.android.wanandroid.adapter.NavigationAdapter
 import com.tainzhi.android.wanandroid.adapter.VerticalTabAdapter
 import com.tainzhi.android.wanandroid.base.ui.BaseVMFragment
 import com.tainzhi.android.wanandroid.bean.Navigation
+import com.tainzhi.android.wanandroid.ui.BrowserFragmentDirections
 import com.tainzhi.android.wanandroid.util.dp2px
 import com.tainzhi.android.wanandroid.view.SpaceItemDecoration
 import kotlinx.android.synthetic.main.fragment_navigation.*
@@ -18,7 +20,14 @@ class NavigationFragment : BaseVMFragment<NavigationViewModel>() {
 
     private val navigationList = mutableListOf<Navigation>()
     private val tabAdapter by lazy { VerticalTabAdapter(navigationList.map { it.name }) }
-    private val navigationAdapter by lazy { NavigationAdapter() }
+    private val navigationAdapter by lazy {
+        NavigationAdapter(click = { article ->
+            viewModel.insertBrowseHistory(article)
+
+            val action = BrowserFragmentDirections.actionGlobalBrowserFragment(article.link)
+            findNavController().navigate(action)
+        })
+    }
     private val linearLayoutManager by lazy { LinearLayoutManager(activity) }
     override fun getLayoutResId() = R.layout.fragment_navigation
 

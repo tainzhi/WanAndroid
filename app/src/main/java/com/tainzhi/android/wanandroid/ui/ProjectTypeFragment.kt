@@ -60,6 +60,8 @@ class ProjectTypeFragment : BaseVMFragment<ArticleViewModel>() {
         projectRefreshLayout.setOnRefreshListener { refresh() }
         projectAdapter.run {
             setOnItemClickListener { _, _, position ->
+                viewModel.insertBrowseHistory(projectAdapter.data[position])
+
                 val action = BrowserFragmentDirections.actionGlobalBrowserFragment(projectAdapter
                         .data[position]
                         .link)

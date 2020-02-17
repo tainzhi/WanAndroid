@@ -66,6 +66,8 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
     private fun initAdapter() {
         searchAdapter.run {
             setOnItemClickListener { _, _, position ->
+                viewModel.insertBrowseHistory(searchAdapter.data[position])
+
                 val action = BrowserFragmentDirections.actionGlobalBrowserFragment(searchAdapter
                         .data[position]
                         .link)

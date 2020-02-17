@@ -31,7 +31,7 @@ val viewModelModule = module {
     viewModel { LoginViewModel(get(), get(), get()) }
     viewModel { ArticleViewModel(get(), get(), get(), get(), get(), get()) }
     viewModel { SystemViewModel(get(), get()) }
-    viewModel { NavigationViewModel(get()) }
+    viewModel { NavigationViewModel(get(), get()) }
     viewModel { ProjectViewModel(get()) }
     viewModel { SearchViewModel(get(), get(), get()) }
     viewModel { HistoryViewModel(get()) }

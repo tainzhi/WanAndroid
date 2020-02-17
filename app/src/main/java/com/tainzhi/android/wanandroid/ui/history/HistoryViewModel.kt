@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.tainzhi.android.wanandroid.base.ui.BaseViewModel
+import com.tainzhi.android.wanandroid.bean.Article
 import com.tainzhi.android.wanandroid.bean.BrowseHistory
 import com.tainzhi.android.wanandroid.db.HistoryDao
 import kotlinx.coroutines.Dispatchers
@@ -26,6 +27,14 @@ class HistoryViewModel(
             val browseHistory = historyDao.getBrowseHistory()
             emitHistoryUIState(showLoading = false, showSuccesses = browseHistory, isRefresh =
             isRefresh, showEnd = true)
+        }
+    }
+
+    fun insertBrowseHistory(article: Article) {
+        launch() {
+            withContext(Dispatchers.Default) {
+                historyDao.insertBrowseHistory(article)
+            }
         }
     }
 

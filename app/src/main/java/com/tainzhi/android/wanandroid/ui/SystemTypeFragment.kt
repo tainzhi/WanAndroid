@@ -54,6 +54,8 @@ class SystemTypeFragment : BaseVMFragment<ArticleViewModel>() {
         systemTypeRefreshLayout.setOnRefreshListener { refresh() }
         systemTypeAdapter.run {
             setOnItemClickListener { _, _, position ->
+                viewModel.insertBrowseHistory(systemTypeAdapter.data[position])
+
                 val action = BrowserFragmentDirections.actionGlobalBrowserFragment(systemTypeAdapter
                         .data[position]
                         .link)

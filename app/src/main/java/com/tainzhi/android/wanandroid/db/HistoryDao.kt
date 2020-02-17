@@ -1,8 +1,10 @@
 package com.tainzhi.android.wanandroid.db
 
 import androidx.room.*
+import com.tainzhi.android.wanandroid.bean.Article
 import com.tainzhi.android.wanandroid.bean.BrowseHistory
 import com.tainzhi.android.wanandroid.bean.SearchHistory
+import java.util.*
 
 /**
  * @author:       tainzhi
@@ -22,6 +24,10 @@ abstract class HistoryDao {
     // browse history
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract fun insertBrowseHistory(browseHistory: BrowseHistory)
+
+    fun insertBrowseHistory(article: Article) {
+        insertBrowseHistory(BrowseHistory(article.hashCode(), Date(), article))
+    }
 
     // Coroutine不支持LiveData
     @Query("SELECT * FROM BROWSE_HISTORY ORDER BY 1 DESC")

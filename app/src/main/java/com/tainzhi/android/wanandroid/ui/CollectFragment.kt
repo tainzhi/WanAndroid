@@ -45,6 +45,8 @@ class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
         articleAdapter.run {
             //            showStar(false)
             setOnItemClickListener { _, _, position ->
+                viewModel.insertBrowseHistory(articleAdapter.data[position])
+
                 val action = BrowserFragmentDirections.actionGlobalBrowserFragment(articleAdapter
                         .data[position]
                         .link)
