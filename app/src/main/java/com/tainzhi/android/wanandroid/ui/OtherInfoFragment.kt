@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.view.Gravity
 import android.view.MenuItem
+import androidx.activity.addCallback
 import androidx.appcompat.widget.PopupMenu
 import androidx.navigation.fragment.findNavController
 import com.afollestad.materialdialogs.MaterialDialog
@@ -26,7 +27,10 @@ class OtherInfoFragment : BaseFragment() {
     override fun initView() {
         toolbar.setTitle(R.string.other_info)
         toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24)
-        toolbar.setNavigationOnClickListener { findNavController().popBackStack() }
+        toolbar.setNavigationOnClickListener { onBack() }
+
+        requireActivity().onBackPressedDispatcher.addCallback { onBack() }
+
         versionName.text = BuildConfig.VERSION_NAME
     }
 
@@ -55,7 +59,7 @@ class OtherInfoFragment : BaseFragment() {
     }
 
     private fun showFeedBackMenu() {
-        val feedbackMenu = context?.let { PopupMenu(it, feedback, Gravity.RIGHT) }
+        val feedbackMenu = context?.let { PopupMenu(it, feedback, Gravity.END) }
         feedbackMenu?.menuInflater?.inflate(R.menu.feedback_menu, feedbackMenu.menu)
         feedbackMenu?.setOnMenuItemClickListener { item: MenuItem ->
             when (item.itemId) {
@@ -80,6 +84,10 @@ class OtherInfoFragment : BaseFragment() {
             }
         }
         feedbackMenu?.show()
+    }
+
+    private fun onBack() {
+        findNavController().popBackStack(R.id.mainFragment, false)
     }
 
     private fun showMe() {

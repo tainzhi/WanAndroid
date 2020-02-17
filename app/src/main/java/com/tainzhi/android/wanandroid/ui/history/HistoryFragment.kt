@@ -2,6 +2,7 @@ package com.tainzhi.android.wanandroid.ui.history
 
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.activity.addCallback
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,6 +33,7 @@ class HistoryFragment : BaseVMFragment<HistoryViewModel>(useBinding = true) {
     override fun initView() {
 
         initToolbar()
+        requireActivity().onBackPressedDispatcher.addCallback { onBack() }
 
         (mBinding as FragmentHistoryBinding).viewModel = viewModel
 
@@ -47,8 +49,7 @@ class HistoryFragment : BaseVMFragment<HistoryViewModel>(useBinding = true) {
         toolbar.setTitle(R.string.browse_history)
         toolbar.setNavigationIcon(R.drawable.arrow_back)
         toolbar.setNavigationOnClickListener {
-            findNavController().popBackStack(R.id
-                    .mainFragment, false)
+            onBack()
         }
         toolbar.inflateMenu(R.menu.delete_menu)
         toolbar.setOnMenuItemClickListener { menuItem ->
@@ -94,6 +95,10 @@ class HistoryFragment : BaseVMFragment<HistoryViewModel>(useBinding = true) {
 
     private fun loadMore() {
         viewModel.getBrowseHistory(isRefresh = false)
+    }
+
+    private fun onBack() {
+        findNavController().popBackStack(R.id.mainFragment, false)
     }
 
     override fun startObserve() {

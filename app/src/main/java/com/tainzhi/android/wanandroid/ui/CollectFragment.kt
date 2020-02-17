@@ -1,5 +1,6 @@
 package com.tainzhi.android.wanandroid.ui
 
+import androidx.activity.addCallback
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,7 +26,9 @@ class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
     override fun initView() {
         toolbar.setTitle(R.string.my_collect)
         toolbar.setNavigationIcon(R.drawable.arrow_back)
-        toolbar.setNavigationOnClickListener { findNavController().popBackStack() }
+        toolbar.setNavigationOnClickListener { onBack() }
+
+        requireActivity().onBackPressedDispatcher.addCallback { onBack() }
 
         (mBinding as FragmentCollectBinding).viewModel = viewModel
 
@@ -80,6 +83,10 @@ class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
 
     private fun loadMore() {
         viewModel.getCollectArticleList(false)
+    }
+
+    private fun onBack() {
+        findNavController().popBackStack()
     }
 
     override fun startObserve() {
