@@ -71,15 +71,15 @@ class LoginViewModel(
                 return@launch
             }
 
-            withContext(provider.main) { showLoading() }
+            withContext(provider.main) { emitUiState(showProgress = true) }
 
             val result = repository.login(userName.get() ?: "", passWord.get() ?: "")
 
             withContext(provider.main) {
                 checkResult(result, {
-                    emitUiState(showSuccess = it, enableLoginButton = true)
+                    emitUiState(showProgress = false, showSuccess = it, enableLoginButton = true)
                 }, {
-                    emitUiState(showError = it, enableLoginButton = true)
+                    emitUiState(showProgress = false, showError = it, enableLoginButton = true)
                 })
             }
         }
@@ -89,14 +89,14 @@ class LoginViewModel(
         viewModelScope.launch(provider.computation) {
             if (userName.get().isNullOrBlank() || passWord.get().isNullOrBlank()) return@launch
 
-            withContext(provider.main) { showLoading() }
+            withContext(provider.main) { emitUiState(showProgress = true) }
 
             val result = repository.register(userName.get() ?: "", passWord.get() ?: "")
             withContext(provider.main) {
                 if (result is Result.Success) {
-                    emitUiState(showSuccess = result.data, enableLoginButton = true)
+                    emitUiState(showProgress = false, showSuccess = result.data, enableLoginButton = true)
                 } else if (result is Result.Error) {
-                    emitUiState(showError = result.exception.message, enableLoginButton = true)
+                    emitUiState(showProgress = false, showError = result.exception.message, enableLoginButton = true)
                 }
             }
         }
@@ -125,11 +125,6 @@ class LoginViewModel(
                 isInputValid(rePassWord.get() ?: "") &&
                 isInputValid(errorHint.get() ?: ""))
     }
-
-    private fun showLoading() {
-        emitUiState(true)
-    }
-
 
     private fun emitUiState(
             showProgress: Boolean = false,

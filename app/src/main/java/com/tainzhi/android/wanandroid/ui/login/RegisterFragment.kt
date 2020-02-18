@@ -1,6 +1,5 @@
 package com.tainzhi.android.wanandroid.ui.login
 
-import android.app.ProgressDialog
 import android.content.Context
 import android.os.IBinder
 import android.view.inputmethod.InputMethodManager
@@ -41,32 +40,18 @@ class RegisterFragment : BaseVMFragment<LoginViewModel>(useBinding = true) {
 
             uiState.observe(viewLifecycleOwner, Observer {
                 if (it.showProgress) {
-                    showProgressDialog()
                     dismissKeyboard(userNameEt.windowToken)
                 }
 
                 it.showSuccess?.let {
-                    dismissProgressDialog()
                     onBackToMain()
                 }
 
                 it.showError?.let { err ->
-                    dismissProgressDialog()
                     activity?.toast(err)
                 }
             })
         }
-    }
-
-    private var progressDialog: ProgressDialog? = null
-    private fun showProgressDialog() {
-        if (progressDialog == null)
-            progressDialog = ProgressDialog(activity)
-        progressDialog?.show()
-    }
-
-    private fun dismissProgressDialog() {
-        progressDialog?.dismiss()
     }
 
     private fun onBack() {

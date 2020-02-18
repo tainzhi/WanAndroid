@@ -31,16 +31,16 @@ class OtherInfoFragment : BaseFragment() {
 
         requireActivity().onBackPressedDispatcher.addCallback { onBack() }
 
-        versionName.text = BuildConfig.VERSION_NAME
+        versionNameTv.text = BuildConfig.VERSION_NAME
     }
 
     override fun initData() {
 
-        license.setOnClickListener { showOwnLicense() }
-        source.setOnClickListener { activity?.openBrowser(GITHUB_PAGE) }
-        feedback.setOnClickListener { showFeedBackMenu() }
-        thirdLib.setOnClickListener { showLicenseDialog() }
-        developer.setOnClickListener { showMe() }
+        licenseTv.setOnClickListener { showOwnLicense() }
+        sourceTv.setOnClickListener { activity?.openBrowser(GITHUB_PAGE) }
+        feedbackTv.setOnClickListener { showFeedBackMenu() }
+        thirdLibTv.setOnClickListener { showLicenseDialog() }
+        developerTv.setOnClickListener { showMe() }
     }
 
     private fun showOwnLicense() {
@@ -59,7 +59,7 @@ class OtherInfoFragment : BaseFragment() {
     }
 
     private fun showFeedBackMenu() {
-        val feedbackMenu = context?.let { PopupMenu(it, feedback, Gravity.END) }
+        val feedbackMenu = context?.let { PopupMenu(it, feedbackTv, Gravity.END) }
         feedbackMenu?.menuInflater?.inflate(R.menu.feedback_menu, feedbackMenu.menu)
         feedbackMenu?.setOnMenuItemClickListener { item: MenuItem ->
             when (item.itemId) {

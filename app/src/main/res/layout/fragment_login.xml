@@ -1,79 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-	<data>
-		<variable
-			name="viewModel"
-			type="com.tainzhi.android.wanandroid.ui.login.LoginViewModel" />
-	</data>
+    <data>
 
-
-	<LinearLayout
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:orientation="vertical">
-
-		<include layout="@layout/title_layout" />
-
-		<com.google.android.material.textfield.TextInputLayout
-			android:id="@+id/userNameLayout"
-			style="@style/TextInputLayout"
-			android:layout_marginTop="80dp"
-			android:hint="@string/username">
-
-			<androidx.appcompat.widget.AppCompatEditText
-				android:id="@+id/userNameEt"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:singleLine="true"
-				android:text="@={viewModel.userName}"
-				afterTextChanged="@{viewModel.verifyInput}" />
-
-		</com.google.android.material.textfield.TextInputLayout>
-
-		<com.google.android.material.textfield.TextInputLayout
-			android:id="@+id/pswLayout"
-			style="@style/TextInputLayout"
-			android:hint="@string/password"
-			app:passwordToggleEnabled="true">
-
-			<androidx.appcompat.widget.AppCompatEditText
-				android:id="@+id/passwordEt"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:inputType="textPassword"
-				android:singleLine="true"
-				android:text="@={viewModel.passWord}"
-				afterTextChanged="@{viewModel.verifyInput}" />
-
-		</com.google.android.material.textfield.TextInputLayout>
+        <variable
+            name="viewModel"
+            type="com.tainzhi.android.wanandroid.ui.login.LoginViewModel" />
+    </data>
 
 
-		<androidx.appcompat.widget.AppCompatButton
-			android:id="@+id/login"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginLeft="20dp"
-			android:layout_marginRight="20dp"
-			android:layout_marginTop="20dp"
-			android:background="@color/colorPrimary"
-			android:text="@string/login"
-			android:textColor="@color/white"
-			android:textSize="16sp"
-			android:enabled="@{viewModel.uiState.enableLoginButton}"
-			android:onClick="@{() -> viewModel.login()}"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-		<TextView
-			android:id="@+id/registerTv"
-			android:layout_height="wrap_content"
-			android:layout_gravity="end"
-			android:layout_marginTop="20dp"
-			android:layout_marginEnd="20dp"
-			android:text="@string/go_to_register"
-			android:layout_width="wrap_content"
-			android:textSize="16sp" />
-	</LinearLayout>
+        <ProgressBar
+            android:id="@+id/loadingProgressBar"
+            visibleUnless="@{viewModel.uiState.showProgress}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.52" />
+
+        <include
+            layout="@layout/title_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/userNameLayout"
+            style="@style/TextInputLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="136dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:hint="@string/username"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/userNameEt"
+                afterTextChanged="@{viewModel.verifyInput}"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:singleLine="true"
+                android:text="@={viewModel.userName}" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/pswLayout"
+            style="@style/TextInputLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:hint="@string/password"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/userNameLayout"
+            app:passwordToggleEnabled="true">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/passwordEt"
+                afterTextChanged="@{viewModel.verifyInput}"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textPassword"
+                android:singleLine="true"
+                android:text="@={viewModel.passWord}" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/login"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@color/colorPrimary"
+            android:enabled="@{viewModel.uiState.enableLoginButton}"
+            android:onClick="@{() -> viewModel.login()}"
+            android:text="@string/login"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/registerTv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/registerTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="89dp"
+            android:layout_marginEnd="19dp"
+            android:text="@string/go_to_register"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pswLayout" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

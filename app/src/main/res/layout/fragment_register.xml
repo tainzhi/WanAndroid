@@ -11,24 +11,51 @@
     </data>
 
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <include layout="@layout/title_layout" />
+        <include
+            android:id="@+id/include2"
+            layout="@layout/title_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/loadingProgressBar"
+            visibleUnless="@{viewModel.uiState.showProgress}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.45" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/userNameLayout"
             style="@style/TextInputLayout"
-            android:layout_marginTop="80dp"
-            android:hint="@string/username">
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="136dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:hint="@string/username"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/userNameEt"
                 afterTextChanged="@{viewModel.verifyRegisterInput}"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:singleLine="true"
                 android:text="@={viewModel.userName}" />
 
@@ -37,14 +64,23 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/pswLayout"
             style="@style/TextInputLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
             android:hint="@string/password"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/userNameLayout"
             app:passwordToggleEnabled="true">
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/passwordEt"
                 afterTextChanged="@{viewModel.verifyRegisterInput}"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:inputType="textPassword"
                 android:singleLine="true"
                 android:text="@={viewModel.passWord}" />
@@ -54,15 +90,25 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/rePasswordLayout"
             style="@style/TextInputLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
             android:hint="@string/re_password"
             app:error="@{viewModel.errorHint}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pswLayout"
             app:passwordToggleEnabled="true">
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/rePasswordEt"
                 afterTextChanged="@{viewModel.verifyRegisterInput}"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:inputType="textPassword"
                 android:singleLine="true"
                 android:text="@={viewModel.rePassWord}" />
@@ -71,18 +117,23 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/register"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="30dp"
+            android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
             android:background="@color/colorPrimary"
             android:enabled="@{viewModel.uiState.enableLoginButton}"
             android:onClick="@{() -> viewModel.register()}"
             android:text="@string/register"
             android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rePasswordLayout" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

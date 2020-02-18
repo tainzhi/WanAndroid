@@ -1,6 +1,5 @@
 package com.tainzhi.android.wanandroid.ui.login
 
-import android.app.ProgressDialog
 import android.content.Context
 import android.os.IBinder
 import android.view.inputmethod.InputMethodManager
@@ -38,34 +37,22 @@ class LoginFragment : BaseVMFragment<LoginViewModel>(useBinding = true) {
         viewModel.apply {
 
             uiState.observe(viewLifecycleOwner, Observer {
-                if (it.showProgress) {
-                    showProgressDialog()
+
+            if (it.showProgress) {
                     dismissKeyboard(userNameEt.windowToken)
                 }
 
                 it.showSuccess?.let {
-                    dismissProgressDialog()
                     finish()
                 }
 
                 it.showError?.let { err ->
-                    dismissProgressDialog()
                     activity?.toast(err)
                 }
             })
         }
     }
 
-    private var progressDialog: ProgressDialog? = null
-    private fun showProgressDialog() {
-        if (progressDialog == null)
-            progressDialog = ProgressDialog(activity)
-        progressDialog?.show()
-    }
-
-    private fun dismissProgressDialog() {
-        progressDialog?.dismiss()
-    }
 
     private fun finish() {
         findNavController().popBackStack(R.id.mainFragment, false)

@@ -26,7 +26,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/userImage"
+            android:id="@+id/userImageIv"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_marginTop="30dp"
@@ -41,7 +41,7 @@
             tools:src="@drawable/ic_user" />
 
         <TextView
-            android:id="@+id/userName"
+            android:id="@+id/userNameTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -58,7 +58,7 @@
             app:layout_constraintTop_toBottomOf="@+id/userImage" />
 
         <TextView
-            android:id="@+id/myCollection"
+            android:id="@+id/myCollectionTv"
             android:layout_width="150dp"
             android:layout_height="40dp"
             android:layout_marginTop="212dp"
@@ -72,15 +72,15 @@
             app:visibleUnless="@{viewModel.isLogin}" />
 
         <TextView
-            android:id="@+id/browseHistory"
+            android:id="@+id/browseHistoryTv"
             android:layout_width="150dp"
             android:layout_height="40dp"
             android:drawableStart="@drawable/ic_baseline_history_24"
             android:gravity="center"
             android:text="@string/browse_history"
-            app:layout_constraintEnd_toEndOf="@+id/myCollection"
-            app:layout_constraintStart_toStartOf="@+id/myCollection"
-            app:layout_constraintTop_toBottomOf="@id/myCollection"
+            app:layout_constraintEnd_toEndOf="@+id/myCollectionTv"
+            app:layout_constraintStart_toStartOf="@+id/myCollectionTv"
+            app:layout_constraintTop_toBottomOf="@id/myCollectionTv"
             app:visibleUnless="@{viewModel.isLogin}" />
 
         <TextView
@@ -90,12 +90,12 @@
             android:drawableStart="@drawable/ic_baseline_info_24"
             android:gravity="center"
             android:text="@string/other_info"
-            app:layout_constraintEnd_toEndOf="@+id/myCollection"
-            app:layout_constraintStart_toStartOf="@+id/myCollection"
-            app:layout_constraintTop_toBottomOf="@id/browseHistory" />
+            app:layout_constraintEnd_toEndOf="@+id/myCollectionTv"
+            app:layout_constraintStart_toStartOf="@+id/myCollectionTv"
+            app:layout_constraintTop_toBottomOf="@id/browseHistoryTv" />
 
         <Button
-            android:id="@+id/logout"
+            android:id="@+id/logoutBtn"
             android:layout_width="120dp"
             android:layout_height="40dp"
             android:layout_marginBottom="52dp"
