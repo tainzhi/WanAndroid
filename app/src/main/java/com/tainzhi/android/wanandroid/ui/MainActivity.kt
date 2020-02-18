@@ -88,7 +88,7 @@ class MainActivity : BaseVMActivity<LoginViewModel>(useBinding = true) {
             navController.navigate(R.id.historyFragment)
         }
         otherInfo.setOnClickListener {
-            navController.navigate(R.id.otherInfoFragment)
+            navController.navigate(R.id.settingsFragment)
         }
         logoutBtn.setOnClickListener {
             viewModel.logout()

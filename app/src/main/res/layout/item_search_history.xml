@@ -17,8 +17,8 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="5dp"
         android:background="@color/white"
-        android:paddingStart="@dimen/item_padding_left_right"
-        android:paddingEnd="@dimen/item_padding_left_right">
+        android:paddingStart="@dimen/margin_normal"
+        android:paddingEnd="@dimen/margin_normal">
 
         <ImageView
             android:id="@+id/_iv_user"
@@ -46,7 +46,7 @@
         <TextView
             android:id="@+id/articleTag"
             style="@style/Article_text"
-            android:layout_marginStart="@dimen/item_padding_left_right"
+            android:layout_marginStart="@dimen/margin_normal"
             android:includeFontPadding="false"
             android:text="@{browseHistory.article.superChapterName+`/`+ browseHistory.article.chapterName}"
             app:layout_constraintBottom_toBottomOf="@+id/_iv_user"

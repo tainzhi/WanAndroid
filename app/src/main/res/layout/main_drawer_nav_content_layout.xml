@@ -21,7 +21,7 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="@dimen/nav_header_height"
+            android:layout_height="176dp"
             android:src="@drawable/side_nav_bar"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,7 +30,7 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_marginTop="30dp"
-            android:paddingTop="@dimen/nav_header_vertical_spacing"
+            android:paddingTop="@dimen/margin_small"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="16dp"
-            android:paddingTop="@dimen/nav_header_vertical_spacing"
+            android:paddingTop="@dimen/margin_small"
             android:text="@{viewModel.isLogin ? viewModel.user.nickname : @string/login_or_register}"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="@color/white"
@@ -89,7 +89,7 @@
             android:layout_height="40dp"
             android:drawableStart="@drawable/ic_baseline_info_24"
             android:gravity="center"
-            android:text="@string/other_info"
+            android:text="@string/settings"
             app:layout_constraintEnd_toEndOf="@+id/myCollectionTv"
             app:layout_constraintStart_toStartOf="@+id/myCollectionTv"
             app:layout_constraintTop_toBottomOf="@id/browseHistoryTv" />

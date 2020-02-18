@@ -26,7 +26,7 @@
             app:destination="@id/searchFragment" />
         <action
             android:id="@+id/action_mainFragment_to_otherInfoFragment"
-            app:destination="@id/otherInfoFragment" />
+            app:destination="@id/settingsFragment" />
         <action
             android:id="@+id/action_mainFragment_to_historyFragment"
             app:destination="@id/historyFragment" />
@@ -78,10 +78,10 @@
         android:label="SearchFragment"
         tools:layout="@layout/fragment_search" />
     <fragment
-        android:id="@+id/otherInfoFragment"
-        android:name="com.tainzhi.android.wanandroid.ui.OtherInfoFragment"
-        android:label="OtherInfoFragment"
-        tools:layout="@layout/fragment_other_info" />
+        android:id="@+id/settingsFragment"
+        android:name="com.tainzhi.android.wanandroid.ui.SettingsFragment"
+        android:label="Settings"
+        tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/historyFragment"
         android:name="com.tainzhi.android.wanandroid.ui.history.HistoryFragment"
