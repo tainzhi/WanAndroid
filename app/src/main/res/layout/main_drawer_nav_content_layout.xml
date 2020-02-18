@@ -52,10 +52,10 @@
             android:textColor="@color/white"
             android:clickable="@{!viewModel.isLogin}"
             tools:text="@string/login_or_register"
-            app:layout_constraintEnd_toEndOf="@+id/userImage"
+            app:layout_constraintEnd_toEndOf="@+id/userImageIv"
             app:layout_constraintHorizontal_bias="0.473"
-            app:layout_constraintStart_toStartOf="@+id/userImage"
-            app:layout_constraintTop_toBottomOf="@+id/userImage" />
+            app:layout_constraintStart_toStartOf="@+id/userImageIv"
+            app:layout_constraintTop_toBottomOf="@+id/userImageIv" />
 
         <TextView
             android:id="@+id/myCollectionTv"
