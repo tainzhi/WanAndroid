@@ -25,7 +25,6 @@ class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
 
     override fun initView() {
         toolbar.setTitle(R.string.my_collect)
-        toolbar.setNavigationIcon(R.drawable.arrow_back)
         toolbar.setNavigationOnClickListener { onBack() }
 
         requireActivity().onBackPressedDispatcher.addCallback { onBack() }

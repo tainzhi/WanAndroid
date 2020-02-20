@@ -47,7 +47,6 @@ class HistoryFragment : BaseVMFragment<HistoryViewModel>(useBinding = true) {
 
     private fun initToolbar() {
         toolbar.setTitle(R.string.browse_history)
-        toolbar.setNavigationIcon(R.drawable.arrow_back)
         toolbar.setNavigationOnClickListener {
             onBack()
         }

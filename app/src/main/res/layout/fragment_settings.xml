@@ -1,110 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
+    <include layout="@layout/common_toolbar" />
 
-        <import type="com.tainzhi.android.wanandroid.BuildConfig" />
-
-    </data>
-
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:scrollbarStyle="insideOverlay"
+        android:scrollbars="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <include layout="@layout/common_toolbar" />
-
-        <androidx.core.widget.NestedScrollView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:clipToPadding="false"
-            android:scrollbarStyle="insideOverlay"
-            android:scrollbars="vertical"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            android:orientation="vertical"
+            android:padding="@dimen/margin_normal">
 
-            <LinearLayout
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="@dimen/margin_normal">
+                android:layout_marginTop="@dimen/margin_small">
 
-                <FrameLayout
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_small">
+                    android:layout_gravity="start|center_vertical"
+                    android:alpha="?alphaEmphasisMedium"
+                    android:text="@string/switch_dark_theme"
+                    android:textAppearance="?textAppearanceBody1" />
 
-                    <TextView
-                        android:id="@+id/dark_theme_title_text_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="start|center_vertical"
-                        android:alpha="?alphaEmphasisMedium"
-                        android:text="开启暗黑主题"
-                        android:textAppearance="?textAppearanceBody1" />
-
-                    <com.google.android.material.switchmaterial.SwitchMaterial
-                        android:id="@+id/dark_theme_switch"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="end|center_vertical" />
-
-                </FrameLayout>
-
-
-                <TextView
-                    android:id="@+id/options_title_text_view"
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/changeThemeSwitch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_large"
-                    android:alpha="?alphaEmphasisMedium"
-                    android:text="Other"
-                    android:textAppearance="?textAppearanceOverline" />
+                    android:layout_gravity="end|center_vertical" />
 
-                <TextView
-                    android:id="@+id/licenseTv"
-                    style="@style/SettingsButton"
-                    android:text="@string/license" />
+            </FrameLayout>
 
-                <TextView
-                    android:id="@+id/sourceTv"
-                    style="@style/SettingsButton"
-                    android:text="@string/source_url" />
 
-                <TextView
-                    android:id="@+id/feedbackTv"
-                    style="@style/SettingsButton"
-                    android:text="@string/feedback" />
+            <TextView
+                android:id="@+id/options_title_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_large"
+                android:alpha="?alphaEmphasisMedium"
+                android:text="Other"
+                android:textAppearance="?textAppearanceOverline" />
 
-                <TextView
-                    android:id="@+id/thirdLibTv"
-                    style="@style/SettingsButton"
-                    android:text="@string/third_lib" />
+            <TextView
+                android:id="@+id/licenseTv"
+                style="@style/SettingsButton"
+                android:text="@string/license" />
 
-                <TextView
-                    android:id="@+id/developerTv"
-                    style="@style/SettingsButton"
-                    android:text="@string/developer" />
+            <TextView
+                android:id="@+id/sourceTv"
+                style="@style/SettingsButton"
+                android:text="@string/source_url" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="?android:dividerHorizontal" />
+            <TextView
+                android:id="@+id/feedbackTv"
+                style="@style/SettingsButton"
+                android:text="@string/feedback" />
 
-                <TextView
-                    android:id="@+id/versionNameTv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_large"
-                    android:alpha="?alphaEmphasisMedium"
-                    android:text="@{BuildConfig.VERSION_NAME}"
-                    android:textAppearance="?textAppearanceOverline"
-                    tools:text="V 1.0.0" />
+            <TextView
+                android:id="@+id/thirdLibTv"
+                style="@style/SettingsButton"
+                android:text="@string/third_lib" />
 
-            </LinearLayout>
-        </androidx.core.widget.NestedScrollView>
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
-</layout>
+            <TextView
+                android:id="@+id/developerTv"
+                style="@style/SettingsButton"
+                android:text="@string/developer" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:dividerHorizontal" />
+
+            <TextView
+                android:id="@+id/versionNameTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_large"
+                android:alpha="?alphaEmphasisMedium"
+                android:text="@{BuildConfig.VERSION_NAME}"
+                android:textAppearance="?textAppearanceOverline"
+                tools:text="V 1.0.0" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
 

@@ -60,4 +60,5 @@
     <string name="no_history">没有记录</string>
     <string name="go_to_register">没有账号?那么就去注册一个吧</string>
     <string name="my_myCollection">Setting</string>
+    <string name="switch_dark_theme">开启暗黑主题</string>
 </resources>

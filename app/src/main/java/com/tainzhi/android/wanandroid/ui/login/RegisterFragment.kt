@@ -21,7 +21,6 @@ class RegisterFragment : BaseVMFragment<LoginViewModel>(useBinding = true) {
 
     override fun initView() {
         toolbar.setTitle(R.string.register)
-        toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24)
         toolbar.setNavigationOnClickListener { onBack() }
 
     }

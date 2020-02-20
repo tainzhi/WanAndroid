@@ -27,7 +27,6 @@ class BrowserFragment : BaseFragment() {
 
     override fun initView() {
         toolbar.setTitle(R.string.is_loading)
-        toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24)
         toolbar.setNavigationOnClickListener { onBack() }
 
         progressBar.progressDrawable = this.resources

@@ -20,7 +20,7 @@ class SystemTypeNormalFragment : BaseFragment() {
         systemParent = args.articleList
         toolbar.run {
             title = systemParent.name
-            setNavigationIcon(R.drawable.arrow_back)
+            setNavigationIcon(R.drawable.ic_baseline_arrow_back_24)
             setNavigationOnClickListener { findNavController().popBackStack() }
         }
 
