@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:background="?colorSurface"
         android:visibility="visible"
-        app:indicator_color="#000000"
+        app:indicator_color="?attr/colorPrimary"
         app:indicator_corners="5dp"
         app:indicator_gravity="right"
         app:tab_height="50dp"
