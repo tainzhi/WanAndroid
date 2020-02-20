@@ -14,10 +14,12 @@
             type="com.tainzhi.android.wanandroid.bean.Article" />
     </data>
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/margin_normal">
+        android:layout_marginStart="@dimen/margin_normal"
+        android:layout_marginTop="@dimen/margin_normal"
+        android:layout_marginEnd="@dimen/margin_normal">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -42,7 +44,6 @@
                     android:id="@+id/projectName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
                     android:textSize="14sp"
                     app:htmlText="@{article.title}"
                     tools:text="音乐播放器" />
@@ -68,7 +69,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@{article.niceDate}"
-                        android:textColor="@color/gray"
                         android:textSize="12sp" />
 
                     <TextView
@@ -78,7 +78,6 @@
                         android:layout_marginStart="5dp"
                         android:layout_toEndOf="@id/projectTime"
                         android:text="@{article.author}"
-                        android:textColor="@color/gray"
                         android:textSize="12sp"
                         tools:ignore="RelativeOverlap" />
 
@@ -94,5 +93,5 @@
 
             </RelativeLayout>
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 </layout>

@@ -23,27 +23,28 @@
 	<!--and icons. Using these attributes throughout your app makes it easy to change a single -->
 	<!--color, or the entire theme, and have those changes cascade through the interface.-->
 
-	<!--Color is customized by overriding Material Components color attributes with custom -->
-	<!--color values. In this project, your theme’s color attributes are already overridden -->
-	<!--with default values defined in this file, color.xml.  Change any of the values in -->
-	<!--this file to see changes applied across all elements of your app.-->
+    <!--Color is customized by overriding Material Components color attributes with custom -->
+    <!--color values. In this project, your theme’s color attributes are already overridden -->
+    <!--with default values defined in this file, color.xml.  Change any of the values in -->
+    <!--this file to see changes applied across all elements of your app.-->
 
-	<!--LIGHT COLOR THEME-->
+    <!--LIGHT COLOR THEME-->
 
-	<!--colorPrimary colors map to components and elements, such as app bars and buttons. -->
-	<!--colorSecondary colors are most often used as accents on components, such as FABs and -->
-	<!--selection controls.-->
-	<color name="color_primary">#6200ee</color>
-	<color name="color_primary_variant">#3700b3</color>
-	<color name="color_secondary">#03dac6</color>
-	<color name="color_secondary_variant">#018786</color>
+    <!--colorPrimary colors map to components and elements, such as app bars and buttons. -->
+    <!--colorSecondary colors are most often used as accents on components, such as FABs and -->
+    <!--selection controls.-->
+    <color name="color_primary">#a11abd</color>
+    <color name="color_primary_dark">#480b9c</color>
+    <color name="color_primary_variant">#3700b3</color>
+    <color name="color_secondary">#03dac6</color>
+    <color name="color_secondary_variant">#018786</color>
 
-	<!--colorBackground appears behind scrollable content and is used for the default window-->
-	<!--background. colorSurface is mapped to the surface of components such as cards, sheets-->
-	<!--and menus. colorError is used to indicate an error state for components such as-->
-	<!--text fields.-->
-	<color name="color_background">#ffffff</color>
-	<color name="color_surface">#ffffff</color>
+    <!--colorBackground appears behind scrollable content and is used for the default window-->
+    <!--background. colorSurface is mapped to the surface of components such as cards, sheets-->
+    <!--and menus. colorError is used to indicate an error state for components such as-->
+    <!--text fields.-->
+    <color name="color_background">#ffffff</color>
+    <color name="color_surface">#ffffff</color>
 	<color name="color_error">#b00020</color>
 
 	<!--"On" colors define how text, icons and strokes are colored in relation to the surface-->

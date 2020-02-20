@@ -27,13 +27,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.52" />
 
-        <include
-            layout="@layout/title_layout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <include layout="@layout/common_toolbar" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/userNameLayout"
@@ -87,7 +81,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
 
-        <androidx.appcompat.widget.AppCompatButton
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/login"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -96,12 +90,9 @@
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="20dp"
-            android:background="@color/colorPrimary"
             android:enabled="@{viewModel.uiState.enableLoginButton}"
             android:onClick="@{() -> viewModel.login()}"
             android:text="@string/login"
-            android:textColor="@color/white"
-            android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/registerTv"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
