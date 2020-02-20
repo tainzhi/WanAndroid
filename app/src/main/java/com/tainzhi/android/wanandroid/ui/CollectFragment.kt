@@ -13,8 +13,8 @@ import com.tainzhi.android.wanandroid.util.dp2px
 import com.tainzhi.android.wanandroid.util.toast
 import com.tainzhi.android.wanandroid.view.CustomLoadMoreView
 import com.tainzhi.android.wanandroid.view.SpaceItemDecoration
+import kotlinx.android.synthetic.main.common_toolbar.*
 import kotlinx.android.synthetic.main.fragment_collect.*
-import kotlinx.android.synthetic.main.fragment_system_type_normal.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {

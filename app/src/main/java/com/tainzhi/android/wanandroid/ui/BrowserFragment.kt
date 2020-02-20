@@ -13,8 +13,8 @@ import com.tainzhi.android.wanandroid.view.X5WebView
 import com.tencent.smtt.sdk.WebChromeClient
 import com.tencent.smtt.sdk.WebView
 import com.tencent.smtt.sdk.WebViewClient
+import kotlinx.android.synthetic.main.common_toolbar.*
 import kotlinx.android.synthetic.main.fragment_browser.*
-import kotlinx.android.synthetic.main.title_layout.*
 
 
 class BrowserFragment : BaseFragment() {

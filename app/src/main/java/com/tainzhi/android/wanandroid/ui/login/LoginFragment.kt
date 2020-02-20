@@ -9,8 +9,8 @@ import com.tainzhi.android.wanandroid.R
 import com.tainzhi.android.wanandroid.base.ui.BaseVMFragment
 import com.tainzhi.android.wanandroid.databinding.FragmentLoginBinding
 import com.tainzhi.android.wanandroid.util.toast
+import kotlinx.android.synthetic.main.common_toolbar.*
 import kotlinx.android.synthetic.main.fragment_login.*
-import kotlinx.android.synthetic.main.title_layout.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class LoginFragment : BaseVMFragment<LoginViewModel>(useBinding = true) {
@@ -21,7 +21,6 @@ class LoginFragment : BaseVMFragment<LoginViewModel>(useBinding = true) {
 
     override fun initView() {
         toolbar.setTitle(R.string.login)
-        toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24)
         toolbar.setNavigationOnClickListener { finish() }
 
         registerTv.setOnClickListener {

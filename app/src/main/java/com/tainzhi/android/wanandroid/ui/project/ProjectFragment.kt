@@ -26,8 +26,6 @@ open class ProjectFragment : BaseVMFragment<ProjectViewModel>() {
     override fun initVM(): ProjectViewModel = getViewModel()
 
     override fun initData() {
-//        projectToolbar.setNavigationOnClickListener { onBackPressed() }
-
         if (isBlog) viewModel.getBlogType()
         else viewModel.getProjectTypeList()
 

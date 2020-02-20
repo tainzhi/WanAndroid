@@ -7,6 +7,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.tainzhi.android.wanandroid.R
 import com.tainzhi.android.wanandroid.base.ui.BaseFragment
 import com.tainzhi.android.wanandroid.bean.SystemParent
+import kotlinx.android.synthetic.main.common_toolbar.*
 import kotlinx.android.synthetic.main.fragment_system_type_normal.*
 
 class SystemTypeNormalFragment : BaseFragment() {
@@ -20,8 +21,10 @@ class SystemTypeNormalFragment : BaseFragment() {
         systemParent = args.articleList
         toolbar.run {
             title = systemParent.name
-            setNavigationIcon(R.drawable.ic_baseline_arrow_back_24)
-            setNavigationOnClickListener { findNavController().popBackStack() }
+
+            setNavigationOnClickListener {
+                findNavController().popBackStack(R.id.mainFragment, false)
+            }
         }
 
         initViewPager()
