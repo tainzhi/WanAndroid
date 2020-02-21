@@ -32,7 +32,7 @@ class PreferenceRepository {
             field = value
         }
 
-    private val _isDarkTheme: MutableLiveData<Boolean> = MutableLiveData()
+    private val _isDarkTheme: MutableLiveData<Boolean> = MutableLiveData(darkTheme)
     val isDarkTheme: LiveData<Boolean> = _isDarkTheme
 
 }
