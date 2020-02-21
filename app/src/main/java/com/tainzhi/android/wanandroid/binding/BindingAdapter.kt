@@ -1,5 +1,6 @@
 package com.tainzhi.android.wanandroid.binding
 
+import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.text.Editable
 import android.text.Html
@@ -48,8 +49,9 @@ fun bindHtmlText(view:TextView,html:String){
 }
 
 @BindingAdapter("articleStar")
-fun bindArticleStar(view:ImageView,collect:Boolean){
-    view.setImageResource(if (collect) R.drawable.timeline_like_pressed else R.drawable.timeline_like_normal)
+fun bindArticleStar(view:ImageView,collect:Boolean) {
+    view.setColorFilter(if (collect) R.attr.colorPrimary else R.attr.colorAccent, PorterDuff.Mode
+            .ADD)
 }
 
 @BindingAdapter(

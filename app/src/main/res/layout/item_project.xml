@@ -83,11 +83,11 @@
 
                     <ImageView
                         android:id="@+id/articleStar"
-                        articleStar="@{article.collect}"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_alignParentEnd="true"
-                        tools:src="@mipmap/ic_launcher" />
+                        articleStar="@{article.collect}"
+                        android:src="@drawable/ic_baseline_favorite_24" />
                 </RelativeLayout>
 
 
