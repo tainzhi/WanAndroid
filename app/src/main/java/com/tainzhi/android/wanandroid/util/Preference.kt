@@ -2,6 +2,7 @@ package com.tainzhi.android.wanandroid.util
 
 import android.annotation.SuppressLint
 import android.content.SharedPreferences
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.PreferenceManager
 import com.tainzhi.android.wanandroid.WanApp
 import java.io.*
@@ -20,6 +21,9 @@ class Preference<T>(val name: String, private val default: T) : ReadWritePropert
     companion object {
         const val IS_LOGIN = "is_login"
         const val USER_GSON = "user_gson"
+
+        const val THEME_MODE = "theme_mode"
+        const val DEFAULT_THEM_MODE = AppCompatDelegate.MODE_NIGHT_NO
 
         fun clearAll() {
             val prefs = PreferenceManager.getDefaultSharedPreferences(WanApp.CONTEXT)

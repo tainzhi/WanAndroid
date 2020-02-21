@@ -6,11 +6,13 @@ import android.view.Gravity
 import android.view.MenuItem
 import android.widget.PopupMenu
 import androidx.activity.addCallback
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
 import com.tainzhi.android.wanandroid.BuildConfig
 import com.tainzhi.android.wanandroid.R
+import com.tainzhi.android.wanandroid.WanApp
 import com.tainzhi.android.wanandroid.base.ui.BaseFragment
 import com.tainzhi.android.wanandroid.util.GITHUB_PAGE
 import com.tainzhi.android.wanandroid.util.ISSUE_URL
@@ -33,7 +35,12 @@ class SettingsFragment : BaseFragment() {
     }
 
     override fun initData() {
-        changeThemeSwitch.setOnCheckedChangeListener { buttonView, isChecked -> }
+        changeThemeSwitch.setOnCheckedChangeListener { button, isChecked ->
+            WanApp.preferenceRepository.darkTheme = isChecked
+        }
+        WanApp.preferenceRepository.isDarkTheme.observe(this, Observer { isDarkTheme ->
+            isDarkTheme?.let { changeThemeSwitch.isChecked = it }
+        })
 
         licenseTv.setOnClickListener { showOwnLicense() }
         sourceTv.setOnClickListener { activity?.openBrowser(GITHUB_PAGE) }

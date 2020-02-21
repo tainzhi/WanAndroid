@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import com.tainzhi.android.wanandroid.bean.User
 import com.tainzhi.android.wanandroid.di.appModule
+import com.tainzhi.android.wanandroid.repository.PreferenceRepository
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import kotlin.properties.Delegates
@@ -20,6 +21,7 @@ class WanApp : Application() {
     companion object {
         var CONTEXT: Context by Delegates.notNull()
         lateinit var current_user: User
+        lateinit var preferenceRepository: PreferenceRepository
     }
 
     override fun onCreate() {
@@ -29,6 +31,8 @@ class WanApp : Application() {
             androidContext(this@WanApp)
             modules(appModule)
         }
+
+        preferenceRepository = PreferenceRepository()
     }
     //x5内核初始化接口
 //        QbSdk.initX5Environment(applicationContext, object : QbSdk.PreInitCallback {

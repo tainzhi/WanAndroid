@@ -5,6 +5,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -12,6 +13,7 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.tainzhi.android.wanandroid.R
+import com.tainzhi.android.wanandroid.WanApp
 import com.tainzhi.android.wanandroid.base.ui.BaseVMActivity
 import com.tainzhi.android.wanandroid.databinding.ActivityMainBinding
 import com.tainzhi.android.wanandroid.ui.login.LoginViewModel
@@ -30,6 +32,8 @@ class MainActivity : BaseVMActivity<LoginViewModel>(useBinding = true) {
     override fun getLayoutResId() = R.layout.activity_main
 
     override fun initView() {
+
+        updateTheme()
 
         navController = findNavController(R.id.mainNavHostFragment)
 
@@ -118,5 +122,11 @@ class MainActivity : BaseVMActivity<LoginViewModel>(useBinding = true) {
             findNavController(R.id.mainNavHostFragment).navigate(R.id.searchFragment)
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun updateTheme() {
+        WanApp.preferenceRepository.nightMode.observe(this, Observer { nightMode ->
+            nightMode?.let { delegate.localNightMode = it }
+        })
     }
 }
