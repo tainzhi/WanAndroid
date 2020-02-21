@@ -27,16 +27,16 @@
 
         <ImageView
             android:id="@+id/userImageIv"
+            imagePlaceholder="@{appR.drawable.ic_user}"
+            imageUrl="@{viewModel.user.icon}"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_marginTop="30dp"
+            android:clickable="@{!viewModel.isLogin}"
             android:paddingTop="@dimen/margin_small"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            imagePlaceholder="@{appR.drawable.ic_user}"
-            imageUrl="@{viewModel.user.icon}"
-            android:clickable="@{!viewModel.isLogin}"
             app:srcCompat="@drawable/ic_user"
             tools:src="@drawable/ic_user" />
 
@@ -46,52 +46,46 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="16dp"
+            android:clickable="@{!viewModel.isLogin}"
             android:paddingTop="@dimen/margin_small"
             android:text="@{viewModel.isLogin ? viewModel.user.nickname : @string/login_or_register}"
-            android:clickable="@{!viewModel.isLogin}"
-            tools:text="@string/login_or_register"
             android:textColor="?attr/colorOnPrimary"
             app:layout_constraintEnd_toEndOf="@+id/userImageIv"
             app:layout_constraintHorizontal_bias="0.473"
             app:layout_constraintStart_toStartOf="@+id/userImageIv"
-            app:layout_constraintTop_toBottomOf="@+id/userImageIv" />
+            app:layout_constraintTop_toBottomOf="@+id/userImageIv"
+            tools:text="@string/login_or_register" />
 
-        <TextView
-            android:id="@+id/myCollectionTv"
-            android:layout_width="150dp"
-            android:layout_height="40dp"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/myCollectionBtn"
+            style="@style/NavigationMenuButton"
             android:layout_marginTop="212dp"
-            android:drawableStart="@drawable/ic_baseline_collections_24"
-            android:gravity="center"
-            android:text="@string/my_myCollection"
+            android:text="@string/my_collection"
+            app:icon="@drawable/ic_baseline_favorite_24"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.329"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:visibleUnless="@{viewModel.isLogin}" />
 
-        <TextView
-            android:id="@+id/browseHistoryTv"
-            android:layout_width="150dp"
-            android:layout_height="40dp"
-            android:drawableStart="@drawable/ic_baseline_history_24"
-            android:gravity="center"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/browseHistoryBtn"
+            style="@style/NavigationMenuButton"
             android:text="@string/browse_history"
-            app:layout_constraintEnd_toEndOf="@+id/myCollectionTv"
-            app:layout_constraintStart_toStartOf="@+id/myCollectionTv"
-            app:layout_constraintTop_toBottomOf="@id/myCollectionTv"
+            app:icon="@drawable/ic_baseline_history_24"
+            app:layout_constraintEnd_toEndOf="@+id/myCollectionBtn"
+            app:layout_constraintStart_toStartOf="@+id/myCollectionBtn"
+            app:layout_constraintTop_toBottomOf="@id/myCollectionBtn"
             app:visibleUnless="@{viewModel.isLogin}" />
 
-        <TextView
-            android:id="@+id/otherInfo"
-            android:layout_width="150dp"
-            android:layout_height="40dp"
-            android:drawableStart="@drawable/ic_baseline_info_24"
-            android:gravity="center"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/settingsBtn"
+            style="@style/NavigationMenuButton"
             android:text="@string/settings"
-            app:layout_constraintEnd_toEndOf="@+id/myCollectionTv"
-            app:layout_constraintStart_toStartOf="@+id/myCollectionTv"
-            app:layout_constraintTop_toBottomOf="@id/browseHistoryTv" />
+            app:icon="@drawable/ic_baseline_settings_24"
+            app:layout_constraintEnd_toEndOf="@+id/myCollectionBtn"
+            app:layout_constraintStart_toStartOf="@+id/myCollectionBtn"
+            app:layout_constraintTop_toBottomOf="@id/browseHistoryBtn" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/logoutBtn"

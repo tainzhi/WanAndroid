@@ -1,5 +1,23 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
+	<!--	Settings-->
+	<style name="SettingsButton">
+		<item name="android:layout_marginTop">@dimen/margin_small</item>
+		<item name="android:layout_gravity">start|center_vertical</item>
+		<item name="android:textAppearance">?textAppearanceBody1</item>
+		<item name="android:alpha">?alphaEmphasisMedium</item>
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:focusable">true</item>
+	</style>
+
+	<style name="NavigationMenuButton" parent="Widget.MaterialComponents.Button.TextButton">
+		<item name="iconSize">30dp</item>
+		<item name="android:layout_width">180dp</item>
+		<item name="android:layout_height">40dp</item>
+		<item name="iconPadding">0dp</item>
+	</style>
+
 
 	<!--Components-->
 
@@ -23,17 +41,6 @@
 	<!--Navigation Drawer-->
 	<style name="Widget.MyTheme.NavigationView" parent="Widget.MaterialComponents.NavigationView">
 		<item name="itemTextAppearance">?textAppearanceBody2</item>
-	</style>
-
-	<!--	Settings-->
-	<style name="SettingsButton">
-		<item name="android:layout_marginTop">@dimen/margin_small</item>
-		<item name="android:layout_gravity">start|center_vertical</item>
-		<item name="android:textAppearance">?textAppearanceBody1</item>
-		<item name="android:alpha">?alphaEmphasisMedium</item>
-		<item name="android:layout_width">match_parent</item>
-		<item name="android:layout_height">wrap_content</item>
-		<item name="android:focusable">true</item>
 	</style>
 
 

@@ -24,7 +24,7 @@ class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
     override fun initVM(): ArticleViewModel = getViewModel()
 
     override fun initView() {
-        toolbar.setTitle(R.string.my_collect)
+        toolbar.setTitle(R.string.my_collection)
         toolbar.setNavigationOnClickListener { onBack() }
 
         requireActivity().onBackPressedDispatcher.addCallback { onBack() }

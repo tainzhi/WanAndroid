@@ -85,13 +85,13 @@ class MainActivity : BaseVMActivity<LoginViewModel>(useBinding = true) {
         userImageIv.setOnClickListener {
             navController.navigate(R.id.action_main_to_login)
         }
-        myCollectionTv.setOnClickListener {
+        myCollectionBtn.setOnClickListener {
             navController.navigate(R.id.collectFragment)
         }
-        browseHistoryTv.setOnClickListener {
+        browseHistoryBtn.setOnClickListener {
             navController.navigate(R.id.historyFragment)
         }
-        otherInfo.setOnClickListener {
+        settingsBtn.setOnClickListener {
             navController.navigate(R.id.settingsFragment)
         }
         logoutBtn.setOnClickListener {

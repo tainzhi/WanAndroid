@@ -46,6 +46,7 @@
 
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/mainDrawerLayoutNavigation"
+            style="@style/Widget.MyTheme.NavigationView"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
