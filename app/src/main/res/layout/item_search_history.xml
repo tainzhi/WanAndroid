@@ -5,8 +5,6 @@
 
     <data>
 
-        <import type="java.text.SimpleDateFormat" />
-
         <variable
             name="browseHistory"
             type="com.tainzhi.android.wanandroid.bean.BrowseHistory" />
@@ -15,41 +13,34 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_normal"
-        android:layout_marginTop="@dimen/margin_normal"
-        android:layout_marginEnd="@dimen/margin_normal">
+        tools:ignore="ContentDescription">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="5dp"
-            android:paddingStart="@dimen/margin_normal"
-            android:paddingEnd="@dimen/margin_normal">
+            android:layout_marginStart="@dimen/margin_normal"
+            android:layout_marginTop="@dimen/margin_small"
+            android:layout_marginEnd="@dimen/margin_normal"
+            android:layout_marginBottom="@dimen/margin_small">
 
             <ImageView
                 android:id="@+id/_iv_user"
                 android:layout_width="14dp"
                 android:layout_height="14dp"
-                android:tint="?attr/colorAccent"
                 android:src="@drawable/ic_user"
+                android:tint="?attr/colorAccent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/articleAuthor"
                 style="@style/Article_text"
-                android:layout_marginStart="8dp"
                 android:includeFontPadding="false"
                 android:text="@{browseHistory.article.shareUser}"
                 app:layout_constraintBottom_toBottomOf="@id/_iv_user"
                 app:layout_constraintStart_toEndOf="@id/_iv_user"
                 app:layout_constraintTop_toTopOf="@id/_iv_user"
                 tools:text="tainzhi" />
-            todo
-            ?? 和 ?:有点儿问题, 无法解析出来
-            android:text="@{browseHistory.article.author ?? `分享者：` +
-            browseHistory.article.shareUser}"
 
             <TextView
                 android:id="@+id/articleTag"
@@ -66,8 +57,7 @@
                 android:id="@+id/articleTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginTop="@dimen/spacing_normal"
                 android:textColor="#1c1c1e"
                 android:textSize="16sp"
                 app:htmlText="@{browseHistory.article.title}"
@@ -80,8 +70,8 @@
                 android:id="@+id/_iv_time"
                 android:layout_width="14dp"
                 android:layout_height="14dp"
-                android:layout_marginTop="5dp"
                 android:src="@drawable/ic_baseline_history_24"
+                android:layout_marginTop="@dimen/spacing_normal"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/articleTitle" />
 
@@ -89,7 +79,6 @@
                 android:id="@+id/articleTime"
                 style="@style/Article_text"
                 dateText="@{browseHistory.date}"
-                android:layout_marginStart="8dp"
                 app:layout_constraintBottom_toBottomOf="@+id/_iv_time"
                 app:layout_constraintStart_toEndOf="@+id/_iv_time"
                 app:layout_constraintTop_toTopOf="@id/_iv_time"
