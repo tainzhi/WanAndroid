@@ -10,7 +10,6 @@ import com.tainzhi.android.wanandroid.adapter.BaseBindAdapter
 import com.tainzhi.android.wanandroid.base.ui.BaseVMFragment
 import com.tainzhi.android.wanandroid.bean.SystemParent
 import com.tainzhi.android.wanandroid.ui.MainFragmentDirections
-import com.tainzhi.android.wanandroid.util.dp2px
 import com.tainzhi.android.wanandroid.util.toast
 import com.tainzhi.android.wanandroid.view.SpaceItemDecoration
 import kotlinx.android.synthetic.main.fragment_system.*
@@ -39,7 +38,7 @@ class SystemFragment : BaseVMFragment<SystemViewModel>() {
 
         systemRecyclerView.run {
             layoutManager = LinearLayoutManager(activity)
-            addItemDecoration(SpaceItemDecoration(systemRecyclerView.dp2px(10)))
+            addItemDecoration(SpaceItemDecoration(context.resources.getDimension(R.dimen.margin_small)))
             adapter = systemAdapter
         }
 

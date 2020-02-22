@@ -9,7 +9,6 @@ import com.tainzhi.android.wanandroid.adapter.BaseBindAdapter
 import com.tainzhi.android.wanandroid.base.ui.BaseVMFragment
 import com.tainzhi.android.wanandroid.bean.Article
 import com.tainzhi.android.wanandroid.databinding.FragmentSquareBinding
-import com.tainzhi.android.wanandroid.util.dp2px
 import com.tainzhi.android.wanandroid.util.toast
 import com.tainzhi.android.wanandroid.view.CustomLoadMoreView
 import com.tainzhi.android.wanandroid.view.SpaceItemDecoration
@@ -48,7 +47,7 @@ class SquareFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
         }
         squareRecyclerView.run {
             layoutManager = LinearLayoutManager(activity)
-            addItemDecoration(SpaceItemDecoration(squareRecyclerView.dp2px(10)))
+            addItemDecoration(SpaceItemDecoration(context.resources.getDimension(R.dimen.margin_small)))
             adapter = squareAdapter
         }
     }

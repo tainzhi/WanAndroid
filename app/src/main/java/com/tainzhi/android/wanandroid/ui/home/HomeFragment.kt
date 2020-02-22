@@ -61,7 +61,7 @@ class HomeFragment : BaseVMFragment<ArticleViewModel>() {
     private fun initRecyclerView() {
         homeRecyclerView.run {
             layoutManager = LinearLayoutManager(activity)
-            addItemDecoration(SpaceItemDecoration(homeRecyclerView.dp2px(10)))
+            addItemDecoration(SpaceItemDecoration(context.resources.getDimension(R.dimen.margin_small)))
         }
         homeArticleAdapter.run {
             setOnItemClickListener { _, _, position ->

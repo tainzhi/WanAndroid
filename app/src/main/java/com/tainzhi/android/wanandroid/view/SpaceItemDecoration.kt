@@ -12,18 +12,12 @@ import androidx.recyclerview.widget.RecyclerView
  **/
 
 
-class SpaceItemDecoration(space: Int) : RecyclerView.ItemDecoration() {
-
-    private val mSpace = space
+class SpaceItemDecoration(private val space: Float) : RecyclerView.ItemDecoration() {
 
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
         super.getItemOffsets(outRect, view, parent, state)
         outRect.top = 0
-        outRect.bottom = mSpace
+        outRect.bottom = space.toInt()
     }
 
-//    override fun getItemOffsets(outRect: Rect?, view: View?, parent: RecyclerView?, state: RecyclerView.State?) {
-//        outRect?.top = 0
-//        outRect?.bottom = mSpace
-//    }
 }

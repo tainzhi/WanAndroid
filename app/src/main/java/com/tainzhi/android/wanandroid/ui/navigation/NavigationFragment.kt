@@ -37,7 +37,7 @@ class NavigationFragment : BaseVMFragment<NavigationViewModel>() {
     override fun initView() {
         navigationRecyclerView.run {
             layoutManager = linearLayoutManager
-            addItemDecoration(SpaceItemDecoration(navigationRecyclerView.dp2px(10)))
+            addItemDecoration(SpaceItemDecoration(context.resources.getDimension(R.dimen.margin_small)))
             adapter = navigationAdapter
             addOnScrollListener(object : RecyclerView.OnScrollListener() {
                 override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {

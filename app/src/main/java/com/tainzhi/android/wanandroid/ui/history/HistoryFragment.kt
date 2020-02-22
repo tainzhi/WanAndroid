@@ -13,7 +13,6 @@ import com.tainzhi.android.wanandroid.base.ui.BaseVMFragment
 import com.tainzhi.android.wanandroid.bean.BrowseHistory
 import com.tainzhi.android.wanandroid.databinding.FragmentHistoryBinding
 import com.tainzhi.android.wanandroid.ui.BrowserFragmentDirections
-import com.tainzhi.android.wanandroid.util.dp2px
 import com.tainzhi.android.wanandroid.view.CustomLoadMoreView
 import com.tainzhi.android.wanandroid.view.SpaceItemDecoration
 import kotlinx.android.synthetic.main.common_toolbar.*
@@ -39,7 +38,7 @@ class HistoryFragment : BaseVMFragment<HistoryViewModel>(useBinding = true) {
 
         historyRecyclerView.run {
             layoutManager = LinearLayoutManager(activity)
-            addItemDecoration(SpaceItemDecoration(historyRecyclerView.dp2px(10)))
+            addItemDecoration(SpaceItemDecoration(context.resources.getDimension(R.dimen.margin_small)))
         }
 
         initAdapter()

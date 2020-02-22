@@ -10,7 +10,6 @@ import com.tainzhi.android.wanandroid.R
 import com.tainzhi.android.wanandroid.adapter.HomeArticleAdapter
 import com.tainzhi.android.wanandroid.base.ui.BaseVMFragment
 import com.tainzhi.android.wanandroid.util.Preference
-import com.tainzhi.android.wanandroid.util.dp2px
 import com.tainzhi.android.wanandroid.util.toast
 import com.tainzhi.android.wanandroid.view.CustomLoadMoreView
 import com.tainzhi.android.wanandroid.view.SpaceItemDecoration
@@ -68,7 +67,7 @@ class SystemTypeFragment : BaseVMFragment<ArticleViewModel>() {
         }
         systemTypeRecyclerView.run {
             layoutManager = LinearLayoutManager(context)
-            addItemDecoration(SpaceItemDecoration(systemTypeRecyclerView.dp2px(10)))
+            addItemDecoration(SpaceItemDecoration(context.resources.getDimension(R.dimen.margin_small)))
             adapter = systemTypeAdapter
         }
     }
