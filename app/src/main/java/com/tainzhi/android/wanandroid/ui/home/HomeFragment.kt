@@ -89,7 +89,7 @@ class HomeFragment : BaseVMFragment<ArticleViewModel>() {
                             collect = !collect
                             viewModel.collectArticle(id, collect)
                         }
-                        notifyDataSetChanged()
+                        notifyItemChanged(position + headerLayoutCount)
                     }
                 } else {
                     Navigation.findNavController(homeRecyclerView).navigate(R.id

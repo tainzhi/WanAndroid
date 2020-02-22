@@ -3,7 +3,6 @@ package com.tainzhi.android.wanandroid.ui.navigation
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.tainzhi.android.wanandroid.R
 import com.tainzhi.android.wanandroid.adapter.NavigationAdapter
 import com.tainzhi.android.wanandroid.adapter.VerticalTabAdapter
@@ -39,15 +38,6 @@ class NavigationFragment : BaseVMFragment<NavigationViewModel>() {
             layoutManager = linearLayoutManager
             addItemDecoration(SpaceItemDecoration(context.resources.getDimension(R.dimen.margin_small)))
             adapter = navigationAdapter
-            addOnScrollListener(object : RecyclerView.OnScrollListener() {
-                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                    super.onScrollStateChanged(recyclerView, newState)
-                    if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                        val firstVisibleItem = linearLayoutManager.findFirstVisibleItemPosition()
-                        tabLayout.arrowScroll(firstVisibleItem)
-                    }
-                }
-            })
         }
 
         initTabLayout()

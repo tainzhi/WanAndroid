@@ -26,6 +26,8 @@ class HomeArticleAdapter(layoutResId: Int = R.layout.item_article) : BaseBindAda
         helper.setVisible(R.id.articleStar, showStar)
         if (item.collect) {
             helper.getView<ImageView>(R.id.articleStar).setImageResource(R.drawable.ic_favourite_check_24)
+        } else {
+            helper.getView<ImageView>(R.id.articleStar).setImageResource(R.drawable.ic_baseline_favorite_24)
         }
     }
 }
