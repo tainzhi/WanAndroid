@@ -57,6 +57,7 @@
     <string name="search_history">历史搜索</string>
     <string name="commonly_used_sites">常用网站</string>
     <string name="deleteAll">Clear</string>
+    <string name="no_collection" translatable="false">no collections</string>
     <string name="no_history">没有记录</string>
     <string name="go_to_register">没有账号?那么就去注册一个吧</string>
     <string name="switch_dark_theme">开启暗黑主题</string>

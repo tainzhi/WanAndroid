@@ -1,5 +1,7 @@
 package com.tainzhi.android.wanandroid.ui
 
+import android.view.ViewGroup
+import android.widget.TextView
 import androidx.activity.addCallback
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -44,7 +46,6 @@ class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
 
     private fun initAdapter() {
         articleAdapter.run {
-            //            showStar(false)
             setOnItemClickListener { _, _, position ->
                 viewModel.insertBrowseHistory(articleAdapter.data[position])
 
@@ -58,6 +59,12 @@ class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
             setOnLoadMoreListener({ loadMore() }, collectRecyclerView)
         }
         collectRecyclerView.adapter = articleAdapter
+
+        val emptyView = layoutInflater.inflate(R.layout.view_empty, collectRecyclerView.parent as
+                ViewGroup, false)
+        val emptyTv = emptyView.findViewById<TextView>(R.id.emptyTv)
+        emptyTv.text = getString(R.string.no_collection)
+        articleAdapter.emptyView = emptyView
     }
 
     private val itemChildClickListener = BaseQuickAdapter.OnItemChildClickListener { _, view, position ->
