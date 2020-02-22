@@ -16,7 +16,7 @@
             android:layout_height="?actionBarSize"
             app:tabIndicatorColor="?attr/colorPrimary"
             app:tabMode="scrollable"
-            app:tabTextAppearance="@style/TabTextStyle" />
+            app:tabTextAppearance="?textAppearanceSubtitle2" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

@@ -54,7 +54,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="20dp"
                     android:text="@string/search_history"
-                    style="@style/Search_Tag_Text" />
+                    style="?textAppearanceSubtitle2" />
 
                 <com.zhy.view.flowlayout.TagFlowLayout
                     android:id="@+id/searchHistoryTagLayout"
@@ -71,7 +71,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="20dp"
                     android:text="@string/everyone_searching"
-                    style="@style/Search_Tag_Text" />
+                    style="?textAppearanceSubtitle2" />
 
                 <com.zhy.view.flowlayout.TagFlowLayout
                     android:id="@+id/hotTagLayout"
@@ -88,7 +88,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="20dp"
                     android:text="@string/commonly_used_sites"
-                    style="@style/Search_Tag_Text" />
+                    style="?textAppearanceSubtitle2" />
 
                 <com.zhy.view.flowlayout.TagFlowLayout
                     android:id="@+id/webTagLayout"
