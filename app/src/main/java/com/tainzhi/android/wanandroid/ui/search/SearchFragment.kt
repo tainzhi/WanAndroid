@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.activity.addCallback
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
@@ -38,7 +39,8 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
     override fun getLayoutResId() = R.layout.fragment_search
 
     override fun initView() {
-        initTagLayout()
+
+        requireActivity().onBackPressedDispatcher.addCallback { onBack() }
 
         searchRecyclerView.run {
             layoutManager = LinearLayoutManager(context)
@@ -46,6 +48,7 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
 
         }
         initAdapter()
+        initTagLayout()
         searchRefreshLayout.setOnRefreshListener { refresh() }
 
         searchView.run {
@@ -102,7 +105,7 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
                             collect = !collect
                             viewModel.collectArticle(id, collect)
                         }
-                        notifyDataSetChanged()
+                        notifyItemChanged(position + headerLayoutCount)
                     }
                 } else {
                     Navigation.findNavController(searchRecyclerView).navigate(R.id
@@ -231,5 +234,9 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
 
         })
 
+    }
+
+    private fun onBack() {
+        findNavController().popBackStack(R.id.mainFragment, false)
     }
 }

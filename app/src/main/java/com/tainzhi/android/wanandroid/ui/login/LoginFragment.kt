@@ -21,7 +21,7 @@ class LoginFragment : BaseVMFragment<LoginViewModel>(useBinding = true) {
 
     override fun initView() {
         toolbar.setTitle(R.string.login)
-        toolbar.setNavigationOnClickListener { finish() }
+        toolbar.setNavigationOnClickListener { onBack() }
 
         registerTv.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
@@ -42,7 +42,7 @@ class LoginFragment : BaseVMFragment<LoginViewModel>(useBinding = true) {
                 }
 
                 it.showSuccess?.let {
-                    finish()
+                    onBack()
                 }
 
                 it.showError?.let { err ->
@@ -53,7 +53,7 @@ class LoginFragment : BaseVMFragment<LoginViewModel>(useBinding = true) {
     }
 
 
-    private fun finish() {
+    private fun onBack() {
         dismissKeyboard(toolbar.windowToken)
         findNavController().popBackStack(R.id.mainFragment, false)
     }
