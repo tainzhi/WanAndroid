@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<com.google.android.material.chip.Chip xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/chip_action"
+    style="?textAppearanceBody2"
+    android:layout_marginStart="@dimen/spacing_micro"
+    android:layout_marginEnd="@dimen/spacing_micro"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
-    android:background="@drawable/tag_bg"
-    style="?textAppearanceSubtitle2"
     android:alpha="?alphaEmphasisDisabled"
-    tools:text="HelloWorld">
-
-</TextView>
+    tools:text="HelloWorld" />

@@ -29,7 +29,8 @@
                 android:id="@+id/projectImg"
                 imagePlaceholder="@{R.mipmap.ic_launcher_round}"
                 imageUrl="@{article.envelopePic}"
-                android:layout_width="150dp"
+                android:layout_width="110dp"
+                android:scaleType="fitXY"
                 android:layout_height="200dp"
                 tools:src="@mipmap/ic_launcher" />
 
