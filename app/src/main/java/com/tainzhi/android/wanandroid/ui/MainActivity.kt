@@ -129,4 +129,6 @@ class MainActivity : BaseVMActivity<LoginViewModel>(useBinding = true) {
             nightMode?.let { delegate.localNightMode = it }
         })
     }
+
+
 }

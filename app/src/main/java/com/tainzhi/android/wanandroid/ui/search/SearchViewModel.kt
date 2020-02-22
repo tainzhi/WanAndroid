@@ -67,7 +67,7 @@ class SearchViewModel(private val searchRepository: SearchRepository,
 
     fun insertSearchHistory(key: String) {
         viewModelScope.launch(Dispatchers.Default) {
-            historyDao.insertSearchKey(SearchHistory(0, key))
+            historyDao.insertSearchKey(SearchHistory(key))
         }
     }
 

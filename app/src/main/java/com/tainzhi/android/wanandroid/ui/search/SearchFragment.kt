@@ -237,6 +237,13 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
     }
 
     private fun onBack() {
-        findNavController().popBackStack(R.id.mainFragment, false)
+        // 如果是在搜索结果页面，那么返回，将隐藏搜索结果页面，显示热搜页面
+        if (searchAdapter.data.size != 0) {
+            searchAdapter.setNewData(null)
+            searchRecyclerView.visibility = View.INVISIBLE
+            hotContent.visibility = View.VISIBLE
+        } else {
+            findNavController().popBackStack()
+        }
     }
 }
