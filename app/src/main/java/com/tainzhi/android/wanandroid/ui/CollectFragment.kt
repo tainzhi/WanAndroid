@@ -75,6 +75,7 @@ class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
                         collect = !collect
                         viewModel.collectArticle(originId, collect)
                     }
+                    data.removeAt(position)
                     notifyItemRemoved(position)
                 }
             }
