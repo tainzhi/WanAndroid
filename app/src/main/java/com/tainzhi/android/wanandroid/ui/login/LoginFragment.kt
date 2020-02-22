@@ -42,6 +42,7 @@ class LoginFragment : BaseVMFragment<LoginViewModel>(useBinding = true) {
                 }
 
                 it.showSuccess?.let {
+                    activity?.toast(R.string.login_success)
                     onBack()
                 }
 

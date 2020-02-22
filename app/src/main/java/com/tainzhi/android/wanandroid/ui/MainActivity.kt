@@ -18,6 +18,7 @@ import com.tainzhi.android.wanandroid.base.ui.BaseVMActivity
 import com.tainzhi.android.wanandroid.databinding.ActivityMainBinding
 import com.tainzhi.android.wanandroid.ui.login.LoginViewModel
 import com.tainzhi.android.wanandroid.util.gone
+import com.tainzhi.android.wanandroid.util.toast
 import com.tainzhi.android.wanandroid.util.visible
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.main_drawer_nav_content_layout.*
@@ -27,6 +28,7 @@ class MainActivity : BaseVMActivity<LoginViewModel>(useBinding = true) {
 
     private lateinit var navController: NavController
 
+    private var exitTime = 0L
     private val mainDestionIds = setOf(R.id.mainFragment, R.id.blogFragment, R.id.projectFragment)
 
     override fun getLayoutResId() = R.layout.activity_main
@@ -96,6 +98,7 @@ class MainActivity : BaseVMActivity<LoginViewModel>(useBinding = true) {
         }
         logoutBtn.setOnClickListener {
             viewModel.logout()
+            toast(R.string.logout_success)
             mainDrawerLayout.closeDrawers()
         }
     }
@@ -108,7 +111,12 @@ class MainActivity : BaseVMActivity<LoginViewModel>(useBinding = true) {
         if (mainDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             mainDrawerLayout.closeDrawer(GravityCompat.START)
         } else {
-            super.onBackPressed()
+            if (System.currentTimeMillis() - exitTime > 2000) {
+                exitTime = System.currentTimeMillis()
+                toast(WanApp.current_user.nickname + R.string.back_press_hint)
+            } else {
+                super.onBackPressed()
+            }
         }
     }
 

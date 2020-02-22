@@ -43,6 +43,7 @@ class RegisterFragment : BaseVMFragment<LoginViewModel>(useBinding = true) {
                 }
 
                 it.showSuccess?.let {
+                    activity?.toast(R.string.register_success)
                     onBackToMain()
                 }
 

@@ -61,4 +61,8 @@
     <string name="go_to_register">没有账号?那么就去注册一个吧</string>
     <string name="switch_dark_theme">开启暗黑主题</string>
     <string name="no_collection">没有收藏记录</string>
+    <string name="back_press_hint">再按一次退出程序</string>
+    <string name="login_success">登录成功</string>
+    <string name="register_success">注册成功</string>
+    <string name="logout_success">已经退出</string>
 </resources>
