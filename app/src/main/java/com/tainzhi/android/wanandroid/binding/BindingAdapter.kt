@@ -1,6 +1,5 @@
 package com.tainzhi.android.wanandroid.binding
 
-import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.text.Editable
 import android.text.Html
@@ -13,7 +12,6 @@ import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestListener
-import com.tainzhi.android.wanandroid.R
 import com.tainzhi.android.wanandroid.bean.Article
 import java.text.SimpleDateFormat
 import java.util.*
@@ -46,12 +44,6 @@ fun bindGoneUnless(view: View, gone: Boolean) {
 @BindingAdapter("htmlText")
 fun bindHtmlText(view:TextView,html:String){
     view.text = if (fromN()) Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY) else Html.fromHtml(html)
-}
-
-@BindingAdapter(value = ["articleStar", "collectColor", "unCollectColor"], requireAll = false)
-fun bindArticleStar(imageView:ImageView, collect:Boolean, collectColor: Int, unCollectColor: Int) {
-    imageView.setColorFilter(if (collect) collectColor else unCollectColor, PorterDuff.Mode
-            .ADD)
 }
 
 @BindingAdapter(

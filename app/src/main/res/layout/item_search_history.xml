@@ -31,6 +31,7 @@
                 android:id="@+id/_iv_user"
                 android:layout_width="14dp"
                 android:layout_height="14dp"
+                android:tint="?attr/colorAccent"
                 android:src="@drawable/ic_user"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

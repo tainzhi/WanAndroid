@@ -85,7 +85,6 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_alignParentEnd="true"
-                        android:tint="@{article.collect ? R.color.color_primary : R.color.color_accent}"
                         android:src="@drawable/ic_baseline_favorite_24" />
                 </RelativeLayout>
 

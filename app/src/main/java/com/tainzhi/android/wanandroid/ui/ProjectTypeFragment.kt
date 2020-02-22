@@ -121,7 +121,6 @@ class ProjectTypeFragment : BaseVMFragment<ArticleViewModel>() {
         when (view.id) {
             R.id.articleStar -> {
                 if (isLogin) {
-
                     projectAdapter.run {
                         data[position].run {
                             collect = !collect

@@ -54,12 +54,6 @@
                         articleAuthor="@{article}"
                         tools:text="tainzhi" />
 
-                    <!--<ImageView-->
-                    <!--android:layout_width="14dp"-->
-                    <!--android:layout_height="14dp"-->
-                    <!--android:layout_marginLeft="15dp"-->
-                    <!--android:src="@drawable/home_hot" />-->
-
                     <TextView
                         android:id="@+id/articleTag"
                         style="@style/Article_text"
@@ -105,7 +99,6 @@
                         android:focusable="true"
                         android:paddingTop="4dp"
                         android:paddingBottom="4dp"
-                        android:tint="?attr/colorAccent"
                         android:src="@drawable/ic_baseline_favorite_24" />
                 </LinearLayout>
 

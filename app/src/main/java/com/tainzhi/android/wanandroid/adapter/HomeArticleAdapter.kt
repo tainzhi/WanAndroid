@@ -23,12 +23,9 @@ class HomeArticleAdapter(layoutResId: Int = R.layout.item_article) : BaseBindAda
     override fun convert(helper: BindViewHolder, item: Article) {
         super.convert(helper, item)
         helper.addOnClickListener(R.id.articleStar)
-        if (showStar) {
-            helper.setVisible(R.id.articleStar, true)
-            helper.getView<ImageView>(R.id.articleStar).setColorFilter(
-                    if (item.collect) R.color.color_error else R.color.color_accent)
-        } else {
-            helper.setVisible(R.id.articleStar, false)
+        helper.setVisible(R.id.articleStar, showStar)
+        if (item.collect) {
+            helper.getView<ImageView>(R.id.articleStar).setImageResource(R.drawable.ic_favourite_check_24)
         }
     }
 }
