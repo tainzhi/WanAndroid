@@ -48,9 +48,9 @@ fun bindHtmlText(view:TextView,html:String){
     view.text = if (fromN()) Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY) else Html.fromHtml(html)
 }
 
-@BindingAdapter("articleStar")
-fun bindArticleStar(view:ImageView,collect:Boolean) {
-    view.setColorFilter(if (collect) R.attr.colorPrimary else R.attr.colorAccent, PorterDuff.Mode
+@BindingAdapter(value = ["articleStar", "collectColor", "unCollectColor"], requireAll = false)
+fun bindArticleStar(imageView:ImageView, collect:Boolean, collectColor: Int, unCollectColor: Int) {
+    imageView.setColorFilter(if (collect) collectColor else unCollectColor, PorterDuff.Mode
             .ADD)
 }
 

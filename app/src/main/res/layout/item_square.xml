@@ -50,7 +50,8 @@
                     <ImageView
                         android:layout_width="14dp"
                         android:layout_height="14dp"
-                        android:src="@drawable/home_hot" />
+                        android:tint="?attr/colorAccent"
+                        android:src="@drawable/ic_user" />
 
                     <TextView
                         android:id="@+id/shareAuthor"
@@ -61,8 +62,9 @@
                     <ImageView
                         android:layout_width="14dp"
                         android:layout_height="14dp"
-                        android:layout_marginLeft="20dp"
-                        android:src="@drawable/ic_time" />
+                        android:layout_marginStart="20dp"
+                        android:tint="?attr/colorAccent"
+                        android:src="@drawable/ic_baseline_history_24" />
 
                     <TextView
                         android:id="@+id/shareTime"

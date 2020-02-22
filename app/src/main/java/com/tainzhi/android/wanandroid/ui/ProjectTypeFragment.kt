@@ -127,7 +127,7 @@ class ProjectTypeFragment : BaseVMFragment<ArticleViewModel>() {
                             collect = !collect
                             viewModel.collectArticle(id, collect)
                         }
-                        notifyDataSetChanged()
+                        notifyItemChanged(position)
                     }
                 } else {
                     Navigation.findNavController(projectRecyclerView)

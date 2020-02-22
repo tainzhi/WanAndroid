@@ -38,6 +38,7 @@
     <color name="color_primary_variant">#3700b3</color>
     <color name="color_secondary">#03dac6</color>
     <color name="color_secondary_variant">#018786</color>
+    <color name="color_accent">@android:color/darker_gray</color>
 
     <!--colorBackground appears behind scrollable content and is used for the default window-->
     <!--background. colorSurface is mapped to the surface of components such as cards, sheets-->
@@ -54,5 +55,4 @@
 	<color name="color_on_background">#000000</color>
 	<color name="color_on_surface">#000000</color>
 	<color name="color_on_error">#ffffff</color>
-
 </resources>
