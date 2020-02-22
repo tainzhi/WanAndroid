@@ -2,6 +2,7 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="wrap_content">
 
     <LinearLayout
@@ -18,8 +19,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingStart="10dp"
-            android:textColor="@color/color_on_surface"
-            android:textSize="16sp" />
+            style="?textAppearanceHeadline6"
+            tools:text="@tools:sample/full_names" />
 
         <com.zhy.view.flowlayout.TagFlowLayout
             android:id="@+id/navigationTagLayout"

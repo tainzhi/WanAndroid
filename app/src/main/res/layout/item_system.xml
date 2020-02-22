@@ -30,7 +30,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@{systemParent.name}"
-                android:textSize="16sp"
+                style="?textAppearanceHeadline6"
+                android:alpha="?alphaEmphasisMedium"
                 tools:text="Parent" />
 
             <TextView
@@ -40,8 +41,8 @@
                 android:layout_below="@id/systemParentTV"
                 android:layout_marginTop="5dp"
                 android:text="@{ExtKt.transFormSystemChild(systemParent.children)}"
-                android:textColor="#323232"
-                android:textSize="12sp"
+                style="?textAppearanceSubtitle2"
+                android:alpha="?alphaEmphasisDisabled"
                 tools:text="Child" />
         </RelativeLayout>
 

@@ -5,7 +5,8 @@
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
     android:background="@drawable/tag_bg"
-    android:textColor="@drawable/text_color"
+    style="?textAppearanceSubtitle2"
+    android:alpha="?alphaEmphasisDisabled"
     tools:text="HelloWorld">
 
 </TextView>

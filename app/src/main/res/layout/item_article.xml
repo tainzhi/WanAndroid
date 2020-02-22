@@ -29,8 +29,8 @@
 
             <ImageView
                 android:id="@+id/userImageIv"
-                android:layout_width="14dp"
-                android:layout_height="14dp"
+                android:layout_width="@dimen/icon_small"
+                android:layout_height="@dimen/icon_small"
                 android:src="@drawable/ic_user"
                 android:tint="?attr/colorAccent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -38,10 +38,12 @@
 
             <TextView
                 android:id="@+id/articleAuthor"
-                style="@style/Article_text"
+                style="?textAppearanceSubtitle2"
+                android:layout_marginStart="@dimen/spacing_micro"
                 articleAuthor="@{article}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:alpha="?alphaEmphasisDisabled"
                 app:layout_constraintBottom_toBottomOf="@+id/userImageIv"
                 app:layout_constraintStart_toEndOf="@+id/userImageIv"
                 app:layout_constraintTop_toTopOf="@+id/userImageIv"
@@ -49,10 +51,12 @@
 
             <TextView
                 android:id="@+id/articleTag"
-                style="@style/Article_text"
+                style="?textAppearanceSubtitle2"
+                android:alpha="?alphaEmphasisDisabled"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_normal"
+                android:includeFontPadding="false"
                 android:text="@{article.superChapterName+`/`+article.chapterName}"
                 app:layout_constraintBottom_toBottomOf="@+id/userImageIv"
                 app:layout_constraintStart_toEndOf="@+id/articleAuthor"
@@ -65,8 +69,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_normal"
-                android:textColor="#1c1c1e"
-                android:textSize="16sp"
+                style="?textAppearanceBody1"
+                android:alpha="?alphaEmphasisMedium"
                 app:htmlText="@{article.title}"
                 app:layout_constraintStart_toStartOf="@+id/userImageIv"
                 app:layout_constraintTop_toBottomOf="@+id/userImageIv"
@@ -74,8 +78,8 @@
 
             <ImageView
                 android:id="@+id/imageView2"
-                android:layout_width="14dp"
-                android:layout_height="14dp"
+                android:layout_width="@dimen/icon_small"
+                android:layout_height="@dimen/icon_small"
                 android:layout_marginTop="@dimen/spacing_normal"
                 android:src="@drawable/ic_baseline_history_24"
                 android:tint="?attr/colorAccent"
@@ -84,9 +88,11 @@
 
             <TextView
                 android:id="@+id/articleTime"
-                style="@style/Article_text"
+                style="?textAppearanceSubtitle2"
+                android:layout_marginStart="@dimen/spacing_micro"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:alpha="?alphaEmphasisDisabled"
                 android:text="@{article.niceDate}"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView2"
                 app:layout_constraintStart_toEndOf="@+id/imageView2"

@@ -22,6 +22,8 @@
     <dimen name="margin_normal">16dp</dimen>
     <dimen name="margin_large">24dp</dimen>
 
+    <dimen name="icon_small">18dp</dimen>
+
     <dimen name="component_label_horizontal_margin">@dimen/margin_normal</dimen>
 
     <dimen name="elevation_default_top_app_bar">4dp</dimen>
