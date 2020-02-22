@@ -123,7 +123,7 @@ class LoginViewModel(
         emitUiState(enableLoginButton = isInputValid(userName.get() ?: "") &&
                 isInputValid(passWord.get() ?: "") &&
                 isInputValid(rePassWord.get() ?: "") &&
-                isInputValid(errorHint.get() ?: ""))
+                errorHint.get() == "")
     }
 
     private fun emitUiState(
