@@ -46,7 +46,7 @@ class SquareFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
             setOnLoadMoreListener({ loadMore() }, squareRecyclerView)
         }
         squareRecyclerView.run {
-            layoutManager = LinearLayoutManager(activity)
+            layoutManager = LinearLayoutManager(context)
             addItemDecoration(SpaceItemDecoration(context.resources.getDimension(R.dimen.margin_small)))
             adapter = squareAdapter
         }

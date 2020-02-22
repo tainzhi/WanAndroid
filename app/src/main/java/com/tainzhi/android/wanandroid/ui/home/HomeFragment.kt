@@ -60,7 +60,7 @@ class HomeFragment : BaseVMFragment<ArticleViewModel>() {
 
     private fun initRecyclerView() {
         homeRecyclerView.run {
-            layoutManager = LinearLayoutManager(activity)
+            layoutManager = LinearLayoutManager(context)
             addItemDecoration(SpaceItemDecoration(context.resources.getDimension(R.dimen.margin_small)))
         }
         homeArticleAdapter.run {

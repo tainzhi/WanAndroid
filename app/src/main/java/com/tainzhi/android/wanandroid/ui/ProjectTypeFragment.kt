@@ -71,7 +71,7 @@ class ProjectTypeFragment : BaseVMFragment<ArticleViewModel>() {
             onItemChildClickListener = this@ProjectTypeFragment.onItemChildClickListener
         }
         projectRecyclerView.run {
-            layoutManager = LinearLayoutManager(activity)
+            layoutManager = LinearLayoutManager(context)
             addItemDecoration(SpaceItemDecoration(context.resources.getDimension(R.dimen.margin_small)))
             adapter = projectAdapter
         }

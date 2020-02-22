@@ -28,14 +28,13 @@ class NavigationFragment : BaseVMFragment<NavigationViewModel>() {
             findNavController().navigate(action)
         })
     }
-    private val linearLayoutManager by lazy { LinearLayoutManager(activity) }
     override fun getLayoutResId() = R.layout.fragment_navigation
 
     override fun initVM(): NavigationViewModel = getViewModel()
 
     override fun initView() {
         navigationRecyclerView.run {
-            layoutManager = linearLayoutManager
+            layoutManager = LinearLayoutManager(context)
             addItemDecoration(SpaceItemDecoration(context.resources.getDimension(R.dimen.margin_small)))
             adapter = navigationAdapter
         }
@@ -55,6 +54,8 @@ class NavigationFragment : BaseVMFragment<NavigationViewModel>() {
     }
 
     private fun scrollToPosition(position: Int) {
+        val linearLayoutManager = navigationRecyclerView.layoutManager as
+                LinearLayoutManager
         val firstPotion = linearLayoutManager.findFirstVisibleItemPosition()
         val lastPosition = linearLayoutManager.findLastVisibleItemPosition()
         when {

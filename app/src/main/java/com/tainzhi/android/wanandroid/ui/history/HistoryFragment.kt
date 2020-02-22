@@ -37,7 +37,7 @@ class HistoryFragment : BaseVMFragment<HistoryViewModel>(useBinding = true) {
         (mBinding as FragmentHistoryBinding).viewModel = viewModel
 
         historyRecyclerView.run {
-            layoutManager = LinearLayoutManager(activity)
+            layoutManager = LinearLayoutManager(context)
             addItemDecoration(SpaceItemDecoration(context.resources.getDimension(R.dimen.margin_small)))
         }
 

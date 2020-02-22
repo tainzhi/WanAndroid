@@ -37,7 +37,7 @@ class SystemFragment : BaseVMFragment<SystemViewModel>() {
     private fun initRecyclerView() {
 
         systemRecyclerView.run {
-            layoutManager = LinearLayoutManager(activity)
+            layoutManager = LinearLayoutManager(context)
             addItemDecoration(SpaceItemDecoration(context.resources.getDimension(R.dimen.margin_small)))
             adapter = systemAdapter
         }

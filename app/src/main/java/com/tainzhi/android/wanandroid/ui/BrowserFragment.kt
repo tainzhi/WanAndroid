@@ -89,7 +89,7 @@ class BrowserFragment : BaseFragment() {
         } else {
             webView.destroy()
             (webView.parent as? LinearLayout)?.removeView(webView)
-            findNavController().popBackStack(R.id.mainFragment, false)
+            findNavController().popBackStack()
         }
     }
 }
