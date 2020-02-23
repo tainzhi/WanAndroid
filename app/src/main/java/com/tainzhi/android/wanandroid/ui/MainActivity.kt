@@ -28,7 +28,7 @@ class MainActivity : BaseVMActivity<LoginViewModel>(useBinding = true) {
 
     private lateinit var navController: NavController
 
-    private var exitTime = 0L
+//    private var exitTime = 0L
     private val mainDestionIds = setOf(R.id.mainFragment, R.id.blogFragment, R.id.projectFragment)
 
     override fun getLayoutResId() = R.layout.activity_main
@@ -98,7 +98,7 @@ class MainActivity : BaseVMActivity<LoginViewModel>(useBinding = true) {
         }
         logoutBtn.setOnClickListener {
             viewModel.logout()
-            toast(R.string.logout_success)
+            toast(WanApp.current_user.nickname + R.string.logout_success)
             mainDrawerLayout.closeDrawers()
         }
     }
@@ -111,12 +111,13 @@ class MainActivity : BaseVMActivity<LoginViewModel>(useBinding = true) {
         if (mainDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             mainDrawerLayout.closeDrawer(GravityCompat.START)
         } else {
-            if (System.currentTimeMillis() - exitTime > 2000) {
-                exitTime = System.currentTimeMillis()
-                toast(WanApp.current_user.nickname + R.string.back_press_hint)
-            } else {
-                super.onBackPressed()
-            }
+//            if (System.currentTimeMillis() - exitTime > 2000) {
+//                exitTime = System.currentTimeMillis()
+//                toast(R.string.back_press_hint)
+//            } else {
+//                super.onBackPressed()
+//            }
+            super.onBackPressed()
         }
     }
 

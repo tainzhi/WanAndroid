@@ -13,10 +13,10 @@
 MVVM(Databinding/VideModel/LifeCycle/Navigation/room)+Coroutine+koin实现的[玩Android](https://wanandroid.com/blog/show/2)
 
 # Demo
-
 ## 静态demo
 
 ## 动态demo
+<img src="./demo/demo.gif" alt="项目demo" height="300">
 
 # 特点
 - 使用协程Coroutine

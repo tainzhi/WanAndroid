@@ -242,6 +242,7 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
             searchAdapter.setNewData(null)
             searchRecyclerView.visibility = View.INVISIBLE
             hotContent.visibility = View.VISIBLE
+            requireActivity().onBackPressedDispatcher.addCallback { onBack() }
         } else {
             findNavController().popBackStack()
         }
