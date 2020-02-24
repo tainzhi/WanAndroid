@@ -2,20 +2,18 @@
 
 + [info](#info)
 + [Demo](#demo)
-    * [静态demo](#静态demo)
-    * [动态demo](#动态demo)
 + [特点](#特点)
 + [构建和使用](#构建和使用)
 + [Todo](#todo)
+    * [feat](#feat)
+    * [fix bug](#fix-bug)
++ [致谢](#致谢)
 
 <!-- vim-markdown-toc -->
 # info
 MVVM(Databinding/VideModel/LifeCycle/Navigation/room)+Coroutine+koin实现的[玩Android](https://wanandroid.com/blog/show/2)
 
 # Demo
-## 静态demo
-
-## 动态demo
 <img src="./demo/demo.gif" alt="项目demo" height="300">
 
 # 特点
