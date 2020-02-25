@@ -243,6 +243,8 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
             searchRecyclerView.visibility = View.INVISIBLE
             hotContent.visibility = View.VISIBLE
             requireActivity().onBackPressedDispatcher.addCallback { onBack() }
+            // 更新搜索记录
+            viewModel.getSearchHistory()
         } else {
             findNavController().popBackStack()
         }

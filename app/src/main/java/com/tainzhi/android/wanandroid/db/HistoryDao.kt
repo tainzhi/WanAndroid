@@ -41,6 +41,10 @@ abstract class HistoryDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract fun insertSearchKey(searchHistory: SearchHistory)
 
+    fun insertSearchKey(searchKey: String) {
+        insertSearchKey(SearchHistory(Date(), searchKey))
+    }
+
     @Query("SELECT * FROM SEARCH_HISTORY ORDER BY 1 DESC ")
     abstract suspend fun getSearchHistory(): List<SearchHistory>
 

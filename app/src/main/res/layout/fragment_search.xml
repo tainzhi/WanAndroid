@@ -5,18 +5,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
-
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/searchView"
+    <com.google.android.material.appbar.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
         android:background="?attr/colorPrimary"
-        app:searchHintIcon="@drawable/search"
-        app:searchIcon="@drawable/search"
-        tools:ignore="RtlSymmetry">
+        android:fitsSystemWindows="true">
+    
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchView"
+            style="@style/Widget.AppCompat.SearchView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/margin_normal"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:layout_marginEnd="@dimen/margin_normal"
+            android:layout_marginBottom="@dimen/spacing_normal"
+            android:background="@drawable/bg_search_view"
+            app:closeIcon="@drawable/ic_baseline_clear_24"
+            app:queryHint="@string/search"
+            app:searchHintIcon="@drawable/search"
+            app:searchIcon="@drawable/search"
+            tools:ignore="RtlSymmetry">
+    
+        </androidx.appcompat.widget.SearchView>
 
-    </androidx.appcompat.widget.SearchView>
+    </com.google.android.material.appbar.AppBarLayout>
 
 
     <RelativeLayout
