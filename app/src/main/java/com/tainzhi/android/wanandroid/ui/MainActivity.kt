@@ -98,7 +98,7 @@ class MainActivity : BaseVMActivity<LoginViewModel>(useBinding = true) {
         }
         logoutBtn.setOnClickListener {
             viewModel.logout()
-            toast(WanApp.current_user.nickname + R.string.logout_success)
+            toast(viewModel.user.value?.nickname + R.string.logout_success)
             mainDrawerLayout.closeDrawers()
         }
     }
