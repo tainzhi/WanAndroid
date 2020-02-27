@@ -97,8 +97,8 @@ class MainActivity : BaseVMActivity<LoginViewModel>(useBinding = true) {
             navController.navigate(R.id.settingsFragment)
         }
         logoutBtn.setOnClickListener {
+            toast(viewModel.user.value?.nickname + getString(R.string.logout_success))
             viewModel.logout()
-            toast(viewModel.user.value?.nickname + R.string.logout_success)
             mainDrawerLayout.closeDrawers()
         }
     }
