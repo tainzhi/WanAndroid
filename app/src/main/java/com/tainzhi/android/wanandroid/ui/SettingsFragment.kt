@@ -8,8 +8,6 @@ import android.widget.PopupMenu
 import androidx.activity.addCallback
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.customview.customView
 import com.tainzhi.android.wanandroid.BuildConfig
 import com.tainzhi.android.wanandroid.R
 import com.tainzhi.android.wanandroid.WanApp
@@ -17,6 +15,7 @@ import com.tainzhi.android.wanandroid.base.ui.BaseFragment
 import com.tainzhi.android.wanandroid.util.GITHUB_PAGE
 import com.tainzhi.android.wanandroid.util.ISSUE_URL
 import com.tainzhi.android.wanandroid.util.openBrowser
+import com.tainzhi.android.wanandroid.view.MeDialog
 import de.psdev.licensesdialog.LicensesDialog
 import de.psdev.licensesdialog.licenses.ApacheSoftwareLicense20
 import de.psdev.licensesdialog.model.Notice
@@ -99,11 +98,7 @@ class SettingsFragment : BaseFragment() {
     }
 
     private fun showMe() {
-        context?.let {
-            MaterialDialog(it).show {
-                customView(R.layout.dialog_me)
-            }
-        }
+        MeDialog.newInstance().show(childFragmentManager, getString(R.string.me))
     }
 }
 

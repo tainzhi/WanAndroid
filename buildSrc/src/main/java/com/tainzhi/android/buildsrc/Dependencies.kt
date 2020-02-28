@@ -154,6 +154,7 @@ object Libs {
 
     const val youthBanner = "com.youth.banner:banner:1.4.10"
 
+    // 腾讯X5Webview
     const val tencentTbssdk = "com.tencent.tbs.tbssdk:sdk:43697"
 
     const val vertialTabLayout = "q.rorbin:VerticalTabLayout:1.2.5"
@@ -161,6 +162,4 @@ object Libs {
     const val flowlayout = "com.hyman:flowlayout-lib:1.1.2"
 
     const val licenseDialog = "de.psdev.licensesdialog:licensesdialog:2.1.0"
-
-    const val materialDialog = "com.afollestad.material-dialogs:core:3.1.1"
 }

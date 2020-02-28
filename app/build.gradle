@@ -115,5 +115,4 @@ dependencies {
     implementation Libs.vertialTabLayout
     implementation Libs.flowlayout
     implementation Libs.licenseDialog
-    implementation Libs.materialDialog
 }
