@@ -88,7 +88,10 @@ dependencies {
     // Required for instrumented tests, AndroidJUnitRunner and JUnit Rules
     androidTestImplementation Libs.AndroidX.Test.runner
     androidTestImplementation Libs.AndroidX.Test.rules
-    //
+    //asser
+    androidTestImplementation Libs.AndroidX.Test.Ext.junit
+    androidTestImplementation Libs.AndroidX.Test.Ext.truth
+    androidTestImplementation Libs.Google.truth
 
     implementation Libs.Kotlin.stdlibJdk7
     implementation Libs.AndroidX.appcompat

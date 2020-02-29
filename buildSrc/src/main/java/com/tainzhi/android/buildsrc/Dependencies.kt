@@ -20,6 +20,8 @@ object Libs {
 
         const val openSourceLicensesPlugin = "com.google.android.gms:oss-licenses-plugin:0.10.1"
         const val openSourceLicensesLibrary = "com.google.android.gms:play-services-oss-licenses:17.0.0"
+
+        const val truth = "com.google.truth:truth:0.42"
     }
 
     object Kotlin {
@@ -41,8 +43,9 @@ object Libs {
 
     object AndroidX {
         const val appcompat = "androidx.appcompat:appcompat:1.1.0"
-        const val browser = "androidx.browser:browser:1.0.0"
         const val coreKtx = "androidx.core:core-ktx:1.2.0-rc01"
+        const val archCoreTesting = "androidx.arch.core:core-testing:2.1.0"
+        const val browser = "androidx.browser:browser:1.0.0"
         const val collection = "androidx.collection:collection-ktx:1.1.0"
         const val palette = "androidx.palette:palette:1.0.0"
         const val recyclerview = "androidx.recyclerview:recyclerview:1.1.0"
@@ -68,12 +71,31 @@ object Libs {
 
         object Test {
             private const val version = "1.2.0"
+
             const val core = "androidx.test:core:$version"
             const val runner = "androidx.test:runner:$version"
             const val rules = "androidx.test:rules:$version"
+            // assertions
+            object  Ext {
+                private const val version = "1.0.0"
+                const val junit = "androidx.test.ext:junit:$version"
+                const val truth = "androidx.test.ext:truth:$version"
+            }
 
-            const val espressoCore = "androidx.test.espresso:espresso-core:3.2.0"
-            const val archCoreTesting = "androidx.arch.core:core-testing:2.1.0"
+
+            object Espresso {
+                private const val version = "3.2.0"
+                const val core = "androidx.test.espresso:espresso-core:$version"
+                const val contrib = "androidx.test.espresso:espresso-contrib:$version"
+                const val intents = "androidx.test.espresso:espresso-intents:$version"
+                const val accessibility = "androidx.test.espresso:espresso-accessibility:$version"
+                const val web = "androidx.test.espresso:espresso-web:$version"
+
+                object Idling {
+                    const val concurrent = "androidx.test.espresso.idling:idling-concurrent:$version"
+                    const val resources = "androidx.test.espresso:espresso-idling-resource:$version"
+                }
+            }
         }
 
         object Paging {
