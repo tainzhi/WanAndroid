@@ -50,8 +50,6 @@ android {
         targetSdkVersion 29
         versionCode gitVersionCode()
         versionName gitVersionTag()
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         versionNameSuffix gitVersionTag()
     }
 
@@ -82,6 +80,16 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    //test
+    testImplementation Libs.junit
+    // Core Library
+    androidTestImplementation Libs.AndroidX.Test.core
+    // Required for instrumented tests, AndroidJUnitRunner and JUnit Rules
+    androidTestImplementation Libs.AndroidX.Test.runner
+    androidTestImplementation Libs.AndroidX.Test.rules
+    //
+
     implementation Libs.Kotlin.stdlibJdk7
     implementation Libs.AndroidX.appcompat
     implementation Libs.AndroidX.coreKtx

@@ -51,8 +51,6 @@ object Libs {
         const val viewPager2 = "androidx.viewpager2:viewpager2:1.0.0"
         const val constraintlayout = "androidx.constraintlayout:constraintlayout:2.0.0-beta4"
 
-        const val archCoreTesting = "androidx.arch.core:core-testing:2.1.0"
-
         const val preference = "androidx.preference:preference:1.1.0"
 
         object Navigation {
@@ -75,6 +73,7 @@ object Libs {
             const val rules = "androidx.test:rules:$version"
 
             const val espressoCore = "androidx.test.espresso:espresso-core:3.2.0"
+            const val archCoreTesting = "androidx.arch.core:core-testing:2.1.0"
         }
 
         object Paging {
