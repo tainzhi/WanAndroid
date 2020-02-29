@@ -27,6 +27,8 @@ def gitVersionTag() {
     return version
 }
 
+apply from: '../test_dependencies.gradle'
+
 //生成打包时间
 def releaseTime() {
     return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
@@ -80,18 +82,6 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-    //test
-    testImplementation Libs.junit
-    // Core Library
-    androidTestImplementation Libs.AndroidX.Test.core
-    // Required for instrumented tests, AndroidJUnitRunner and JUnit Rules
-    androidTestImplementation Libs.AndroidX.Test.runner
-    androidTestImplementation Libs.AndroidX.Test.rules
-    //asser
-    androidTestImplementation Libs.AndroidX.Test.Ext.junit
-    androidTestImplementation Libs.AndroidX.Test.Ext.truth
-    androidTestImplementation Libs.Google.truth
 
     implementation Libs.Kotlin.stdlibJdk7
     implementation Libs.AndroidX.appcompat
