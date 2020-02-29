@@ -34,7 +34,7 @@ class SettingsFragment : BaseFragment() {
     }
 
     override fun initData() {
-        changeThemeSwitch.setOnCheckedChangeListener { button, isChecked ->
+        changeThemeSwitch.setOnCheckedChangeListener { _, isChecked ->
             WanApp.preferenceRepository.darkTheme = isChecked
         }
         WanApp.preferenceRepository.isDarkTheme.observe(this, Observer { isDarkTheme ->
