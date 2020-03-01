@@ -52,11 +52,11 @@ class SystemFragment : BaseVMFragment<SystemViewModel>() {
     }
 
     private fun refresh() {
-        viewModel.getSystemTypes()
+        mViewModel.getSystemTypes()
     }
 
     override fun startObserve() {
-        viewModel.run {
+        mViewModel.run {
             uiState.observe(viewLifecycleOwner, Observer {
                 systemRefreshLayout.isRefreshing = it.showLoading
 

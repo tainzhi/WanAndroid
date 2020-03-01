@@ -62,13 +62,13 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
 
     private fun refresh() {
         searchAdapter.setEnableLoadMore(false)
-        viewModel.searchHot(true, key)
+        mViewModel.searchHot(true, key)
     }
 
     private fun initAdapter() {
         searchAdapter.run {
             setOnItemClickListener { _, _, position ->
-                viewModel.insertBrowseHistory(searchAdapter.data[position])
+                mViewModel.insertBrowseHistory(searchAdapter.data[position])
 
                 val action = BrowserFragmentDirections.actionGlobalBrowserFragment(searchAdapter
                         .data[position]
@@ -87,13 +87,13 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
     }
 
     private fun loadMore() {
-        viewModel.searchHot(false, key)
+        mViewModel.searchHot(false, key)
     }
 
     override fun initData() {
-        viewModel.getSearchHistory()
-        viewModel.getHotSearch()
-        viewModel.getWebSites()
+        mViewModel.getSearchHistory()
+        mViewModel.getHotSearch()
+        mViewModel.getWebSites()
     }
 
     private val onItemChildClickListener = BaseQuickAdapter.OnItemChildClickListener { _, view, position ->
@@ -103,7 +103,7 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
                     searchAdapter.run {
                         data[position].run {
                             collect = !collect
-                            viewModel.collectArticle(id, collect)
+                            mViewModel.collectArticle(id, collect)
                         }
                         notifyItemChanged(position + headerLayoutCount)
                     }
@@ -179,8 +179,8 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
 
     private fun startSearch(key: String) {
         searchView.clearFocus()
-        viewModel.insertSearchHistory(key)
-        viewModel.searchHot(true, key)
+        mViewModel.insertSearchHistory(key)
+        mViewModel.searchHot(true, key)
     }
 
     private val onQueryTextListener = object : SearchView.OnQueryTextListener {
@@ -198,7 +198,7 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
 
     override fun startObserve() {
 
-        viewModel.uiState.observe(viewLifecycleOwner, Observer {
+        mViewModel.uiState.observe(viewLifecycleOwner, Observer {
             searchRecyclerView.visibility = if (it.showHot) View.GONE else View.VISIBLE
             hotContent.visibility = if (!it.showHot) View.GONE else View.VISIBLE
             searchRefreshLayout.isRefreshing = it.showLoading
@@ -244,7 +244,7 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
             hotContent.visibility = View.VISIBLE
             requireActivity().onBackPressedDispatcher.addCallback { onBack() }
             // 更新搜索记录
-            viewModel.getSearchHistory()
+            mViewModel.getSearchHistory()
         } else {
             findNavController().popBackStack()
         }

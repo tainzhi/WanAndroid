@@ -19,7 +19,7 @@ abstract class BaseVMFragment<VM: BaseViewModel>(useBinding: Boolean = false): F
 
     private val _useBinding = useBinding
     protected lateinit var mBinding: ViewDataBinding
-    protected lateinit var viewModel: VM
+    protected lateinit var mViewModel: VM
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return if (_useBinding) {
@@ -31,7 +31,7 @@ abstract class BaseVMFragment<VM: BaseViewModel>(useBinding: Boolean = false): F
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewModel = initVM()
+        mViewModel = initVM()
         initView()
         initData()
         startObserve()

@@ -30,7 +30,7 @@ class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
 
         requireActivity().onBackPressedDispatcher.addCallback { onBack() }
 
-        (mBinding as FragmentCollectBinding).viewModel = viewModel
+        (mBinding as FragmentCollectBinding).viewModel = mViewModel
 
         collectRecyclerView.run {
             layoutManager = LinearLayoutManager(activity)
@@ -47,7 +47,7 @@ class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
     private fun initAdapter() {
         articleAdapter.run {
             setOnItemClickListener { _, _, position ->
-                viewModel.insertBrowseHistory(articleAdapter.data[position])
+                mViewModel.insertBrowseHistory(articleAdapter.data[position])
 
                 val action = BrowserFragmentDirections.actionGlobalBrowserFragment(articleAdapter
                         .data[position]
@@ -73,7 +73,7 @@ class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
                 articleAdapter.run {
                     data[position].run {
                         collect = !collect
-                        viewModel.collectArticle(originId, collect)
+                        mViewModel.collectArticle(originId, collect)
                     }
                     data.removeAt(position)
                     notifyItemRemoved(position)
@@ -84,11 +84,11 @@ class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
 
     private fun refresh() {
         articleAdapter.setEnableLoadMore(false)
-        viewModel.getCollectArticleList(true)
+        mViewModel.getCollectArticleList(true)
     }
 
     private fun loadMore() {
-        viewModel.getCollectArticleList(false)
+        mViewModel.getCollectArticleList(false)
     }
 
     private fun onBack() {
@@ -97,7 +97,7 @@ class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
 
     override fun startObserve() {
 
-        viewModel.apply {
+        mViewModel.apply {
 
             uiState.observe(viewLifecycleOwner, Observer {
 

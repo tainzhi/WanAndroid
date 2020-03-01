@@ -53,7 +53,7 @@ class SystemTypeFragment : BaseVMFragment<ArticleViewModel>() {
         systemTypeRefreshLayout.setOnRefreshListener { refresh() }
         systemTypeAdapter.run {
             setOnItemClickListener { _, _, position ->
-                viewModel.insertBrowseHistory(systemTypeAdapter.data[position])
+                mViewModel.insertBrowseHistory(systemTypeAdapter.data[position])
 
                 val action = BrowserFragmentDirections.actionGlobalBrowserFragment(systemTypeAdapter
                         .data[position]
@@ -79,7 +79,7 @@ class SystemTypeFragment : BaseVMFragment<ArticleViewModel>() {
                     systemTypeAdapter.run {
                         data[position].run {
                             collect = !collect
-                            viewModel.collectArticle(id, collect)
+                            mViewModel.collectArticle(id, collect)
                         }
                         notifyDataSetChanged()
                     }
@@ -104,14 +104,14 @@ class SystemTypeFragment : BaseVMFragment<ArticleViewModel>() {
     private fun loadData(isRefresh: Boolean) {
         cid?.let {
             if (this.isBlog)
-                viewModel.getBlogArticleList(isRefresh, it)
+                mViewModel.getBlogArticleList(isRefresh, it)
             else
-                viewModel.getSystemTypeArticleList(isRefresh, it)
+                mViewModel.getSystemTypeArticleList(isRefresh, it)
         }
     }
 
     override fun startObserve() {
-        viewModel.uiState.observe(viewLifecycleOwner, Observer {
+        mViewModel.uiState.observe(viewLifecycleOwner, Observer {
             systemTypeRefreshLayout.isRefreshing = it.showLoading
 
             it.showSuccess?.let { list ->

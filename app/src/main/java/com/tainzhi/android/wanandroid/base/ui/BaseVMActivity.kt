@@ -4,8 +4,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import com.tainzhi.android.wanandroid.base.ui.BaseViewModel
-import com.tencent.smtt.utils.m
 
 /**
  * @author:       tainzhi
@@ -18,11 +16,11 @@ abstract class BaseVMActivity<VM : BaseViewModel>(useBinding: Boolean = false): 
 () {
     private val _useBinding = useBinding
     protected lateinit var mBinding: ViewDataBinding
-    lateinit var viewModel: VM
+    lateinit var mViewModel: VM
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = initVM()
+        mViewModel = initVM()
         startObserve()
 
         if (_useBinding) {

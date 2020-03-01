@@ -97,14 +97,14 @@ class MainActivity : BaseVMActivity<LoginViewModel>(useBinding = true) {
             navController.navigate(R.id.settingsFragment)
         }
         logoutBtn.setOnClickListener {
-            toast(viewModel.user.value?.nickname + getString(R.string.logout_success))
-            viewModel.logout()
+            toast(mViewModel.user.value?.nickname + getString(R.string.logout_success))
+            mViewModel.logout()
             mainDrawerLayout.closeDrawers()
         }
     }
 
     override fun initData() {
-        (mBinding as ActivityMainBinding).include.viewModel = viewModel
+        (mBinding as ActivityMainBinding).include.viewModel = mViewModel
     }
 
     override fun onBackPressed() {

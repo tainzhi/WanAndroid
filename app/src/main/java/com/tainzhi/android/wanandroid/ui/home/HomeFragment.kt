@@ -65,7 +65,7 @@ class HomeFragment : BaseVMFragment<ArticleViewModel>() {
         }
         homeArticleAdapter.run {
             setOnItemClickListener { _, _, position ->
-                viewModel.insertBrowseHistory(homeArticleAdapter.data[position])
+                mViewModel.insertBrowseHistory(homeArticleAdapter.data[position])
                 val action = BrowserFragmentDirections.actionGlobalBrowserFragment(homeArticleAdapter
                         .data[position]
                         .link)
@@ -87,7 +87,7 @@ class HomeFragment : BaseVMFragment<ArticleViewModel>() {
                     homeArticleAdapter.run {
                         data[position].run {
                             collect = !collect
-                            viewModel.collectArticle(id, collect)
+                            mViewModel.collectArticle(id, collect)
                         }
                         notifyItemChanged(position + headerLayoutCount)
                     }
@@ -100,7 +100,7 @@ class HomeFragment : BaseVMFragment<ArticleViewModel>() {
     }
 
     private fun loadMore() {
-        viewModel.getHomeArticleList(false)
+        mViewModel.getHomeArticleList(false)
     }
 
     private fun initBanner() {
@@ -121,11 +121,11 @@ class HomeFragment : BaseVMFragment<ArticleViewModel>() {
 
     fun refresh() {
         homeArticleAdapter.setEnableLoadMore(false)
-        viewModel.getHomeArticleList(true)
+        mViewModel.getHomeArticleList(true)
     }
 
     override fun startObserve() {
-        viewModel.apply {
+        mViewModel.apply {
             mBanners.observe(viewLifecycleOwner, Observer { it ->
                 it?.let { setBanner(it) }
             })

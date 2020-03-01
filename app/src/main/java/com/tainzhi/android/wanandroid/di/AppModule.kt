@@ -44,11 +44,11 @@ val repositoryModule = module {
     single { HomeRepository() }
     single { SquareRepository() }
     single { ProjectRepository() }
-    single { CollectRepository() }
-    single { SystemRepository() }
     single { NavigationRepository() }
-    single { SearchRepository() }
-    single { ShareRepository() }
+    factory { CollectRepository() }
+    factory { SystemRepository() }
+    factory { SearchRepository() }
+    factory { ShareRepository() }
 }
 
 val databaseModule = module {

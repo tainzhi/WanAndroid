@@ -22,7 +22,7 @@ class NavigationFragment : BaseVMFragment<NavigationViewModel>() {
     private val tabAdapter by lazy { VerticalTabAdapter(navigationList.map { it.name }) }
     private val navigationAdapter by lazy {
         NavigationAdapter(click = { article ->
-            viewModel.insertBrowseHistory(article)
+            mViewModel.insertBrowseHistory(article)
 
             val action = BrowserFragmentDirections.actionGlobalBrowserFragment(article.link)
             findNavController().navigate(action)
@@ -67,11 +67,11 @@ class NavigationFragment : BaseVMFragment<NavigationViewModel>() {
     }
 
     override fun initData() {
-        viewModel.getNavigation()
+        mViewModel.getNavigation()
     }
 
     override fun startObserve() {
-        viewModel.run {
+        mViewModel.run {
             navigationList.observe(viewLifecycleOwner, Observer {
                 it?.run { getNavigation(it) }
             })

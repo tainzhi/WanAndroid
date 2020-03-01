@@ -26,8 +26,8 @@ open class ProjectFragment : BaseVMFragment<ProjectViewModel>() {
     override fun initVM(): ProjectViewModel = getViewModel()
 
     override fun initData() {
-        if (isBlog) viewModel.getBlogType()
-        else viewModel.getProjectTypeList()
+        if (isBlog) mViewModel.getBlogType()
+        else mViewModel.getProjectTypeList()
 
     }
 
@@ -57,7 +57,7 @@ open class ProjectFragment : BaseVMFragment<ProjectViewModel>() {
     }
 
     override fun startObserve() {
-        viewModel.systemData.observe(viewLifecycleOwner, Observer {
+        mViewModel.systemData.observe(viewLifecycleOwner, Observer {
             it?.run { getProjectTypeList(it) }
         })
     }

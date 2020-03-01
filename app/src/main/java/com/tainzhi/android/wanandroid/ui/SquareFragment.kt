@@ -24,7 +24,7 @@ class SquareFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
     override fun initVM(): ArticleViewModel = getViewModel()
 
     override fun initView() {
-        (mBinding as FragmentSquareBinding).viewModel = viewModel
+        (mBinding as FragmentSquareBinding).viewModel = mViewModel
         initRecyclerView()
     }
 
@@ -35,7 +35,7 @@ class SquareFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
     private fun initRecyclerView() {
         squareAdapter.run {
             setOnItemClickListener { _, _, position ->
-                viewModel.insertBrowseHistory(squareAdapter.data[position])
+                mViewModel.insertBrowseHistory(squareAdapter.data[position])
 
                 val action = BrowserFragmentDirections.actionGlobalBrowserFragment(squareAdapter
                         .data[position]
@@ -53,16 +53,16 @@ class SquareFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
     }
 
     private fun loadMore() {
-        viewModel.getSquareArticleList(false)
+        mViewModel.getSquareArticleList(false)
     }
 
     private fun refresh() {
         squareAdapter.setEnableLoadMore(false)
-        viewModel.getSquareArticleList(true)
+        mViewModel.getSquareArticleList(true)
     }
 
     override fun startObserve() {
-        viewModel.uiState.observe(viewLifecycleOwner, Observer {
+        mViewModel.uiState.observe(viewLifecycleOwner, Observer {
 
             it.showSuccess?.let { list ->
                 squareAdapter.run {

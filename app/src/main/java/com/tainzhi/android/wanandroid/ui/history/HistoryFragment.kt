@@ -34,7 +34,7 @@ class HistoryFragment : BaseVMFragment<HistoryViewModel>(useBinding = true) {
         initToolbar()
         requireActivity().onBackPressedDispatcher.addCallback { onBack() }
 
-        (mBinding as FragmentHistoryBinding).viewModel = viewModel
+        (mBinding as FragmentHistoryBinding).viewModel = mViewModel
 
         historyRecyclerView.run {
             layoutManager = LinearLayoutManager(context)
@@ -52,7 +52,7 @@ class HistoryFragment : BaseVMFragment<HistoryViewModel>(useBinding = true) {
         toolbar.inflateMenu(R.menu.delete_menu)
         toolbar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.deleteAll -> viewModel.deleteBrowseHistory()
+                R.id.deleteAll -> mViewModel.deleteBrowseHistory()
                 else -> Unit
 
             }
@@ -67,7 +67,7 @@ class HistoryFragment : BaseVMFragment<HistoryViewModel>(useBinding = true) {
     private fun initAdapter() {
         historyAdapter.run {
             setOnItemClickListener { _, _, position ->
-                viewModel.insertBrowseHistory(historyAdapter.data[position].article)
+                mViewModel.insertBrowseHistory(historyAdapter.data[position].article)
 
                 val action = BrowserFragmentDirections.actionGlobalBrowserFragment(historyAdapter
                         .data[position].article.link)
@@ -88,11 +88,11 @@ class HistoryFragment : BaseVMFragment<HistoryViewModel>(useBinding = true) {
 
     private fun refresh() {
         historyAdapter.setEnableLoadMore(false)
-        viewModel.getBrowseHistory(isRefresh = true)
+        mViewModel.getBrowseHistory(isRefresh = true)
     }
 
     private fun loadMore() {
-        viewModel.getBrowseHistory(isRefresh = false)
+        mViewModel.getBrowseHistory(isRefresh = false)
     }
 
     private fun onBack() {
@@ -100,7 +100,7 @@ class HistoryFragment : BaseVMFragment<HistoryViewModel>(useBinding = true) {
     }
 
     override fun startObserve() {
-        viewModel.apply {
+        mViewModel.apply {
             uiState.observe(viewLifecycleOwner, Observer {
                 it.showSuccesses?.let { list ->
                     historyAdapter.run {

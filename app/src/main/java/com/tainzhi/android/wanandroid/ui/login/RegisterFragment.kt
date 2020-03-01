@@ -26,14 +26,14 @@ class RegisterFragment : BaseVMFragment<LoginViewModel>(useBinding = true) {
     }
 
     override fun initData() {
-        (mBinding as FragmentRegisterBinding).viewModel = viewModel
+        (mBinding as FragmentRegisterBinding).viewModel = mViewModel
     }
 
     override fun startObserve() {
-        viewModel.apply {
+        mViewModel.apply {
             registerUser.observe(viewLifecycleOwner, Observer {
                 it?.run {
-                    viewModel.register()
+                    mViewModel.register()
                 }
             })
 

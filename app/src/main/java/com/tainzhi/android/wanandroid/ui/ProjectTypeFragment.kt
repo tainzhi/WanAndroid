@@ -59,7 +59,7 @@ class ProjectTypeFragment : BaseVMFragment<ArticleViewModel>() {
         projectRefreshLayout.setOnRefreshListener { refresh() }
         projectAdapter.run {
             setOnItemClickListener { _, _, position ->
-                viewModel.insertBrowseHistory(projectAdapter.data[position])
+                mViewModel.insertBrowseHistory(projectAdapter.data[position])
 
                 val action = BrowserFragmentDirections.actionGlobalBrowserFragment(projectAdapter
                         .data[position]
@@ -90,17 +90,17 @@ class ProjectTypeFragment : BaseVMFragment<ArticleViewModel>() {
     private fun loadData(isRefresh: Boolean) {
         isLated?.run {
             if (this) {
-                viewModel.getLatestProjectList(isRefresh)
+                mViewModel.getLatestProjectList(isRefresh)
             } else {
                 cid?.let {
-                    viewModel.getProjectTypeDetailList(isRefresh, it)
+                    mViewModel.getProjectTypeDetailList(isRefresh, it)
                 }
             }
         }
     }
 
     override fun startObserve() {
-        viewModel.uiState.observe(viewLifecycleOwner, Observer {
+        mViewModel.uiState.observe(viewLifecycleOwner, Observer {
             projectRefreshLayout.isRefreshing = it.showLoading
 
             it.showSuccess?.let { list ->
@@ -123,7 +123,7 @@ class ProjectTypeFragment : BaseVMFragment<ArticleViewModel>() {
                     projectAdapter.run {
                         data[position].run {
                             collect = !collect
-                            viewModel.collectArticle(id, collect)
+                            mViewModel.collectArticle(id, collect)
                         }
                         notifyItemChanged(position)
                     }

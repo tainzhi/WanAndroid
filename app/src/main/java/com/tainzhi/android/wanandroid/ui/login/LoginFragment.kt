@@ -29,15 +29,15 @@ class LoginFragment : BaseVMFragment<LoginViewModel>(useBinding = true) {
     }
 
     override fun initData() {
-        (mBinding as FragmentLoginBinding).viewModel = viewModel
+        (mBinding as FragmentLoginBinding).viewModel = mViewModel
     }
 
     override fun startObserve() {
-        viewModel.apply {
+        mViewModel.apply {
 
             uiState.observe(viewLifecycleOwner, Observer {
 
-            if (it.showProgress) {
+                if (it.showProgress) {
                     dismissKeyboard(userNameEt.windowToken)
                 }
 
