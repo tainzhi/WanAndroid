@@ -23,9 +23,9 @@ abstract class HistoryDao {
 
     // browse history
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract fun insertBrowseHistory(browseHistory: BrowseHistory)
+    abstract suspend fun insertBrowseHistory(browseHistory: BrowseHistory)
 
-    fun insertBrowseHistory(article: Article) {
+    suspend fun insertBrowseHistory(article: Article) {
         insertBrowseHistory(BrowseHistory(article.hashCode(), Date(), article))
     }
 
@@ -39,9 +39,9 @@ abstract class HistoryDao {
 
     // Search history
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract fun insertSearchKey(searchHistory: SearchHistory)
+    abstract suspend fun insertSearchKey(searchHistory: SearchHistory)
 
-    fun insertSearchKey(searchKey: String) {
+    suspend fun insertSearchKey(searchKey: String) {
         insertSearchKey(SearchHistory(Date(), searchKey))
     }
 
