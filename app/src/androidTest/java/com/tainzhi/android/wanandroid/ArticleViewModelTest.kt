@@ -42,8 +42,8 @@ class ArticleViewModelTest : KoinTest {
     fun homeArticle() {
         GlobalScope.launch {
             viewModel.getHomeArticleList()
-            val uiState = getValue(viewModel.uiState)
-            assertThat(uiState.showSuccess?.size, not(0))
+//            val uiState = getValue(viewModel.uiState)
+            assertThat(viewModel.uiState.value?.showSuccess?.size, not(0))
         }
     }
 
