@@ -3,8 +3,8 @@ package com.tainzhi.android.wanandroid
 import com.tainzhi.android.wanandroid.di.appModule
 import com.tainzhi.android.wanandroid.ui.ArticleViewModel
 import junit.framework.TestCase.assertNotNull
+import org.junit.After
 import org.junit.Test
-import org.koin.core.context.startKoin
 import org.koin.test.KoinTest
 import org.koin.test.check.checkModules
 import org.koin.test.get
@@ -21,9 +21,11 @@ class MyKoinTest : KoinTest {
 
     @Test
     fun `should inject my components`() {
-        startKoin {
-            appModule
-        }
+//        WanApp.kt已经startKoin
+//        startKoin {
+//            androidContext(appContext)
+//            modules(appModule)
+//        }
         articleViewModel = get()
         assertNotNull(articleViewModel)
     }
@@ -33,5 +35,10 @@ class MyKoinTest : KoinTest {
         checkModules {
             appModule
         }
+    }
+
+    @After
+    fun `stop`() {
+//        stopKoin()
     }
 }

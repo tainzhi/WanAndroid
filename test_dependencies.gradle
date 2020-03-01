@@ -9,6 +9,7 @@ dependencies {
 
     androidTestImplementation Libs.Coroutines.test
 
+    androidTestImplementation Libs.AndroidX.archCoreTesting
     // Core Library
     androidTestImplementation Libs.AndroidX.Test.core
     // Required for instrumented tests, AndroidJUnitRunner and JUnit Rules
@@ -18,5 +19,9 @@ dependencies {
     androidTestImplementation Libs.AndroidX.Test.Ext.junit
     androidTestImplementation Libs.AndroidX.Test.Ext.truth
     androidTestImplementation Libs.Google.truth
+
+    androidTestImplementation Libs.AndroidX.Test.Espresso.core
+    androidTestImplementation Libs.AndroidX.Test.Espresso.contrib
+    androidTestImplementation Libs.AndroidX.Test.Espresso.intents
 
 }

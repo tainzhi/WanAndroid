@@ -1,4 +1,4 @@
-package com.tainzhi.android.wanandroid
+package com.tainzhi.android.wanandroid.utils
 
 import androidx.lifecycle.LifecycleCoroutineScope
 import kotlinx.coroutines.CoroutineScope

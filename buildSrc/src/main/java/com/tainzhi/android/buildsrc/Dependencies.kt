@@ -123,6 +123,7 @@ object Libs {
         object Work {
             private const val version = "2.3.0"
             const val runtimeKtx = "androidx.work:work-runtime-ktx:$version"
+            const val test = "androidx.work:work-testing:$version"
         }
     }
 

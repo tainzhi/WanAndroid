@@ -8,6 +8,7 @@ import com.google.common.truth.Truth.assertThat
 import com.tainzhi.android.wanandroid.bean.SearchHistory
 import com.tainzhi.android.wanandroid.db.HistoryDao
 import com.tainzhi.android.wanandroid.db.WanAppDB
+import com.tainzhi.android.wanandroid.utils.TestScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch

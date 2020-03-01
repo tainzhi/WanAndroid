@@ -1,16 +1,17 @@
 package com.tainzhi.android.wanandroid
 
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.tainzhi.android.wanandroid.bean.SearchHistory
 import com.tainzhi.android.wanandroid.db.HistoryDao
 import com.tainzhi.android.wanandroid.db.WanAppDB
-import com.tainzhi.android.wanandroid.di.appModule
-import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.MatcherAssert.assertThat
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import org.koin.core.context.startKoin
+import org.junit.runner.RunWith
 import org.koin.test.KoinTest
 import org.koin.test.get
 import java.io.IOException
@@ -23,13 +24,18 @@ import java.util.*
  * @description:
  **/
 
+@RunWith(AndroidJUnit4::class)
 class KoinRoomTest : KoinTest {
     private lateinit var historyDao: HistoryDao
     private lateinit var db: WanAppDB
 
     @Before
     fun createDb() {
-        startKoin { appModule }
+//        WanApp.kt已经startKoin
+//        startKoin {
+//            androidContext(appContext)
+//            modules(appModule)
+//        }
         historyDao = get()
         db = get()
     }
@@ -38,6 +44,7 @@ class KoinRoomTest : KoinTest {
     @Throws(IOException::class)
     fun closeDb() {
         db.close()
+//        stopKoin()
     }
 
     @Test
@@ -47,7 +54,8 @@ class KoinRoomTest : KoinTest {
         GlobalScope.launch {
 
             historyDao.insertSearchKey(searchHistory)
-            assertEquals(historyDao.getSearchHistory()[0], searchHistory)
+//            assertEquals(historyDao.getSearchHistory()[0], searchHistory)
+            assertThat(historyDao.getSearchHistory()[0], equalTo(searchHistory))
         }
     }
 }

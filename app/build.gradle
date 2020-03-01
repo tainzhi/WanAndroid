@@ -50,6 +50,7 @@ android {
         applicationId "com.tanzhi.android.wanandroid"
         minSdkVersion 21
         targetSdkVersion 29
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         versionCode gitVersionCode()
         versionName gitVersionTag()
         versionNameSuffix gitVersionTag()
