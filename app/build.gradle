@@ -103,7 +103,6 @@ dependencies {
 
     implementation Libs.Coroutines.android
 
-    implementation Libs.Koin.android
     implementation Libs.Koin.scope
     implementation Libs.Koin.viewmodel
 
