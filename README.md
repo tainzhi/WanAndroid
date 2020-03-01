@@ -26,6 +26,7 @@ MVVM(Databinding/VideModel/LifeCycle/Navigation/room)+Coroutine+koin实现的[�
 - Material Desing风格
 - 暗黑主题
 - room实现查询记录/浏览记录
+- unit test with Room/koin
 
 # 构建和使用
 - 1. 需求：必须要Android Studio 4.0 以上
