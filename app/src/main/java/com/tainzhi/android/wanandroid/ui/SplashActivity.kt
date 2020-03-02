@@ -9,11 +9,9 @@ import com.tainzhi.android.wanandroid.binding.fromN
 import com.tainzhi.android.wanandroid.util.startKtxActivity
 import com.tainzhi.android.wanandroid.view.ScrollLinearLayoutManager
 import kotlinx.android.synthetic.main.activity_splash.*
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-@ExperimentalCoroutinesApi
 class SplashActivity : BaseActivity() {
 
     private val imageSrcId = arrayListOf(

@@ -17,7 +17,7 @@ import kotlinx.coroutines.cancel
 
 abstract class BaseActivity(useBinding: Boolean = false) : AppCompatActivity(), CoroutineScope by MainScope() {
     private val _useBinding = useBinding
-    protected lateinit var mBinding: ViewDataBinding
+    open lateinit var mBinding: ViewDataBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
