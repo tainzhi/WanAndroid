@@ -3,7 +3,7 @@ package com.tainzhi.android.wanandroid.ui
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
-import androidx.lifecycle.viewModelScope
+import com.tainzhi.android.wanandroid.CoroutinesDispatcherProvider
 import com.tainzhi.android.wanandroid.base.Result
 import com.tainzhi.android.wanandroid.base.ui.BaseViewModel
 import com.tainzhi.android.wanandroid.bean.Article
@@ -11,8 +11,6 @@ import com.tainzhi.android.wanandroid.bean.ArticleList
 import com.tainzhi.android.wanandroid.bean.Banner
 import com.tainzhi.android.wanandroid.db.HistoryDao
 import com.tainzhi.android.wanandroid.repository.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 /**
@@ -28,7 +26,8 @@ class ArticleViewModel(
         private val projectRepository: ProjectRepository,
         private val collectRepository: CollectRepository,
         private val systemRepository: SystemRepository,
-        private val historyDao: HistoryDao
+        private val historyDao: HistoryDao,
+        private val dispatcher: CoroutinesDispatcherProvider
 ) : BaseViewModel() {
 
     sealed class ArticleType {
@@ -65,7 +64,7 @@ class ArticleViewModel(
 
     fun collectArticle(articleId: Int, boolean: Boolean) {
         launch {
-            withContext(Dispatchers.IO) {
+            withContext(dispatcher.computation) {
                 if (boolean) collectRepository.collectArticle(articleId)
                 else collectRepository.unCollectArticle(articleId)
             }
@@ -74,25 +73,27 @@ class ArticleViewModel(
 
     fun insertBrowseHistory(article: Article) {
         launch() {
-            withContext(Dispatchers.Default) {
+            withContext(dispatcher.computation) {
                 historyDao.insertBrowseHistory(article)
             }
         }
     }
 
     private fun getArticleList(articleType: ArticleType, isRefresh: Boolean = false, cid: Int = 0) {
-        viewModelScope.launch(Dispatchers.Main) {
+        launch {
             emitArticleUiState(true)
             if (isRefresh) currentPage = if (articleType is ArticleType.ProjectDetailList) 1 else 0
 
-            val result = when (articleType) {
-                ArticleType.Home -> homeRepository.getArticleList(currentPage)
-                ArticleType.Square -> squareRepository.getSquareArticleList(currentPage)
-                ArticleType.LatestProject -> projectRepository.getLastedProject(currentPage)
-                ArticleType.ProjectDetailList -> projectRepository.getProjectTypeDetailList(currentPage, cid)
-                ArticleType.Collection -> collectRepository.getCollectArticles(currentPage)
-                ArticleType.SystemType -> systemRepository.getSystemTypeDetail(cid, currentPage)
-                ArticleType.Blog -> systemRepository.getBlogArticle(cid, currentPage)
+            val result = withContext(dispatcher.computation) {
+                when (articleType) {
+                    ArticleType.Home -> homeRepository.getArticleList(currentPage)
+                    ArticleType.Square -> squareRepository.getSquareArticleList(currentPage)
+                    ArticleType.LatestProject -> projectRepository.getLastedProject(currentPage)
+                    ArticleType.ProjectDetailList -> projectRepository.getProjectTypeDetailList(currentPage, cid)
+                    ArticleType.Collection -> collectRepository.getCollectArticles(currentPage)
+                    ArticleType.SystemType -> systemRepository.getSystemTypeDetail(cid, currentPage)
+                    ArticleType.Blog -> systemRepository.getBlogArticle(cid, currentPage)
+                }
             }
 
             if (result is Result.Success) {

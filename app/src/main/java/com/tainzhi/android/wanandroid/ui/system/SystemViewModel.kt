@@ -2,14 +2,12 @@ package com.tainzhi.android.wanandroid.ui.system
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import com.tainzhi.android.wanandroid.CoroutinesDispatcherProvider
 import com.tainzhi.android.wanandroid.base.Result
 import com.tainzhi.android.wanandroid.base.ui.BaseViewModel
 import com.tainzhi.android.wanandroid.bean.SystemParent
 import com.tainzhi.android.wanandroid.repository.CollectRepository
 import com.tainzhi.android.wanandroid.repository.SystemRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 /**
@@ -21,16 +19,17 @@ import kotlinx.coroutines.withContext
 
 class SystemViewModel(
         private val systemRepository: SystemRepository,
-        private val collectRepository: CollectRepository
+        private val collectRepository: CollectRepository,
+        private val dispatcher: CoroutinesDispatcherProvider
 ) : BaseViewModel() {
     private val _systemParentList: MutableLiveData<BaseUiModel<List<SystemParent>>> = MutableLiveData()
     val uiState: LiveData<BaseUiModel<List<SystemParent>>>
         get() = _systemParentList
 
     fun getSystemTypes() {
-        viewModelScope.launch(Dispatchers.Main) {
+        launch {
             emitArticleUiState(showLoading = true)
-            val result = withContext(Dispatchers.IO) { systemRepository.getSystemTypes() }
+            val result = withContext(dispatcher.computation) { systemRepository.getSystemTypes() }
 
             if (result is Result.Success)
                 emitArticleUiState(showLoading = false, showSuccess = result.data)
@@ -41,7 +40,7 @@ class SystemViewModel(
 
     fun collectArticle(articleId: Int, boolean: Boolean) {
         launch {
-            withContext(Dispatchers.IO) {
+            withContext(dispatcher.computation) {
                 if (boolean) collectRepository.collectArticle(articleId)
                 else collectRepository.unCollectArticle(articleId)
             }

@@ -14,7 +14,7 @@ import kotlin.coroutines.CoroutineContext
  * @description:
  **/
 
-interface ManagedCoroutineScope : CoroutineScope {
+interface ManagedCoroutineScope : TestCoroutineScope {
     abstract fun launch(bloack: suspend CoroutineScope.() -> Unit): Job
 }
 

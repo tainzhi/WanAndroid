@@ -4,7 +4,6 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
-import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
 import com.tainzhi.android.wanandroid.CoroutinesDispatcherProvider
 import com.tainzhi.android.wanandroid.base.Result
@@ -13,7 +12,6 @@ import com.tainzhi.android.wanandroid.bean.User
 import com.tainzhi.android.wanandroid.db.HistoryDao
 import com.tainzhi.android.wanandroid.repository.LoginRepository
 import com.tainzhi.android.wanandroid.util.Preference
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 /**
@@ -25,8 +23,8 @@ import kotlinx.coroutines.withContext
 
 class LoginViewModel(
         val repository: LoginRepository,
-        private val provider: CoroutinesDispatcherProvider,
-        private val historyDao: HistoryDao
+        private val historyDao: HistoryDao,
+        private val dispatcher: CoroutinesDispatcherProvider
 ) : BaseViewModel() {
     private var _isLogin by Preference(Preference.IS_LOGIN, false)
     private var _user by Preference(Preference.USER_GSON, "")
@@ -65,39 +63,43 @@ class LoginViewModel(
     }
 
     fun login() {
-        viewModelScope.launch(provider.computation) {
+        launch {
             if (userName.get().isNullOrBlank() || passWord.get().isNullOrBlank()) {
                 emitUiState(enableLoginButton = false)
                 return@launch
             }
 
-            withContext(provider.main) { emitUiState(showProgress = true) }
+            emitUiState(showProgress = true)
 
-            val result = repository.login(userName.get() ?: "", passWord.get() ?: "")
-
-            withContext(provider.main) {
-                checkResult(result, {
-                    emitUiState(showProgress = false, showSuccess = it, enableLoginButton = true)
-                }, {
-                    emitUiState(showProgress = false, showError = it, enableLoginButton = true)
-                })
+            val result = withContext(dispatcher.computation) {
+                repository.login(userName.get() ?: "", passWord
+                        .get() ?: "")
             }
+
+            checkResult(result, {
+                emitUiState(showProgress = false, showSuccess = it, enableLoginButton = true)
+            }, {
+                emitUiState(showProgress = false, showError = it, enableLoginButton = true)
+            })
         }
     }
 
     fun register() {
-        viewModelScope.launch(provider.computation) {
+        launch() {
             if (userName.get().isNullOrBlank() || passWord.get().isNullOrBlank()) return@launch
 
-            withContext(provider.main) { emitUiState(showProgress = true) }
+            emitUiState(showProgress = true)
 
-            val result = repository.register(userName.get() ?: "", passWord.get() ?: "")
-            withContext(provider.main) {
-                if (result is Result.Success) {
-                    emitUiState(showProgress = false, showSuccess = result.data, enableLoginButton = true)
-                } else if (result is Result.Error) {
-                    emitUiState(showProgress = false, showError = result.exception.message, enableLoginButton = true)
-                }
+            val result = withContext(dispatcher.computation) {
+                repository.register(userName.get()
+                        ?: "",
+                        passWord.get()
+                                ?: "")
+            }
+            if (result is Result.Success) {
+                emitUiState(showProgress = false, showSuccess = result.data, enableLoginButton = true)
+            } else if (result is Result.Error) {
+                emitUiState(showProgress = false, showError = result.exception.message, enableLoginButton = true)
             }
         }
     }
@@ -153,9 +155,11 @@ class LoginViewModel(
         mUser.value = null
         Preference.clearAll()
 
-        viewModelScope.launch(provider.computation) {
-            historyDao.deleteAll()
-            repository.logout()
+        launch {
+            withContext(dispatcher.computation) {
+                historyDao.deleteAll()
+                repository.logout()
+            }
         }
     }
 }
