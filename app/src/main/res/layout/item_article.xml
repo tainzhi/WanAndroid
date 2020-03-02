@@ -70,7 +70,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_normal"
                 style="?textAppearanceBody1"
-                android:alpha="?alphaEmphasisMedium"
+                android:alpha="?alphaEmphasisHigh"
                 app:htmlText="@{article.title}"
                 app:layout_constraintStart_toStartOf="@+id/userImageIv"
                 app:layout_constraintTop_toBottomOf="@+id/userImageIv"

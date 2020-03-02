@@ -1,11 +1,13 @@
 package com.tainzhi.android.wanandroid.ui.search
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.activity.addCallback
 import androidx.appcompat.widget.SearchView
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
@@ -49,7 +51,10 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
         }
         initAdapter()
         initTagLayout()
-        searchRefreshLayout.setOnRefreshListener { refresh() }
+        searchRefreshLayout.run {
+            setColorSchemeColors(ContextCompat.getColor(activity as Context, R.color.color_secondary))
+            setOnRefreshListener { refresh() }
+        }
 
         searchView.run {
             //            isIconified = false

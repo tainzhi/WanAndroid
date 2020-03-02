@@ -23,6 +23,7 @@
 
 	<style name="NavigationMenuButton" parent="Widget.MaterialComponents.Button.TextButton">
 		<item name="iconSize">30dp</item>
+		<item name="android:textSize">16sp</item>
 		<item name="android:layout_width">180dp</item>
 		<item name="android:layout_height">40dp</item>
 		<item name="iconPadding">0dp</item>

@@ -1,6 +1,8 @@
 package com.tainzhi.android.wanandroid.ui
 
+import android.content.Context
 import android.os.Bundle
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
@@ -56,7 +58,10 @@ class ProjectTypeFragment : BaseVMFragment<ArticleViewModel>() {
     }
 
     private fun initRecyclerView() {
-        projectRefreshLayout.setOnRefreshListener { refresh() }
+        projectRefreshLayout.run {
+            setColorSchemeColors(ContextCompat.getColor(activity as Context, R.color.color_secondary))
+            setOnRefreshListener { refresh() }
+        }
         projectAdapter.run {
             setOnItemClickListener { _, _, position ->
                 mViewModel.insertBrowseHistory(projectAdapter.data[position])

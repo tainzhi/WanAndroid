@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 style="?textAppearanceBody1"
-                android:alpha="?alphaEmphasisMedium"
+                android:alpha="?alphaEmphasisHigh"
                 app:htmlText="@{article.title}" />
 
             <LinearLayout

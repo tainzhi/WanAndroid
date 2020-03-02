@@ -1,5 +1,7 @@
 package com.tainzhi.android.wanandroid.ui.system
 
+import android.content.Context
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -48,7 +50,10 @@ class SystemFragment : BaseVMFragment<SystemViewModel>() {
             findNavController().navigate(action)
         }
 
-        systemRefreshLayout.setOnRefreshListener { refresh() }
+        systemRefreshLayout.run {
+            setColorSchemeColors(ContextCompat.getColor(activity as Context, R.color.color_secondary))
+            setOnRefreshListener { refresh() }
+        }
     }
 
     private fun refresh() {

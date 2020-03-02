@@ -1,7 +1,9 @@
 package com.tainzhi.android.wanandroid.ui.home
 
+import android.content.Context
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
@@ -50,6 +52,7 @@ class HomeFragment : BaseVMFragment<ArticleViewModel>() {
         initBanner()
 
         homeRefreshLayout.run {
+            setColorSchemeColors(ContextCompat.getColor(activity as Context, R.color.color_secondary))
             setOnRefreshListener { refresh() }
         }
     }

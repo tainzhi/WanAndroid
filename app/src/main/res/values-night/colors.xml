@@ -24,6 +24,7 @@
     <color name="color_primary_variant">#4b01d0</color>
     <color name="color_secondary">#03dac6</color>
     <color name="color_secondary_variant">#018786</color>
+    <color name="color_accent">@color/color_secondary</color>
 
     <color name="color_background">#000000</color>
     <color name="color_surface">#121212</color>
