@@ -11,6 +11,15 @@ object Libs {
 
     const val leakCanary = "com.squareup.leakcanary:leakcanary-android:2.1"
 
+    // Mockito framework
+    object Mockito {
+        private const val version = "3.3.0"
+        // for unit test
+        const val core = "org.mockito:mockito-core:$version"
+        // for android test
+        const val android = "org.mockito:mockito-android:$version"
+    }
+
     object Google {
         const val material = "com.google.android.material:material:1.2.0-alpha03"
         const val firebaseCore = "com.google.firebase:firebase-core:17.2.2"
@@ -72,6 +81,7 @@ object Libs {
         object Test {
             private const val version = "1.2.0"
 
+            // test: Robolectric environment
             const val core = "androidx.test:core:$version"
             const val runner = "androidx.test:runner:$version"
             const val rules = "androidx.test:rules:$version"

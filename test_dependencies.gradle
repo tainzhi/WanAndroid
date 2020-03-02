@@ -4,9 +4,14 @@ dependencies {
 
     // Unit test
     testImplementation Libs.junit
+    testImplementation Libs.Mockito.core
+    testImplementation Libs.Koin.test
+    testImplementation Libs.Coroutines.test
+    testImplementation Libs.AndroidX.Test.core
+
+
     // Koin for Unit test and instrumented test
     androidTestImplementation Libs.Koin.test
-
     androidTestImplementation Libs.Coroutines.test
 
     androidTestImplementation Libs.AndroidX.archCoreTesting
