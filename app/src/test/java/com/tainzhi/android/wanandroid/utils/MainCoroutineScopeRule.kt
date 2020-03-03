@@ -1,5 +1,8 @@
 package com.tainzhi.android.wanandroid.utils
 
+import android.app.Application
+import android.content.Context
+import com.tainzhi.android.wanandroid.testAppModule
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.TestCoroutineDispatcher
@@ -8,6 +11,10 @@ import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
 import org.junit.rules.TestWatcher
 import org.junit.runner.Description
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
+import org.koin.core.context.stopKoin
+import org.mockito.Mock
 
 /**
  * @author:       tainzhi
@@ -19,6 +26,10 @@ import org.junit.runner.Description
 class MainCoroutineScopeRule constructor(val dispatcher: TestCoroutineDispatcher = TestCoroutineDispatcher()) :
         TestWatcher(),
         TestCoroutineScope by TestCoroutineScope(dispatcher) {
+
+    @Mock
+    private lateinit var mockContext: Context
+
     override fun starting(description: Description?) {
         super.starting(description)
         // If your codebase allows the injection of other dispatchers like
@@ -28,11 +39,19 @@ class MainCoroutineScopeRule constructor(val dispatcher: TestCoroutineDispatcher
         // All injected dispatchers in a test should point to a single instance of
         // TestCoroutineDispatcher.
         Dispatchers.setMain(dispatcher)
+
+        mockContext = Application()
+        startKoin {
+            androidContext(mockContext)
+            modules(testAppModule)
+        }
     }
 
     override fun finished(description: Description?) {
         super.finished(description)
         cleanupTestCoroutines()
         Dispatchers.resetMain()
+
+        stopKoin()
     }
 }

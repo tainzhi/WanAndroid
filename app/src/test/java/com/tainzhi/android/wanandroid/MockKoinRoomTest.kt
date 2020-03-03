@@ -1,7 +1,5 @@
 package com.tainzhi.android.wanandroid
 
-import android.app.Application
-import android.content.Context
 import com.tainzhi.android.wanandroid.bean.SearchHistory
 import com.tainzhi.android.wanandroid.db.HistoryDao
 import com.tainzhi.android.wanandroid.utils.MainCoroutineScopeRule
@@ -10,17 +8,11 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.MatcherAssert.assertThat
-import org.junit.After
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.koin.android.ext.koin.androidContext
-import org.koin.core.context.startKoin
-import org.koin.core.context.stopKoin
 import org.koin.test.KoinTest
 import org.koin.test.get
-import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
 import java.util.*
 
@@ -41,23 +33,9 @@ class MockKoinRoomTest : KoinTest {
     @get:Rule
     val mainCoroutineScope = MainCoroutineScopeRule()
 
-    @Mock
-    private lateinit var mockContext: Context
-
-    private lateinit var historyDao: HistoryDao
-
-    @Before
-    fun `setup`() {
-        mockContext = Application()
-        startKoin {
-            androidContext(mockContext)
-            modules(testAppModule)
-        }
-        historyDao = get()
-    }
-
     @Test
     fun writeUserAndReadInList() {
+        val historyDao = get<HistoryDao>()
         val searchHistory = SearchHistory(Date(), "search_key")
 
         // 不能使用runBloackingTest,会报错job not completed错误
@@ -70,10 +48,5 @@ class MockKoinRoomTest : KoinTest {
             val queryResult = historyDao.getSearchHistory()
             assertThat(queryResult[0], equalTo(searchHistory))
         }
-    }
-
-    @After
-    fun `tearDown`() {
-        stopKoin()
     }
 }
