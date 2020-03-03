@@ -32,7 +32,7 @@ class SearchViewModel(private val searchRepository: SearchRepository,
             emitArticleUiState(showLoading = true)
             if (isRefresh) currentPage = 0
 
-            val result = withContext(dispatcher.io) {
+            val result = withContext(dispatcher.computation) {
                 searchRepository.searchHot(currentPage, key)
             }
 
@@ -54,7 +54,7 @@ class SearchViewModel(private val searchRepository: SearchRepository,
 
     fun getSearchHistory() {
         launch {
-            val searchHistory = withContext(dispatcher.io) {
+            val searchHistory = withContext(dispatcher.computation) {
                 historyDao.getSearchHistory()
             }
             emitArticleUiState(showHot = true, showSearchHistory = searchHistory.map { it.searchKey })
@@ -64,7 +64,7 @@ class SearchViewModel(private val searchRepository: SearchRepository,
 
     fun insertSearchHistory(key: String) {
         launch {
-            withContext(dispatcher.io) {
+            withContext(dispatcher.computation) {
                 historyDao.insertSearchKey(key)
             }
         }

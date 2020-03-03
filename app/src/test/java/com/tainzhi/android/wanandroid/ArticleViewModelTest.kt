@@ -2,12 +2,12 @@ package com.tainzhi.android.wanandroid
 
 import android.app.Application
 import android.content.Context
-import com.tainzhi.android.wanandroid.bean.SearchHistory
-import com.tainzhi.android.wanandroid.db.HistoryDao
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.tainzhi.android.wanandroid.ui.ArticleViewModel
 import com.tainzhi.android.wanandroid.utils.MainCoroutineScopeRule
+import com.tainzhi.android.wanandroid.utils.captureValues
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.test.runBlockingTest
 import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.After
@@ -22,29 +22,28 @@ import org.koin.test.KoinTest
 import org.koin.test.get
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
-import java.util.*
 
 /**
  * @author:       tainzhi
  * @mail:         qfq61@qq.com
- * @date:         2020/3/1 下午4:43
+ * @date:         2020/3/1 下午9:16
  * @description:
  **/
 
 @RunWith(MockitoJUnitRunner::class)
 @ExperimentalCoroutinesApi
-class MockKoinRoomTest : KoinTest {
+class ArticleViewModelTest : KoinTest {
 
-//    @get:Rule
-//    val instantTaskExecutorRule = InstantTaskExecutorRule()
-
-    @get:Rule
-    val mainCoroutineScope = MainCoroutineScopeRule()
+    private lateinit var viewModel: ArticleViewModel
 
     @Mock
     private lateinit var mockContext: Context
 
-    private lateinit var historyDao: HistoryDao
+    @get:Rule
+    val instantTaskExecutorRule = InstantTaskExecutorRule()
+
+    @get:Rule
+    val mainCoroutineScope = MainCoroutineScopeRule()
 
     @Before
     fun `setup`() {
@@ -53,22 +52,17 @@ class MockKoinRoomTest : KoinTest {
             androidContext(mockContext)
             modules(testAppModule)
         }
-        historyDao = get()
+
+        viewModel = get()
     }
 
     @Test
-    fun writeUserAndReadInList() {
-        val searchHistory = SearchHistory(Date(), "search_key")
-
-        // 不能使用runBloackingTest,会报错job not completed错误
-        // 因为查询room只是suspend，
-        // 可以替换使用GlobeScope.launch， 或者runBlockingTest{}
-        // 这里使用的是test线程，而不是android amin thread， 不会报错： 不能再main thread 操作数据库
-        GlobalScope.launch {
-            historyDao.insertSearchKey(searchHistory)
-
-            val queryResult = historyDao.getSearchHistory()
-            assertThat(queryResult[0], equalTo(searchHistory))
+    fun homeArticle() {
+        mainCoroutineScope.dispatcher.runBlockingTest {
+            viewModel.getHomeArticleList()
+            viewModel.uiState.captureValues {
+                assertThat(values.size, equalTo(1))
+            }
         }
     }
 

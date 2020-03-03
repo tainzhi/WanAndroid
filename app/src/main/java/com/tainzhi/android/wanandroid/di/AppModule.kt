@@ -39,7 +39,6 @@ val viewModelModule = module {
 
 val repositoryModule = module {
     single { WanClient.getService(WanService::class.java, WanService.BASE_URL) }
-    single { CoroutinesDispatcherProvider() }
     single { LoginRepository(get()) }
     single { HomeRepository() }
     single { SquareRepository() }
@@ -49,6 +48,11 @@ val repositoryModule = module {
     factory { SystemRepository() }
     factory { SearchRepository() }
     factory { ShareRepository() }
+}
+
+// 单独抽出CoroutineModule, 方便test
+val coroutineModule = module {
+    single { CoroutinesDispatcherProvider() }
 }
 
 val databaseModule = module {
@@ -66,5 +70,5 @@ val databaseModule = module {
     single { provideHistoryDao(get()) }
 }
 
-val appModule = listOf(viewModelModule, repositoryModule, databaseModule)
+val appModule = listOf(viewModelModule, repositoryModule, databaseModule, coroutineModule)
 
