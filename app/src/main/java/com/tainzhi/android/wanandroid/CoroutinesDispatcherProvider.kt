@@ -15,7 +15,7 @@ import kotlinx.coroutines.Dispatchers.Main
 
 data class CoroutinesDispatcherProvider(
         val main: CoroutineDispatcher = Dispatchers.Main,
-        val computation: CoroutineDispatcher = Dispatchers.Default,
+        val default: CoroutineDispatcher = Dispatchers.Default,
         val io: CoroutineDispatcher = Dispatchers.IO
 ) {
     constructor(): this(Main, Default, IO)

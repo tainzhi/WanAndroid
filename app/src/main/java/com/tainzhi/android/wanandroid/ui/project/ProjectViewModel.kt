@@ -7,12 +7,11 @@ import com.tainzhi.android.wanandroid.base.Result
 import com.tainzhi.android.wanandroid.base.ui.BaseViewModel
 import com.tainzhi.android.wanandroid.bean.SystemParent
 import com.tainzhi.android.wanandroid.repository.ProjectRepository
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class ProjectViewModel(
         private val repository: ProjectRepository,
-        private val dispatcher: CoroutinesDispatcherProvider
+        private val dispatcherProvider: CoroutinesDispatcherProvider
 ) : BaseViewModel() {
 
     private val _mSystemParentList: MutableLiveData<List<SystemParent>> = MutableLiveData()
@@ -34,7 +33,7 @@ class ProjectViewModel(
     }
 
     private suspend fun emitData(data: List<SystemParent>) {
-        withContext(Dispatchers.Main) {
+        withContext(dispatcherProvider.main) {
             _mSystemParentList.value = data
         }
     }

@@ -11,7 +11,6 @@ import com.tainzhi.android.wanandroid.bean.ArticleList
 import com.tainzhi.android.wanandroid.bean.Banner
 import com.tainzhi.android.wanandroid.db.HistoryDao
 import com.tainzhi.android.wanandroid.repository.*
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 /**
@@ -29,7 +28,7 @@ class ArticleViewModel(
         private val systemRepository: SystemRepository,
         private val historyDao: HistoryDao,
         private val dispatcherProvider: CoroutinesDispatcherProvider
-) : BaseViewModel() {
+) : BaseViewModel(dispatcherProvider.default, dispatcherProvider.io) {
 
     sealed class ArticleType {
         object Home : ArticleType()                 // 首页
@@ -114,7 +113,7 @@ class ArticleViewModel(
             isRefresh: Boolean = false,
             needLogin: Boolean? = null
     ) {
-        withContext(Dispatchers.Main) {
+        withContext(dispatcherProvider.main) {
             val uiModel = ArticleUiModel(showLoading, showError, showSuccess, showEnd, isRefresh, needLogin)
             _uiState.value = uiModel
         }

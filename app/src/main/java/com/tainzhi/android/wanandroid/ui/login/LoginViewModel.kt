@@ -12,7 +12,6 @@ import com.tainzhi.android.wanandroid.bean.User
 import com.tainzhi.android.wanandroid.db.HistoryDao
 import com.tainzhi.android.wanandroid.repository.LoginRepository
 import com.tainzhi.android.wanandroid.util.Preference
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 /**
@@ -25,7 +24,7 @@ import kotlinx.coroutines.withContext
 class LoginViewModel(
         val repository: LoginRepository,
         private val historyDao: HistoryDao,
-        private val dispatcher: CoroutinesDispatcherProvider
+        private val dispatcherProvider: CoroutinesDispatcherProvider
 ) : BaseViewModel() {
     private var _isLogin by Preference(Preference.IS_LOGIN, false)
     private var _user by Preference(Preference.USER_GSON, "")
@@ -134,7 +133,7 @@ class LoginViewModel(
             enableLoginButton: Boolean = false,
             needLogin: Boolean = false
     ) {
-        withContext(Dispatchers.Main) {
+        withContext(dispatcherProvider.main) {
             val uiModel = LoginUiModel(showProgress, showError, showSuccess, enableLoginButton, needLogin)
             // 登录或者注册成功
             if (showSuccess != null) {

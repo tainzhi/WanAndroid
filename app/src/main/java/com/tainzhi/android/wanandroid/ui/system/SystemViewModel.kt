@@ -8,7 +8,6 @@ import com.tainzhi.android.wanandroid.base.ui.BaseViewModel
 import com.tainzhi.android.wanandroid.bean.SystemParent
 import com.tainzhi.android.wanandroid.repository.CollectRepository
 import com.tainzhi.android.wanandroid.repository.SystemRepository
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 /**
@@ -52,7 +51,7 @@ class SystemViewModel(
             showSuccess: List<SystemParent>? = null
     ) {
         val uiModel = BaseUiModel(showLoading, showError, showSuccess)
-        withContext(Dispatchers.Main) {
+        withContext(dispatcherProvider.main) {
             _systemParentList.value = uiModel
         }
     }

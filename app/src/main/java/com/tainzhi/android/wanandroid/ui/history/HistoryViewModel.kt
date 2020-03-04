@@ -7,7 +7,6 @@ import com.tainzhi.android.wanandroid.base.ui.BaseViewModel
 import com.tainzhi.android.wanandroid.bean.Article
 import com.tainzhi.android.wanandroid.bean.BrowseHistory
 import com.tainzhi.android.wanandroid.db.HistoryDao
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class HistoryViewModel(
@@ -56,7 +55,7 @@ class HistoryViewModel(
             showEnd: Boolean = false,
             isDelete: Boolean = false
     ) {
-        withContext(Dispatchers.Main) {
+        withContext(dispatcherProvider.main) {
             val historyUiModel = HistoryUiModel(showLoading, showSuccesses, isRefresh, showEnd, isDelete)
             _uiState.value = historyUiModel
         }

@@ -11,13 +11,12 @@ import com.tainzhi.android.wanandroid.bean.Hot
 import com.tainzhi.android.wanandroid.db.HistoryDao
 import com.tainzhi.android.wanandroid.repository.CollectRepository
 import com.tainzhi.android.wanandroid.repository.SearchRepository
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class SearchViewModel(private val searchRepository: SearchRepository,
                       private val collectRepository: CollectRepository,
                       private val historyDao: HistoryDao,
-                      private val dispatcher: CoroutinesDispatcherProvider
+                      private val dispatcherProvider: CoroutinesDispatcherProvider
 ) : BaseViewModel() {
 
     private var currentPage = 0
@@ -61,40 +60,34 @@ class SearchViewModel(private val searchRepository: SearchRepository,
 
     fun insertSearchHistory(key: String) {
         launch {
-            withContext(dispatcher.computation) {
-                historyDao.insertSearchKey(key)
-            }
+            historyDao.insertSearchKey(key)
         }
     }
 
     fun insertBrowseHistory(article: Article) {
         launch {
-            withContext(dispatcher.main) {
-                historyDao.insertBrowseHistory(article)
-            }
+            historyDao.insertBrowseHistory(article)
         }
     }
 
     fun getWebSites() {
         launch {
-            val result = withContext(dispatcher.computation) { searchRepository.getWebSites() }
+            val result = searchRepository.getWebSites()
             if (result is Result.Success) emitArticleUiState(showHot = true, showWebSites = result.data)
         }
     }
 
     fun getHotSearch() {
         launch {
-            val result = withContext(dispatcher.computation) { searchRepository.getHotSearch() }
+            val result = searchRepository.getHotSearch()
             if (result is Result.Success) emitArticleUiState(showHot = true, showHotSearch = result.data)
         }
     }
 
     fun collectArticle(articleId: Int, boolean: Boolean) {
         launch {
-            withContext(dispatcher.computation) {
-                if (boolean) collectRepository.collectArticle(articleId)
-                else collectRepository.unCollectArticle(articleId)
-            }
+            if (boolean) collectRepository.collectArticle(articleId)
+            else collectRepository.unCollectArticle(articleId)
         }
     }
 
@@ -111,7 +104,7 @@ class SearchViewModel(private val searchRepository: SearchRepository,
     ) {
         val uiModel = SearchUiModel(showHot, showLoading, showError, showSuccess, showEnd,
                 isRefresh, showWebSites, showHotSearch, showSearchHistory)
-        withContext(Dispatchers.Main) {
+        withContext(dispatcherProvider.main) {
             _uiState.value = uiModel
         }
     }

@@ -9,7 +9,6 @@ import com.tainzhi.android.wanandroid.bean.Article
 import com.tainzhi.android.wanandroid.bean.Navigation
 import com.tainzhi.android.wanandroid.db.HistoryDao
 import com.tainzhi.android.wanandroid.repository.NavigationRepository
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class NavigationViewModel(private val navigationRepository: NavigationRepository,
@@ -35,7 +34,7 @@ class NavigationViewModel(private val navigationRepository: NavigationRepository
     }
 
     private suspend fun emitData(data: List<Navigation>) {
-        withContext(Dispatchers.Main) {
+        withContext(dispatcherProvider.main) {
             _navigationList.value = data
         }
     }
