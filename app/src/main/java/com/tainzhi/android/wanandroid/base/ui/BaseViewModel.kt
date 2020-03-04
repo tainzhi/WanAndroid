@@ -12,7 +12,10 @@ import kotlinx.coroutines.*
  * @description:
  **/
 
-open class BaseViewModel : ViewModel() {
+open class BaseViewModel(
+        private val defaultDispatcher: CoroutineDispatcher = Dispatchers.Default,
+        private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
+) : ViewModel() {
     open class BaseUiModel<T>(
             var showLoading: Boolean = false,
             var showError: String? = null,
@@ -21,14 +24,14 @@ open class BaseViewModel : ViewModel() {
             var isRefresh: Boolean = false
     )
 
-    val exception: MutableLiveData<Throwable> = MutableLiveData()
+    private val exception: MutableLiveData<Throwable> = MutableLiveData()
 
     private fun launchOnUI(block: suspend CoroutineScope.() -> Unit) {
-        viewModelScope.launch { block() }
+        viewModelScope.launch(defaultDispatcher) { block() }
     }
 
     suspend fun <T> launchOnIO(block: suspend CoroutineScope.() -> T) {
-        withContext(Dispatchers.IO) {
+        withContext(ioDispatcher) {
             block
         }
     }

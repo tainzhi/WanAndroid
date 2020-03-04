@@ -11,6 +11,7 @@ import com.tainzhi.android.wanandroid.bean.Hot
 import com.tainzhi.android.wanandroid.db.HistoryDao
 import com.tainzhi.android.wanandroid.repository.CollectRepository
 import com.tainzhi.android.wanandroid.repository.SearchRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class SearchViewModel(private val searchRepository: SearchRepository,
@@ -32,9 +33,7 @@ class SearchViewModel(private val searchRepository: SearchRepository,
             emitArticleUiState(showLoading = true)
             if (isRefresh) currentPage = 0
 
-            val result = withContext(dispatcher.computation) {
-                searchRepository.searchHot(currentPage, key)
-            }
+            val result = searchRepository.searchHot(currentPage, key)
 
             if (result is Result.Success) {
                 val articleList = result.data
@@ -54,9 +53,7 @@ class SearchViewModel(private val searchRepository: SearchRepository,
 
     fun getSearchHistory() {
         launch {
-            val searchHistory = withContext(dispatcher.computation) {
-                historyDao.getSearchHistory()
-            }
+            val searchHistory = historyDao.getSearchHistory()
             emitArticleUiState(showHot = true, showSearchHistory = searchHistory.map { it.searchKey })
 
         }
@@ -101,7 +98,7 @@ class SearchViewModel(private val searchRepository: SearchRepository,
         }
     }
 
-    private fun emitArticleUiState(
+    private suspend fun emitArticleUiState(
             showHot: Boolean = false,
             showLoading: Boolean = false,
             showError: String? = null,
@@ -114,7 +111,9 @@ class SearchViewModel(private val searchRepository: SearchRepository,
     ) {
         val uiModel = SearchUiModel(showHot, showLoading, showError, showSuccess, showEnd,
                 isRefresh, showWebSites, showHotSearch, showSearchHistory)
-        _uiState.value = uiModel
+        withContext(Dispatchers.Main) {
+            _uiState.value = uiModel
+        }
     }
 
 

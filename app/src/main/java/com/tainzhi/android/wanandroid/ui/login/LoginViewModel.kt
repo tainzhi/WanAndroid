@@ -12,6 +12,7 @@ import com.tainzhi.android.wanandroid.bean.User
 import com.tainzhi.android.wanandroid.db.HistoryDao
 import com.tainzhi.android.wanandroid.repository.LoginRepository
 import com.tainzhi.android.wanandroid.util.Preference
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 /**
@@ -58,8 +59,10 @@ class LoginViewModel(
     private fun isInputValid(input: String) = input.isNotBlank()
 
     private fun loginDataChanged() {
-        emitUiState(enableLoginButton = isInputValid(userName.get() ?: "") &&
-                isInputValid(passWord.get() ?: ""))
+        launch {
+            emitUiState(enableLoginButton = isInputValid(userName.get() ?: "") &&
+                    isInputValid(passWord.get() ?: ""))
+        }
     }
 
     fun login() {
@@ -71,10 +74,8 @@ class LoginViewModel(
 
             emitUiState(showProgress = true)
 
-            val result = withContext(dispatcher.computation) {
-                repository.login(userName.get() ?: "", passWord
-                        .get() ?: "")
-            }
+            val result = repository.login(userName.get() ?: "", passWord
+                    .get() ?: "")
 
             checkResult(result, {
                 emitUiState(showProgress = false, showSuccess = it, enableLoginButton = true)
@@ -85,17 +86,13 @@ class LoginViewModel(
     }
 
     fun register() {
-        launch() {
+        launch {
             if (userName.get().isNullOrBlank() || passWord.get().isNullOrBlank()) return@launch
 
             emitUiState(showProgress = true)
 
-            val result = withContext(dispatcher.computation) {
-                repository.register(userName.get()
-                        ?: "",
-                        passWord.get()
-                                ?: "")
-            }
+            val result = repository.register(userName.get() ?: "",
+                    passWord.get() ?: "")
             if (result is Result.Success) {
                 emitUiState(showProgress = false, showSuccess = result.data, enableLoginButton = true)
             } else if (result is Result.Error) {
@@ -122,25 +119,29 @@ class LoginViewModel(
             errorHint.set("两次输入密码不一致")
 
         }
-        emitUiState(enableLoginButton = isInputValid(userName.get() ?: "") &&
-                isInputValid(passWord.get() ?: "") &&
-                isInputValid(rePassWord.get() ?: "") &&
-                errorHint.get() == "")
+        launch {
+            emitUiState(enableLoginButton = isInputValid(userName.get() ?: "") &&
+                    isInputValid(passWord.get() ?: "") &&
+                    isInputValid(rePassWord.get() ?: "") &&
+                    errorHint.get() == "")
+        }
     }
 
-    private fun emitUiState(
+    private suspend fun emitUiState(
             showProgress: Boolean = false,
             showError: String? = null,
             showSuccess: User? = null,
             enableLoginButton: Boolean = false,
             needLogin: Boolean = false
     ) {
-        val uiModel = LoginUiModel(showProgress, showError, showSuccess, enableLoginButton, needLogin)
-        // 登录或者注册成功
-        if (showSuccess != null) {
-            updateUser(showSuccess)
+        withContext(Dispatchers.Main) {
+            val uiModel = LoginUiModel(showProgress, showError, showSuccess, enableLoginButton, needLogin)
+            // 登录或者注册成功
+            if (showSuccess != null) {
+                updateUser(showSuccess)
+            }
+            _uiState.value = uiModel
         }
-        _uiState.value = uiModel
     }
 
     private fun getUserFromGson(): User = Gson().fromJson<User>(_user, User::class.java)
@@ -156,10 +157,8 @@ class LoginViewModel(
         Preference.clearAll()
 
         launch {
-            withContext(dispatcher.computation) {
-                historyDao.deleteAll()
-                repository.logout()
-            }
+            historyDao.deleteAll()
+            repository.logout()
         }
     }
 }

@@ -11,6 +11,7 @@ import com.tainzhi.android.wanandroid.bean.ArticleList
 import com.tainzhi.android.wanandroid.bean.Banner
 import com.tainzhi.android.wanandroid.db.HistoryDao
 import com.tainzhi.android.wanandroid.repository.*
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 /**
@@ -27,7 +28,7 @@ class ArticleViewModel(
         private val collectRepository: CollectRepository,
         private val systemRepository: SystemRepository,
         private val historyDao: HistoryDao,
-        private val dispatcher: CoroutinesDispatcherProvider
+        private val dispatcherProvider: CoroutinesDispatcherProvider
 ) : BaseViewModel() {
 
     sealed class ArticleType {
@@ -64,18 +65,14 @@ class ArticleViewModel(
 
     fun collectArticle(articleId: Int, boolean: Boolean) {
         launch {
-            withContext(dispatcher.computation) {
-                if (boolean) collectRepository.collectArticle(articleId)
-                else collectRepository.unCollectArticle(articleId)
-            }
+            if (boolean) collectRepository.collectArticle(articleId)
+            else collectRepository.unCollectArticle(articleId)
         }
     }
 
     fun insertBrowseHistory(article: Article) {
         launch() {
-            withContext(dispatcher.computation) {
-                historyDao.insertBrowseHistory(article)
-            }
+            historyDao.insertBrowseHistory(article)
         }
     }
 
@@ -84,16 +81,14 @@ class ArticleViewModel(
             emitArticleUiState(true)
             if (isRefresh) currentPage = if (articleType is ArticleType.ProjectDetailList) 1 else 0
 
-            val result = withContext(dispatcher.computation) {
-                when (articleType) {
-                    ArticleType.Home -> homeRepository.getArticleList(currentPage)
-                    ArticleType.Square -> squareRepository.getSquareArticleList(currentPage)
-                    ArticleType.LatestProject -> projectRepository.getLastedProject(currentPage)
-                    ArticleType.ProjectDetailList -> projectRepository.getProjectTypeDetailList(currentPage, cid)
-                    ArticleType.Collection -> collectRepository.getCollectArticles(currentPage)
-                    ArticleType.SystemType -> systemRepository.getSystemTypeDetail(cid, currentPage)
-                    ArticleType.Blog -> systemRepository.getBlogArticle(cid, currentPage)
-                }
+            val result = when (articleType) {
+                ArticleType.Home -> homeRepository.getArticleList(currentPage)
+                ArticleType.Square -> squareRepository.getSquareArticleList(currentPage)
+                ArticleType.LatestProject -> projectRepository.getLastedProject(currentPage)
+                ArticleType.ProjectDetailList -> projectRepository.getProjectTypeDetailList(currentPage, cid)
+                ArticleType.Collection -> collectRepository.getCollectArticles(currentPage)
+                ArticleType.SystemType -> systemRepository.getSystemTypeDetail(cid, currentPage)
+                ArticleType.Blog -> systemRepository.getBlogArticle(cid, currentPage)
             }
 
             if (result is Result.Success) {
@@ -111,7 +106,7 @@ class ArticleViewModel(
         }
     }
 
-    private fun emitArticleUiState(
+    private suspend fun emitArticleUiState(
             showLoading: Boolean = false,
             showError: String? = null,
             showSuccess: ArticleList? = null,
@@ -119,8 +114,10 @@ class ArticleViewModel(
             isRefresh: Boolean = false,
             needLogin: Boolean? = null
     ) {
-        val uiModel = ArticleUiModel(showLoading, showError, showSuccess, showEnd, isRefresh, needLogin)
-        _uiState.value = uiModel
+        withContext(Dispatchers.Main) {
+            val uiModel = ArticleUiModel(showLoading, showError, showSuccess, showEnd, isRefresh, needLogin)
+            _uiState.value = uiModel
+        }
     }
 
 

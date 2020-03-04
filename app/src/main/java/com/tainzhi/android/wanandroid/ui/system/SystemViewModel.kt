@@ -8,6 +8,7 @@ import com.tainzhi.android.wanandroid.base.ui.BaseViewModel
 import com.tainzhi.android.wanandroid.bean.SystemParent
 import com.tainzhi.android.wanandroid.repository.CollectRepository
 import com.tainzhi.android.wanandroid.repository.SystemRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 /**
@@ -20,7 +21,7 @@ import kotlinx.coroutines.withContext
 class SystemViewModel(
         private val systemRepository: SystemRepository,
         private val collectRepository: CollectRepository,
-        private val dispatcher: CoroutinesDispatcherProvider
+        private val dispatcherProvider: CoroutinesDispatcherProvider
 ) : BaseViewModel() {
     private val _systemParentList: MutableLiveData<BaseUiModel<List<SystemParent>>> = MutableLiveData()
     val uiState: LiveData<BaseUiModel<List<SystemParent>>>
@@ -29,7 +30,7 @@ class SystemViewModel(
     fun getSystemTypes() {
         launch {
             emitArticleUiState(showLoading = true)
-            val result = withContext(dispatcher.computation) { systemRepository.getSystemTypes() }
+            val result = systemRepository.getSystemTypes()
 
             if (result is Result.Success)
                 emitArticleUiState(showLoading = false, showSuccess = result.data)
@@ -40,19 +41,19 @@ class SystemViewModel(
 
     fun collectArticle(articleId: Int, boolean: Boolean) {
         launch {
-            withContext(dispatcher.computation) {
-                if (boolean) collectRepository.collectArticle(articleId)
-                else collectRepository.unCollectArticle(articleId)
-            }
+            if (boolean) collectRepository.collectArticle(articleId)
+            else collectRepository.unCollectArticle(articleId)
         }
     }
 
-    private fun emitArticleUiState(
+    private suspend fun emitArticleUiState(
             showLoading: Boolean = false,
             showError: String? = null,
             showSuccess: List<SystemParent>? = null
     ) {
         val uiModel = BaseUiModel(showLoading, showError, showSuccess)
-        _systemParentList.value = uiModel
+        withContext(Dispatchers.Main) {
+            _systemParentList.value = uiModel
+        }
     }
 }

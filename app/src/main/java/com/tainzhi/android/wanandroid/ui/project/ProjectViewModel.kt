@@ -7,6 +7,7 @@ import com.tainzhi.android.wanandroid.base.Result
 import com.tainzhi.android.wanandroid.base.ui.BaseViewModel
 import com.tainzhi.android.wanandroid.bean.SystemParent
 import com.tainzhi.android.wanandroid.repository.ProjectRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class ProjectViewModel(
@@ -20,15 +21,21 @@ class ProjectViewModel(
 
     fun getProjectTypeList() {
         launch {
-            val result = withContext(dispatcher.computation) { repository.getProjectTypeList() }
-            if (result is Result.Success) _mSystemParentList.value = result.data
+            val result = repository.getProjectTypeList()
+            if (result is Result.Success) emitData(result.data)
         }
     }
 
     fun getBlogType() {
         launch {
-            val result = withContext(dispatcher.computation) { repository.getBlog() }
-            if (result is Result.Success) _mSystemParentList.value = result.data
+            val result = repository.getBlog()
+            if (result is Result.Success) emitData(result.data)
+        }
+    }
+
+    private suspend fun emitData(data: List<SystemParent>) {
+        withContext(Dispatchers.Main) {
+            _mSystemParentList.value = data
         }
     }
 }
