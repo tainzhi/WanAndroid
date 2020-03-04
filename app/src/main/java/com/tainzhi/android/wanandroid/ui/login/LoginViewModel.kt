@@ -58,10 +58,8 @@ class LoginViewModel(
     private fun isInputValid(input: String) = input.isNotBlank()
 
     private fun loginDataChanged() {
-        launch {
             emitUiState(enableLoginButton = isInputValid(userName.get() ?: "") &&
                     isInputValid(passWord.get() ?: ""))
-        }
     }
 
     fun login() {
@@ -118,36 +116,32 @@ class LoginViewModel(
             errorHint.set("两次输入密码不一致")
 
         }
-        launch {
             emitUiState(enableLoginButton = isInputValid(userName.get() ?: "") &&
                     isInputValid(passWord.get() ?: "") &&
                     isInputValid(rePassWord.get() ?: "") &&
                     errorHint.get() == "")
-        }
     }
 
-    private suspend fun emitUiState(
+    private fun emitUiState(
             showProgress: Boolean = false,
             showError: String? = null,
             showSuccess: User? = null,
             enableLoginButton: Boolean = false,
             needLogin: Boolean = false
     ) {
-        withContext(dispatcherProvider.main) {
             val uiModel = LoginUiModel(showProgress, showError, showSuccess, enableLoginButton, needLogin)
             // 登录或者注册成功
             if (showSuccess != null) {
                 updateUser(showSuccess)
             }
-            _uiState.value = uiModel
-        }
+            _uiState.postValue(uiModel)
     }
 
     private fun getUserFromGson(): User = Gson().fromJson<User>(_user, User::class.java)
 
     private fun updateUser(user: User) {
-        mIsLogin.value = true
-        mUser.value = user
+        mIsLogin.postValue(true)
+        mUser.postValue(user)
     }
 
     fun logout() {

@@ -1,9 +1,5 @@
 package com.tainzhi.android.buildsrc
 
-object Versions {
-    const val ktlint = "0.35.0"
-}
-
 object Libs {
     const val androidGradlePlugin = "com.android.tools.build:gradle:4.0.0-alpha09"
 
@@ -34,9 +30,8 @@ object Libs {
     }
 
     object Kotlin {
-        private const val version = "1.3.61"
-
-        const val stdlibJdk7 = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$version"
+        private const val version = "1.3.70"
+        const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib:$version"
         const val reflect = "org.jetbrains.kotlin:kotlin-reflect:$version"
         const val gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
         const val extensions = "org.jetbrains.kotlin:kotlin-android-extensions:$version"
