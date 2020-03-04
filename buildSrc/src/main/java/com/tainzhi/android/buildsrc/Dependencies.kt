@@ -30,7 +30,10 @@ object Libs {
     }
 
     object Kotlin {
-        private const val version = "1.3.70"
+        private const val koin_failed_version = "1.3.70"
+        private const val version = "1.3.61"
+        const val stdlibJdk7 = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Kotlin.version}"
+        const val stdlibJdk8 = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Kotlin.version}"
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib:$version"
         const val reflect = "org.jetbrains.kotlin:kotlin-reflect:$version"
         const val gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
@@ -39,6 +42,7 @@ object Libs {
 
     object Coroutines {
         private const val version = "1.3.3"
+
         const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version"
         const val rx2 = "org.jetbrains.kotlinx:kotlinx-coroutines-rx2:$version"
         const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version"

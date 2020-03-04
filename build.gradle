@@ -15,8 +15,6 @@ import com.tainzhi.android.buildsrc.Libs
 
     allprojects {
         repositories {
-            maven { url 'https://maven.aliyun.com/repository/public/' }
-            maven { url 'https://maven.aliyun.com/repository/spring/'}
             google()
             jcenter()
             maven { url "https://jitpack.io" }
