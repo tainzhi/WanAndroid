@@ -1,7 +1,10 @@
+<h1 align="center">玩安卓</h1></br>
+    <p align="center">
+    MVVM+Coroutine+koin实现的<a href="https://wanandroid.com/blog/show/2">玩安卓</a>
+    <br>MVVM(Databing/ViewModel/Navigation/room)</br>
 <!-- vim-markdown-toc GFM -->
 
-+ [info](#info)
-+ [Demo](#demo)
++ [ScreenShot](#ScreenShot)
 + [特点](#特点)
 + [构建和使用](#构建和使用)
 + [Todo](#todo)
@@ -10,11 +13,12 @@
 + [致谢](#致谢)
 
 <!-- vim-markdown-toc -->
-# info
-MVVM(Databinding/VideModel/LifeCycle/Navigation/room)+Coroutine+koin实现的[玩Android](https://wanandroid.com/blog/show/2)
-
-# Demo
-<img src="./images/demo.gif" alt="项目demo" height="300">
+# ScreenShot
+<p align="center">
+     <img src="./images/demo.gif" alt="项目demo" width="32%">
+     <img src="./images/demo.gif" alt="项目demo" width="32%">
+     <img src="./images/demo.gif" alt="项目demo" width="32%">
+</p>
 
 # 特点
 - 使用协程Coroutine
