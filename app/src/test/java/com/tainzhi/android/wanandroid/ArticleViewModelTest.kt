@@ -1,5 +1,6 @@
 package com.tainzhi.android.wanandroid
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.tainzhi.android.wanandroid.ui.ArticleViewModel
 import com.tainzhi.android.wanandroid.utils.MainCoroutineScopeRule
 import com.tainzhi.android.wanandroid.utils.captureValues
@@ -26,6 +27,9 @@ import org.mockito.junit.MockitoJUnitRunner
 class ArticleViewModelTest : KoinTest {
 
     private lateinit var viewModel: ArticleViewModel
+
+    @get:Rule
+    val instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @get:Rule
     val mainCoroutineScope = MainCoroutineScopeRule()

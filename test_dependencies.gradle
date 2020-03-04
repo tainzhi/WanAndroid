@@ -9,6 +9,7 @@ dependencies {
     testImplementation Libs.Coroutines.test
     testImplementation Libs.AndroidX.Test.core
     testImplementation Libs.AndroidX.archCoreTesting
+    testImplementation Libs.Google.truth
 
 
     // Koin for Unit test and instrumented test

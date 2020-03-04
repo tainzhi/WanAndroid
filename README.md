@@ -30,6 +30,8 @@ MVVM(Databinding/VideModel/LifeCycle/Navigation/room)+Coroutine+koin实现的[�
 
 # 构建和使用
 - 1. 需求：必须要Android Studio 4.0 以上
+- 2. 构建打包`./gradlew assembleDebug`
+- 2. 执行本地单元测试`./gradlew test`
 
 
 
