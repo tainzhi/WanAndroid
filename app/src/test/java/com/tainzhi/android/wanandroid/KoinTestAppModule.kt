@@ -7,6 +7,7 @@ import com.tainzhi.android.wanandroid.db.WanAppDB
 import com.tainzhi.android.wanandroid.di.repositoryModule
 import com.tainzhi.android.wanandroid.di.viewModelModule
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.test.TestCoroutineDispatcher
 import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
 
@@ -17,10 +18,6 @@ import org.koin.dsl.module
  * @description:
  **/
 
-// 替换掉默认的 Dispatchers.default, 它不能用于测试
-val testCoroutineModule = module {
-    single { CoroutinesDispatcherProvider(Dispatchers.Main, Dispatchers.Main, Dispatchers.Main) }
-}
 
 val testDatabaseModule = module {
     fun provideDatabase(application: Application): WanAppDB {
@@ -39,6 +36,5 @@ val testDatabaseModule = module {
 val testAppModule = listOf(
         viewModelModule,
         repositoryModule,
-        testDatabaseModule,
-        testCoroutineModule)
+        testDatabaseModule)
 

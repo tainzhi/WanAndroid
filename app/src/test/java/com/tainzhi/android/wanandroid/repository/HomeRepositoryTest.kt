@@ -3,7 +3,10 @@ package com.tainzhi.android.wanandroid.repository
 import com.tainzhi.android.wanandroid.base.Result
 import com.tainzhi.android.wanandroid.utils.MainCoroutineScopeRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.runBlockingTest
+import net.bytebuddy.matcher.ElementMatchers.`is`
+import org.hamcrest.CoreMatchers.equalTo
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -31,8 +34,8 @@ class HomeRepositoryTest : KoinTest {
 
     @Test
     fun getBanners() = mainCoroutineScope.runBlockingTest {
-        val repository = get<HomeRepository>()
-        val result = repository.getBanners()
-        assertTrue(result is Result.Success)
+            val repository = get<HomeRepository>()
+            val result = repository.getBanners()
+            assertTrue(result is Result.Success)
     }
 }

@@ -2,6 +2,7 @@ package com.tainzhi.android.wanandroid.utils
 
 import android.app.Application
 import android.content.Context
+import com.tainzhi.android.wanandroid.CoroutinesDispatcherProvider
 import com.tainzhi.android.wanandroid.testAppModule
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -14,6 +15,7 @@ import org.junit.runner.Description
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin
+import org.koin.dsl.module
 import org.mockito.Mock
 
 /**
@@ -41,9 +43,14 @@ class MainCoroutineScopeRule constructor(val dispatcher: TestCoroutineDispatcher
         Dispatchers.setMain(dispatcher)
 
         mockContext = Application()
+
+        // 替换掉默认的 Dispatchers.default, 它不能用于测试
+        val testCoroutineModule = module {
+            single { CoroutinesDispatcherProvider() }
+        }
         startKoin {
             androidContext(mockContext)
-            modules(testAppModule)
+            modules(testAppModule + testCoroutineModule)
         }
     }
 

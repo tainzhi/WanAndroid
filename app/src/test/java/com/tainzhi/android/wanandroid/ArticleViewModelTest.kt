@@ -4,9 +4,12 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.tainzhi.android.wanandroid.ui.ArticleViewModel
 import com.tainzhi.android.wanandroid.utils.MainCoroutineScopeRule
 import com.tainzhi.android.wanandroid.utils.captureValues
+import com.tainzhi.android.wanandroid.utils.getOrAwaitValue
+import com.tainzhi.android.wanandroid.utils.observeForTesting
+import junit.framework.TestCase.assertTrue
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
-import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.CoreMatchers.*
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Rule
 import org.junit.Test
@@ -37,11 +40,23 @@ class ArticleViewModelTest : KoinTest {
     @Test
     fun homeArticle() {
         viewModel = get()
-        mainCoroutineScope.dispatcher.runBlockingTest {
-            viewModel.getHomeArticleList()
-            viewModel.uiState.captureValues {
-                assertThat(values.size, equalTo(1))
-            }
+        viewModel.getHomeArticleList()
+        mainCoroutineScope.runBlockingTest {
+            var uiState = viewModel.uiState.getOrAwaitValue()
+            assertThat(uiState.showLoading, `is`(true))
+            uiState = viewModel.uiState.getOrAwaitValue()
+            assertThat(uiState.showLoading, `is`(false))
+//            var count = 0
+//            viewModel.uiState.captureValues {
+//                assertThat(values.size, equalTo(count))
+//                when (count) {
+//                    1 -> assertThat(values[count-1]?.showLoading, `is`(true))
+//                    2 -> assertThat(values[count-1]?.showSuccess, `is`(nullValue()))
+//                    3 -> assertThat(values[count-1]?.showSuccess, `is`(notNullValue()))
+//                }
+//                assertThat(values.size, equalTo(1))
+//                count++
+//            }
         }
     }
 }
