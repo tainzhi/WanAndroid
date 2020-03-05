@@ -7,13 +7,13 @@ apply plugin: 'kotlin-kapt'
 apply plugin: "androidx.navigation.safeargs.kotlin"
 
 // get git commit counts, ie 73
-def gitVersionCode() {
+static def gitVersionCode() {
     def cmd = 'git rev-list HEAD --first-parent --count'
     cmd.execute().text.trim().toInteger()
 }
 
 // after you run `git tag`, then you can retrieve it
-def gitVersionTag() {
+static def gitVersionTag() {
     def cmd = 'git describe --tags'
     def version = cmd.execute().text.trim()
 
@@ -36,11 +36,29 @@ def releaseTime() {
 
 android {
     signingConfigs {
+        def release_keyStoreFile
+        def release_keyStorePassword
+        def release_keyAlias
+        def release_keyPassword
+        config {
+            //加载资源
+            Properties properties = new Properties()
+            InputStream inputStream = project.rootProject.file('local.properties').newDataInputStream()
+            properties.load( inputStream )
+
+            //读取文件
+            release_keyStoreFile = properties.getProperty('release_keyStoreFile')
+            //读取字段
+            release_keyAlias = properties.getProperty( 'release_keyAlias' )
+            release_keyPassword = properties.getProperty( 'release_keyPassword' )
+            release_keyStorePassword = properties.getProperty( 'release_keyStorePassword' )
+        }
         release {
-            storeFile file(RELEASE_STOREFILE)
-            storePassword RELEASE_STOREPASSWORD
-            keyAlias RELEASE_KEY_ALIAS
-            keyPassword RELEASE_KEY_PASSWORD
+
+            storeFile file( release_keyStoreFile )
+            storePassword release_keyStorePassword
+            keyAlias release_keyAlias
+            keyPassword release_keyPassword
         }
     }
     compileSdkVersion 29
