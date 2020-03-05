@@ -91,11 +91,11 @@
                         tools:text="@tools:sample/date/hhmmss" />
 
                     <ImageView
-                        android:id="@+id/articleStar"
+                        android:id="@+id/collectIv"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_alignParentEnd="true"
-                        android:src="@drawable/ic_baseline_favorite_24" />
+                        android:src="@drawable/ic_collect_unchecked_24" />
                 </RelativeLayout>
 
 

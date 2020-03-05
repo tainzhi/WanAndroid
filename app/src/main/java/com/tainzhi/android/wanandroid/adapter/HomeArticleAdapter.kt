@@ -14,20 +14,20 @@ import com.tainzhi.android.wanandroid.bean.Article
 
 class HomeArticleAdapter(layoutResId: Int = R.layout.item_article) : BaseBindAdapter<Article>
 (layoutResId, BR.article) {
-    private var showStar = true
+    private var showCollect = true
 
-    fun showStar(showStar: Boolean) {
-        this.showStar = showStar
+    fun showCollect(showCollect: Boolean) {
+        this.showCollect = showCollect
     }
 
     override fun convert(helper: BindViewHolder, item: Article) {
         super.convert(helper, item)
-        helper.addOnClickListener(R.id.articleStar)
-        helper.setVisible(R.id.articleStar, showStar)
+        helper.addOnClickListener(R.id.collectIv)
+        helper.setVisible(R.id.collectIv, showCollect)
         if (item.collect) {
-            helper.getView<ImageView>(R.id.articleStar).setImageResource(R.drawable.ic_favourite_check_24)
+            helper.getView<ImageView>(R.id.collectIv).setImageResource(R.drawable.ic_collect_check_24)
         } else {
-            helper.getView<ImageView>(R.id.articleStar).setImageResource(R.drawable.ic_baseline_favorite_24)
+            helper.getView<ImageView>(R.id.collectIv).setImageResource(R.drawable.ic_collect_unchecked_24)
         }
     }
 }

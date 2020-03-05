@@ -100,15 +100,14 @@
                 tools:text="1小时前" />
 
             <ImageView
-                android:id="@+id/articleStar"
+                android:id="@+id/collectIv"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:src="@drawable/ic_baseline_favorite_24"
+                android:src="@drawable/ic_collect_check_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>

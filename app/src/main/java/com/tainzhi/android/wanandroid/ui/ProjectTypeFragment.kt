@@ -123,7 +123,7 @@ class ProjectTypeFragment : BaseVMFragment<ArticleViewModel>() {
 
     private val onItemChildClickListener = BaseQuickAdapter.OnItemChildClickListener { _, view, position ->
         when (view.id) {
-            R.id.articleStar -> {
+            R.id.collectIv -> {
                 if (isLogin) {
                     projectAdapter.run {
                         data[position].run {

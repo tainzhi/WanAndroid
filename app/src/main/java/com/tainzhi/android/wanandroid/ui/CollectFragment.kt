@@ -73,7 +73,7 @@ class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
 
     private val itemChildClickListener = BaseQuickAdapter.OnItemChildClickListener { _, view, position ->
         when (view.id) {
-            R.id.articleStar -> {
+            R.id.collectIv -> {
                 articleAdapter.run {
                     data[position].run {
                         collect = !collect

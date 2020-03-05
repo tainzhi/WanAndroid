@@ -62,7 +62,7 @@
             style="@style/NavigationMenuButton"
             android:layout_marginTop="212dp"
             android:text="@string/my_collection"
-            app:icon="@drawable/ic_baseline_favorite_24"
+            app:icon="@drawable/ic_collect_unchecked_24"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.329"
             app:layout_constraintStart_toStartOf="parent"

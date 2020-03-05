@@ -103,7 +103,7 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
 
     private val onItemChildClickListener = BaseQuickAdapter.OnItemChildClickListener { _, view, position ->
         when (view.id) {
-            R.id.articleStar -> {
+            R.id.collectIv -> {
                 if (isLogin) {
                     searchAdapter.run {
                         data[position].run {

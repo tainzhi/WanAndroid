@@ -2,7 +2,6 @@ package com.tainzhi.android.wanandroid.ui
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.liveData
 import com.tainzhi.android.wanandroid.CoroutinesDispatcherProvider
 import com.tainzhi.android.wanandroid.base.Result
 import com.tainzhi.android.wanandroid.base.ui.BaseViewModel
@@ -44,13 +43,18 @@ class ArticleViewModel(
     val uiState: LiveData<ArticleUiModel>
         get() = _uiState
 
+    private val _banners = MutableLiveData<List<Banner>>()
+    val banners: LiveData<List<Banner>> = _banners
+
     private var currentPage = 0
 
 
-    val mBanners: LiveData<List<Banner>> = liveData {
-        kotlin.runCatching {
-            val data = homeRepository.getBanners()
-            if (data is Result.Success) emit(data.data)
+    fun getBanners() {
+        launch {
+            val result = homeRepository.getBanners()
+            if (result is Result.Success) {
+                _banners.postValue(result.data)
+            }
         }
     }
 
