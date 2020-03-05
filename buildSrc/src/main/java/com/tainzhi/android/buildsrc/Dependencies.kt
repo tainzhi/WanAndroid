@@ -30,8 +30,7 @@ object Libs {
     }
 
     object Kotlin {
-        private const val koin_failed_version = "1.3.70"
-        private const val version = "1.3.61"
+        private const val version = "1.3.70"
         const val stdlibJdk7 = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Kotlin.version}"
         const val stdlibJdk8 = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Kotlin.version}"
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib:$version"
@@ -166,7 +165,7 @@ object Libs {
     }
 
     object Koin {
-        private const val version = "2.1.1"
+        private const val version = "2.1.3"
         // Koin AndroidX Scope features
         const val scope = "org.koin:koin-androidx-scope:$version"
         // Koin AndroidX Architecture ViewModel

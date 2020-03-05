@@ -14,7 +14,7 @@
 
 <!-- vim-markdown-toc -->
 # ScreenShot
-<p align="center">
+<p align="left">
      <img src="./images/demo1.gif" alt="项目demo" width="32%">
      <img src="./images/demo2.gif" alt="项目demo" width="32%">
 </p>
