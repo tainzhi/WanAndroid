@@ -84,11 +84,14 @@ object Libs {
             const val core = "androidx.test:core:$version"
             const val runner = "androidx.test:runner:$version"
             const val rules = "androidx.test:rules:$version"
-            // assertions
-            object  Ext {
-                private const val version = "1.0.0"
+
+            object Ext {
+                private const val version = "1.1.0"
                 const val junit = "androidx.test.ext:junit:$version"
+
+                // assertions
                 const val truth = "androidx.test.ext:truth:$version"
+                const val junitKtx = "androidx.test.ext:junit-ktx:$version"
             }
 
 
