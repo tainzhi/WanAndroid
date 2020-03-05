@@ -124,12 +124,13 @@ class HomeFragment : BaseVMFragment<ArticleViewModel>() {
 
     fun refresh() {
         homeArticleAdapter.setEnableLoadMore(false)
+        mViewModel.getBanners()
         mViewModel.getHomeArticleList(true)
     }
 
     override fun startObserve() {
         mViewModel.apply {
-            mBanners.observe(viewLifecycleOwner, Observer { it ->
+            banners.observe(viewLifecycleOwner, Observer { it ->
                 it?.let { setBanner(it) }
             })
 
