@@ -91,7 +91,8 @@
                 android:layout_marginTop="@dimen/margin_large"
                 android:alpha="?alphaEmphasisMedium"
                 android:text="@{BuildConfig.VERSION_NAME}"
-                android:textAppearance="?textAppearanceOverline"
+                android:layout_gravity="center_horizontal"
+                android:textAppearance="?textAppearanceHeadline6"
                 tools:text="V 1.0.0" />
 
         </LinearLayout>
