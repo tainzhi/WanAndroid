@@ -1,8 +1,10 @@
 package com.tainzhi.android.wanandroid.ui.history
 
+import android.content.Context
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.activity.addCallback
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -33,6 +35,7 @@ class HistoryFragment : BaseVMFragment<HistoryViewModel>(useBinding = true) {
 
         initToolbar()
         requireActivity().onBackPressedDispatcher.addCallback { onBack() }
+        historySwipeRefreshLayout.setColorSchemeColors(ContextCompat.getColor(activity as Context, R.color.color_secondary))
 
         (mBinding as FragmentHistoryBinding).viewModel = mViewModel
 

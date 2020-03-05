@@ -1,8 +1,10 @@
 package com.tainzhi.android.wanandroid.ui
 
+import android.content.Context
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.activity.addCallback
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,6 +29,8 @@ class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
     override fun initView() {
         toolbar.setTitle(R.string.my_collection)
         toolbar.setNavigationOnClickListener { onBack() }
+
+        collectRefreshLayout.setColorSchemeColors(ContextCompat.getColor(activity as Context, R.color.color_secondary))
 
         requireActivity().onBackPressedDispatcher.addCallback { onBack() }
 
