@@ -19,6 +19,9 @@
      <img src="./images/demo2.gif" alt="项目demo" width="32%">
 </p>
 
+# APK下载
+[WanAndroid](
+
 # 特点
 - 使用协程Coroutine
 - 基于Navigation，1个Activity多个Fragment(except SplashActivity)
@@ -36,7 +39,11 @@
 - 2. 构建打包`./gradlew assembleDebug`
 - 2. 执行本地单元测试`./gradlew test`
 
-
+# 其他：把最新版apk推送到gitee仓库，便于更新
+```
+./gradlew assembleRelease
+mv app/build/outputs/apk/release/*.apk ./apk
+```
 
 # Todo
 ## feat
