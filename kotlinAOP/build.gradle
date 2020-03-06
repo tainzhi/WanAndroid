@@ -3,6 +3,7 @@ import com.tainzhi.android.buildsrc.Libs
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'android-aspectjx'
 
 android {
     compileSdkVersion Libs.Version.compileSdkVersion
@@ -28,5 +29,6 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation Libs.Kotlin.stdlib
     implementation Libs.AndroidX.coreKtx
+    implementation Libs.AspectJX.aspectJrt
 
 }

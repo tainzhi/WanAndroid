@@ -193,6 +193,12 @@ object Libs {
         const val compiler = "com.github.bumptech.glide:compiler:4.10.0"
     }
 
+
+    object AspectJX {
+        const val hujiangAspectJX = "com.hujiang.aspectjx:gradle-android-plugin-aspectjx:2.0.8"
+        const val aspectJrt = "org.aspectj:aspectjrt:1.9.2"
+    }
+
     const val timber = "com.jakewharton.timber:timber:4.7.1"
 
     const val cookietar = "com.github.franmontiel:PersistentCookieJar:v1.0.1"
