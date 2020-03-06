@@ -5,7 +5,6 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: "androidx.navigation.safeargs.kotlin"
-apply plugin: 'android-aspectjx'
 
 // get git commit counts, ie 73
 static def gitVersionCode() {
@@ -97,18 +96,10 @@ android {
         jvmTarget = JavaVersion.VERSION_1_8
     }
 
-    aspectjx {
-        exclude 'org.jetbrains.kotlin'
-        exclude 'org.jetbrains.kotlinx'
-        exclude 'com.android.support'
-    }
-
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-    implementation project(":kotlinAOP")
 
     implementation Libs.Kotlin.stdlib
     implementation Libs.AndroidX.appcompat

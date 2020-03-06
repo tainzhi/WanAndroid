@@ -1,3 +1,2 @@
-include ':kotlinAOP'
 include ':app'
 rootProject.name = "WanAndroid"
