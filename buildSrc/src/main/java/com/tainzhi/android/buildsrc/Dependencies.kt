@@ -1,11 +1,20 @@
 package com.tainzhi.android.buildsrc
 
 object Libs {
+
     const val androidGradlePlugin = "com.android.tools.build:gradle:4.0.0-alpha09"
 
     const val junit = "junit:junit:4.13"
 
     const val leakCanary = "com.squareup.leakcanary:leakcanary-android:2.1"
+
+    object Version {
+        const val minSdkVersion = 21
+        const val targetSdkVersion = 29
+        const val compileSdkVersion = 29
+        const val buildToolsVersion =  "29.0.2"
+
+    }
 
     // Mockito framework
     object Mockito {
