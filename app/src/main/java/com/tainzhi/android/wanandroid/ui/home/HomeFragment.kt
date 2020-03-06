@@ -10,6 +10,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
+import com.tainzhi.android.kotlinaop.annotation.SingleClick
 import com.tainzhi.android.wanandroid.R
 import com.tainzhi.android.wanandroid.adapter.HomeArticleAdapter
 import com.tainzhi.android.wanandroid.base.ui.BaseVMFragment
@@ -67,7 +68,7 @@ class HomeFragment : BaseVMFragment<ArticleViewModel>() {
             addItemDecoration(SpaceItemDecoration(context.resources.getDimension(R.dimen.margin_small)))
         }
         homeArticleAdapter.run {
-            setOnItemClickListener { _, _, position ->
+            setOnItemClickListener @SingleClick { _, _, position ->
                 mViewModel.insertBrowseHistory(homeArticleAdapter.data[position])
                 val action = BrowserFragmentDirections.actionGlobalBrowserFragment(homeArticleAdapter
                         .data[position]

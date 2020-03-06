@@ -108,6 +108,8 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    implementation project(":kotlinAOP")
+
     implementation Libs.Kotlin.stdlib
     implementation Libs.AndroidX.appcompat
     implementation Libs.AndroidX.coreKtx
