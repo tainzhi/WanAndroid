@@ -1,4 +1,4 @@
-<h1 align="center">玩安卓</h1></br>
+<h1 align="left">玩安卓</h1></br>
     <p align="center">
     MVVM+Coroutine+koin实现的<a href="https://wanandroid.com/blog/show/2">玩安卓</a>
     <br>MVVM(Databing/ViewModel/Navigation/room)</br>
@@ -15,12 +15,12 @@
 <!-- vim-markdown-toc -->
 # ScreenShot
 <p align="left">
-     <img src="./images/demo1.gif" alt="项目demo" width="32%">
-     <img src="./images/demo2.gif" alt="项目demo" width="32%">
+     <img src="./images/demo1.gif" alt="项目demo" width="30%">
+     <img src="./images/demo2.gif" alt="项目demo" width="30%">
 </p>
 
 # APK下载
-[WanAndroid](
+[WanAndroid]()
 
 # 特点
 - 使用协程Coroutine
@@ -42,7 +42,7 @@
 # 其他：把最新版apk推送到gitee仓库，便于更新
 ```
 ./gradlew assembleRelease
-mv app/build/outputs/apk/release/*.apk ./apk
+    mv app/build/outputs/apk/release/*.apk ./apk
 ```
 
 # Todo
