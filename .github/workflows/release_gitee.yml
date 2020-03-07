@@ -1,0 +1,54 @@
+name: push release apk to gitee.com
+env:
+  REPO: WanAndroid
+  RELEASE_APK_DIR: app/build/outputs/apk/releae
+on:
+  push:
+    tags:
+      - '*'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@master
+      - name: get environemnt
+        run: |
+          # echo ::set-env name=TAG::$(cd ./ && git describe --abbrev=0), 直接git describe命令报错，通过tag事件触发后，下一条命令获取的tag, eg， v0.7.1
+          echo ::set-env name=TAG::${GITHUB_REF/refs\/tags\//}
+          # CURRENT_DIR, eg, /home/runner/work/WanAndroid/WanAndroid
+          echo "::set-env name=CURRETNT_DIR::$(pwd)"
+      - name: set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: assemble release apk
+        run:
+          ./gradlew assembleRelease
+          cd ${{ env.releaseDirectory }}
+          echo ::set-env name=BASE_NAME::$(for i in *apk; do echo $i | sed "s/.apk//"; done)
+          cd -
+      - name: sign release apk
+        uses: r0adkll/sign-android-release@v1
+        with:
+          releaseDirectory: ${{ env.RELEASE_APK_DIR }}
+          signingKeyBase64: ${{ secrets.SIGNING_KEY }}
+          alias: ${{ secrets.ALIAS }}
+          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
+          keyPassword: ${{ secrets.KEY_PASSWORD }}
+      - name: set gitee private key
+        uses: kielabokkie/ssh-key-and-known-hosts-action@v1
+        with:
+          ssh-private-key: ${{ secrets.GITEE_PRIVATE_KEY }}
+          ssh-host: gitee.com
+      - name: clone WanAndroidServer form gitee
+        run:  |
+          git clone git@gitee.com:qinmen/WanAndroidServer.git
+          cd WanAndroidServer
+          git config --local user.email "qinmen"
+          git config --local user.name "qfq61@qq.com"
+          cp ${{ env.SIGNED_RELEASE_FILE }} "./"${{ env.BASE_NAME }}.apk
+          # 复制app/build/outputs/apk/release/output.json复制到Server目录，方便上传
+          cp "../"${{ env.REPO }}"/"{{ env.RELEASE_APK_DIR }}/output.json ./
+          git add . && git commit -m "update apk"
+          git push origin master

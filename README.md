@@ -4,9 +4,11 @@
     <br>MVVM(Databing/ViewModel/Navigation/room)</br>
 <!-- vim-markdown-toc GFM -->
 
-+ [ScreenShot](#ScreenShot)
++ [ScreenShot](#screenshot)
++ [APK下载](#apk下载)
 + [特点](#特点)
 + [构建和使用](#构建和使用)
++ [其他：把最新版apk推送到gitee仓库，便于更新](#其他把最新版apk推送到gitee仓库便于更新)
 + [Todo](#todo)
     * [feat](#feat)
     * [fix bug](#fix-bug)
@@ -20,7 +22,7 @@
 </p>
 
 # APK下载
-[WanAndroid](https://gitee.com/qinmen/WanAndroid/blob/master/apk/)
+[WanAndroid](https://gitee.com/qinmen/WanAndroidServer)
 
 # 特点
 - 使用协程Coroutine
@@ -40,10 +42,16 @@
 - 2. 执行本地单元测试`./gradlew test`
 
 # 其他：把最新版apk推送到gitee仓库，便于更新
+推送到[gitee](https://gitee.com/qinmen/WanAndroidServer)
+
+使用的[github aciton](https://github.com/r0adkll/sign-android-release)
+
+解码`android.release.keystore`复制后添加到github该项目settings > secrets， 添加`SIGNING_KEY`的value
+```bash
+openssl base64 < android.release.keystore |tr -d '\n'| tee signing.key | pbcopy
 ```
-./gradlew assembleRelease
-    mv app/build/outputs/apk/release/*.apk ./apk
-```
+同理添加`ALIAS`, `KEY_STORE_PASSOWR`, `KEY_PASSWORD`到github的secrets
+
 
 # Todo
 ## feat

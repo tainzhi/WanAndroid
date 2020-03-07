@@ -1,4 +1,6 @@
 import com.tainzhi.android.buildsrc.Libs
+import groovy.json.JsonOutput
+import groovy.json.JsonSlurper
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
@@ -6,60 +8,30 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: "androidx.navigation.safeargs.kotlin"
 
-// get git commit counts, ie 73
-static def gitVersionCode() {
-    def cmd = 'git rev-list HEAD --first-parent --count'
-    cmd.execute().text.trim().toInteger()
-}
-
-// after you run `git tag`, then you can retrieve it
-static def gitVersionTag() {
-    def cmd = 'git describe --tags'
-    def version = cmd.execute().text.trim()
-
-    def pattern = "-(\\d+)-g"
-    def matcher = version =~ pattern
-    if (matcher) {
-        version = version.substring(0, matcher.start()) + "." + matcher[0][1]
-    } else {
-        version = version + ".0"
-    }
-    return version
-}
 
 apply from: '../test_dependencies.gradle'
 
-//生成打包时间
-def releaseTime() {
-    return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
-}
 
 android {
     signingConfigs {
-        def release_keyStoreFile
-        def release_keyStorePassword
-        def release_keyAlias
-        def release_keyPassword
-        config {
-            //加载资源
-            Properties properties = new Properties()
-            InputStream inputStream = project.rootProject.file('local.properties').newDataInputStream()
-            properties.load( inputStream )
-
-            //读取文件
-            release_keyStoreFile = properties.getProperty('release_keyStoreFile')
-            //读取字段
-            release_keyAlias = properties.getProperty( 'release_keyAlias' )
-            release_keyPassword = properties.getProperty( 'release_keyPassword' )
-            release_keyStorePassword = properties.getProperty( 'release_keyStorePassword' )
-        }
-        release {
-
-            storeFile file( release_keyStoreFile )
-            storePassword release_keyStorePassword
-            keyAlias release_keyAlias
-            keyPassword release_keyPassword
-        }
+//        //加载资源
+//        Properties properties = new Properties()
+//        InputStream inputStream = project.rootProject.file('local.properties').newDataInputStream()
+//        properties.load( inputStream )
+//
+//        //读取文件
+//        def release_keyStoreFile = properties.getProperty('release_keyStoreFile')
+//        //读取字段
+//        def release_keyAlias = properties.getProperty( 'release_keyAlias' )
+//        def release_keyPassword = properties.getProperty( 'release_keyPassword' )
+//        def release_keyStorePassword = properties.getProperty( 'release_keyStorePassword' )
+//        release {
+//
+//            storeFile file( release_keyStoreFile )
+//            storePassword release_keyStorePassword
+//            keyAlias release_keyAlias
+//            keyPassword release_keyPassword
+//        }
     }
     compileSdkVersion Libs.Version.compileSdkVersion
     buildToolsVersion Libs.Version.buildToolsVersion
@@ -83,7 +55,7 @@ android {
         }
         release {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
+//            signingConfig signingConfigs.release
         }
     }
 
@@ -102,6 +74,15 @@ android {
 
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8
+    }
+
+}
+
+gradle.projectsEvaluated {
+
+    assembleRelease.doLast {
+        def updateDescription = "1.update test 2.update test"
+        addDownloadUrl(updateDescription)
     }
 
 }
@@ -148,4 +129,45 @@ dependencies {
     implementation Libs.vertialTabLayout
     implementation Libs.flowlayout
     implementation Libs.licenseDialog
+}
+
+
+// get git commit counts, ie 73
+static def gitVersionCode() {
+    def cmd = 'git rev-list HEAD --first-parent --count'
+    cmd.execute().text.trim().toInteger()
+}
+
+// after you run `git tag`, then you can retrieve it
+static def gitVersionTag() {
+    def cmd = 'git describe --tags'
+    def version = cmd.execute().text.trim()
+
+    def pattern = "-(\\d+)-g"
+    def matcher = version =~ pattern
+    if (matcher) {
+        version = version.substring(0, matcher.start()) + "." + matcher[0][1]
+    } else {
+        version = version + ".0"
+    }
+    return version
+}
+
+// assembleRelease后会在app/build/outpus/apk/release/目录下生成apk和outpus.json
+// outpus.json已经有apk的一些信息，比如versionCode和versionNumber
+// 默认缺少打包时间和更新描述，在这里添加
+// 并添加下载路径
+// 我要把包通过github action上传到 https://gitee.com/qinmen/WanAndroidServer 方便下载
+static def addDownloadUrl (String updateDescription) {
+    def currentTime = new Date().format("yyyy-MM-dd HH:mm:ss", TimeZone.getTimeZone("UTC"))
+
+    def updateJsonPath = "app/build/outputs/apk/release/output.json"
+    def inputFile = new File(updateJsonPath)
+    def json = new JsonSlurper().parseText(inputFile.text)
+    def downloadUrl = "https://gitee.com/qinmen/WanAndroidServer/raw/master/" + json.elements.outputFile[0]
+//    println (new JsonOutput().toJson(json))
+    json << [assembleTime: currentTime]
+    json << [downloadUrl: downloadUrl]
+    json << [versionCode: gitVersionCode()]
+    inputFile.write(new JsonOutput().toJson(json))
 }
