@@ -12,12 +12,13 @@
 	
 	<!--	Settings-->
 	<style name="SettingsButton">
-		<item name="android:layout_marginTop">@dimen/margin_small</item>
+		<item name="android:layout_marginTop">@dimen/margin_normal</item>
 		<item name="android:layout_gravity">start|center_vertical</item>
 		<item name="android:textAppearance">?textAppearanceBody1</item>
 		<item name="android:alpha">?alphaEmphasisMedium</item>
 		<item name="android:layout_width">match_parent</item>
 		<item name="android:layout_height">wrap_content</item>
+		<item name="android:drawableEnd">@drawable/ic_baseline_keyboard_arrow_right_24</item>
 		<item name="android:focusable">true</item>
 	</style>
 

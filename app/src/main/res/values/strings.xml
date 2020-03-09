@@ -60,7 +60,7 @@
     <string name="no_collection" translatable="false">no collections</string>
     <string name="no_history">没有记录</string>
     <string name="go_to_register">没有账号?那么就去注册一个吧</string>
-    <string name="switch_dark_theme">开启暗黑主题</string>
+    <string name="switch_dark_theme">Switch Dark Theme</string>
     <string name="back_press_hint">Press back again to exit</string>
     <string name="login_success">Login successfully</string>
     <string name="register_success">Regster successfully</string>
