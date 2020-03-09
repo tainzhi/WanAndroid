@@ -42,15 +42,12 @@
 - 2. 执行本地单元测试`./gradlew test`
 
 # 其他：把最新版apk推送到gitee仓库，便于更新
-推送到[gitee](https://gitee.com/qinmen/WanAndroidServer)
-
-使用的[github aciton](https://github.com/r0adkll/sign-android-release)
-
-解码`android.release.keystore`复制后添加到github该项目settings > secrets， 添加`SIGNING_KEY`的value
-```bash
-openssl base64 < android.release.keystore |tr -d '\n'| tee signing.key | pbcopy
-```
-同理添加`ALIAS`, `KEY_STORE_PASSOWR`, `KEY_PASSWORD`到github的secrets
+推送到[gitee](https://gitee.com/qinmen/GithubServer/tree/master/WanAndroid), [action具体使用](./readme/github_action.md)
+- 修改app/build.gradle下面的`def updateDescription = "1.update test 2.update test"`
+- 添加升级信息后，打git tag后push，触发github action, assembleRelease
+- 通过action签名apk后上传到release asset, 同时也上传到gitee，用作下载更新链接
+- gitee下的`update.json`内容生成步骤为：assembleRelease生成了update.json和apk后，再通过gradle添加打包时间和对应的gitee下载链接后，通过git
+  ssh上传到gitee，便于下载
 
 
 # Todo

@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@master
-      - name: get environemnt
+      - name: set environemnt
         run: |
           # echo ::set-env name=TAG::$(cd ./ && git describe --abbrev=0), 直接git describe命令报错，通过tag事件触发后，下一条命令获取的tag, eg， v0.7.1
           echo ::set-env name=TAG::${GITHUB_REF/refs\/tags\//}
@@ -43,17 +43,17 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.GITEE_PRIVATE_KEY }}
           ssh-host: gitee.com
-      - name: clone WanAndroidServer form gitee
+      - name: clone GithubServer form gitee
         run:  |
           cd ..
-          git clone git@gitee.com:qinmen/WanAndroidServer.git
-          cp ${{ env.REPO }}/${{ env.SIGNED_RELEASE_FILE }} WanAndroidServer/${{ env.BASE_NAME }}.apk
+          git clone git@gitee.com:qinmen/GithubServer.git
+          cp ${{ env.REPO }}/${{ env.SIGNED_RELEASE_FILE }} GithubServer/${{ env.REPO }}/${{ env.BASE_NAME }}.apk
           # 复制app/build/outputs/apk/release/output.json复制到Server目录，方便上传
-          cp ${{ env.REPO }}/${{ env.RELEASE_APK_DIR }}/output.json WanAndroidServer/
-          cd WanAndroidServer
+          cp ${{ env.REPO }}/${{ env.RELEASE_APK_DIR }}/output.json GithubServer/${{ env.REPO }}
+          cd GithubServer
           git config --local user.email "qinmen"
           git config --local user.name "qfq61@qq.com"
-          git add . && git commit -m "update apk"
+          git add . && git commit -m "add "${{ env.BASE_NAME }.apk
           git push origin master
           cd ../${{ env.REPO }}
       - name: Create Release
