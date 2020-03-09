@@ -1,7 +1,7 @@
 name: push release apk to gitee.com
 env:
   REPO: WanAndroid
-  RELEASE_APK_DIR: app/build/outputs/apk/releae
+  RELEASE_APK_DIR: app/build/outputs/apk/release
 on:
   push:
     tags:
@@ -23,10 +23,12 @@ jobs:
         with:
           java-version: 1.8
       - name: assemble release apk
-        run:
+        run: |
           ./gradlew assembleRelease
-          cd ${{ env.releaseDirectory }}
-          echo ::set-env name=BASE_NAME::$(for i in *apk; do echo $i | sed "s/.apk//"; done)
+      - name: get apk basekname
+        run: |
+          cd ${{ env.RELEASE_APK_DIR }}
+          echo "::set-env name=BASE_NAME::$(for i in *apk; do echo $i | sed 's/.apk//'; done)"
           cd -
       - name: sign release apk
         uses: r0adkll/sign-android-release@v1
@@ -43,12 +45,34 @@ jobs:
           ssh-host: gitee.com
       - name: clone WanAndroidServer form gitee
         run:  |
+          cd ..
           git clone git@gitee.com:qinmen/WanAndroidServer.git
+          cp ${{ env.REPO }}/${{ env.SIGNED_RELEASE_FILE }} WanAndroidServer/${{ env.BASE_NAME }}.apk
+          # 复制app/build/outputs/apk/release/output.json复制到Server目录，方便上传
+          cp ${{ env.REPO }}/${{ env.RELEASE_APK_DIR }}/output.json WanAndroidServer/
           cd WanAndroidServer
           git config --local user.email "qinmen"
           git config --local user.name "qfq61@qq.com"
-          cp ${{ env.SIGNED_RELEASE_FILE }} "./"${{ env.BASE_NAME }}.apk
-          # 复制app/build/outputs/apk/release/output.json复制到Server目录，方便上传
-          cp "../"${{ env.REPO }}"/"{{ env.RELEASE_APK_DIR }}/output.json ./
           git add . && git commit -m "update apk"
           git push origin master
+          cd ../${{ env.REPO }}
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+      - name: Upload Release Asset
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+          asset_path: ./${{ env.SIGNED_RELEASE_FILE }}
+          asset_name: ${{ env.BASE_NAME }}.apk
+          asset_content_type: application/zip
