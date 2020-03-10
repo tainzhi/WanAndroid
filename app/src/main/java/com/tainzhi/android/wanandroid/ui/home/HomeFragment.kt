@@ -35,7 +35,7 @@ import org.koin.androidx.viewmodel.ext.android.getViewModel
  **/
 
 class HomeFragment : BaseVMFragment<ArticleViewModel>() {
-    private val isLogin by Preference(Preference.IS_LOGIN, false)
+    private val isLogin by Preference(Preference.KEY_IS_LOGIN, false)
     private val homeArticleAdapter by lazy { HomeArticleAdapter() }
     private val bannerImages = mutableListOf<String>()
     private val bannerTitles = mutableListOf<String>()

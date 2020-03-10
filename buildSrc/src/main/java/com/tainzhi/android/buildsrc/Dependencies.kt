@@ -215,4 +215,7 @@ object Libs {
     const val flowlayout = "com.hyman:flowlayout-lib:1.1.2"
 
     const val licenseDialog = "de.psdev.licensesdialog:licensesdialog:2.1.0"
+
+    // AppUpdate，简单的实现App更新下载和安装
+    const val appUpdate = "com.azhon:appupdateX:2.8.0"
 }

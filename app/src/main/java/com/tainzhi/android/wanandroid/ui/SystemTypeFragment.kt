@@ -20,7 +20,7 @@ import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class SystemTypeFragment : BaseVMFragment<ArticleViewModel>() {
 
-    private val isLogin by Preference(Preference.IS_LOGIN, false)
+    private val isLogin by Preference(Preference.KEY_IS_LOGIN, false)
 
     private val cid by lazy { arguments?.getInt(CID) }
     private val isBlog by lazy { arguments?.getBoolean(BLOG) ?: false } // 区分是体系下的文章列表还是公众号下的文章列表

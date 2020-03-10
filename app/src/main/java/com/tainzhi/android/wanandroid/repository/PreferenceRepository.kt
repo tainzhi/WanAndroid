@@ -17,7 +17,7 @@ import com.tainzhi.android.wanandroid.util.Preference
  **/
 
 class PreferenceRepository {
-    private var _s_nightMode by Preference(Preference.THEME_MODE, Preference.DEFAULT_THEM_MODE)
+    private var _s_nightMode by Preference(Preference.KEY_THEME_MODE, Preference.DEFAULT_THEM_MODE)
 
     private val _nightMode = MutableLiveData(_s_nightMode)
     val nightMode: LiveData<Int> = _nightMode
@@ -39,8 +39,8 @@ class PreferenceRepository {
     val isDarkTheme: LiveData<Boolean> = _isDarkTheme
 
 
-    private var _isLogin by Preference(Preference.IS_LOGIN, false)
-    private var _user by Preference(Preference.USER_GSON, "")
+    private var _isLogin by Preference(Preference.KEY_IS_LOGIN, false)
+    private var _user by Preference(Preference.KEY_USER_JSON, "")
 
     val mIsLogin: MutableLiveData<Boolean> = MutableLiveData(_isLogin)
     val mUser: MutableLiveData<User> = MutableLiveData()
@@ -48,12 +48,12 @@ class PreferenceRepository {
     val isLogin: LiveData<Boolean> = mIsLogin
     val user: LiveData<User> = Transformations.switchMap(mIsLogin) { isLogin ->
         if (isLogin) {
-            mUser.value = getUserFromGson()
+            mUser.value = getUserFromJson()
         } else {
             mUser.value = null
         }
         mUser
     }
 
-    private fun getUserFromGson(): User = Gson().fromJson<User>(_user, User::class.java)
+    private fun getUserFromJson(): User = Gson().fromJson<User>(_user, User::class.java)
 }

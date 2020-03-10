@@ -65,4 +65,6 @@
     <string name="login_success">登录成功</string>
     <string name="register_success">注册成功</string>
     <string name="logout_success">已经退出</string>
+    <string name="check_update">检查新版本</string>
+    <string name="check_update_result">当前版本已是最新版本</string>
 </resources>

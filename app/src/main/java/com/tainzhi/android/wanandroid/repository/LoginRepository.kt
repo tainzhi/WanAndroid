@@ -2,7 +2,7 @@ package com.tainzhi.android.wanandroid.repository
 
 import com.google.gson.Gson
 import com.tainzhi.android.wanandroid.WanApp
-import com.tainzhi.android.wanandroid.api.WanService
+import com.tainzhi.android.wanandroid.api.WanClient.service
 import com.tainzhi.android.wanandroid.base.BaseRepository
 import com.tainzhi.android.wanandroid.base.Result
 import com.tainzhi.android.wanandroid.bean.User
@@ -15,9 +15,9 @@ import com.tainzhi.android.wanandroid.util.Preference
  * @description:
  **/
 
-class LoginRepository(val service: WanService): BaseRepository() {
-    private var isLogin by Preference(Preference.IS_LOGIN, false)
-    private var userJson by Preference(Preference.USER_GSON, "")
+class LoginRepository : BaseRepository() {
+    private var isLogin by Preference(Preference.KEY_IS_LOGIN, false)
+    private var userJson by Preference(Preference.KEY_USER_JSON, "")
 
     suspend fun login(userName: String, passWord: String): Result<User> {
         return safeApiCall(call = { requestLogin(userName, passWord) },

@@ -43,6 +43,10 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         versionCode gitVersionCode()
         versionName gitVersionTag()
+
+        // 第三方库 AppUpdate
+        // 每个应用拥有不同的authorities，防止相同在同一个手机上无法同时安装
+        resValue "string", "authorities", applicationId
     }
 
     buildFeatures {
@@ -81,7 +85,8 @@ android {
 gradle.projectsEvaluated {
 
     assembleRelease.doLast {
-        def updateDescription = "1.修改了一些异常bug 2.提升了性能"
+        // 升级内容以 \n 分割
+        def updateDescription = "1.修改了一些异常bug\n2.提升了性能"
         addDownloadUrl(updateDescription)
     }
 
@@ -129,6 +134,7 @@ dependencies {
     implementation Libs.vertialTabLayout
     implementation Libs.flowlayout
     implementation Libs.licenseDialog
+    implementation Libs.appUpdate
 }
 
 
@@ -157,7 +163,7 @@ static def gitVersionTag() {
 // outpus.json已经有apk的一些信息，比如versionCode和versionNumber
 // 默认缺少打包时间和更新描述，在这里添加
 // 并添加下载路径
-// 我要把包通过github action上传到 https://gitee.com/qinmen/WanAndroidServer 方便下载
+// 我要把包通过github action上传到 https://gitee.com/qinmen/GithubServer/WanAndroid 方便下载
 static def addDownloadUrl (String updateDescription) {
     def currentTime = new Date().format("yyyy-MM-dd HH:mm:ss", TimeZone.getTimeZone("UTC"))
     def inputJsonPath = "app/build/outputs/apk/release/output.json"
@@ -165,13 +171,14 @@ static def addDownloadUrl (String updateDescription) {
     def json = new JsonSlurper().parseText(inputFile.text)
     def apkFileName = json.elements[0].outputFile
     def versionCode = json.elements[0].versionCode
-    def downloadUrl = "https://gitee.com/qinmen/WanAndroidServer/raw/master/" + apkFileName
+    def downloadUrl = "https://gitee.com/qinmen/GithubServer/raw/master/WanAndroid" + apkFileName
     def backupDownloadUrl = "https://github.com/tainzhi/WanAndroid/releases/download/" + gitVersionTag() + "/" + apkFileName
     def dataMap = [ 'versionCode': versionCode,
-                    'url': downloadUrl,
-                    'time': currentTime,
                     'description': updateDescription,
-                    'url_backup': backupDownloadUrl]
+                    'url': downloadUrl,
+                    'url_backup': backupDownloadUrl,
+                    'time': currentTime,
+                    'apkName': apkFileName]
     def updateMap = [ 'errorCode': 0, 'data': dataMap, 'errorMsg': '']
     def outputJsonPath = "app/build/outputs/apk/release/update.json"
     (new File(outputJsonPath)).write(new JsonOutput().toJson(updateMap))

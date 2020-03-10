@@ -19,10 +19,10 @@ import kotlin.reflect.KProperty
 class Preference<T>(val name: String, private val default: T) : ReadWriteProperty<Any?, T> {
 
     companion object {
-        const val IS_LOGIN = "is_login"
-        const val USER_GSON = "user_gson"
+        const val KEY_IS_LOGIN = "KEY_IS_LOGIN"
+        const val KEY_USER_JSON = "KEY_USER_JSON"
 
-        const val THEME_MODE = "theme_mode"
+        const val KEY_THEME_MODE = "theme_mode"
         const val DEFAULT_THEM_MODE = AppCompatDelegate.MODE_NIGHT_NO
 
         fun clearAll() {

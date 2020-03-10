@@ -29,7 +29,7 @@ import org.koin.dsl.module
  **/
 
 val viewModelModule = module {
-    viewModel { MainViewModel(get(), get(), get()) }
+    viewModel { MainViewModel(get(), get(), get(), get()) }
     viewModel { LoginViewModel(get(), get()) }
     viewModel { ArticleViewModel(get(), get(), get(), get(), get(), get(), get()) }
     viewModel { SystemViewModel(get(), get(), get()) }
@@ -41,7 +41,8 @@ val viewModelModule = module {
 
 val repositoryModule = module {
     single { WanClient.getService(WanService::class.java, WanService.BASE_URL) }
-    single { LoginRepository(get()) }
+    single { MainRepository() }
+    single { LoginRepository() }
     single { HomeRepository() }
     single { SquareRepository() }
     single { ProjectRepository() }

@@ -30,7 +30,7 @@ import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class SearchFragment : BaseVMFragment<SearchViewModel>() {
 
-    private val isLogin by Preference(Preference.IS_LOGIN, false)
+    private val isLogin by Preference(Preference.KEY_IS_LOGIN, false)
     private val searchAdapter by lazy { HomeArticleAdapter() }
     private var key = ""
     private val searchHistoryList = mutableListOf<String>()

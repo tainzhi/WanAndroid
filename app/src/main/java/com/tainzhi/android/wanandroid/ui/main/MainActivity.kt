@@ -16,6 +16,7 @@ import com.tainzhi.android.wanandroid.R
 import com.tainzhi.android.wanandroid.WanApp
 import com.tainzhi.android.wanandroid.base.ui.BaseVMActivity
 import com.tainzhi.android.wanandroid.databinding.ActivityMainBinding
+import com.tainzhi.android.wanandroid.util.UpdateUtils
 import com.tainzhi.android.wanandroid.util.gone
 import com.tainzhi.android.wanandroid.util.toast
 import com.tainzhi.android.wanandroid.util.visible
@@ -34,8 +35,6 @@ class MainActivity : BaseVMActivity<MainViewModel>(useBinding = true) {
     override fun getLayoutResId() = R.layout.activity_main
 
     override fun initView() {
-
-        updateTheme()
 
         navController = findNavController(R.id.mainNavHostFragment)
 
@@ -77,6 +76,15 @@ class MainActivity : BaseVMActivity<MainViewModel>(useBinding = true) {
     override fun initVM(): MainViewModel = getViewModel()
 
     override fun startObserve() {
+
+        // update theme
+        WanApp.preferenceRepository.nightMode.observe(this, Observer { nightMode ->
+            nightMode?.let { delegate.localNightMode = it }
+        })
+
+        mViewModel.updateInfo.observe(this, Observer { updateInfo ->
+            UpdateUtils.newInstance().updateApp(this, updateInfo)
+        })
     }
 
     private fun initNavigationView() {
@@ -105,6 +113,8 @@ class MainActivity : BaseVMActivity<MainViewModel>(useBinding = true) {
 
     override fun initData() {
         (mBinding as ActivityMainBinding).include.viewModel = mViewModel
+
+        getAppUpdateInfo()
     }
 
     override fun onBackPressed() {
@@ -133,11 +143,8 @@ class MainActivity : BaseVMActivity<MainViewModel>(useBinding = true) {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun updateTheme() {
-        WanApp.preferenceRepository.nightMode.observe(this, Observer { nightMode ->
-            nightMode?.let { delegate.localNightMode = it }
-        })
+    private fun getAppUpdateInfo() {
+        mViewModel.getAppUpdateInfo()
     }
-
 
 }

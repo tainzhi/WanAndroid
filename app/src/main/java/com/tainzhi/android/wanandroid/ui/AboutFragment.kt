@@ -1,5 +1,7 @@
 package com.tainzhi.android.wanandroid.ui
 
+import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.view.Gravity
@@ -10,9 +12,8 @@ import androidx.navigation.fragment.findNavController
 import com.tainzhi.android.wanandroid.BuildConfig
 import com.tainzhi.android.wanandroid.R
 import com.tainzhi.android.wanandroid.base.ui.BaseFragment
-import com.tainzhi.android.wanandroid.util.GITHUB_PAGE
-import com.tainzhi.android.wanandroid.util.ISSUE_URL
-import com.tainzhi.android.wanandroid.util.openBrowser
+import com.tainzhi.android.wanandroid.bean.UpdateInfo
+import com.tainzhi.android.wanandroid.util.*
 import com.tainzhi.android.wanandroid.view.MeDialog
 import de.psdev.licensesdialog.LicensesDialog
 import de.psdev.licensesdialog.licenses.ApacheSoftwareLicense20
@@ -33,6 +34,7 @@ class AboutFragment : BaseFragment() {
 
     override fun initData() {
 
+        checkUpdateTv.setOnClickListener { checkUpdate() }
         licenseTv.setOnClickListener { showOwnLicense() }
         sourceTv.setOnClickListener { activity?.openBrowser(GITHUB_PAGE) }
         feedbackTv.setOnClickListener { showFeedBackMenu() }
@@ -91,5 +93,21 @@ class AboutFragment : BaseFragment() {
 
     private fun showMe() {
         MeDialog.newInstance().show(childFragmentManager, getString(R.string.me))
+    }
+
+    /**
+     * 检查是否有新版本可以下载
+     */
+    private fun checkUpdate() {
+        val currVersionCode = AppInfoUtils.getVersionCode()
+        val updateInfo = MemoryCache.instance?.get(MemoryCache.KEY_UPDATE_INFO) as UpdateInfo
+        if (currVersionCode >= updateInfo.versionCode) {
+            AlertDialog.Builder(activity)
+                    .setMessage(R.string.check_update_result)
+                    .create()
+                    .show()
+        } else {
+            UpdateUtils.newInstance().updateApp(activity as Context, updateInfo)
+        }
     }
 }

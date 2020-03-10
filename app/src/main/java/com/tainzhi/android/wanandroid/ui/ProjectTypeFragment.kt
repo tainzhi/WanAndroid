@@ -26,7 +26,7 @@ import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class ProjectTypeFragment : BaseVMFragment<ArticleViewModel>() {
 
-    private val isLogin by Preference(Preference.IS_LOGIN, false)
+    private val isLogin by Preference(Preference.KEY_IS_LOGIN, false)
     private val cid by lazy { arguments?.getInt(CID) }
     private val isLated by lazy { arguments?.getBoolean(LASTED) }
     private val projectAdapter by lazy { HomeArticleAdapter(R.layout.item_project) }

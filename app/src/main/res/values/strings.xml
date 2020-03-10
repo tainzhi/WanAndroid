@@ -30,6 +30,8 @@
     <string name="send_email">Send e-mail</string>
     <string name="sendto">QFQ61@QQ.COM</string>
     <string name="mail_topic">Wanandroid 反馈</string>
+    <string name="check_update">Check Latest Version</string>
+    <string name="check_update_result">This is the latest version!</string>
     <string name="license">开源协议</string>
     <string name="source_url">源代码地址</string>
     <string name="feedback">意见反馈</string>

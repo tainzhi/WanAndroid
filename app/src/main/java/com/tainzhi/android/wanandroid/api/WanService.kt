@@ -84,4 +84,7 @@ interface WanService {
     @POST("/lg/user_article/add/json")
     suspend fun shareArticle(@Field("title") title: String, @Field("link") url: String): Response<String>
 
+    @GET("https://gitee.com/qinmen/GithubServer/raw/master/WanAndroid/update.json")
+    suspend fun getUpdateInfo(): Response<UpdateInfo>
+
 }
