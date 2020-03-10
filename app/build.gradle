@@ -81,7 +81,7 @@ android {
 gradle.projectsEvaluated {
 
     assembleRelease.doLast {
-        def updateDescription = "1.update test 2.update test"
+        def updateDescription = "1.修改了一些异常bug 2.提升了性能"
         addDownloadUrl(updateDescription)
     }
 
@@ -160,14 +160,19 @@ static def gitVersionTag() {
 // 我要把包通过github action上传到 https://gitee.com/qinmen/WanAndroidServer 方便下载
 static def addDownloadUrl (String updateDescription) {
     def currentTime = new Date().format("yyyy-MM-dd HH:mm:ss", TimeZone.getTimeZone("UTC"))
-
-    def updateJsonPath = "app/build/outputs/apk/release/output.json"
-    def inputFile = new File(updateJsonPath)
+    def inputJsonPath = "app/build/outputs/apk/release/output.json"
+    def inputFile = new File(inputJsonPath)
     def json = new JsonSlurper().parseText(inputFile.text)
-    def downloadUrl = "https://gitee.com/qinmen/WanAndroidServer/raw/master/" + json.elements.outputFile[0]
-//    println (new JsonOutput().toJson(json))
-    json << [assembleTime: currentTime]
-    json << [downloadUrl: downloadUrl]
-    json << [versionCode: gitVersionCode()]
-    inputFile.write(new JsonOutput().toJson(json))
+    def apkFileName = json.elements[0].outputFile
+    def versionCode = json.elements[0].versionCode
+    def downloadUrl = "https://gitee.com/qinmen/WanAndroidServer/raw/master/" + apkFileName
+    def backupDownloadUrl = "https://github.com/tainzhi/WanAndroid/releases/download/" + gitVersionTag() + "/" + apkFileName
+    def dataMap = [ 'versionCode': versionCode,
+                    'url': downloadUrl,
+                    'time': currentTime,
+                    'description': updateDescription,
+                    'url_backup': backupDownloadUrl]
+    def updateMap = [ 'errorCode': 0, 'data': dataMap, 'errorMsg': '']
+    def outputJsonPath = "app/build/outputs/apk/release/update.json"
+    (new File(outputJsonPath)).write(new JsonOutput().toJson(updateMap))
 }

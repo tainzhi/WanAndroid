@@ -48,8 +48,8 @@ jobs:
           cd ..
           git clone git@gitee.com:qinmen/GithubServer.git
           cp ${{ env.REPO }}/${{ env.SIGNED_RELEASE_FILE }} GithubServer/${{ env.REPO }}/${{ env.BASE_NAME }}.apk
-          # 复制app/build/outputs/apk/release/output.json复制到Server目录，方便上传
-          cp ${{ env.REPO }}/${{ env.RELEASE_APK_DIR }}/output.json GithubServer/${{ env.REPO }}
+          # 复制app/build/outputs/apk/release/update.json复制到Server目录，方便上传
+          cp ${{ env.REPO }}/${{ env.RELEASE_APK_DIR }}/update.json GithubServer/${{ env.REPO }}
           cd GithubServer
           git config --local user.email "qinmen"
           git config --local user.name "qfq61@qq.com"
