@@ -4,7 +4,7 @@ import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.IdlingResource
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.tainzhi.android.wanandroid.ui.MainActivity
+import com.tainzhi.android.wanandroid.ui.main.MainActivity
 import com.tainzhi.android.wanandroid.utils.DataBindingIdlingResource
 import org.junit.After
 import org.junit.Before

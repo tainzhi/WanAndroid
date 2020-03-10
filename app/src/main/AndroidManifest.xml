@@ -20,7 +20,7 @@
         android:theme="@style/MyTheme.DayNight"
         tools:ignore="GoogleAppIndexingWaring"
         tools:targetApi="n">
-        <activity android:name=".ui.MainActivity" />
+        <activity android:name=".ui.main.MainActivity" />
         <activity android:name=".ui.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

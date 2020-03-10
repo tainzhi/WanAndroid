@@ -3,16 +3,12 @@ package com.tainzhi.android.wanandroid.ui.login
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import com.google.gson.Gson
 import com.tainzhi.android.wanandroid.CoroutinesDispatcherProvider
+import com.tainzhi.android.wanandroid.WanApp
 import com.tainzhi.android.wanandroid.base.Result
 import com.tainzhi.android.wanandroid.base.ui.BaseViewModel
 import com.tainzhi.android.wanandroid.bean.User
-import com.tainzhi.android.wanandroid.db.HistoryDao
 import com.tainzhi.android.wanandroid.repository.LoginRepository
-import com.tainzhi.android.wanandroid.util.Preference
-import kotlinx.coroutines.withContext
 
 /**
  * @author:       tainzhi
@@ -23,24 +19,14 @@ import kotlinx.coroutines.withContext
 
 class LoginViewModel(
         val repository: LoginRepository,
-        private val historyDao: HistoryDao,
         private val dispatcherProvider: CoroutinesDispatcherProvider
 ) : BaseViewModel() {
-    private var _isLogin by Preference(Preference.IS_LOGIN, false)
-    private var _user by Preference(Preference.USER_GSON, "")
 
-    private val mIsLogin: MutableLiveData<Boolean> = MutableLiveData(_isLogin)
-    private val mUser: MutableLiveData<User> = MutableLiveData()
+    private val mIsLogin: MutableLiveData<Boolean> = WanApp.preferenceRepository.mIsLogin
+    private val mUser: MutableLiveData<User> = WanApp.preferenceRepository.mUser
 
     val isLogin: LiveData<Boolean> = mIsLogin
-    val user: LiveData<User> = Transformations.switchMap(mIsLogin) { isLogin ->
-        if (isLogin) {
-            mUser.value = getUserFromGson()
-        } else {
-            mUser.value = null
-        }
-        mUser
-    }
+    val user: LiveData<User> = mUser
 
     val userName = ObservableField<String>("")
     val passWord = ObservableField<String>("")
@@ -137,23 +123,11 @@ class LoginViewModel(
             _uiState.postValue(uiModel)
     }
 
-    private fun getUserFromGson(): User = Gson().fromJson<User>(_user, User::class.java)
-
     private fun updateUser(user: User) {
         mIsLogin.postValue(true)
         mUser.postValue(user)
     }
 
-    fun logout() {
-        mIsLogin.value = false
-        mUser.value = null
-        Preference.clearAll()
-
-        launch {
-            historyDao.deleteAll()
-            repository.logout()
-        }
-    }
 }
 
 data class LoginUiModel(

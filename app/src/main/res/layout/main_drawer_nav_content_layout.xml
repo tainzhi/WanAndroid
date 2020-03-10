@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.tainzhi.android.wanandroid.ui.login.LoginViewModel" />
+            type="com.tainzhi.android.wanandroid.ui.main.MainViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"

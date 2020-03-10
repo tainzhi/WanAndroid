@@ -1,4 +1,4 @@
-package com.tainzhi.android.wanandroid.ui
+package com.tainzhi.android.wanandroid.ui.main
 
 import android.view.Menu
 import android.view.MenuItem
@@ -16,7 +16,6 @@ import com.tainzhi.android.wanandroid.R
 import com.tainzhi.android.wanandroid.WanApp
 import com.tainzhi.android.wanandroid.base.ui.BaseVMActivity
 import com.tainzhi.android.wanandroid.databinding.ActivityMainBinding
-import com.tainzhi.android.wanandroid.ui.login.LoginViewModel
 import com.tainzhi.android.wanandroid.util.gone
 import com.tainzhi.android.wanandroid.util.toast
 import com.tainzhi.android.wanandroid.util.visible
@@ -24,12 +23,13 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.main_drawer_nav_content_layout.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
-class MainActivity : BaseVMActivity<LoginViewModel>(useBinding = true) {
+class MainActivity : BaseVMActivity<MainViewModel>(useBinding = true) {
 
     private lateinit var navController: NavController
 
-//    private var exitTime = 0L
-    private val mainDestionIds = setOf(R.id.mainFragment, R.id.blogFragment, R.id.projectFragment)
+    //    private var exitTime = 0L
+    private val mainDestinationIds = setOf(R.id.mainFragment, R.id.blogFragment, R.id
+            .projectFragment)
 
     override fun getLayoutResId() = R.layout.activity_main
 
@@ -39,14 +39,14 @@ class MainActivity : BaseVMActivity<LoginViewModel>(useBinding = true) {
 
         navController = findNavController(R.id.mainNavHostFragment)
 
-        val appBarConfig = AppBarConfiguration(mainDestionIds, mainDrawerLayout)
+        val appBarConfig = AppBarConfiguration(mainDestinationIds, mainDrawerLayout)
         setSupportActionBar(toolbar)
         setupActionBarWithNavController(navController, appBarConfig)
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
         supportActionBar?.setHomeButtonEnabled(true)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id in mainDestionIds) {
+            if (destination.id in mainDestinationIds) {
                 mainBottomNavigation.visible()
                 toolbar.visible()
                 mainDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
@@ -74,7 +74,7 @@ class MainActivity : BaseVMActivity<LoginViewModel>(useBinding = true) {
 
     }
 
-    override fun initVM(): LoginViewModel = getViewModel()
+    override fun initVM(): MainViewModel = getViewModel()
 
     override fun startObserve() {
     }

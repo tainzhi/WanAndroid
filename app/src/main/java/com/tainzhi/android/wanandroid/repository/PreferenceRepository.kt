@@ -3,6 +3,9 @@ package com.tainzhi.android.wanandroid.repository
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
+import com.google.gson.Gson
+import com.tainzhi.android.wanandroid.bean.User
 import com.tainzhi.android.wanandroid.util.Preference
 
 
@@ -35,4 +38,22 @@ class PreferenceRepository {
     private val _isDarkTheme: MutableLiveData<Boolean> = MutableLiveData(darkTheme)
     val isDarkTheme: LiveData<Boolean> = _isDarkTheme
 
+
+    private var _isLogin by Preference(Preference.IS_LOGIN, false)
+    private var _user by Preference(Preference.USER_GSON, "")
+
+    val mIsLogin: MutableLiveData<Boolean> = MutableLiveData(_isLogin)
+    val mUser: MutableLiveData<User> = MutableLiveData()
+
+    val isLogin: LiveData<Boolean> = mIsLogin
+    val user: LiveData<User> = Transformations.switchMap(mIsLogin) { isLogin ->
+        if (isLogin) {
+            mUser.value = getUserFromGson()
+        } else {
+            mUser.value = null
+        }
+        mUser
+    }
+
+    private fun getUserFromGson(): User = Gson().fromJson<User>(_user, User::class.java)
 }
