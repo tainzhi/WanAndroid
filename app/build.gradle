@@ -128,6 +128,7 @@ dependencies {
 
     debugImplementation Libs.leakCanary
 
+    implementation Libs.timber
     implementation Libs.baseRecyclerViewAdapterHelper
     implementation Libs.youthBanner
     implementation Libs.tencentTbssdk

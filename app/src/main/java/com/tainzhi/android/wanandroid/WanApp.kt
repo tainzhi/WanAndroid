@@ -8,6 +8,7 @@ import com.tainzhi.android.wanandroid.repository.PreferenceRepository
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
+import timber.log.Timber
 import kotlin.properties.Delegates
 
 /**
@@ -33,8 +34,12 @@ class WanApp : Application() {
             androidLogger()
             modules(appModule)
         }
-
+    
         preferenceRepository = PreferenceRepository()
+    
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        }
     }
     //x5内核初始化接口
 //        QbSdk.initX5Environment(applicationContext, object : QbSdk.PreInitCallback {

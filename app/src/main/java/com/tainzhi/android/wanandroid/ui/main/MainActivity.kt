@@ -23,6 +23,7 @@ import com.tainzhi.android.wanandroid.util.visible
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.main_drawer_nav_content_layout.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
+import timber.log.Timber
 
 class MainActivity : BaseVMActivity<MainViewModel>(useBinding = true) {
 
@@ -112,9 +113,15 @@ class MainActivity : BaseVMActivity<MainViewModel>(useBinding = true) {
     }
 
     override fun initData() {
+    
         (mBinding as ActivityMainBinding).include.viewModel = mViewModel
-
-        getAppUpdateInfo()
+    
+        // FIXME: 2020/3/11 初始化没有User的post，导致用户信息没有显示，原因还是用户登录状态的保持和传递
+        // 尤其是没有使用Event bus，怎么处理，还需要深入
+        mViewModel.getAppUpdateInfo()
+    
+        Timber.tag(MainActivity::class.simpleName)
+        Timber.i(mViewModel.user.value.toString())
     }
 
     override fun onBackPressed() {
@@ -141,10 +148,6 @@ class MainActivity : BaseVMActivity<MainViewModel>(useBinding = true) {
             findNavController(R.id.mainNavHostFragment).navigate(R.id.searchFragment)
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    private fun getAppUpdateInfo() {
-        mViewModel.getAppUpdateInfo()
     }
 
 }

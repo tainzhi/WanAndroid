@@ -37,16 +37,6 @@ class MainViewModel(
     val user: LiveData<User> = mUser
     val updateInfo = mUpdateInfo
 
-    fun logout() {
-        mIsLogin.value = false
-        mUser.value = null
-        Preference.clearAll()
-
-        launch {
-            historyDao.deleteAll()
-            loginRepository.logout()
-        }
-    }
 
     fun getAppUpdateInfo() {
         launch {
@@ -64,5 +54,16 @@ class MainViewModel(
             }
         }
     }
-
+    
+    fun logout() {
+        mIsLogin.value = false
+        mUser.value = null
+        Preference.clearAll()
+        
+        launch {
+            historyDao.deleteAll()
+            loginRepository.logout()
+        }
+    }
+    
 }
