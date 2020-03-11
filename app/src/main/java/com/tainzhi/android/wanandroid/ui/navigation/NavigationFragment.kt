@@ -3,13 +3,15 @@ package com.tainzhi.android.wanandroid.ui.navigation
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSmoothScroller
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE
 import com.tainzhi.android.wanandroid.R
 import com.tainzhi.android.wanandroid.adapter.NavigationAdapter
 import com.tainzhi.android.wanandroid.adapter.VerticalTabAdapter
 import com.tainzhi.android.wanandroid.base.ui.BaseVMFragment
 import com.tainzhi.android.wanandroid.bean.Navigation
 import com.tainzhi.android.wanandroid.ui.BrowserFragmentDirections
-import com.tainzhi.android.wanandroid.util.dp2px
 import com.tainzhi.android.wanandroid.view.SpaceItemDecoration
 import kotlinx.android.synthetic.main.fragment_navigation.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
@@ -37,6 +39,7 @@ class NavigationFragment : BaseVMFragment<NavigationViewModel>() {
             layoutManager = LinearLayoutManager(context)
             addItemDecoration(SpaceItemDecoration(context.resources.getDimension(R.dimen.margin_small)))
             adapter = navigationAdapter
+            addOnScrollListener(scrollListener)
         }
 
         initTabLayout()
@@ -57,12 +60,22 @@ class NavigationFragment : BaseVMFragment<NavigationViewModel>() {
         val linearLayoutManager = navigationRecyclerView.layoutManager as
                 LinearLayoutManager
         val firstPotion = linearLayoutManager.findFirstVisibleItemPosition()
-        val lastPosition = linearLayoutManager.findLastVisibleItemPosition()
-        when {
-            position <= firstPotion || position >= lastPosition -> navigationRecyclerView.smoothScrollToPosition(position)
-            else -> navigationRecyclerView.run {
-                smoothScrollBy(0, this.getChildAt(position - firstPotion).top - this.dp2px(8))
+    
+        if (position > firstPotion) {
+            //向后
+            val scroller: LinearSmoothScroller = object : LinearSmoothScroller(activity) {
+                override fun getHorizontalSnapPreference(): Int {
+                    return SNAP_TO_START //具体见源码注释
+                }
+            
+                override fun getVerticalSnapPreference(): Int {
+                    return SNAP_TO_START //具体见源码注释
+                }
             }
+            scroller.targetPosition = position
+            linearLayoutManager.startSmoothScroll(scroller)
+        } else {
+            navigationRecyclerView.smoothScrollToPosition(position)
         }
     }
 
@@ -77,12 +90,24 @@ class NavigationFragment : BaseVMFragment<NavigationViewModel>() {
             })
         }
     }
-
+    
     private fun getNavigation(navigationList: List<Navigation>) {
         this.navigationList.clear()
         this.navigationList.addAll(navigationList)
         tabLayout.setTabAdapter(tabAdapter)
-
+        
         navigationAdapter.setNewData(navigationList)
+    }
+    
+    private val scrollListener = object : RecyclerView.OnScrollListener() {
+        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+            super.onScrollStateChanged(recyclerView, newState)
+            if (newState == SCROLL_STATE_IDLE) {
+                val linearLayoutManager = navigationRecyclerView.layoutManager as
+                        LinearLayoutManager
+                val firstPotion = linearLayoutManager.findFirstVisibleItemPosition()
+                tabLayout.setTabSelected(firstPotion)
+            }
+        }
     }
 }
