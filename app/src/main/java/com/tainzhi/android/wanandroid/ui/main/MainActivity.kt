@@ -128,12 +128,12 @@ class MainActivity : BaseVMActivity<MainViewModel>(useBinding = true) {
         if (mainDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             mainDrawerLayout.closeDrawer(GravityCompat.START)
         } else {
-//            if (System.currentTimeMillis() - exitTime > 2000) {
-//                exitTime = System.currentTimeMillis()
-//                toast(R.string.back_press_hint)
-//            } else {
-//                super.onBackPressed()
-//            }
+            // if (System.currentTimeMillis() - exitTime > 2000) {
+            //     exitTime = System.currentTimeMillis()
+            //     toast(R.string.back_press_hint)
+            // } else {
+            //     super.onBackPressed()
+            // }
             super.onBackPressed()
         }
     }
