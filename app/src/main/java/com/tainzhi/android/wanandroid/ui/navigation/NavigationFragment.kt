@@ -1,5 +1,6 @@
 package com.tainzhi.android.wanandroid.ui.navigation
 
+import android.view.MotionEvent
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,7 +20,8 @@ import q.rorbin.verticaltablayout.VerticalTabLayout
 import q.rorbin.verticaltablayout.widget.TabView
 
 class NavigationFragment : BaseVMFragment<NavigationViewModel>() {
-
+    
+    private var touchLeft = true // 0 left, 1 right
     private val navigationList = mutableListOf<Navigation>()
     private val tabAdapter by lazy { VerticalTabAdapter(navigationList.map { it.name }) }
     private val navigationAdapter by lazy {
@@ -40,6 +42,21 @@ class NavigationFragment : BaseVMFragment<NavigationViewModel>() {
             addItemDecoration(SpaceItemDecoration(context.resources.getDimension(R.dimen.margin_small)))
             adapter = navigationAdapter
             addOnScrollListener(scrollListener)
+            // 右滑动， 而不是左滑动
+            addOnItemTouchListener(object : RecyclerView.OnItemTouchListener {
+                override fun onTouchEvent(rv: RecyclerView, e: MotionEvent) {
+                    touchLeft = false
+                }
+        
+                override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
+                    touchLeft = false
+                    return false
+                }
+        
+                override fun onRequestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {
+                    touchLeft = false
+                }
+            })
         }
 
         initTabLayout()
@@ -51,6 +68,7 @@ class NavigationFragment : BaseVMFragment<NavigationViewModel>() {
             }
 
             override fun onTabSelected(tab: TabView?, position: Int) {
+                touchLeft = true
                 scrollToPosition(position)
             }
         })
@@ -102,7 +120,8 @@ class NavigationFragment : BaseVMFragment<NavigationViewModel>() {
     private val scrollListener = object : RecyclerView.OnScrollListener() {
         override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
             super.onScrollStateChanged(recyclerView, newState)
-            if (newState == SCROLL_STATE_IDLE) {
+            // 手动滑动右边，待idle后，左边onTabSelected
+            if (newState == SCROLL_STATE_IDLE && !touchLeft) {
                 val linearLayoutManager = navigationRecyclerView.layoutManager as
                         LinearLayoutManager
                 val firstPotion = linearLayoutManager.findFirstVisibleItemPosition()
