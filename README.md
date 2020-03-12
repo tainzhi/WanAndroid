@@ -35,9 +35,10 @@
 - unit test with Room/koin
 
 # 构建和使用
-- 1. 需求：必须要Android Studio 4.0 以上
-- 2. 构建打包`./gradlew assembleDebug`
-- 2. 执行本地单元测试`./gradlew test`
+- 1. clone下载`git clone --recursive https://github.com/tainzhi/WanAndroid`
+- 2. 需求：必须要Android Studio 4.0 以上
+- 3. 构建打包`./gradlew assembleDebug`
+- 4. 执行本地单元测试`./gradlew test`
 
 # 其他：把最新版apk推送到gitee仓库，便于更新
 推送到[gitee](https://gitee.com/qinmen/GithubServer/tree/master/WanAndroid), [action具体使用](./readme/github_action.md)
