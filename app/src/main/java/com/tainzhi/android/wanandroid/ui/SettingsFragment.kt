@@ -29,7 +29,7 @@ class SettingsFragment : BaseFragment() {
         })
 
         settingsAboutFl.setOnClickListener {
-            findNavController().navigate(R.id.aboutFragment)
+            findNavController().navigate(R.id.action_settingsFragment_to_aboutFragment)
         }
     }
 

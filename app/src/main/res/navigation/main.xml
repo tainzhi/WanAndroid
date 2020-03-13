@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     app:startDestination="@id/mainFragment">
-
+    
     <include app:graph="@navigation/login" />
-
+    
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.tainzhi.android.wanandroid.ui.MainFragment"
@@ -14,19 +14,35 @@
         tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_main_to_login"
-            app:destination="@id/login" />
+            app:destination="@id/login"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_mainFragment_to_collectFragment"
             app:destination="@id/collectFragment" />
         <action
             android:id="@+id/action_systemFragment_to_systemTypeNormalFragment"
-            app:destination="@id/systemTypeNormalFragment" />
+            app:destination="@id/systemTypeNormalFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_mainFragment_to_searchFragment"
-            app:destination="@id/searchFragment" />
+            app:destination="@id/searchFragment"
+            app:enterAnim="@anim/scale_in"
+            app:exitAnim="@anim/alpha_out"
+            app:popEnterAnim="@anim/alpha_in"
+            app:popExitAnim="@anim/scale_out" />
         <action
-            android:id="@+id/action_mainFragment_to_otherInfoFragment"
-            app:destination="@id/settingsFragment" />
+            android:id="@+id/action_mainFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_mainFragment_to_historyFragment"
             app:destination="@id/historyFragment" />
@@ -39,34 +55,34 @@
         android:id="@+id/projectFragment"
         android:name="com.tainzhi.android.wanandroid.ui.project.ProjectFragment"
         android:label="@string/project" />
-
-
+    
+    
     <fragment
         android:id="@+id/collectFragment"
         android:name="com.tainzhi.android.wanandroid.ui.CollectFragment"
         android:label="fragment_collect"
         tools:layout="@layout/fragment_collect" />
-
+    
     <fragment
         android:id="@+id/browserFragment"
         android:name="com.tainzhi.android.wanandroid.ui.BrowserFragment"
         android:label="fragment_browser"
         tools:layout="@layout/fragment_browser">
-
+        
         <argument
             android:name="url"
             android:defaultValue="www.wanandroid.com"
             app:argType="string" />
-
+    
     </fragment>
     <action
         android:id="@+id/action_global_browserFragment"
-        app:enterAnim="@anim/enter_slide_down"
-        app:exitAnim="@anim/exit_slide_down"
-        app:popEnterAnim="@anim/pop_enter_slide_up"
-        app:popExitAnim="@anim/pop_exit_slide_up"
-        app:destination="@id/browserFragment" />
-
+        app:destination="@id/browserFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+    
     <fragment
         android:id="@+id/systemTypeNormalFragment"
         android:name="com.tainzhi.android.wanandroid.ui.SystemTypeNormalFragment"
@@ -88,7 +104,11 @@
         tools:layout="@layout/fragment_settings">
         <action
             android:id="@+id/action_settingsFragment_to_aboutFragment"
-            app:destination="@id/aboutFragment" />
+            app:destination="@id/aboutFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/historyFragment"

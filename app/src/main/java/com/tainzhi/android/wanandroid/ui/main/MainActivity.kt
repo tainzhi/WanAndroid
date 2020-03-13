@@ -99,13 +99,13 @@ class MainActivity : BaseVMActivity<MainViewModel>(useBinding = true) {
             navController.navigate(R.id.action_main_to_login)
         }
         myCollectionBtn.setOnClickListener {
-            navController.navigate(R.id.collectFragment)
+            navController.navigate(R.id.action_mainFragment_to_collectFragment)
         }
         browseHistoryBtn.setOnClickListener {
-            navController.navigate(R.id.historyFragment)
+            navController.navigate(R.id.action_mainFragment_to_historyFragment)
         }
         settingsBtn.setOnClickListener {
-            navController.navigate(R.id.settingsFragment)
+            navController.navigate(R.id.action_mainFragment_to_settingsFragment)
         }
         logoutBtn.setOnClickListener {
             toast(mViewModel.user.value?.nickname + getString(R.string.logout_success))
@@ -147,7 +147,7 @@ class MainActivity : BaseVMActivity<MainViewModel>(useBinding = true) {
     
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.searchFragment) {
-            navController.navigate(R.id.searchFragment)
+            navController.navigate(R.id.action_mainFragment_to_searchFragment)
         }
         return super.onOptionsItemSelected(item)
     }
