@@ -100,8 +100,8 @@ class AboutFragment : BaseFragment() {
      */
     private fun checkUpdate() {
         val currVersionCode = AppInfoUtils.getVersionCode()
-        val updateInfo = MemoryCache.instance?.get(MemoryCache.KEY_UPDATE_INFO) as UpdateInfo
-        if (currVersionCode >= updateInfo.versionCode) {
+        val updateInfo = MemoryCache.instance?.get(MemoryCache.KEY_UPDATE_INFO) as? UpdateInfo
+        if (updateInfo == null || currVersionCode >= updateInfo.versionCode) {
             AlertDialog.Builder(activity)
                     .setMessage(R.string.check_update_result)
                     .create()

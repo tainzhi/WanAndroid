@@ -73,6 +73,8 @@
                     android:id="@+id/searchHistoryTagLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:layout_marginEnd="@dimen/margin_small"
                     android:layout_marginTop="10dp"
                     app:max_select="1">
 
@@ -85,14 +87,16 @@
                     android:layout_marginTop="20dp"
                     android:text="@string/everyone_searching"
                     style="?textAppearanceSubtitle2" />
-
+    
                 <com.zhy.view.flowlayout.TagFlowLayout
                     android:id="@+id/hotTagLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:layout_marginEnd="@dimen/margin_small"
                     app:max_select="1">
-
+    
                 </com.zhy.view.flowlayout.TagFlowLayout>
 
                 <TextView
@@ -102,14 +106,16 @@
                     android:layout_marginTop="20dp"
                     android:text="@string/commonly_used_sites"
                     style="?textAppearanceSubtitle2" />
-
+    
                 <com.zhy.view.flowlayout.TagFlowLayout
                     android:id="@+id/webTagLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:layout_marginEnd="@dimen/margin_small"
                     app:max_select="1">
-
+    
                 </com.zhy.view.flowlayout.TagFlowLayout>
 
             </LinearLayout>
