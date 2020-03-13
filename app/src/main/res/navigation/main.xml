@@ -61,6 +61,10 @@
     </fragment>
     <action
         android:id="@+id/action_global_browserFragment"
+        app:enterAnim="@anim/enter_slide_down"
+        app:exitAnim="@anim/exit_slide_down"
+        app:popEnterAnim="@anim/pop_enter_slide_up"
+        app:popExitAnim="@anim/pop_exit_slide_up"
         app:destination="@id/browserFragment" />
 
     <fragment

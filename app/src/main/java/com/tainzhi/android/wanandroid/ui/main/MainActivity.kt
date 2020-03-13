@@ -7,9 +7,11 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.NavigationUI.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.tainzhi.android.wanandroid.R
@@ -36,8 +38,8 @@ class MainActivity : BaseVMActivity<MainViewModel>(useBinding = true) {
     override fun getLayoutResId() = R.layout.activity_main
 
     override fun initView() {
-
-        navController = findNavController(R.id.mainNavHostFragment)
+    
+        navController = mainNavHostFragment.findNavController()
 
         val appBarConfig = AppBarConfiguration(mainDestinationIds, mainDrawerLayout)
         setSupportActionBar(toolbar)
@@ -142,12 +144,16 @@ class MainActivity : BaseVMActivity<MainViewModel>(useBinding = true) {
         menuInflater.inflate(R.menu.main_search_menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
-
+    
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.searchFragment) {
-            findNavController(R.id.mainNavHostFragment).navigate(R.id.searchFragment)
+            navController.navigate(R.id.searchFragment)
         }
         return super.onOptionsItemSelected(item)
     }
-
+    
+    override fun onSupportNavigateUp(): Boolean {
+        return navigateUp(Navigation.findNavController(this, R.id.mainNavHostFragment), mainDrawerLayout)
+    }
+    
 }
