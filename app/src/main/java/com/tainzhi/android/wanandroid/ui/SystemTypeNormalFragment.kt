@@ -1,7 +1,6 @@
 package com.tainzhi.android.wanandroid.ui
 
 import androidx.activity.addCallback
-import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -32,7 +31,6 @@ class SystemTypeNormalFragment : BaseFragment() {
                 onBack()
             }
         }
-        (activity as AppCompatActivity).setSupportActionBar(toolbar)
 
         initViewPager()
     }

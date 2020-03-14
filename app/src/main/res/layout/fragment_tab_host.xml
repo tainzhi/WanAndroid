@@ -27,6 +27,7 @@
                     android:layout_gravity="top"
                     android:background="?attr/colorPrimary"
                     app:layout_scrollFlags="scroll|enterAlways"
+                    app:menu="@menu/main_search_menu"
                     app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
             </com.google.android.material.appbar.AppBarLayout>
             

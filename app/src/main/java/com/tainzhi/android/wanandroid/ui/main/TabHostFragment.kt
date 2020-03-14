@@ -1,11 +1,9 @@
 package com.tainzhi.android.wanandroid.ui.main
 
-import androidx.activity.addCallback
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.setupWithNavController
+import androidx.navigation.findNavController
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.tainzhi.android.wanandroid.R
 import com.tainzhi.android.wanandroid.R.string
@@ -140,10 +138,6 @@ class TabHostFragment : BaseVMFragment<MainViewModel>(useBinding = true) {
     //     return super.onOptionsItemSelected(item)
     // }
     //
-    // override fun onSupportNavigateUp(): Boolean {
-    //     return navigateUp(Navigation.findNavController(this, R.id.mainNavHostFragment), mainDrawerLayout)
-    // }
-    //
     
     // 主页tab
     private val tabHostFragment by lazy { MainFragment() }
@@ -158,6 +152,8 @@ class TabHostFragment : BaseVMFragment<MainViewModel>(useBinding = true) {
     private val BLOG_INDEX = 1
     private val PROJECT_INDEX = 2
     
+    private var exitTime = 0L
+    
     private val fragmentList = listOf(tabHostFragment, blogFragment, projectFragment)
     
     override fun getLayoutResId() = R.layout.fragment_tab_host
@@ -165,21 +161,30 @@ class TabHostFragment : BaseVMFragment<MainViewModel>(useBinding = true) {
     override fun initVM() = get<MainViewModel>()
     
     override fun initView() {
-    
-        requireActivity().onBackPressedDispatcher.addCallback { onBack() }
-    
+        
+        requireActivity().onBackPressedDispatcher.addCallback(onBackPressed)
+        
         (mBinding as FragmentTabHostBinding).include.viewModel = mViewModel
-    
-        (activity as AppCompatActivity).setSupportActionBar(toolbar)
+        
+        
         toolbar.title = getString(R.string.main)
-    
+        toolbar.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.searchFragment -> {
+                    view!!.findNavController().navigate(R.id.action_tabHostFragment_to_searchFragment)
+                    true
+                }
+                else -> false
+            }
+        }
+        
         initNavigationView()
-    
+        
         tabHostViewPager.run {
             adapter = object : FragmentStateAdapter(this@TabHostFragment) {
-            
+                
                 override fun getItemCount() = fragmentList.size
-            
+                
                 override fun createFragment(position: Int) = fragmentList[position]
             }
             // disable swipe left or right
@@ -212,30 +217,27 @@ class TabHostFragment : BaseVMFragment<MainViewModel>(useBinding = true) {
                 .navigation_drawer_close)
         mainDrawerLayout.addDrawerListener(toggle)
         toggle.syncState()
-        
-        val navController = findNavController()
-        
-        
-        mainDrawerLayoutNavigation.setupWithNavController(navController)
+    
+        // mainDrawerLayoutNavigation.setupWithNavController(navController)
         userNameTv.setOnClickListener {
             closeDrawer()
-            navController.navigate(R.id.action_tabHostFragment_to_login)
+            view!!.findNavController().navigate(R.id.action_tabHostFragment_to_login)
         }
         userImageIv.setOnClickListener {
             closeDrawer()
-            navController.navigate(R.id.action_tabHostFragment_to_login)
+            view!!.findNavController().navigate(R.id.action_tabHostFragment_to_login)
         }
         myCollectionBtn.setOnClickListener {
             closeDrawer()
-            navController.navigate(R.id.action_tabHostFragment_to_collectFragment)
+            view!!.findNavController().navigate(R.id.action_tabHostFragment_to_collectFragment)
         }
         browseHistoryBtn.setOnClickListener {
             closeDrawer()
-            navController.navigate(R.id.action_tabHostFragment_to_historyFragment)
+            view!!.findNavController().navigate(R.id.action_tabHostFragment_to_historyFragment)
         }
         settingsBtn.setOnClickListener {
             closeDrawer()
-            navController.navigate(R.id.action_tabHostFragment_to_settingsFragment)
+            view!!.findNavController().navigate(R.id.action_tabHostFragment_to_settingsFragment)
         }
         logoutBtn.setOnClickListener {
             closeDrawer()
@@ -254,9 +256,17 @@ class TabHostFragment : BaseVMFragment<MainViewModel>(useBinding = true) {
         mainDrawerLayout.closeDrawer(GravityCompat.START)
     }
     
-    private fun onBack() {
-        if (mainDrawerLayout.isDrawerOpen(GravityCompat.START)) {
-            closeDrawer()
+    private val onBackPressed = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            if (mainDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+                closeDrawer()
+            } else if (System.currentTimeMillis() - exitTime > 2000) {
+                exitTime = System.currentTimeMillis()
+                activity?.toast(R.string.back_press_hint)
+            } else {
+                isEnabled = false
+            }
         }
     }
+    
 }

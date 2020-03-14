@@ -4,7 +4,6 @@ import android.content.Context
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.activity.addCallback
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -30,7 +29,6 @@ class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
     override fun initView() {
         toolbar.setTitle(R.string.my_collection)
         toolbar.setNavigationOnClickListener { onBack() }
-        (activity as AppCompatActivity).setSupportActionBar(toolbar)
 
         collectRefreshLayout.setColorSchemeColors(ContextCompat.getColor(activity as Context, R.color.color_secondary))
 
