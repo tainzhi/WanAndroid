@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.activity.addCallback
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
@@ -41,8 +41,8 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
     override fun getLayoutResId() = R.layout.fragment_search
 
     override fun initView() {
-
-        requireActivity().onBackPressedDispatcher.addCallback { onBack() }
+    
+        requireActivity().onBackPressedDispatcher.addCallback(onBackPressed)
 
         searchRecyclerView.run {
             layoutManager = LinearLayoutManager(context)
@@ -230,28 +230,30 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
                 hotList.addAll(data)
                 hotTagLayout.adapter.notifyDataChanged()
             }
-
+    
             it.showWebSites?.let { data ->
                 webSitesList.clear()
                 webSitesList.addAll(data)
                 webTagLayout.adapter.notifyDataChanged()
             }
-
+    
         })
-
+    
     }
-
-    private fun onBack() {
-        // 如果是在搜索结果页面，那么返回，将隐藏搜索结果页面，显示热搜页面
-        if (searchAdapter.data.size != 0) {
-            searchAdapter.setNewData(null)
-            searchRecyclerView.visibility = View.INVISIBLE
-            hotContent.visibility = View.VISIBLE
-            requireActivity().onBackPressedDispatcher.addCallback { onBack() }
-            // 更新搜索记录
-            mViewModel.getSearchHistory()
-        } else {
-            findNavController().popBackStack()
+    
+    private val onBackPressed = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            // 如果是在搜索结果页面，那么返回，将隐藏搜索结果页面，显示热搜页面
+            if (searchAdapter.data.size != 0) {
+                searchAdapter.setNewData(null)
+                searchRecyclerView.visibility = View.INVISIBLE
+                hotContent.visibility = View.VISIBLE
+                // 更新搜索记录
+                mViewModel.getSearchHistory()
+            } else {
+                findNavController().popBackStack()
+                isEnabled = false
+            }
         }
     }
 }

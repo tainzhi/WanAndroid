@@ -1,7 +1,7 @@
 package com.tainzhi.android.wanandroid.ui
 
-import androidx.activity.addCallback
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.tainzhi.android.wanandroid.R
 import com.tainzhi.android.wanandroid.WanApp
@@ -15,10 +15,10 @@ class SettingsFragment : BaseFragment() {
 
     override fun initView() {
         toolbar.setTitle(R.string.settings)
-        toolbar.setNavigationOnClickListener { onBack() }
+        toolbar.setNavigationOnClickListener { view ->
+            view.findNavController().navigateUp()
+        }
     
-    
-        requireActivity().onBackPressedDispatcher.addCallback { onBack() }
     }
 
     override fun initData() {
@@ -34,8 +34,5 @@ class SettingsFragment : BaseFragment() {
         }
     }
 
-    private fun onBack() {
-        findNavController().popBackStack()
-    }
 }
 

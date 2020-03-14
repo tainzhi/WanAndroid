@@ -4,7 +4,8 @@ import android.graphics.Bitmap
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import androidx.activity.addCallback
+import androidx.activity.OnBackPressedCallback
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.tainzhi.android.wanandroid.R
@@ -27,7 +28,7 @@ class BrowserFragment : BaseFragment() {
 
     override fun initView() {
         toolbar.setTitle(R.string.is_loading)
-        toolbar.setNavigationOnClickListener { onBack() }
+        toolbar.setNavigationOnClickListener { view -> onBack(view) }
 
         progressBar.progressDrawable = this.resources
                 .getDrawable(R.drawable.color_progressbar, null)
@@ -35,9 +36,8 @@ class BrowserFragment : BaseFragment() {
         initWebView()
 
         browserLinearLayout.addView(webView)
-
-
-        requireActivity().onBackPressedDispatcher.addCallback { onBack() }
+    
+        requireActivity().onBackPressedDispatcher.addCallback(onBackPressed)
     }
 
     override fun initData() {
@@ -81,15 +81,29 @@ class BrowserFragment : BaseFragment() {
             }
         }
     }
-
-    private fun onBack() {
+    
+    private fun onBack(view: View) {
         // 如果可以放回上次浏览网页
         if (webView.canGoBack()) {
             webView.goBack()
         } else {
             webView.destroy()
             (webView.parent as? LinearLayout)?.removeView(webView)
-            findNavController().popBackStack()
+            view.findNavController().popBackStack()
+        }
+    }
+    
+    private val onBackPressed = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            // 如果可以放回上次浏览网页
+            if (webView.canGoBack()) {
+                webView.goBack()
+            } else {
+                webView.destroy()
+                (webView.parent as? LinearLayout)?.removeView(webView)
+                findNavController().popBackStack()
+                isEnabled = false
+            }
         }
     }
 }

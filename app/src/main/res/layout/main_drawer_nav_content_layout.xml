@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.tainzhi.android.wanandroid.ui.main.MainViewModel" />
+            type="com.tainzhi.android.wanandroid.ui.main.TabHostViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"

@@ -14,6 +14,7 @@ import com.tainzhi.android.wanandroid.repository.MainRepository
 import com.tainzhi.android.wanandroid.util.MemoryCache
 import com.tainzhi.android.wanandroid.util.Preference
 import com.tainzhi.android.wanandroid.util.UpdateUtils
+import timber.log.Timber
 
 /**
  * @author:      tainzhi
@@ -22,13 +23,13 @@ import com.tainzhi.android.wanandroid.util.UpdateUtils
  * @description:
  **/
 
-class MainViewModel(
+class TabHostViewModel(
         private val loginRepository: LoginRepository,
         private val mainRepository: MainRepository,
         private val historyDao: HistoryDao,
         private val dispatcherProvider: CoroutinesDispatcherProvider
 ) : BaseViewModel() {
-
+    
     private val mIsLogin: MutableLiveData<Boolean> = WanApp.preferenceRepository.mIsLogin
     private val mUser: MutableLiveData<User> = WanApp.preferenceRepository.mUser
     private val mUpdateInfo = MutableLiveData<UpdateInfo>()
@@ -51,6 +52,15 @@ class MainViewModel(
                         mUpdateInfo.postValue(updateInfo)
                     }
                 }
+            }
+        }
+    }
+    
+    fun getUserInfo() {
+        if (mIsLogin.value == true) {
+            launch {
+                mUser.postValue(WanApp.preferenceRepository.mUser.value)
+                Timber.d("qfq, ${mUser.value}")
             }
         }
     }

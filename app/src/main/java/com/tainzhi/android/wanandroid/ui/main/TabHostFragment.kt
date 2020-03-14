@@ -1,8 +1,10 @@
 package com.tainzhi.android.wanandroid.ui.main
 
+import android.content.Context
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
+import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.tainzhi.android.wanandroid.R
@@ -12,12 +14,13 @@ import com.tainzhi.android.wanandroid.databinding.FragmentTabHostBinding
 import com.tainzhi.android.wanandroid.ui.BlogFragment
 import com.tainzhi.android.wanandroid.ui.MainFragment
 import com.tainzhi.android.wanandroid.ui.project.ProjectFragment
+import com.tainzhi.android.wanandroid.util.UpdateUtils
 import com.tainzhi.android.wanandroid.util.toast
 import kotlinx.android.synthetic.main.fragment_tab_host.*
 import kotlinx.android.synthetic.main.main_drawer_nav_content_layout.*
 import org.koin.android.ext.android.get
 
-class TabHostFragment : BaseVMFragment<MainViewModel>(useBinding = true) {
+class TabHostFragment : BaseVMFragment<TabHostViewModel>(useBinding = true) {
     //
     // private lateinit var navController: NavController
     //
@@ -66,7 +69,7 @@ class TabHostFragment : BaseVMFragment<MainViewModel>(useBinding = true) {
     //
     // }
     //
-    // override fun initVM(): MainViewModel = getViewModel()
+    // override fun initVM(): TabHostViewModel = getViewModel()
     //
     // override fun startObserve() {
     //
@@ -158,7 +161,7 @@ class TabHostFragment : BaseVMFragment<MainViewModel>(useBinding = true) {
     
     override fun getLayoutResId() = R.layout.fragment_tab_host
     
-    override fun initVM() = get<MainViewModel>()
+    override fun initVM() = get<TabHostViewModel>()
     
     override fun initView() {
         
@@ -247,9 +250,17 @@ class TabHostFragment : BaseVMFragment<MainViewModel>(useBinding = true) {
     }
     
     override fun initData() {
+        // FIXME: 2020/3/11 初始化没有User的post，导致用户信息没有显示，原因还是用户登录状态的保持和传递
+        // 尤其是没有使用Event bus，怎么处理，还需要深入
+        mViewModel.getAppUpdateInfo()
+        mViewModel.getUserInfo()
     }
     
     override fun startObserve() {
+    
+        mViewModel.updateInfo.observe(this, Observer { updateInfo ->
+            UpdateUtils.newInstance().updateApp(activity as Context, updateInfo)
+        })
     }
     
     private fun closeDrawer() {
@@ -263,7 +274,6 @@ class TabHostFragment : BaseVMFragment<MainViewModel>(useBinding = true) {
             } else if (System.currentTimeMillis() - exitTime > 2000) {
                 exitTime = System.currentTimeMillis()
                 activity?.toast(R.string.back_press_hint)
-            } else {
                 isEnabled = false
             }
         }

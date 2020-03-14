@@ -43,7 +43,7 @@ class PreferenceRepository {
     private var _user by Preference(Preference.KEY_USER_JSON, "")
 
     val mIsLogin: MutableLiveData<Boolean> = MutableLiveData(_isLogin)
-    val mUser: MutableLiveData<User> = MutableLiveData()
+    val mUser: MutableLiveData<User> = MutableLiveData(getUserFromJson())
 
     val isLogin: LiveData<Boolean> = mIsLogin
     val user: LiveData<User> = Transformations.switchMap(mIsLogin) { isLogin ->

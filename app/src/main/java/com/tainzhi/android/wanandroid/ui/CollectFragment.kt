@@ -3,9 +3,9 @@ package com.tainzhi.android.wanandroid.ui
 import android.content.Context
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.activity.addCallback
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
@@ -28,14 +28,14 @@ class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
 
     override fun initView() {
         toolbar.setTitle(R.string.my_collection)
-        toolbar.setNavigationOnClickListener { onBack() }
-
+        toolbar.setNavigationOnClickListener { view ->
+            view.findNavController().navigateUp()
+        }
+    
         collectRefreshLayout.setColorSchemeColors(ContextCompat.getColor(activity as Context, R.color.color_secondary))
-
-        requireActivity().onBackPressedDispatcher.addCallback { onBack() }
-
+    
         (mBinding as FragmentCollectBinding).viewModel = mViewModel
-
+    
         collectRecyclerView.run {
             layoutManager = LinearLayoutManager(activity)
             addItemDecoration(SpaceItemDecoration(context.resources.getDimension(R.dimen.margin_small)))
@@ -93,11 +93,6 @@ class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
 
     private fun loadMore() {
         mViewModel.getCollectArticleList(false)
-    }
-
-    private fun onBack() {
-        // findNavController().popBackStack(R.id.mainFragment, false)
-        findNavController().popBackStack()
     }
 
     override fun startObserve() {
