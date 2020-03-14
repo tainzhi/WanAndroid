@@ -1,6 +1,7 @@
 package com.tainzhi.android.wanandroid.ui
 
 import androidx.activity.addCallback
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.tainzhi.android.wanandroid.R
@@ -16,6 +17,7 @@ class SettingsFragment : BaseFragment() {
     override fun initView() {
         toolbar.setTitle(R.string.settings)
         toolbar.setNavigationOnClickListener { onBack() }
+        (activity as AppCompatActivity).setSupportActionBar(toolbar)
 
         requireActivity().onBackPressedDispatcher.addCallback { onBack() }
     }

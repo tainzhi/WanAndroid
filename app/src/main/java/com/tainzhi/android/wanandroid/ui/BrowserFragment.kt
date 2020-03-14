@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.activity.addCallback
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.tainzhi.android.wanandroid.R
@@ -28,6 +29,7 @@ class BrowserFragment : BaseFragment() {
     override fun initView() {
         toolbar.setTitle(R.string.is_loading)
         toolbar.setNavigationOnClickListener { onBack() }
+        (activity as AppCompatActivity).setSupportActionBar(toolbar)
 
         progressBar.progressDrawable = this.resources
                 .getDrawable(R.drawable.color_progressbar, null)

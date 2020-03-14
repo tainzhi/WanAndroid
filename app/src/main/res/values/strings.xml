@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="TypographyEllipsis">
     <string name="app_name">WanAndroid</string>
     <string name="app_logo_html"><font color="#FF0000">Wan</font>Android</string>
-    <string name="home">Home</string>
+    <string name="main">Main</string>
     <string name="blog">Blog</string>
     <string name="search">Search</string>
     <string name="project">Project</string>

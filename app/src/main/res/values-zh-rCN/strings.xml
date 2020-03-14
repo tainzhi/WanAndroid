@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="TypographyEllipsis">
     <string name="app_name">玩安卓</string>
     <string name="app_logo_html"><font color="#FF0000">Wan</font>Android</string>
-    <string name="home">主页</string>
+    <string name="main">主页</string>
     <string name="blog">博客</string>
     <string name="search">搜索</string>
     <string name="project">项目分类</string>

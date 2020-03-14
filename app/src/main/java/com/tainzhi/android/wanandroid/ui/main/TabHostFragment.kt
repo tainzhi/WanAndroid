@@ -1,12 +1,14 @@
 package com.tainzhi.android.wanandroid.ui.main
 
+import androidx.activity.addCallback
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.tainzhi.android.wanandroid.R
 import com.tainzhi.android.wanandroid.R.string
-import com.tainzhi.android.wanandroid.adapter.TabHostPagerAdapter
 import com.tainzhi.android.wanandroid.base.ui.BaseVMFragment
 import com.tainzhi.android.wanandroid.databinding.FragmentTabHostBinding
 import com.tainzhi.android.wanandroid.ui.BlogFragment
@@ -156,34 +158,48 @@ class TabHostFragment : BaseVMFragment<MainViewModel>(useBinding = true) {
     private val BLOG_INDEX = 1
     private val PROJECT_INDEX = 2
     
-    private val tabHostPagerAdapter by lazy {
-        TabHostPagerAdapter(this,
-                            listOf(tabHostFragment, blogFragment, projectFragment))
-    }
+    private val fragmentList = listOf(tabHostFragment, blogFragment, projectFragment)
     
     override fun getLayoutResId() = R.layout.fragment_tab_host
     
     override fun initVM() = get<MainViewModel>()
     
     override fun initView() {
-        
+    
+        requireActivity().onBackPressedDispatcher.addCallback { onBack() }
+    
         (mBinding as FragmentTabHostBinding).include.viewModel = mViewModel
-        
+    
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
-        
+        toolbar.title = getString(R.string.main)
+    
         initNavigationView()
-        
+    
         tabHostViewPager.run {
-            adapter = tabHostPagerAdapter
+            adapter = object : FragmentStateAdapter(this@TabHostFragment) {
+            
+                override fun getItemCount() = fragmentList.size
+            
+                override fun createFragment(position: Int) = fragmentList[position]
+            }
             // disable swipe left or right
             isUserInputEnabled = false
         }
         
         tabHostBottomNavigation.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.tabHostFragment -> tabHostViewPager.currentItem = MAIN_INDEX
-                R.id.blogFragment -> tabHostViewPager.currentItem = BLOG_INDEX
-                R.id.projectFragment -> tabHostViewPager.currentItem = PROJECT_INDEX
+                R.id.tabHostFragment -> {
+                    tabHostViewPager.currentItem = MAIN_INDEX
+                    toolbar.title = getString(R.string.main)
+                }
+                R.id.blogFragment -> {
+                    tabHostViewPager.currentItem = BLOG_INDEX
+                    toolbar.title = getString(R.string.blog)
+                }
+                R.id.projectFragment -> {
+                    tabHostViewPager.currentItem = PROJECT_INDEX
+                    toolbar.title = getString(R.string.project)
+                }
             }
             true
         }
@@ -202,24 +218,29 @@ class TabHostFragment : BaseVMFragment<MainViewModel>(useBinding = true) {
         
         mainDrawerLayoutNavigation.setupWithNavController(navController)
         userNameTv.setOnClickListener {
+            closeDrawer()
             navController.navigate(R.id.action_tabHostFragment_to_login)
         }
         userImageIv.setOnClickListener {
+            closeDrawer()
             navController.navigate(R.id.action_tabHostFragment_to_login)
         }
         myCollectionBtn.setOnClickListener {
+            closeDrawer()
             navController.navigate(R.id.action_tabHostFragment_to_collectFragment)
         }
         browseHistoryBtn.setOnClickListener {
+            closeDrawer()
             navController.navigate(R.id.action_tabHostFragment_to_historyFragment)
         }
         settingsBtn.setOnClickListener {
+            closeDrawer()
             navController.navigate(R.id.action_tabHostFragment_to_settingsFragment)
         }
         logoutBtn.setOnClickListener {
+            closeDrawer()
             activity?.toast(mViewModel.user.value?.nickname + getString(string.logout_success))
             mViewModel.logout()
-            mainDrawerLayout.closeDrawers()
         }
     }
     
@@ -229,5 +250,13 @@ class TabHostFragment : BaseVMFragment<MainViewModel>(useBinding = true) {
     override fun startObserve() {
     }
     
+    private fun closeDrawer() {
+        mainDrawerLayout.closeDrawer(GravityCompat.START)
+    }
     
+    private fun onBack() {
+        if (mainDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            closeDrawer()
+        }
+    }
 }

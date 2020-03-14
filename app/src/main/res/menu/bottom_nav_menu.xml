@@ -3,7 +3,7 @@
 	<item
 		android:id="@+id/tabHostFragment"
 		android:icon="@drawable/ic_baseline_home_24"
-		android:title="@string/home" />
+		android:title="@string/main" />
 
 	<item
 		android:id="@+id/blogFragment"

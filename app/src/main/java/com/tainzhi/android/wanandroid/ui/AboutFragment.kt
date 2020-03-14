@@ -8,6 +8,7 @@ import android.view.Gravity
 import android.view.MenuItem
 import android.widget.PopupMenu
 import androidx.activity.addCallback
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import com.tainzhi.android.wanandroid.BuildConfig
 import com.tainzhi.android.wanandroid.R
@@ -28,6 +29,7 @@ class AboutFragment : BaseFragment() {
     override fun initView() {
         toolbar.setTitle(R.string.about)
         toolbar.setNavigationOnClickListener { onBack() }
+        (activity as AppCompatActivity).setSupportActionBar(toolbar)
 
         requireActivity().onBackPressedDispatcher.addCallback { onBack() }
     }

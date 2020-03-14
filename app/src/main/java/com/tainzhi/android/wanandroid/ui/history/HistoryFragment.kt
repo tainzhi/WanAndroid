@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.activity.addCallback
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -57,10 +58,11 @@ class HistoryFragment : BaseVMFragment<HistoryViewModel>(useBinding = true) {
             when (menuItem.itemId) {
                 R.id.deleteAll -> mViewModel.deleteBrowseHistory()
                 else -> Unit
-
+            
             }
             false
         }
+        (activity as AppCompatActivity).setSupportActionBar(toolbar)
     }
 
     override fun initData() {

@@ -3,6 +3,7 @@ package com.tainzhi.android.wanandroid.ui.login
 import android.content.Context
 import android.os.IBinder
 import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.tainzhi.android.wanandroid.R
@@ -22,6 +23,7 @@ class RegisterFragment : BaseVMFragment<LoginViewModel>(useBinding = true) {
     override fun initView() {
         toolbar.setTitle(R.string.register)
         toolbar.setNavigationOnClickListener { onBack() }
+        (activity as AppCompatActivity).setSupportActionBar(toolbar)
 
     }
 
