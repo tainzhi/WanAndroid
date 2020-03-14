@@ -55,6 +55,6 @@ class SystemTypeNormalFragment : BaseFragment() {
     }
 
     private fun onBack() {
-        findNavController().popBackStack(R.id.mainFragment, false)
+        findNavController().popBackStack()
     }
 }

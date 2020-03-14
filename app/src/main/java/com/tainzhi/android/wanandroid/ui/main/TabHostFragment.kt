@@ -185,7 +185,7 @@ class TabHostFragment : BaseVMFragment<MainViewModel>(useBinding = true) {
                 R.id.blogFragment -> tabHostViewPager.currentItem = BLOG_INDEX
                 R.id.projectFragment -> tabHostViewPager.currentItem = PROJECT_INDEX
             }
-            false
+            true
         }
         
     }
@@ -228,4 +228,6 @@ class TabHostFragment : BaseVMFragment<MainViewModel>(useBinding = true) {
     
     override fun startObserve() {
     }
+    
+    
 }
