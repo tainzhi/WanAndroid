@@ -99,7 +99,7 @@ class HistoryFragment : BaseVMFragment<HistoryViewModel>(useBinding = true) {
     }
 
     private fun onBack() {
-        findNavController().popBackStack(R.id.mainFragment, false)
+        findNavController().popBackStack()
     }
 
     override fun startObserve() {

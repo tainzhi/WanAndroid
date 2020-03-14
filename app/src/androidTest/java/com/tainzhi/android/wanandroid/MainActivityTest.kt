@@ -7,7 +7,7 @@ import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
-import com.tainzhi.android.wanandroid.ui.main.MainActivity
+import com.tainzhi.android.wanandroid.ui.main.TabHostFragment
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -21,10 +21,10 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class MainActivityTest {
-
+    
     @Rule
     @JvmField
-    var activityTestRule = ActivityTestRule(MainActivity::class.java)
+    var activityTestRule = ActivityTestRule(TabHostFragment::class.java)
 
     @Test
     fun clickResearch() {

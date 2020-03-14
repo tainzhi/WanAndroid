@@ -6,7 +6,6 @@ import com.tainzhi.android.wanandroid.R
 import com.tainzhi.android.wanandroid.adapter.SplashAdapter
 import com.tainzhi.android.wanandroid.base.ui.BaseActivity
 import com.tainzhi.android.wanandroid.binding.fromN
-import com.tainzhi.android.wanandroid.ui.main.MainActivity
 import com.tainzhi.android.wanandroid.util.startKtxActivity
 import com.tainzhi.android.wanandroid.view.ScrollLinearLayoutManager
 import kotlinx.android.synthetic.main.activity_splash.*

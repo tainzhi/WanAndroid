@@ -11,7 +11,7 @@ import com.tainzhi.android.wanandroid.R
 import com.tainzhi.android.wanandroid.adapter.BaseBindAdapter
 import com.tainzhi.android.wanandroid.base.ui.BaseVMFragment
 import com.tainzhi.android.wanandroid.bean.SystemParent
-import com.tainzhi.android.wanandroid.ui.MainFragmentDirections
+import com.tainzhi.android.wanandroid.ui.main.TabHostFragmentDirections
 import com.tainzhi.android.wanandroid.util.toast
 import com.tainzhi.android.wanandroid.view.SpaceItemDecoration
 import kotlinx.android.synthetic.main.fragment_system.*
@@ -45,8 +45,8 @@ class SystemFragment : BaseVMFragment<SystemViewModel>() {
         }
 
         systemAdapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener { _, _, position ->
-            val action = MainFragmentDirections.actionSystemFragmentToSystemTypeNormalFragment(systemAdapter
-                    .data[position])
+            val action = TabHostFragmentDirections.actionSystemFragmentToSystemTypeNormalFragment(systemAdapter
+                                                                                                          .data[position])
             findNavController().navigate(action)
         }
 

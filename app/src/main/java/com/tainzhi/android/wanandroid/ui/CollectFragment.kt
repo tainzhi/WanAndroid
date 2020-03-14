@@ -96,7 +96,8 @@ class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
     }
 
     private fun onBack() {
-        findNavController().popBackStack(R.id.mainFragment, false)
+        // findNavController().popBackStack(R.id.mainFragment, false)
+        findNavController().popBackStack()
     }
 
     override fun startObserve() {

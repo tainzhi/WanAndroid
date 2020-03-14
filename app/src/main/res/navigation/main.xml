@@ -3,25 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    app:startDestination="@id/mainFragment">
+    app:startDestination="@id/tabHostFragment">
     
     <include app:graph="@navigation/login" />
     
     <fragment
-        android:id="@+id/mainFragment"
-        android:name="com.tainzhi.android.wanandroid.ui.MainFragment"
-        android:label="@string/home"
-        tools:layout="@layout/fragment_main">
+        android:id="@+id/tabHostFragment"
+        android:name="com.tainzhi.android.wanandroid.ui.main.TabHostFragment"
+        tools:layout="@layout/fragment_tab_host">
         <action
-            android:id="@+id/action_main_to_login"
+            android:id="@+id/action_tabHostFragment_to_login"
             app:destination="@id/login"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
-        <action
-            android:id="@+id/action_mainFragment_to_collectFragment"
-            app:destination="@id/collectFragment" />
         <action
             android:id="@+id/action_systemFragment_to_systemTypeNormalFragment"
             app:destination="@id/systemTypeNormalFragment"
@@ -30,32 +26,26 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
         <action
-            android:id="@+id/action_mainFragment_to_searchFragment"
+            android:id="@+id/action_tabHostFragment_to_searchFragment"
             app:destination="@id/searchFragment"
             app:enterAnim="@anim/scale_in"
             app:exitAnim="@anim/alpha_out"
             app:popEnterAnim="@anim/alpha_in"
             app:popExitAnim="@anim/scale_out" />
         <action
-            android:id="@+id/action_mainFragment_to_settingsFragment"
+            android:id="@+id/action_tabHostFragment_to_settingsFragment"
             app:destination="@id/settingsFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
         <action
-            android:id="@+id/action_mainFragment_to_historyFragment"
+            android:id="@+id/action_tabHostFragment_to_collectFragment"
+            app:destination="@id/collectFragment" />
+        <action
+            android:id="@+id/action_tabHostFragment_to_historyFragment"
             app:destination="@id/historyFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/blogFragment"
-        android:name="com.tainzhi.android.wanandroid.ui.BlogFragment"
-        android:label="@string/blog" />
-    <fragment
-        android:id="@+id/projectFragment"
-        android:name="com.tainzhi.android.wanandroid.ui.project.ProjectFragment"
-        android:label="@string/project" />
-    
     
     <fragment
         android:id="@+id/collectFragment"

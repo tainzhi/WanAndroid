@@ -4,7 +4,7 @@ import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.IdlingResource
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.tainzhi.android.wanandroid.ui.main.MainActivity
+import com.tainzhi.android.wanandroid.ui.main.TabHostFragment
 import com.tainzhi.android.wanandroid.utils.DataBindingIdlingResource
 import org.junit.After
 import org.junit.Before
@@ -22,9 +22,9 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class BasicUiTest {
-
+    
     @get:Rule
-    var activityScenarioRule = ActivityScenarioRule(MainActivity::class.java)
+    var activityScenarioRule = ActivityScenarioRule(TabHostFragment::class.java)
 
     private lateinit var dataBindingIdlingResource: IdlingResource
 

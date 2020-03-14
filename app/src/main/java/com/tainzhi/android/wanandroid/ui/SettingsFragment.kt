@@ -34,7 +34,7 @@ class SettingsFragment : BaseFragment() {
     }
 
     private fun onBack() {
-        findNavController().popBackStack(R.id.mainFragment, false)
+        findNavController().popBackStack()
     }
 }
 
