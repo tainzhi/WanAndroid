@@ -21,127 +21,6 @@ import kotlinx.android.synthetic.main.main_drawer_nav_content_layout.*
 import org.koin.android.ext.android.get
 
 class TabHostFragment : BaseVMFragment<TabHostViewModel>(useBinding = true) {
-    //
-    // private lateinit var navController: NavController
-    //
-    // //    private var exitTime = 0L
-    // private val mainDestinationIds = setOf(R.id.tabHostFragment, R.id.blogFragment, R.id
-    //         .projectFragment)
-    //
-    // override fun getLayoutResId() = R.layout.fragment_tab_host
-    //
-    // override fun initView() {
-    //
-    //     navController = mainNavHostFragment.findNavController()
-    //
-    //     val appBarConfig = AppBarConfiguration(mainDestinationIds, mainDrawerLayout)
-    //     setSupportActionBar(toolbar)
-    //     setupActionBarWithNavController(navController, appBarConfig)
-    //     supportActionBar?.setDisplayHomeAsUpEnabled(false)
-    //     supportActionBar?.setHomeButtonEnabled(true)
-    //
-    //     navController.addOnDestinationChangedListener { _, destination, _ ->
-    //         if (destination.id in mainDestinationIds) {
-    //             mainBottomNavigation.visible()
-    //             toolbar.visible()
-    //             mainDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
-    //         } else {
-    //             mainBottomNavigation.gone()
-    //             toolbar.gone()
-    //             mainDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-    //         }
-    //     }
-    //
-    //     val toggle = ActionBarDrawerToggle(
-    //             this, mainDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string
-    //             .navigation_drawer_close)
-    //     mainDrawerLayout.addDrawerListener(toggle)
-    //     toggle.syncState()
-    //
-    //     mainBottomNavigation.run {
-    //         setupWithNavController(navController)
-    //         setOnNavigationItemSelectedListener { menuItem ->
-    //             NavigationUI.onNavDestinationSelected(menuItem, navController)
-    //         }
-    //     }
-    //
-    //     initNavigationView()
-    //
-    // }
-    //
-    // override fun initVM(): TabHostViewModel = getViewModel()
-    //
-    // override fun startObserve() {
-    //
-    //
-    //     mViewModel.updateInfo.observe(this, Observer { updateInfo ->
-    //         UpdateUtils.newInstance().updateApp(this, updateInfo)
-    //     })
-    // }
-    //
-    // private fun initNavigationView() {
-    //     mainDrawerLayoutNavigation.setupWithNavController(navController)
-    //     userNameTv.setOnClickListener {
-    //         navController.navigate(R.id.action_tabHostFragment_to_login)
-    //     }
-    //     userImageIv.setOnClickListener {
-    //         navController.navigate(R.id.action_tabHostFragment_to_login)
-    //     }
-    //     myCollectionBtn.setOnClickListener {
-    //         navController.navigate(R.id.action_tabHostFragment_to_collectFragment)
-    //     }
-    //     browseHistoryBtn.setOnClickListener {
-    //         navController.navigate(R.id.action_tabHostFragment_to_historyFragment)
-    //     }
-    //     settingsBtn.setOnClickListener {
-    //         navController.navigate(R.id.action_tabHostFragment_to_settingsFragment)
-    //     }
-    //     logoutBtn.setOnClickListener {
-    //         toast(mViewModel.user.value?.nickname + getString(R.string.logout_success))
-    //         mViewModel.logout()
-    //         mainDrawerLayout.closeDrawers()
-    //     }
-    // }
-    //
-    // override fun initData() {
-    //
-    //     (mBinding as ActivityMainBinding).include.viewModel = mViewModel
-    //
-    //     // FIXME: 2020/3/11 初始化没有User的post，导致用户信息没有显示，原因还是用户登录状态的保持和传递
-    //     // 尤其是没有使用Event bus，怎么处理，还需要深入
-    //     mViewModel.getAppUpdateInfo()
-    //
-    //     Timber.tag(TabHostFragment::class.simpleName)
-    //     Timber.i(mViewModel.user.value.toString())
-    // }
-    //
-    // override fun onBackPressed() {
-    //     if (mainDrawerLayout.isDrawerOpen(GravityCompat.START)) {
-    //         mainDrawerLayout.closeDrawer(GravityCompat.START)
-    //     } else {
-    //         // if (System.currentTimeMillis() - exitTime > 2000) {
-    //         //     exitTime = System.currentTimeMillis()
-    //         //     toast(R.string.back_press_hint)
-    //         // } else {
-    //         //     super.onBackPressed()
-    //         // }
-    //         super.onBackPressed()
-    //     }
-    // }
-    //
-    // override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-    //     menuInflater.inflate(R.menu.main_search_menu, menu)
-    //     return super.onCreateOptionsMenu(menu)
-    // }
-    //
-    // override fun onOptionsItemSelected(item: MenuItem): Boolean {
-    //     if (item.itemId == R.id.searchFragment) {
-    //         navController.navigate(R.id.action_tabHostFragment_to_searchFragment)
-    //     }
-    //     return super.onOptionsItemSelected(item)
-    // }
-    //
-    
     // 主页tab
     private val tabHostFragment by lazy { MainFragment() }
     
@@ -180,6 +59,7 @@ class TabHostFragment : BaseVMFragment<TabHostViewModel>(useBinding = true) {
                 else -> false
             }
         }
+        toolbar.setNavigationOnClickListener { onBackPressed.isEnabled = true }
         
         initNavigationView()
         
@@ -271,11 +151,12 @@ class TabHostFragment : BaseVMFragment<TabHostViewModel>(useBinding = true) {
         override fun handleOnBackPressed() {
             if (mainDrawerLayout != null && mainDrawerLayout.isDrawerOpen(GravityCompat.START)) {
                 closeDrawer()
-            } else if (System.currentTimeMillis() - exitTime > 2000) {
-                exitTime = System.currentTimeMillis()
-                activity?.toast(R.string.back_press_hint)
-                isEnabled = false
             }
+            isEnabled = false
+            // else if (System.currentTimeMillis() - exitTime > 2000) {
+            //     exitTime = System.currentTimeMillis()
+            //     activity?.toast(R.string.back_press_hint)
+            // }
         }
     }
     
