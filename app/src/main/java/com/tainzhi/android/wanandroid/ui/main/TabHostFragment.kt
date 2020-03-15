@@ -269,7 +269,7 @@ class TabHostFragment : BaseVMFragment<TabHostViewModel>(useBinding = true) {
     
     private val onBackPressed = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
-            if (mainDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            if (mainDrawerLayout != null && mainDrawerLayout.isDrawerOpen(GravityCompat.START)) {
                 closeDrawer()
             } else if (System.currentTimeMillis() - exitTime > 2000) {
                 exitTime = System.currentTimeMillis()

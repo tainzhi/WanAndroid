@@ -14,7 +14,6 @@ import com.tainzhi.android.wanandroid.repository.MainRepository
 import com.tainzhi.android.wanandroid.util.MemoryCache
 import com.tainzhi.android.wanandroid.util.Preference
 import com.tainzhi.android.wanandroid.util.UpdateUtils
-import timber.log.Timber
 
 /**
  * @author:      tainzhi
@@ -60,7 +59,6 @@ class TabHostViewModel(
         if (mIsLogin.value == true) {
             launch {
                 mUser.postValue(WanApp.preferenceRepository.mUser.value)
-                Timber.d("qfq, ${mUser.value}")
             }
         }
     }

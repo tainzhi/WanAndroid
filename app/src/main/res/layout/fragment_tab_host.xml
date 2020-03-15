@@ -9,17 +9,15 @@
         android:layout_height="match_parent"
         tools:context=".ui.main.TabHostFragment">
         
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            
+    
             <com.google.android.material.appbar.AppBarLayout
                 android:id="@+id/appBarLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toTopOf="@id/tabHostViewPager"
-                app:layout_constraintTop_toTopOf="parent">
-                
+                android:layout_height="wrap_content">
+        
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
@@ -30,23 +28,22 @@
                     app:menu="@menu/main_search_menu"
                     app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
             </com.google.android.material.appbar.AppBarLayout>
-            
+    
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/tabHostViewPager"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toTopOf="@+id/tabHostBottomNavigation"
-                app:layout_constraintTop_toBottomOf="@id/appBarLayout"
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 tools:ignore="FragmentTagUsage" />
-            
+    
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/tabHostBottomNavigation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
                 app:menu="@menu/bottom_nav_menu" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
         
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/mainDrawerLayoutNavigation"
