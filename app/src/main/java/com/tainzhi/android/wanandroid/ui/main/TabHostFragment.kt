@@ -5,7 +5,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.Observer
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.tainzhi.android.wanandroid.R
 import com.tainzhi.android.wanandroid.R.string
@@ -52,7 +52,7 @@ class TabHostFragment : BaseVMFragment<TabHostViewModel>(useBinding = true) {
         toolbar.setOnMenuItemClickListener { item ->
             when (item.itemId) {
                 R.id.searchFragment -> {
-                    view!!.findNavController().navigate(R.id.action_tabHostFragment_to_searchFragment)
+                    findNavController().navigate(R.id.action_tabHostFragment_to_searchFragment)
                     true
                 }
                 else -> false
@@ -103,23 +103,23 @@ class TabHostFragment : BaseVMFragment<TabHostViewModel>(useBinding = true) {
         // mainDrawerLayoutNavigation.setupWithNavController(navController)
         userNameTv.setOnClickListener {
             closeDrawer()
-            view!!.findNavController().navigate(R.id.action_tabHostFragment_to_login)
+            findNavController().navigate(R.id.action_tabHostFragment_to_login)
         }
         userImageIv.setOnClickListener {
             closeDrawer()
-            view!!.findNavController().navigate(R.id.action_tabHostFragment_to_login)
+            findNavController().navigate(R.id.action_tabHostFragment_to_login)
         }
         myCollectionBtn.setOnClickListener {
             closeDrawer()
-            view!!.findNavController().navigate(R.id.action_tabHostFragment_to_collectFragment)
+            findNavController().navigate(R.id.action_tabHostFragment_to_collectFragment)
         }
         browseHistoryBtn.setOnClickListener {
             closeDrawer()
-            view!!.findNavController().navigate(R.id.action_tabHostFragment_to_historyFragment)
+            findNavController().navigate(R.id.action_tabHostFragment_to_historyFragment)
         }
         settingsBtn.setOnClickListener {
             closeDrawer()
-            view!!.findNavController().navigate(R.id.action_tabHostFragment_to_settingsFragment)
+            findNavController().navigate(R.id.action_tabHostFragment_to_settingsFragment)
         }
         logoutBtn.setOnClickListener {
             closeDrawer()

@@ -3,6 +3,7 @@ package com.tainzhi.android.wanandroid.ui.history
 import android.content.Context
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.activity.addCallback
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
@@ -32,17 +33,20 @@ class HistoryFragment : BaseVMFragment<HistoryViewModel>(useBinding = true) {
     override fun initVM(): HistoryViewModel = getViewModel()
 
     override fun initView() {
-
+    
         initToolbar()
+    
+        requireActivity().onBackPressedDispatcher.addCallback { onBack() }
+    
         historySwipeRefreshLayout.setColorSchemeColors(ContextCompat.getColor(activity as Context, R.color.color_secondary))
-
+    
         (mBinding as FragmentHistoryBinding).viewModel = mViewModel
-
+    
         historyRecyclerView.run {
             layoutManager = LinearLayoutManager(context)
             addItemDecoration(SpaceItemDecoration(context.resources.getDimension(R.dimen.margin_small)))
         }
-
+    
         initAdapter()
     }
 
@@ -116,5 +120,9 @@ class HistoryFragment : BaseVMFragment<HistoryViewModel>(useBinding = true) {
                 }
             })
         }
+    }
+    
+    private fun onBack() {
+        findNavController().navigateUp()
     }
 }

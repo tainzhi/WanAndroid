@@ -3,6 +3,7 @@ package com.tainzhi.android.wanandroid.ui.login
 import android.content.Context
 import android.os.IBinder
 import android.view.inputmethod.InputMethodManager
+import androidx.activity.addCallback
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.tainzhi.android.wanandroid.R
@@ -22,6 +23,8 @@ class LoginFragment : BaseVMFragment<LoginViewModel>(useBinding = true) {
     override fun initView() {
         toolbar.setTitle(R.string.login)
         toolbar.setNavigationOnClickListener { onBack() }
+    
+        requireActivity().onBackPressedDispatcher.addCallback { onBack() }
     
         registerTv.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
@@ -56,7 +59,7 @@ class LoginFragment : BaseVMFragment<LoginViewModel>(useBinding = true) {
 
     private fun onBack() {
         dismissKeyboard(toolbar.windowToken)
-        findNavController().popBackStack()
+        findNavController().navigateUp()
     }
 
     private fun dismissKeyboard(windowToken: IBinder) {

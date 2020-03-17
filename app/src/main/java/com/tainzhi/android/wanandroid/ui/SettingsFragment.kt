@@ -1,5 +1,6 @@
 package com.tainzhi.android.wanandroid.ui
 
+import androidx.activity.addCallback
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -19,6 +20,8 @@ class SettingsFragment : BaseFragment() {
             view.findNavController().navigateUp()
         }
     
+        requireActivity().onBackPressedDispatcher.addCallback { onBack() }
+    
     }
 
     override fun initData() {
@@ -28,11 +31,15 @@ class SettingsFragment : BaseFragment() {
         WanApp.preferenceRepository.isDarkTheme.observe(this, Observer { isDarkTheme ->
             isDarkTheme?.let { changeThemeSwitch.isChecked = it }
         })
-
-        settingsAboutFl.setOnClickListener {
-            findNavController().navigate(R.id.action_settingsFragment_to_aboutFragment)
+    
+        settingsAboutFl.setOnClickListener { view ->
+            view.findNavController().navigate(R.id.action_settingsFragment_to_aboutFragment)
         }
     }
-
+    
+    private fun onBack() {
+        findNavController().navigateUp()
+    }
+    
 }
 

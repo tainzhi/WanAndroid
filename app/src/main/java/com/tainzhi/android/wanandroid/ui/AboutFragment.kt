@@ -88,7 +88,7 @@ class AboutFragment : BaseFragment() {
     }
 
     private fun onBack() {
-        findNavController().popBackStack()
+        findNavController().navigateUp()
     }
 
     private fun showMe() {

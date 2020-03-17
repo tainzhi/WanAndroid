@@ -74,8 +74,10 @@ class ArticleViewModel(
     }
 
     fun insertBrowseHistory(article: Article) {
-        launch() {
-            historyDao.insertBrowseHistory(article)
+        launch {
+            withContext(dispatcherProvider.io) {
+                historyDao.insertBrowseHistory(article)
+            }
         }
     }
 

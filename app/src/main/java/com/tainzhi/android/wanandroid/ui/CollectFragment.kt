@@ -3,6 +3,7 @@ package com.tainzhi.android.wanandroid.ui
 import android.content.Context
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.activity.addCallback
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
@@ -31,6 +32,7 @@ class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
         toolbar.setNavigationOnClickListener { view ->
             view.findNavController().navigateUp()
         }
+        requireActivity().onBackPressedDispatcher.addCallback { onBack() }
     
         collectRefreshLayout.setColorSchemeColors(ContextCompat.getColor(activity as Context, R.color.color_secondary))
     
@@ -54,9 +56,9 @@ class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
                 mViewModel.insertBrowseHistory(articleAdapter.data[position])
 
                 val action = BrowserFragmentDirections.actionGlobalBrowserFragment(articleAdapter
-                        .data[position]
-                        .link)
+                                                                                           .data[position].link)
                 findNavController().navigate(action)
+
             }
             onItemChildClickListener = itemChildClickListener
             setLoadMoreView(CustomLoadMoreView())
@@ -110,14 +112,18 @@ class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
                         loadMoreComplete()
                     }
                 }
-
+    
                 if (it.showEnd) articleAdapter.loadMoreEnd()
-
+    
                 it.showError?.let { message ->
                     activity?.toast(if (message.isBlank()) "网络异常" else message)
                 }
             })
         }
     }
-
+    
+    private fun onBack() {
+        findNavController().navigateUp()
+    }
+    
 }
