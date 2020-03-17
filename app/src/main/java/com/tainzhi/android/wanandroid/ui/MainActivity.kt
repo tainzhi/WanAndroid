@@ -15,8 +15,6 @@ import com.tainzhi.android.wanandroid.WanApp
 
 class MainActivity : AppCompatActivity() {
     
-    // private var exitTime = 0L
-    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -27,13 +25,4 @@ class MainActivity : AppCompatActivity() {
         })
     }
     
-    // override fun onBackPressed() {
-    //     if (System.currentTimeMillis() - exitTime > 2000) {
-    //         exitTime = System.currentTimeMillis()
-    //         toast(R.string.back_press_hint)
-    //
-    //     } else {
-    //         super.onBackPressed()
-    //     }
-    // }
 }

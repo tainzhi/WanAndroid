@@ -48,7 +48,6 @@ class TabHostFragment : BaseVMFragment<TabHostViewModel>(useBinding = true) {
         
         (mBinding as FragmentTabHostBinding).include.viewModel = mViewModel
         
-        
         toolbar.title = getString(R.string.main)
         toolbar.setOnMenuItemClickListener { item ->
             when (item.itemId) {
@@ -151,12 +150,13 @@ class TabHostFragment : BaseVMFragment<TabHostViewModel>(useBinding = true) {
         override fun handleOnBackPressed() {
             if (mainDrawerLayout != null && mainDrawerLayout.isDrawerOpen(GravityCompat.START)) {
                 closeDrawer()
+                // isEnabled = false
+            } else if (System.currentTimeMillis() - exitTime > 2000) {
+                exitTime = System.currentTimeMillis()
+                activity?.toast(R.string.back_press_hint)
+            } else {
+                requireActivity().finish()
             }
-            isEnabled = false
-            // else if (System.currentTimeMillis() - exitTime > 2000) {
-            //     exitTime = System.currentTimeMillis()
-            //     activity?.toast(R.string.back_press_hint)
-            // }
         }
     }
     
