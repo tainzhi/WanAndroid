@@ -72,7 +72,7 @@ class ScrollAwareFABBehavior(context: Context, attrs: AttributeSet) : FloatingAc
         var marginBottom = 0
         val layoutParams = v.layoutParams
         if (layoutParams is ViewGroup.MarginLayoutParams) {
-            marginBottom = (layoutParams as ViewGroup.MarginLayoutParams).bottomMargin
+            marginBottom = layoutParams.bottomMargin
         }
         return marginBottom
     }

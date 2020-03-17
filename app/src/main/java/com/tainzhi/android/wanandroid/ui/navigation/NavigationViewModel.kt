@@ -28,7 +28,7 @@ class NavigationViewModel(private val navigationRepository: NavigationRepository
     }
 
     fun insertBrowseHistory(article: Article) {
-        launch() {
+        launch {
             historyDao.insertBrowseHistory(article)
         }
     }

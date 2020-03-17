@@ -13,9 +13,9 @@ import kotlin.math.ceil
  **/
 
 class FitImageView : AppCompatImageView {
-    constructor(context: Context) : super(context) {}
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {}
-
+    constructor(context: Context) : super(context)
+    constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
+    
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         if (drawable != null) {
             val width = MeasureSpec.getSize(widthMeasureSpec)

@@ -9,6 +9,6 @@ import com.tainzhi.android.wanandroid.ui.project.ProjectFragment
  * @description:
  **/
 
-class BlogFragment() : ProjectFragment() {
+class BlogFragment : ProjectFragment() {
     override var isBlog = true
 }
