@@ -4,7 +4,6 @@ import com.tainzhi.android.wanandroid.api.WanClient
 import com.tainzhi.android.wanandroid.base.BaseRepository
 import com.tainzhi.android.wanandroid.base.Result
 import com.tainzhi.android.wanandroid.bean.ArticleList
-import java.io.IOException
 
 /**
  * @author:       tainzhi
@@ -15,16 +14,12 @@ import java.io.IOException
 
 
 class SquareRepository :  BaseRepository(){
-
-
-    suspend fun getSquareArticleList(page:Int):Result<ArticleList>{
-        return safeApiCall(call = {requestSquareArticleList(page)},errorMessage = "网络异常")
+    
+    
+    suspend fun getSquareArticleList(page: Int): Result<ArticleList> {
+        return safeApiCall(call = { requestSquareArticleList(page) })
     }
-
-    private suspend fun requestSquareArticleList(page: Int):Result<ArticleList>{
-        val response = WanClient.service.getSquareArticleList(page)
-        return if (response.errorCode == 0) Result.Success(response.data)
-        else Result.Error(IOException(response.errorMsg))
-
-    }
+    
+    private suspend fun requestSquareArticleList(page: Int): Result<ArticleList> =
+            executeResponse(WanClient.service.getSquareArticleList(page))
 }

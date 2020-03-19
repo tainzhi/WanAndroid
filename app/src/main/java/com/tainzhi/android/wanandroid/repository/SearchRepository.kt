@@ -16,15 +16,15 @@ import com.tainzhi.android.wanandroid.bean.Hot
 
 class SearchRepository : BaseRepository() {
     suspend fun searchHot(page: Int, key: String): Result<ArticleList> {
-        return safeApiCall(call = {requestSearch(page, key)},errorMessage = "网络错误")
+        return safeApiCall(call = { requestSearch(page, key) })
     }
 
     suspend fun getWebSites(): Result<List<Hot>> {
-        return safeApiCall(call = {requestWebSites()},errorMessage = "网络错误")
+        return safeApiCall(call = { requestWebSites() })
     }
 
     suspend fun getHotSearch(): Result<List<Hot>> {
-        return safeApiCall(call = {requestHotSearch()},errorMessage = "网络错误")
+        return safeApiCall(call = { requestHotSearch() })
     }
 
     private suspend fun requestWebSites():Result<List<Hot>> =

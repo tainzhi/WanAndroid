@@ -150,7 +150,7 @@ class HomeFragment : BaseVMFragment<ArticleViewModel>() {
                 if (it.showEnd) homeArticleAdapter.loadMoreEnd()
 
                 it.showError?.let { message ->
-                    activity?.toast(if (message.isBlank()) "网络异常" else message)
+                    activity?.toast(if (message.isBlank()) "Net error" else message)
                 }
 
             })

@@ -24,11 +24,11 @@ class ProjectRepository : BaseRepository() {
     }
 
     suspend fun getProjectTypeList(): Result<List<SystemParent>> {
-        return safeApiCall(call = {requestProjectTypeList()},errorMessage = "网络错误")
+        return safeApiCall(call = { requestProjectTypeList() })
     }
 
     suspend fun getBlog(): Result<List<SystemParent>> {
-        return safeApiCall(call = {requestBlogTypeList()},errorMessage = "网络错误")
+        return safeApiCall(call = { requestBlogTypeList() })
     }
 
     private suspend fun requestProjectTypeDetailList(page: Int, cid: Int) =

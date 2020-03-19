@@ -62,7 +62,3 @@ object AppInfoUtils {
         }
     }
 }
-
-
- 
- 

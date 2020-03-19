@@ -17,15 +17,15 @@ import com.tainzhi.android.wanandroid.bean.SystemParent
 class SystemRepository : BaseRepository() {
 
     suspend fun getSystemTypeDetail(cid: Int, page: Int): Result<ArticleList> {
-        return safeApiCall(call = {requestSystemTypeDetail(cid, page)},errorMessage = "网络错误")
+        return safeApiCall(call = { requestSystemTypeDetail(cid, page) })
     }
 
     suspend fun getSystemTypes(): Result<List<SystemParent>> {
-        return safeApiCall(call = { requestSystemTypes() }, errorMessage = "网络错误")
+        return safeApiCall(call = { requestSystemTypes() })
     }
 
     suspend fun getBlogArticle(cid: Int, page: Int): Result<ArticleList> {
-        return safeApiCall(call = {requestBlogArticle(cid, page)},errorMessage = "网络错误")
+        return safeApiCall(call = { requestBlogArticle(cid, page) })
     }
 
     private suspend fun requestSystemTypes(): Result<List<SystemParent>> =

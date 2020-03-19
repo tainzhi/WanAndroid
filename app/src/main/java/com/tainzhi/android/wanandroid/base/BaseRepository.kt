@@ -2,6 +2,7 @@ package com.tainzhi.android.wanandroid.base
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.coroutineScope
+import timber.log.Timber
 import java.io.IOException
 
 /**
@@ -15,13 +16,14 @@ open class BaseRepository {
     suspend fun <T: Any> apiCall(call: suspend () -> Response<T> ): Response<T> {
         return call.invoke()
     }
-
-    suspend fun <T: Any> safeApiCall(call: suspend () -> Result<T>, errorMessage: String):
+    
+    suspend fun <T : Any> safeApiCall(call: suspend () -> Result<T>, errorMessage: String = "Net error"):
             Result<T> {
         return try {
             call()
         } catch (e: Exception) {
-            Result.Error(IOException(errorMessage, e))
+            Timber.w(e.toString())
+            Result.Error(e)
         }
     }
 
@@ -32,7 +34,7 @@ open class BaseRepository {
         return coroutineScope {
             if (response.errorCode == -1) {
                 errorBlock?.let { it() }
-                Result.Error(IOException(response.errorMsg))
+                Result.Error(IOException("errorCode=-1, ${response.errorMsg}"))
             } else {
                 successBlock?.let{ it()}
                 Result.Success(response.data)

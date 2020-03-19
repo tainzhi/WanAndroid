@@ -131,7 +131,7 @@ class SystemTypeFragment : BaseVMFragment<ArticleViewModel>() {
             if (it.showEnd) systemTypeAdapter.loadMoreEnd()
 
             it.showError?.let { message ->
-                activity?.toast(if (message.isBlank()) "网络异常" else message)
+                activity?.toast(if (message.isBlank()) "Net error" else message)
             }
         })
     }

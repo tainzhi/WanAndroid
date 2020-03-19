@@ -76,7 +76,7 @@ class SquareFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
             if (it.showEnd) squareAdapter.loadMoreEnd()
 
             it.showError?.let { message ->
-                activity?.toast(if (message.isBlank()) "网络异常" else message)
+                activity?.toast(if (message.isBlank()) "Net error" else message)
             }
 
         })

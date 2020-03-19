@@ -15,15 +15,15 @@ import com.tainzhi.android.wanandroid.bean.ArticleList
 class CollectRepository : BaseRepository() {
 
     suspend fun getCollectArticles(page: Int): Result<ArticleList> {
-        return safeApiCall(call = { requestCollectArticles(page) }, errorMessage = "网络错误")
+        return safeApiCall(call = { requestCollectArticles(page) })
     }
 
     suspend fun collectArticle(articleId: Int): Result<ArticleList> {
-        return safeApiCall(call = { requestCollectArticle(articleId) }, errorMessage = "网络错误")
+        return safeApiCall(call = { requestCollectArticle(articleId) })
     }
 
     suspend fun unCollectArticle(articleId: Int): Result<ArticleList> {
-        return safeApiCall(call = { requestCancelCollectArticle(articleId) }, errorMessage = "网络错误")
+        return safeApiCall(call = { requestCancelCollectArticle(articleId) })
     }
 
     private suspend fun requestCollectArticles(page: Int): Result<ArticleList> =
