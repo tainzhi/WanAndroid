@@ -11,7 +11,6 @@ import com.tainzhi.android.wanandroid.bean.Banner
 import com.tainzhi.android.wanandroid.db.HistoryDao
 import com.tainzhi.android.wanandroid.repository.*
 import kotlinx.coroutines.withContext
-import timber.log.Timber
 
 /**
  * @author:       tainzhi
@@ -96,7 +95,6 @@ class ArticleViewModel(
                 ArticleType.SystemType -> systemRepository.getSystemTypeDetail(cid, currentPage)
                 ArticleType.Blog -> systemRepository.getBlogArticle(cid, currentPage)
             }
-            Timber.e("qfq, articleType=${result.toString()}")
 
             if (result is Result.Success) {
                 val articleList = result.data
