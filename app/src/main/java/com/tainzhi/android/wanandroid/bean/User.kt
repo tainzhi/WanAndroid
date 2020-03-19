@@ -1,5 +1,7 @@
 package com.tainzhi.android.wanandroid.bean
 
+import java.io.Serializable
+
 /**
  * @author:       tainzhi
  * @mail:         qfq61@qq.com
@@ -21,7 +23,7 @@ data class User(
         val type: Int,
         val username: String
 
-) {
+) : Serializable {
     override fun equals(other: Any?): Boolean {
         return if (other is User) {
             this.id == other.id

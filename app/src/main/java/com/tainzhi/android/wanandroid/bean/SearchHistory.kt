@@ -3,6 +3,7 @@ package com.tainzhi.android.wanandroid.bean
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.io.Serializable
 import java.util.*
 
 /**
@@ -16,4 +17,4 @@ import java.util.*
 data class SearchHistory(
         @ColumnInfo(name = "search_time_stamp") val date: Date,
         @PrimaryKey val searchKey: String
-)
+) : Serializable

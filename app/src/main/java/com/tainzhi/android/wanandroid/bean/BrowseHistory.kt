@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.io.Serializable
 import java.util.*
 
 /**
@@ -15,12 +16,12 @@ import java.util.*
 
 @Entity(tableName = "browse_history")
 data class BrowseHistory(
-//        @PrimaryKey(autoGenerate = true) val id: Long,
+        //        @PrimaryKey(autoGenerate = true) val id: Long,
         @PrimaryKey var articleHashCode: Int,
         @ColumnInfo(name = "browse_time_stamp") val date: Date,
         @Embedded(prefix = "article") val article: Article
-//    @Ignore val ignoreSome: String
-)
+        //    @Ignore val ignoreSome: String
+) : Serializable
 //) {
 //    constructor( stamp: Long, article: Article): this(0, stamp, article, "")
 //    constructor( stamp: Long, article: Article, unsed: String): this(0, stamp, article, unsed)

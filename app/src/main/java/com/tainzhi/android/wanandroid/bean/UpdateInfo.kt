@@ -1,5 +1,7 @@
 package com.tainzhi.android.wanandroid.bean
 
+import java.io.Serializable
+
 /**
  * @author:      tainzhi
  * @mail:        qfq61@qq.com
@@ -13,4 +15,4 @@ data class UpdateInfo(
         val url_backup: String, // https://github.com/tainzhi/WanAndroid/releases/download/v0.4.14/QWanAndroid_v0.4.13_release.apk
         val time: String, // 2020-03-10 08:18:47
         val apkName: String // QWanAndroid_v0.4.13_release.apk
-)
+) : Serializable

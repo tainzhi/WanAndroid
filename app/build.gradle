@@ -2,6 +2,9 @@ import com.tainzhi.android.buildsrc.Libs
 import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
 
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
@@ -14,24 +17,24 @@ apply from: '../test_dependencies.gradle'
 
 android {
     signingConfigs {
-//        //加载资源
-//        Properties properties = new Properties()
-//        InputStream inputStream = project.rootProject.file('local.properties').newDataInputStream()
-//        properties.load( inputStream )
-//
-//        //读取文件
-//        def release_keyStoreFile = properties.getProperty('release_keyStoreFile')
-//        //读取字段
-//        def release_keyAlias = properties.getProperty( 'release_keyAlias' )
-//        def release_keyPassword = properties.getProperty( 'release_keyPassword' )
-//        def release_keyStorePassword = properties.getProperty( 'release_keyStorePassword' )
-//        release {
-//
-//            storeFile file( release_keyStoreFile )
-//            storePassword release_keyStorePassword
-//            keyAlias release_keyAlias
-//            keyPassword release_keyPassword
-//        }
+        //加载资源
+        Properties properties = new Properties()
+        InputStream inputStream = project.rootProject.file('local.properties').newDataInputStream()
+        properties.load( inputStream )
+
+        //读取文件
+        def release_keyStoreFile = properties.getProperty('release_keyStoreFile')
+        //读取字段
+        def release_keyAlias = properties.getProperty( 'release_keyAlias' )
+        def release_keyPassword = properties.getProperty( 'release_keyPassword' )
+        def release_keyStorePassword = properties.getProperty( 'release_keyStorePassword' )
+        release {
+
+            storeFile file( release_keyStoreFile )
+            storePassword release_keyStorePassword
+            keyAlias release_keyAlias
+            keyPassword release_keyPassword
+        }
     }
     compileSdkVersion Libs.Version.compileSdkVersion
     buildToolsVersion Libs.Version.buildToolsVersion
@@ -55,11 +58,16 @@ android {
 
     buildTypes {
         debug {
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
         release {
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-//            signingConfig signingConfigs.release
+            signingConfig signingConfigs.release
         }
     }
 
@@ -80,14 +88,12 @@ android {
         jvmTarget = JavaVersion.VERSION_1_8
     }
 
-}
-
-gradle.projectsEvaluated {
-
-    assembleRelease.doLast {
-        // 升级内容以 \n 分割
-        def updateDescription = "1.修改了一些异常bug\n2.提升了性能"
-        addDownloadUrl(updateDescription)
+    afterEvaluate {
+        assembleRelease.doLast {
+            // 升级内容以 \n 分割
+            def updateDescription = "1.修改了一些异常bug\n2.提升了性能"
+            addDownloadUrl(updateDescription)
+        }
     }
 
 }
@@ -166,7 +172,7 @@ static def gitVersionTag() {
 // 并添加下载路径
 // 我要把包通过github action上传到 https://gitee.com/qinmen/GithubServer/WanAndroid 方便下载
 static def addDownloadUrl (String updateDescription) {
-    def currentTime = new Date().format("yyyy-MM-dd HH:mm:ss", TimeZone.getTimeZone("UTC"))
+    def currentTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
     def inputJsonPath = "app/build/outputs/apk/release/output.json"
     def inputFile = new File(inputJsonPath)
     def json = new JsonSlurper().parseText(inputFile.text)

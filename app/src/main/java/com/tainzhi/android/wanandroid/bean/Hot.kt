@@ -1,5 +1,7 @@
 package com.tainzhi.android.wanandroid.bean
 
+import java.io.Serializable
+
 /**
  * @author:       tainzhi
  * @mail:         qfq61@qq.com
@@ -7,9 +9,10 @@ package com.tainzhi.android.wanandroid.bean
  * @description:
  **/
 
-data class Hot(val id: Int,
-               val link: String,
-               val name: String,
-               val order: Int,
-               val visible: Int,
-               val icon: String)
+data class Hot(
+        val id: Int,
+        val link: String,
+        val name: String,
+        val order: Int,
+        val visible: Int,
+        val icon: String) : Serializable

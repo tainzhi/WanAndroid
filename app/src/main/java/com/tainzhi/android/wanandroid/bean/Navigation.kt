@@ -1,5 +1,7 @@
 package com.tainzhi.android.wanandroid.bean
 
+import java.io.Serializable
+
 /**
  * @author:       tainzhi
  * @mail:         qfq61@qq.com
@@ -8,6 +10,7 @@ package com.tainzhi.android.wanandroid.bean
  **/
 
 
-data class Navigation(val articles: List<Article>,
-                      val cid: Int,
-                      val name: String)
+data class Navigation(
+        val articles: List<Article>,
+        val cid: Int,
+        val name: String) : Serializable

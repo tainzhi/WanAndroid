@@ -1,5 +1,7 @@
 package com.tainzhi.android.wanandroid.bean
 
+import java.io.Serializable
+
 /**
  * @author:       tainzhi
  * @mail:         qfq61@qq.com
@@ -7,11 +9,12 @@ package com.tainzhi.android.wanandroid.bean
  * @description:
  **/
 
-data class Banner(val desc: String,
-                  val id: Int,
-                  val imagePath: String,
-                  val isVisible: Int,
-                  val order: Int,
-                  val title: String,
-                  val type: Int,
-                  val url: String)
+data class Banner(
+        val desc: String,
+        val id: Int,
+        val imagePath: String,
+        val isVisible: Int,
+        val order: Int,
+        val title: String,
+        val type: Int,
+        val url: String) : Serializable
