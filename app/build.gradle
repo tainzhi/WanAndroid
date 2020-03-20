@@ -140,6 +140,7 @@ dependencies {
     implementation Libs.flowlayout
     implementation Libs.licenseDialog
     implementation Libs.appUpdate
+    implementation Libs.activityOnCrash
 }
 
 

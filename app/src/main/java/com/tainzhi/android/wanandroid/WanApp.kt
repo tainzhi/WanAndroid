@@ -3,9 +3,12 @@ package com.tainzhi.android.wanandroid
 import ReleaseCrashTimberTree
 import android.app.Application
 import android.content.Context
+import cat.ereza.customactivityoncrash.config.CaocConfig
 import com.tainzhi.android.wanandroid.bean.User
 import com.tainzhi.android.wanandroid.di.appModule
 import com.tainzhi.android.wanandroid.repository.PreferenceRepository
+import com.tainzhi.android.wanandroid.ui.CrashActivity
+import com.tainzhi.android.wanandroid.ui.MainActivity
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -43,6 +46,22 @@ class WanApp : Application() {
         } else {
             Timber.plant(ReleaseCrashTimberTree())
         }
+    
+        initCrashActivity()
+    }
+    
+    private fun initCrashActivity() {
+        CaocConfig.Builder.create()
+                .backgroundMode(CaocConfig.BACKGROUND_MODE_SILENT)
+                .enabled(true)
+                .showErrorDetails(true)
+                .showRestartButton(true)
+                .logErrorOnRestart(false)
+                .trackActivities(false)
+                .minTimeBetweenCrashesMs(2000)
+                .restartActivity(MainActivity::class.java)
+                .errorActivity(CrashActivity::class.java)
+                .apply()
     }
     
 }

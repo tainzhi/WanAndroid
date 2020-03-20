@@ -67,4 +67,8 @@
     <string name="logout_success">已经退出</string>
     <string name="check_update">检查新版本</string>
     <string name="check_update_result">当前版本已是最新版本</string>
+    <string name="check_log">查看日志</string>
+    <string name="close_app">关闭应用</string>
+    <string name="restart_app">重新启动</string>
+    <string name="happen_something">发生了可怕的事情~</string>
 </resources>

@@ -2,13 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.tainzhi.android.wanandroid">
-
+    
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-
+    
     <application
         android:name=".WanApp"
         android:allowBackup="false"
@@ -20,13 +20,16 @@
         android:theme="@style/MyTheme.DayNight"
         tools:ignore="GoogleAppIndexingWaring"
         tools:targetApi="n">
+        <activity
+            android:name=".ui.CrashActivity"
+            android:process=":error_activity" />
         <activity android:name=".ui.MainActivity" />
         <activity
             android:name=".ui.SplashActivity"
             android:theme="@style/MyTheme.DayNight.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-        
+                
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
