@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.*
+import timber.log.Timber
 
 /**
  * @author:       tainzhi
@@ -68,8 +69,9 @@ open class BaseViewModel(
             try {
                 tryBlock()
             } catch (e: Throwable) {
+                Timber.w(e.toString())
                 if (e !is CancellationException || handleCancellationExceptionManually) {
-                    exception.value = e
+                    exception.postValue(e)
                     catchBlock(e)
                 } else {
                     throw e

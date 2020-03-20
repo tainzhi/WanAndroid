@@ -52,7 +52,7 @@ class SplashActivity : BaseActivity() {
         //       Activity在从全屏变化为非全屏时无法适应主题的变化，而被切掉一块
         // window.clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN)
         //        WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN)
-        // 方法2：清楚全屏属性
+        // 方法2：清除全屏属性
         window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
         super.finish()
     }
