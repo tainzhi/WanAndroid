@@ -99,7 +99,7 @@ android {
 bugly {
     appId = "25c0753a52"
     appKey = "2c72a2dc-57af-47c2-be10-c6f592cc743f"
-    debug = true
+    // debug = true
 }
 
 dependencies {

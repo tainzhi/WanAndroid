@@ -5,7 +5,6 @@ import com.tainzhi.android.buildsrc.Libs
 
             google()
             jcenter()
-            mavenCentral()
 
         }
         dependencies {
