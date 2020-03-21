@@ -9,6 +9,7 @@ import com.tainzhi.android.wanandroid.di.appModule
 import com.tainzhi.android.wanandroid.repository.PreferenceRepository
 import com.tainzhi.android.wanandroid.ui.CrashActivity
 import com.tainzhi.android.wanandroid.ui.MainActivity
+import com.tencent.bugly.crashreport.CrashReport
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -48,6 +49,7 @@ class WanApp : Application() {
         }
     
         initCrashActivity()
+        initBugly()
     }
     
     private fun initCrashActivity() {
@@ -62,6 +64,10 @@ class WanApp : Application() {
                 .restartActivity(MainActivity::class.java)
                 .errorActivity(CrashActivity::class.java)
                 .apply()
+    }
+    
+    private fun initBugly() {
+        CrashReport.initCrashReport(applicationContext, "25c0753a52", BuildConfig.DEBUG)
     }
     
 }

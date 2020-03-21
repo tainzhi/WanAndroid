@@ -9,8 +9,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-apply plugin: "androidx.navigation.safeargs.kotlin"
-
+apply plugin: 'androidx.navigation.safeargs.kotlin'
 
 apply from: '../test_dependencies.gradle'
 
@@ -89,7 +88,7 @@ android {
     afterEvaluate {
         assembleRelease.doLast {
             // 升级内容以 \n 分割
-            def updateDescription = "1.修改了一些异常bug\n2.提升了性能"
+            def updateDescription = "1.修改了UI逻辑\n2.fix some fatal bug\n3.添加bug上报\n4.混淆代码\n5.添加Crash页面"
             addDownloadUrl(updateDescription)
         }
     }
@@ -136,11 +135,12 @@ dependencies {
     implementation Libs.baseRecyclerViewAdapterHelper
     implementation Libs.youthBanner
     implementation Libs.tencentTbssdk
-    implementation Libs.vertialTabLayout
+    implementation Libs.verticalTabLayout
     implementation Libs.flowlayout
     implementation Libs.licenseDialog
     implementation Libs.appUpdate
     implementation Libs.activityOnCrash
+    implementation Libs.buglyCrashReport
 }
 
 

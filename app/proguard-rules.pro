@@ -31,3 +31,7 @@
 -keepattributes Signature
 -keepattributes Exceptions
 -keepnames class * implements java.io.Serializable
+
+# tencent bugly
+-dontwarn com.tencent.bugly.**
+-keep public class com.tencent.bugly.**{*;}
