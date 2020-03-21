@@ -5,12 +5,14 @@ import com.tainzhi.android.buildsrc.Libs
 
             google()
             jcenter()
+            mavenCentral()
 
         }
         dependencies {
             classpath Libs.androidGradlePlugin
             classpath Libs.Kotlin.gradlePlugin
             classpath Libs.AndroidX.Navigation.safeArgs
+            classpath Libs.buglyUploadMapping
         }
     }
 
