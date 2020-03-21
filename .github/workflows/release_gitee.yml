@@ -53,7 +53,7 @@ jobs:
           cd GithubServer
           git config --local user.email "qinmen"
           git config --local user.name "qfq61@qq.com"
-          git add . && git commit -m "add "${{ env.BASE_NAME }.apk
+          git add . && git commit -m "add "${{ env.BASE_NAME }}.apk
           git push origin master
           cd ../${{ env.REPO }}
       - name: Create Release
