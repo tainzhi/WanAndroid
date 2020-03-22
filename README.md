@@ -56,6 +56,10 @@
 - [] 历史记录分页查找`select * from table_name limit 10 offset 0`
 - [] 参考[android developer/performance](https://developer.android.com/topic/performance)优化app
 - [] 内存泄漏处理
+- [] [github action](./.github/workflow/release_gitee.yml):
+  不能自动执行；[README](./.github/workflow/README.md)中记录了git push tag后触发
+- [] [bugly符号表上传](https://bugly.qq.com/docs/user-guide/symbol-configuration-android/?v=20200203205953):
+  改gradle插件最新版3.0在Maven仓库中无法找到，只能使用2.1.0
 
 # 致谢
 学习了[Lulululbj Wanandroid](https://github.com/lulululbj/wanandroid/)大神很多，也像众多其他大佬学习了很多。感谢
