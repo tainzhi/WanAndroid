@@ -19,8 +19,6 @@
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/historySwipeRefreshLayout"
-            isRefresh="@{viewModel.uiState.showLoading}"
-            onRefresh="@{() -> viewModel.refresh()}"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -29,7 +27,7 @@
                 android:id="@+id/historyRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:listitem="@layout/item_search_history" />
+                tools:listitem="@layout/item_history" />
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </LinearLayout>
 

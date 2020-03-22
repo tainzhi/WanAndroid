@@ -120,6 +120,8 @@ dependencies {
     implementation Libs.AndroidX.Room.runtime
     implementation Libs.AndroidX.Room.ktx
     kapt Libs.AndroidX.Room.compiler
+    implementation Libs.AndroidX.Paging.runtime
+    implementation Libs.AndroidX.Paging.runtimeKtx
 
     implementation Libs.Google.material
 
