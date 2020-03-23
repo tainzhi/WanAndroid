@@ -30,11 +30,25 @@ class HistoryViewModel(
                     )
             )
     
-    fun deleteBrowseHistory() {
+    /**
+     * 删除所有浏览历史记录
+     */
+    fun deleteAllBrowseHistory() {
         launch {
             // emitHistoryUIState(showLoading = true)
-            historyDao.deleteBrowseHistory()
+            historyDao.deleteAllBrowseHistory()
             // emitHistoryUIState(showLoading = false, isDelete = true)
+        }
+    }
+    
+    /**
+     * 删除单条浏览记录
+     *
+     * @param browseHistory 单条浏览记录
+     */
+    fun deleteBrowseHistory(browseHistory: BrowseHistory) {
+        launch {
+            historyDao.deleteBrowseHistory(browseHistory)
         }
     }
     

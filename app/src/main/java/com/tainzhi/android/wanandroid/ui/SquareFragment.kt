@@ -5,7 +5,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tainzhi.android.wanandroid.BR
 import com.tainzhi.android.wanandroid.R
-import com.tainzhi.android.wanandroid.adapter.BaseBindAdapter
+import com.tainzhi.android.wanandroid.base.ui.BaseBindAdapter
 import com.tainzhi.android.wanandroid.base.ui.BaseVMFragment
 import com.tainzhi.android.wanandroid.bean.Article
 import com.tainzhi.android.wanandroid.databinding.FragmentSquareBinding

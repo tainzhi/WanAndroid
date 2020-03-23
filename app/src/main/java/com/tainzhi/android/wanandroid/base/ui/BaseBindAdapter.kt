@@ -1,4 +1,4 @@
-package com.tainzhi.android.wanandroid.adapter
+package com.tainzhi.android.wanandroid.base.ui
 
 import android.view.View
 import android.view.ViewGroup
@@ -14,13 +14,12 @@ import com.tainzhi.android.wanandroid.R
  * @date:         2020/1/25 上午11:25
  * @description:
  **/
- 
-open class BaseBindAdapter<T>(layoutResId: Int, br: Int): BaseQuickAdapter<T, BaseBindAdapter
-.BindViewHolder>(layoutResId) {
 
+open class BaseBindAdapter<T>(layoutResId: Int, br: Int) : BaseQuickAdapter<T, BaseBindAdapter.BindViewHolder>(layoutResId) {
+    
     private val _br = br
-
-
+    
+    
     override fun convert(helper: BindViewHolder, item: T) {
         helper.binding.run {
             setVariable(_br, item)

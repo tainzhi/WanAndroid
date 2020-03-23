@@ -18,8 +18,8 @@ import java.util.*
 abstract class HistoryDao {
     @Transaction
     open suspend fun deleteAll() {
-        deleteBrowseHistory()
-        deleteSearchHistory()
+        deleteAllBrowseHistory()
+        deleteAllSearchHistory()
     }
     
     // browse history
@@ -34,7 +34,10 @@ abstract class HistoryDao {
     abstract fun getAllBrowseHistory(): DataSource.Factory<Int, BrowseHistory>
     
     @Query("DELETE FROM BROWSE_HISTORY")
-    abstract suspend fun deleteBrowseHistory()
+    abstract suspend fun deleteAllBrowseHistory()
+    
+    @Delete
+    abstract suspend fun deleteBrowseHistory(browseHistory: BrowseHistory)
     
     
     // Search history
@@ -47,7 +50,7 @@ abstract class HistoryDao {
 
     @Query("SELECT * FROM SEARCH_HISTORY ORDER BY 1 DESC ")
     abstract suspend fun getSearchHistory(): List<SearchHistory>
-
+    
     @Query("DELETE FROM SEARCH_HISTORY")
-    abstract suspend fun deleteSearchHistory()
+    abstract suspend fun deleteAllSearchHistory()
 }

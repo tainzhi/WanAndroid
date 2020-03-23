@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.tainzhi.android.wanandroid.BR
 import com.tainzhi.android.wanandroid.R
-import com.tainzhi.android.wanandroid.adapter.BaseBindAdapter
+import com.tainzhi.android.wanandroid.base.ui.BaseBindAdapter
 import com.tainzhi.android.wanandroid.base.ui.BaseVMFragment
 import com.tainzhi.android.wanandroid.bean.SystemParent
 import com.tainzhi.android.wanandroid.ui.main.TabHostFragmentDirections
