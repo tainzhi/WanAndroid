@@ -14,15 +14,48 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:ignore="ContentDescription">
-
+    
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/itemHistoryBackground"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?colorAccent">
+        
+            <TextView
+                android:id="@+id/tv_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="@string/delete"
+                android:textColor="?colorOnPrimary"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+                app:layout_constraintEnd_toStartOf="@+id/imageView2"
+                app:layout_constraintTop_toTopOf="@+id/imageView2" />
+        
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="32dp"
+                android:tint="?colorOnError"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@android:drawable/ic_menu_delete" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/itemHistoryForeground"
+            android:background="?android:windowBackground"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_normal"
-            android:layout_marginTop="@dimen/margin_small"
-            android:layout_marginEnd="@dimen/margin_normal"
-            android:layout_marginBottom="@dimen/margin_small">
-
+            android:paddingStart="@dimen/margin_normal"
+            android:paddingTop="@dimen/margin_small"
+            android:paddingEnd="@dimen/margin_normal"
+            android:paddingBottom="@dimen/margin_small"
+            tools:visibility="invisible">
+        
             <ImageView
                 android:id="@+id/_iv_user"
                 style="?textAppearanceSubtitle2"
@@ -96,5 +129,7 @@
                 app:layout_constraintTop_toTopOf="@id/_iv_time"
                 tools:text="@tools:sample/date/hhmmss" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+
     </com.google.android.material.card.MaterialCardView>
 </layout>

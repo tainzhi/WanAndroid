@@ -71,4 +71,7 @@
     <string name="close_app">关闭应用</string>
     <string name="restart_app">重新启动</string>
     <string name="happen_something">发生了可怕的事情~</string>
+    <string name="delete">删除</string>
+    <string name="undo">取消</string>
+    <string name="remove_item_msg">这条记录已经被删除</string>
 </resources>

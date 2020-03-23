@@ -57,6 +57,12 @@ class HistoryViewModel(
             historyDao.insertBrowseHistory(article)
         }
     }
+    
+    fun insertBrowseHistory(browseHistory: BrowseHistory) {
+        launch {
+            historyDao.insertBrowseHistory(browseHistory)
+        }
+    }
 }
 
 data class HistoryUiModel(

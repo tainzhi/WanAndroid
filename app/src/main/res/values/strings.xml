@@ -72,4 +72,7 @@
     <string name="close_app">Close App</string>
     <string name="restart_app">Restart App</string>
     <string name="happen_something">Has Happen terrible things</string>
+    <string name="delete">Delete</string>
+    <string name="undo">UNDO</string>
+    <string name="remove_item_msg">This item has been removed!</string>
 </resources>

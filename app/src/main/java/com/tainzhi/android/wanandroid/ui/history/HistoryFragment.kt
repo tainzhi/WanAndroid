@@ -1,14 +1,19 @@
 package com.tainzhi.android.wanandroid.ui.history
 
 import android.content.Context
+import android.graphics.Color
 import androidx.activity.addCallback
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.tainzhi.android.wanandroid.R
 import com.tainzhi.android.wanandroid.adapter.HistoryAdapter
+import com.tainzhi.android.wanandroid.adapter.RecyclerItemTouchHelper
 import com.tainzhi.android.wanandroid.base.ui.BaseVMFragment
 import com.tainzhi.android.wanandroid.databinding.FragmentHistoryBinding
 import com.tainzhi.android.wanandroid.ui.BrowserFragmentDirections
@@ -48,6 +53,7 @@ class HistoryFragment : BaseVMFragment<HistoryViewModel>(useBinding = true) {
             addItemDecoration(SpaceItemDecoration(context.resources.getDimension(R.dimen.margin_small)))
             adapter = historyAdapter
         }
+        ItemTouchHelper(recyclerItemTouchHelper).attachToRecyclerView(historyRecyclerView)
     }
     
     private fun initToolbar() {
@@ -77,4 +83,25 @@ class HistoryFragment : BaseVMFragment<HistoryViewModel>(useBinding = true) {
     private fun onBack() {
         findNavController().navigateUp()
     }
+    
+    private val recyclerItemTouchHelper = RecyclerItemTouchHelper(
+            0,
+            ItemTouchHelper.LEFT,
+            object : RecyclerItemTouchHelper.RecyclerItemTouchHelperListener {
+                override fun onSwiped(viewHolder: RecyclerView.ViewHolder?, direction: Int, position: Int) {
+                    if (viewHolder is HistoryAdapter.HistoryViewHolder) {
+                        mViewModel.deleteBrowseHistory(viewHolder.browseHistory!!)
+                        
+                        
+                        val snackbar: Snackbar = Snackbar.make(mBinding.root, R.string.remove_item_msg,
+                                                               Snackbar.LENGTH_LONG)
+                        snackbar.setAction(R.string.undo) { _ ->
+                            mViewModel.insertBrowseHistory(viewHolder.browseHistory!!)
+                        }
+                        snackbar.setActionTextColor(Color.YELLOW)
+                        snackbar.show()
+                    }
+                }
+            }
+    )
 }
