@@ -50,9 +50,11 @@
 
 
 # Todo
-- [] 参考[android developer/testing](https://developer.android.com/training/testing)添加各种测试
 - [] 升级youthbanner
 - [] 升级[BaseRecyclerViewAdapterHelper](https://github.com/CymChad/BaseRecyclerViewAdapterHelper/releases)
+- [] 没有联网的msg没有上传到UI层并toast显示
+- [] 公众号文章无法查看
+- [] 参考[android developer/testing](https://developer.android.com/training/testing)添加各种测试
 - [] 历史记录分页查找`select * from table_name limit 10 offset 0`
 - [] 参考[android developer/performance](https://developer.android.com/topic/performance)优化app
 - [] 内存泄漏处理
