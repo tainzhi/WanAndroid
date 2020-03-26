@@ -50,7 +50,6 @@
 
 
 # Todo
-- [] 升级youthbanner
 - [] 升级[BaseRecyclerViewAdapterHelper](https://github.com/CymChad/BaseRecyclerViewAdapterHelper/releases)
 - [] 没有联网的msg没有上传到UI层并toast显示
 - [] 公众号文章无法查看
