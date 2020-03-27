@@ -10,8 +10,10 @@ import android.util.TypedValue
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ProgressBar
-import androidx.annotation.NonNull
+import androidx.annotation.RequiresApi
 import com.tainzhi.android.wanandroid.WanApp
+import com.tencent.smtt.export.external.interfaces.WebResourceRequest
+import com.tencent.smtt.export.external.interfaces.WebResourceResponse
 import com.tencent.smtt.sdk.*
 import okhttp3.Cookie
 import okhttp3.HttpUrl.Companion.toHttpUrl
@@ -56,7 +58,7 @@ class X5WebView : FrameLayout {
         progressBar = ProgressBar(context, null, android.R.attr.progressBarStyleHorizontal)
         progressBar.max = 100
         addView(progressBar, LayoutParams(LayoutParams.MATCH_PARENT,
-                                          TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1f, resources.displayMetrics).toInt()))
+                                          TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2f, resources.displayMetrics).toInt()))
         
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             CookieManager.getInstance().setAcceptThirdPartyCookies(webView, true)
@@ -66,8 +68,6 @@ class X5WebView : FrameLayout {
         webView!!.webChromeClient = MyWebChromeClient()
         webView!!.webViewClient = MyWebViewClient()
         val webSetting: WebSettings = webView!!.settings
-        webSetting.javaScriptEnabled = true
-        webSetting.javaScriptCanOpenWindowsAutomatically = false
         webSetting.allowFileAccess = true
         webSetting.layoutAlgorithm = WebSettings.LayoutAlgorithm.NARROW_COLUMNS
         webSetting.setSupportZoom(false)
@@ -79,6 +79,9 @@ class X5WebView : FrameLayout {
         webSetting.domStorageEnabled = true
         webSetting.setGeolocationEnabled(true)
         webSetting.setAppCacheMaxSize(Long.MAX_VALUE)
+        // 不能被注释掉，否则无法查看公众号文章
+        webSetting.javaScriptEnabled = true
+        webSetting.javaScriptCanOpenWindowsAutomatically = false
         webSetting.pluginState = WebSettings.PluginState.ON_DEMAND
         webSetting.setRenderPriority(WebSettings.RenderPriority.HIGH)
         webSetting.cacheMode = WebSettings.LOAD_DEFAULT
@@ -102,23 +105,9 @@ class X5WebView : FrameLayout {
         return this
     }
     
-    fun getUrl(): String {
-        var url = webView!!.url
-        return if (url == null) {
-            ""
-        } else {
-            url
-        }
-    }
+    fun getUrl() = webView!!.url ?: ""
     
-    fun getTitle(): String {
-        val title = webView!!.title
-        return if (title == null) {
-            ""
-        } else {
-            title
-        }
-    }
+    fun getTitle() = webView!!.title ?: ""
     
     fun canGoBack() = webView!!.canGoBack()
     
@@ -236,10 +225,10 @@ class X5WebView : FrameLayout {
     }
     
     inner class MyWebViewClient : WebViewClient() {
-        // private fun shouldInterceptRequest(uri: Uri): Boolean {
-        //     syncCookiesForWanAndroid(uri.toString())
-        //     return false
-        // }
+        private fun shouldInterceptRequest(uri: Uri): Boolean {
+            syncCookiesForWanAndroid(uri.toString())
+            return false
+        }
         //
         // private fun shouldOverrideUrlLoading(uri: Uri): Boolean {
         //     return when (SettingUtils.getInstance().getUrlInterceptType()) {
@@ -259,7 +248,7 @@ class X5WebView : FrameLayout {
                 return
             }
             val cookies: List<Cookie> = WanApp.cookieJar.loadForRequest(url.toHttpUrl())
-            if (cookies == null || cookies.isEmpty()) {
+            if (cookies.isEmpty()) {
                 return
             }
             val cookieManager = CookieManager.getInstance()
@@ -283,20 +272,20 @@ class X5WebView : FrameLayout {
                 cookieManager.flush()
             }
         }
-        
-        // override fun shouldInterceptRequest(view: WebView, url: String): WebResourceResponse {
-        //     return if (shouldInterceptRequest(Uri.parse(url))) {
-        //         WebResourceResponse(null, null, null)
-        //     } else super.shouldInterceptRequest(view, url)
-        // }
-        //
-        // @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-        // override fun shouldInterceptRequest(view: WebView, request: WebResourceRequest): WebResourceResponse {
-        //     return if (shouldInterceptRequest(request.url)) {
-        //         WebResourceResponse(null, null, null)
-        //     } else super.shouldInterceptRequest(view, request)
-        // }
-        //
+    
+        override fun shouldInterceptRequest(view: WebView, url: String): WebResourceResponse? {
+            return if (shouldInterceptRequest(Uri.parse(url))) {
+                WebResourceResponse(null, null, null)
+            } else super.shouldInterceptRequest(view, url)
+        }
+    
+        @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+        override fun shouldInterceptRequest(view: WebView, request: WebResourceRequest): WebResourceResponse? {
+            return if (shouldInterceptRequest(request.url)) {
+                WebResourceResponse(null, null, null)
+            } else super.shouldInterceptRequest(view, request)
+        }
+    
         // override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
         //     return shouldOverrideUrlLoading(Uri.parse(url))
         // }
@@ -305,7 +294,7 @@ class X5WebView : FrameLayout {
         // override fun shouldOverrideUrlLoading(view: WebView, request: WebResourceRequest): Boolean {
         //     return shouldOverrideUrlLoading(request.url)
         // }
-        
+    
         override fun onPageStarted(p0: WebView?, p1: String?, p2: Bitmap?) {
             super.onPageStarted(p0, p1, p2)
             onPageTitleCallback?.onReceivedTitle(getUrl())
@@ -326,7 +315,7 @@ class X5WebView : FrameLayout {
     
     
     interface OnPageTitleCallback {
-        fun onReceivedTitle(@NonNull title: String?)
+        fun onReceivedTitle(title: String?)
     }
     
     interface OnPageLoadCallback {

@@ -1,7 +1,6 @@
 package com.tainzhi.android.wanandroid.ui
 
 import android.view.View
-import android.widget.LinearLayout
 import androidx.activity.OnBackPressedCallback
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -25,39 +24,46 @@ class BrowserFragment : BaseFragment() {
         requireActivity().onBackPressedDispatcher.addCallback(onBackPressed)
     
         webView.run {
-            // setOnPageTitleCallback(object : com.tainzhi.android.wanandroid.view.widget.X5WebView.OnPageTitleCallback {
-            //     override fun onReceivedTitle(title: String?) {
-            //         toolbar.title = title
-            //     }
-            // })
+            setOnPageTitleCallback(object : com.tainzhi.android.wanandroid.view.widget.X5WebView.OnPageTitleCallback {
+                override fun onReceivedTitle(title: String?) {
+                    toolbar.title = title
+                }
+            })
             loadUrl(args.url)
         }
     }
-
+    
     override fun initData() {
     }
-
+    
+    override fun onPause() {
+        super.onPause()
+        webView.onPause()
+    }
+    
+    override fun onResume() {
+        super.onResume()
+        webView.onResume()
+    }
+    
     private fun onBack(view: View) {
-        // 如果可以放回上次浏览网页
+        // 如果可以反回上次浏览网页
         if (webView.canGoBack()) {
             webView.goBack()
         } else {
             webView.onDestroy()
-            (webView.parent as? LinearLayout)?.removeView(webView)
             view.findNavController().popBackStack()
         }
     }
     
     private val onBackPressed = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
-            // 如果可以放回上次浏览网页
+            // 如果可以反回上次浏览网页
             if (webView.canGoBack()) {
                 webView.goBack()
             } else {
                 webView.onDestroy()
-                (webView.parent as? LinearLayout)?.removeView(webView)
                 findNavController().popBackStack()
-                isEnabled = false
             }
         }
     }
