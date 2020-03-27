@@ -4,6 +4,9 @@ import ReleaseCrashTimberTree
 import android.app.Application
 import android.content.Context
 import cat.ereza.customactivityoncrash.config.CaocConfig
+import com.franmontiel.persistentcookiejar.PersistentCookieJar
+import com.franmontiel.persistentcookiejar.cache.SetCookieCache
+import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor
 import com.tainzhi.android.wanandroid.bean.User
 import com.tainzhi.android.wanandroid.di.appModule
 import com.tainzhi.android.wanandroid.repository.PreferenceRepository
@@ -29,6 +32,10 @@ class WanApp : Application() {
         var CONTEXT: Context by Delegates.notNull()
         lateinit var current_user: User
         lateinit var preferenceRepository: PreferenceRepository
+        val cookieJar by lazy {
+            PersistentCookieJar(SetCookieCache(),
+                                SharedPrefsCookiePersistor(CONTEXT))
+        }
     }
 
     override fun onCreate() {

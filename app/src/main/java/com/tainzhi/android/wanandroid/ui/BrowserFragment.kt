@@ -1,8 +1,6 @@
 package com.tainzhi.android.wanandroid.ui
 
-import android.graphics.Bitmap
 import android.view.View
-import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.activity.OnBackPressedCallback
 import androidx.navigation.findNavController
@@ -10,17 +8,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.tainzhi.android.wanandroid.R
 import com.tainzhi.android.wanandroid.base.ui.BaseFragment
-import com.tainzhi.android.wanandroid.view.X5WebView
-import com.tencent.smtt.sdk.WebChromeClient
-import com.tencent.smtt.sdk.WebView
-import com.tencent.smtt.sdk.WebViewClient
 import kotlinx.android.synthetic.main.common_toolbar.*
 import kotlinx.android.synthetic.main.fragment_browser.*
 
 
 class BrowserFragment : BaseFragment() {
-
-    private lateinit var webView: X5WebView
 
     private val args: BrowserFragmentArgs by navArgs()
 
@@ -29,65 +21,28 @@ class BrowserFragment : BaseFragment() {
     override fun initView() {
         toolbar.setTitle(R.string.is_loading)
         toolbar.setNavigationOnClickListener { view -> onBack(view) }
-
-        progressBar.progressDrawable = this.resources
-                .getDrawable(R.drawable.color_progressbar, null)
-
-        initWebView()
-
-        browserLinearLayout.addView(webView)
     
         requireActivity().onBackPressedDispatcher.addCallback(onBackPressed)
+    
+        webView.run {
+            // setOnPageTitleCallback(object : com.tainzhi.android.wanandroid.view.widget.X5WebView.OnPageTitleCallback {
+            //     override fun onReceivedTitle(title: String?) {
+            //         toolbar.title = title
+            //     }
+            // })
+            loadUrl(args.url)
+        }
     }
 
     override fun initData() {
-        args.url.let {
-            webView.loadUrl(it)
-        }
     }
 
-    private fun initWebView() {
-        val params = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT)
-        webView = X5WebView(activity?.applicationContext)
-        webView.run {
-            layoutParams = params
-
-            webViewClient = object : WebViewClient() {
-
-                override fun onPageStarted(p0: WebView?, p1: String?, p2: Bitmap?) {
-                    super.onPageStarted(p0, p1, p2)
-                    progressBar.visibility = View.VISIBLE
-                }
-
-                override fun onPageFinished(p0: WebView?, p1: String?) {
-                    super.onPageFinished(p0, p1)
-                    progressBar.visibility = View.GONE
-                }
-            }
-            webChromeClient = object : WebChromeClient() {
-                override fun onProgressChanged(p0: WebView?, p1: Int) {
-                    super.onProgressChanged(p0, p1)
-                    progressBar?.progress = p1
-                }
-
-                override fun onReceivedTitle(p0: WebView?, p1: String?) {
-                    super.onReceivedTitle(p0, p1)
-                    p1?.let {
-                        toolbar.title = p1
-                    }
-                }
-
-            }
-        }
-    }
-    
     private fun onBack(view: View) {
         // 如果可以放回上次浏览网页
         if (webView.canGoBack()) {
             webView.goBack()
         } else {
-            webView.destroy()
+            webView.onDestroy()
             (webView.parent as? LinearLayout)?.removeView(webView)
             view.findNavController().popBackStack()
         }
@@ -99,7 +54,7 @@ class BrowserFragment : BaseFragment() {
             if (webView.canGoBack()) {
                 webView.goBack()
             } else {
-                webView.destroy()
+                webView.onDestroy()
                 (webView.parent as? LinearLayout)?.removeView(webView)
                 findNavController().popBackStack()
                 isEnabled = false
