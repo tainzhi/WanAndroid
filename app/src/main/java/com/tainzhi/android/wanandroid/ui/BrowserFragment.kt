@@ -6,6 +6,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.tainzhi.android.wanandroid.R
+import com.tainzhi.android.wanandroid.WanApp
 import com.tainzhi.android.wanandroid.base.ui.BaseFragment
 import kotlinx.android.synthetic.main.common_toolbar.*
 import kotlinx.android.synthetic.main.fragment_browser.*
@@ -24,6 +25,7 @@ class BrowserFragment : BaseFragment() {
         requireActivity().onBackPressedDispatcher.addCallback(onBackPressed)
     
         webView.run {
+            isDarkTheme = WanApp.preferenceRepository.darkTheme
             setOnPageTitleCallback(object : com.tainzhi.android.wanandroid.view.widget.X5WebView.OnPageTitleCallback {
                 override fun onReceivedTitle(title: String?) {
                     toolbar.title = title

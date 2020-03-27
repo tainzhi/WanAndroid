@@ -2,6 +2,8 @@ package com.tainzhi.android.wanandroid.view.widget
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.text.TextUtils
@@ -10,8 +12,11 @@ import android.util.TypedValue
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ProgressBar
+import androidx.annotation.FloatRange
 import androidx.annotation.RequiresApi
 import com.tainzhi.android.wanandroid.WanApp
+import com.tencent.smtt.export.external.extension.interfaces.IX5WebSettingsExtension
+import com.tencent.smtt.export.external.interfaces.IX5WebSettings
 import com.tencent.smtt.export.external.interfaces.WebResourceRequest
 import com.tencent.smtt.export.external.interfaces.WebResourceResponse
 import com.tencent.smtt.sdk.*
@@ -29,11 +34,16 @@ class X5WebView : FrameLayout {
     
     private var webView: WebView? = null
     private lateinit var progressBar: ProgressBar
-    private var isProgressBarShown = true
-    private var onPageTitleCallback: OnPageTitleCallback? = null
-    private var onPageLoadCallback: OnPageLoadCallback? = null
-    private var onPageProgressCallback: OnPageProgressCallback? = null
-    private var onHistoryUpdateCallback: OnHistoryUpdateCallback? = null
+    
+    var onPageTitleCallback: OnPageTitleCallback? = null
+    var onPageLoadCallback: OnPageLoadCallback? = null
+    var onPageProgressCallback: OnPageProgressCallback? = null
+    var onHistoryUpdateCallback: OnHistoryUpdateCallback? = null
+    
+    var isProgressBarShown = true
+    var isDarkTheme = false
+    var maskColor = Color.TRANSPARENT
+    
     
     constructor(context: Context) : super(context) {
         initialization(context)
@@ -88,16 +98,21 @@ class X5WebView : FrameLayout {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             webSetting.mixedContentMode = android.webkit.WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
         }
-        // val ext: IX5WebSettingsExtension = webView!!.getSettingsExtension()
-        // if (ext != null) {
-        //     ext.setPageCacheCapacity(IX5WebSettings.DEFAULT_CACHE_CAPACITY)
-        //     if (SettingUtils.getInstance().isDarkTheme()) {
-        //         container.setDarkMaskEnable(false)
-        //         ext.setDayOrNight(false)
-        //     } else {
-        //         ext.setDayOrNight(true)
-        //     }
-        // }
+        val ext: IX5WebSettingsExtension? = webView?.settingsExtension
+        ext?.setPageCacheCapacity(IX5WebSettings.DEFAULT_CACHE_CAPACITY)
+        if (isDarkTheme) {
+            maskColor = alphaColor(Color.parseColor("#f5f5f5"), 0.8f)
+            ext?.setDayOrNight(false)
+        } else {
+            ext?.setDayOrNight(true)
+        }
+    }
+    
+    override fun dispatchDraw(canvas: Canvas) {
+        super.dispatchDraw(canvas)
+        if (isDarkTheme) {
+            canvas.drawColor(maskColor)
+        }
     }
     
     fun loadUrl(url: String): X5WebView {
@@ -108,6 +123,15 @@ class X5WebView : FrameLayout {
     fun getUrl() = webView!!.url ?: ""
     
     fun getTitle() = webView!!.title ?: ""
+    
+    private fun alphaColor(color: Int, @FloatRange(from = 0.0, to = 1.0) alpha: Float): Int {
+        return Color.argb(
+                (alpha * 255).toInt(),
+                color,
+                color,
+                color
+        )
+    }
     
     fun canGoBack() = webView!!.canGoBack()
     
