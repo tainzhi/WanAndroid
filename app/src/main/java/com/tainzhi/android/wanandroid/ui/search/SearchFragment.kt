@@ -42,7 +42,7 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
 
     override fun initView() {
     
-        requireActivity().onBackPressedDispatcher.addCallback(onBackPressed)
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, onBackPressed)
 
         searchRecyclerView.run {
             layoutManager = LinearLayoutManager(context)
@@ -239,6 +239,16 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
     
         })
     
+    }
+    
+    override fun onResume() {
+        super.onResume()
+        searchRefreshLayout.isEnabled = true
+    }
+    
+    override fun onPause() {
+        super.onPause()
+        searchRefreshLayout.isEnabled = false
     }
     
     private val onBackPressed = object : OnBackPressedCallback(true) {

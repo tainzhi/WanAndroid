@@ -72,14 +72,24 @@ class SquareFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
                     loadMoreComplete()
                 }
             }
-
+    
             if (it.showEnd) squareAdapter.loadMoreEnd()
-
+    
             it.showError?.let { message ->
                 activity?.toast(if (message.isBlank()) "Net error" else message)
             }
-
+    
         })
     }
-
+    
+    override fun onPause() {
+        super.onPause()
+        squareRefreshLayout.isEnabled = false
+    }
+    
+    override fun onResume() {
+        super.onResume()
+        squareRefreshLayout.isEnabled = true
+    }
+    
 }

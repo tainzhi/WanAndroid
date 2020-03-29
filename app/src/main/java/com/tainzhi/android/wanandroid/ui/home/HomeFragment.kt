@@ -167,14 +167,16 @@ class HomeFragment : BaseVMFragment<ArticleViewModel>() {
                 .setBannerTitles(bannerTitles)
         banner.start()
     }
-
-    override fun onStart() {
-        super.onStart()
+    
+    override fun onResume() {
+        super.onResume()
+        homeRefreshLayout.isEnabled = true
         banner.startAutoPlay()
     }
-
-    override fun onStop() {
-        super.onStop()
+    
+    override fun onPause() {
+        super.onPause()
+        homeRefreshLayout.isEnabled = false
         banner.stopAutoPlay()
     }
 }

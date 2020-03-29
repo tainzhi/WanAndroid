@@ -116,11 +116,21 @@ class ProjectTypeFragment : BaseVMFragment<ArticleViewModel>() {
                     loadMoreComplete()
                 }
             }
-
+    
             if (it.showEnd) projectAdapter.loadMoreEnd()
         })
     }
-
+    
+    override fun onPause() {
+        super.onPause()
+        projectRefreshLayout.isEnabled = false
+    }
+    
+    override fun onResume() {
+        super.onResume()
+        projectRefreshLayout.isEnabled = true
+    }
+    
     private val onItemChildClickListener = BaseQuickAdapter.OnItemChildClickListener { _, view, position ->
         when (view.id) {
             R.id.collectIv -> {

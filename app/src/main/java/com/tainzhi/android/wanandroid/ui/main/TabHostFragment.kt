@@ -44,7 +44,7 @@ class TabHostFragment : BaseVMFragment<TabHostViewModel>(useBinding = true) {
     
     override fun initView() {
         
-        requireActivity().onBackPressedDispatcher.addCallback(onBackPressed)
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, onBackPressed)
         
         (mBinding as FragmentTabHostBinding).include.viewModel = mViewModel
         

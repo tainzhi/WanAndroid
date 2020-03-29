@@ -22,7 +22,7 @@ class BrowserFragment : BaseFragment() {
         toolbar.setTitle(R.string.is_loading)
         toolbar.setNavigationOnClickListener { view -> onBack(view) }
     
-        requireActivity().onBackPressedDispatcher.addCallback(onBackPressed)
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, onBackPressed)
     
         webView.run {
             isDarkTheme = WanApp.preferenceRepository.darkTheme
@@ -38,14 +38,14 @@ class BrowserFragment : BaseFragment() {
     override fun initData() {
     }
     
-    override fun onPause() {
-        super.onPause()
-        webView.onPause()
-    }
-    
     override fun onResume() {
         super.onResume()
         webView.onResume()
+    }
+    
+    override fun onPause() {
+        super.onPause()
+        webView.onPause()
     }
     
     private fun onBack(view: View) {

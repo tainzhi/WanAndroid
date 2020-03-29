@@ -59,16 +59,26 @@ class SystemFragment : BaseVMFragment<SystemViewModel>() {
     private fun refresh() {
         mViewModel.getSystemTypes()
     }
-
+    
     override fun startObserve() {
         mViewModel.run {
             uiState.observe(viewLifecycleOwner, Observer {
                 systemRefreshLayout.isRefreshing = it.showLoading
-
+                
                 it.showSuccess?.let { list -> systemAdapter.replaceData(list) }
-
+                
                 it.showError?.let { message -> activity?.toast(message) }
             })
         }
+    }
+    
+    override fun onResume() {
+        super.onResume()
+        systemRefreshLayout.isEnabled = true
+    }
+    
+    override fun onStop() {
+        super.onStop()
+        systemRefreshLayout.isEnabled = false
     }
 }
