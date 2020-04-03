@@ -50,7 +50,6 @@
 
 
 # Todo
-- [] 升级[BaseRecyclerViewAdapterHelper](https://github.com/CymChad/BaseRecyclerViewAdapterHelper/releases)
 - [] 没有联网的msg没有上传到UI层并toast显示
 - [] 参考[android developer/testing](https://developer.android.com/training/testing)添加各种测试
 - [] 参考[android developer/performance](https://developer.android.com/topic/performance)优化app
@@ -59,6 +58,7 @@
   不能自动执行；[README](./.github/workflow/README.md)中记录了git push tag后触发
 - [] [bugly符号表上传](https://bugly.qq.com/docs/user-guide/symbol-configuration-android/?v=20200203205953):
   改gradle插件最新版3.0在Maven仓库中无法找到，只能使用2.1.0
+- [x] 升级[BaseRecyclerViewAdapterHelper](https://github.com/CymChad/BaseRecyclerViewAdapterHelper/releases)
 - [x] 内存泄漏处理
 - [x] 公众号文章无法查看
 
