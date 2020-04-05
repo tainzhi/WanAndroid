@@ -7,10 +7,11 @@ import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.chad.library.adapter.base.BaseQuickAdapter
+import com.chad.library.adapter.base.listener.OnItemChildClickListener
 import com.tainzhi.android.wanandroid.R
 import com.tainzhi.android.wanandroid.adapter.HomeArticleAdapter
 import com.tainzhi.android.wanandroid.base.ui.BaseVMFragment
+import com.tainzhi.android.wanandroid.databinding.ItemProjectBinding
 import com.tainzhi.android.wanandroid.util.Preference
 import com.tainzhi.android.wanandroid.view.CustomLoadMoreView
 import com.tainzhi.android.wanandroid.view.SpaceItemDecoration
@@ -29,7 +30,8 @@ class ProjectTypeFragment : BaseVMFragment<ArticleViewModel>() {
     private val isLogin by Preference(Preference.KEY_IS_LOGIN, false)
     private val cid by lazy { arguments?.getInt(CID) }
     private val isLated by lazy { arguments?.getBoolean(LASTED) }
-    private val projectAdapter by lazy { HomeArticleAdapter(R.layout.item_project) }
+    private val projectAdapter by lazy { HomeArticleAdapter<ItemProjectBinding>(R.layout.item_project, BR
+            .article) }
 
     companion object {
         private const val CID = "cid"
@@ -71,9 +73,12 @@ class ProjectTypeFragment : BaseVMFragment<ArticleViewModel>() {
                         .link)
                 findNavController().navigate(action)
             }
-            setLoadMoreView(CustomLoadMoreView())
-            setOnLoadMoreListener({ loadMore() }, projectRecyclerView)
-            onItemChildClickListener = this@ProjectTypeFragment.onItemChildClickListener
+            loadMoreModule.run {
+                loadMoreView = CustomLoadMoreView()
+                setOnLoadMoreListener{ loadMore() }
+
+            }
+            setOnItemChildClickListener(this@ProjectTypeFragment.onItemChildClickListener)
         }
         projectRecyclerView.run {
             layoutManager = LinearLayoutManager(context)
@@ -84,7 +89,7 @@ class ProjectTypeFragment : BaseVMFragment<ArticleViewModel>() {
     }
 
     private fun refresh() {
-        projectAdapter.setEnableLoadMore(false)
+        projectAdapter.loadMoreModule.isEnableLoadMore =  false
         loadData(true)
     }
 
@@ -110,14 +115,16 @@ class ProjectTypeFragment : BaseVMFragment<ArticleViewModel>() {
 
             it.showSuccess?.let { list ->
                 projectAdapter.run {
-                    if (it.isRefresh) replaceData(list.datas)
+                    if (it.isRefresh) setList(list.datas)
                     else addData(list.datas)
-                    setEnableLoadMore(true)
-                    loadMoreComplete()
+                    loadMoreModule.run {
+                        isEnableLoadMore = true
+                        loadMoreComplete()
+                    }
                 }
             }
     
-            if (it.showEnd) projectAdapter.loadMoreEnd()
+            if (it.showEnd) projectAdapter.loadMoreModule.loadMoreEnd()
         })
     }
     
@@ -131,7 +138,7 @@ class ProjectTypeFragment : BaseVMFragment<ArticleViewModel>() {
         projectRefreshLayout.isEnabled = true
     }
     
-    private val onItemChildClickListener = BaseQuickAdapter.OnItemChildClickListener { _, view, position ->
+    private val onItemChildClickListener = OnItemChildClickListener { _, view, position ->
         when (view.id) {
             R.id.collectIv -> {
                 if (isLogin) {

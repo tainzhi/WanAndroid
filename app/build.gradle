@@ -30,10 +30,10 @@ android {
         def release_keyStorePassword = properties.getProperty( 'release_keyStorePassword' )
         release {
 
-            storeFile file( release_keyStoreFile )
-            storePassword release_keyStorePassword
-            keyAlias release_keyAlias
-            keyPassword release_keyPassword
+//            storeFile file( release_keyStoreFile )
+//            storePassword release_keyStorePassword
+//            keyAlias release_keyAlias
+//            keyPassword release_keyPassword
         }
     }
     compileSdkVersion Libs.Version.compileSdkVersion
@@ -65,7 +65,7 @@ android {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
+//            signingConfig signingConfigs.release
         }
     }
 

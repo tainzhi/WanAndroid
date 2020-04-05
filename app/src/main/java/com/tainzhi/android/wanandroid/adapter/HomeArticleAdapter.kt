@@ -1,5 +1,6 @@
 package com.tainzhi.android.wanandroid.adapter
 
+import androidx.databinding.ViewDataBinding
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
 import com.tainzhi.android.wanandroid.R
@@ -13,12 +14,13 @@ import com.tainzhi.android.wanandroid.databinding.ItemArticleBinding
  * @description:
  **/
 
-class HomeArticleAdapter : BaseQuickAdapter<Article, BaseDataBindingHolder<ItemArticleBinding>> {
-    constructor() : super(R.layout.item_article)
-    
-    override fun convert(holder: BaseDataBindingHolder<ItemArticleBinding>, item: Article) {
+class HomeArticleAdapter<T: ViewDataBinding>(layoutResId: Int, val br: Int) :
+        BaseQuickAdapter<Article,
+        BaseDataBindingHolder<T>>(layoutResId) {
+
+    override fun convert(holder: BaseDataBindingHolder<T>, item: Article) {
         holder.dataBinding?.apply {
-            article = item
+            setVariable(br, item)
             executePendingBindings()
         }
     }

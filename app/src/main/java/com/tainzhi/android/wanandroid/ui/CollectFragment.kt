@@ -9,11 +9,12 @@ import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.chad.library.adapter.base.BaseQuickAdapter
+import com.chad.library.adapter.base.listener.OnItemChildClickListener
 import com.tainzhi.android.wanandroid.R
 import com.tainzhi.android.wanandroid.adapter.HomeArticleAdapter
 import com.tainzhi.android.wanandroid.base.ui.BaseVMFragment
 import com.tainzhi.android.wanandroid.databinding.FragmentCollectBinding
+import com.tainzhi.android.wanandroid.databinding.ItemArticleBinding
 import com.tainzhi.android.wanandroid.util.toast
 import com.tainzhi.android.wanandroid.view.CustomLoadMoreView
 import com.tainzhi.android.wanandroid.view.SpaceItemDecoration
@@ -22,7 +23,8 @@ import kotlinx.android.synthetic.main.fragment_collect.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
-    private val articleAdapter by lazy { HomeArticleAdapter() }
+    private val articleAdapter by lazy { HomeArticleAdapter<ItemArticleBinding>(R.layout
+            .item_article, BR.article) }
     override fun getLayoutResId() = R.layout.fragment_collect
 
     override fun initVM(): ArticleViewModel = getViewModel()
@@ -33,11 +35,11 @@ class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
             view.findNavController().navigateUp()
         }
         requireActivity().onBackPressedDispatcher.addCallback { onBack() }
-    
+
         collectRefreshLayout.setColorSchemeColors(ContextCompat.getColor(activity as Context, R.color.color_secondary))
-    
+
         (mBinding as FragmentCollectBinding).viewModel = mViewModel
-    
+
         collectRecyclerView.run {
             layoutManager = LinearLayoutManager(activity)
             addItemDecoration(SpaceItemDecoration(context.resources.getDimension(R.dimen.margin_small)))
@@ -56,13 +58,15 @@ class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
                 mViewModel.insertBrowseHistory(articleAdapter.data[position])
 
                 val action = BrowserFragmentDirections.actionGlobalBrowserFragment(articleAdapter
-                                                                                           .data[position].link)
+                        .data[position].link)
                 findNavController().navigate(action)
 
             }
-            onItemChildClickListener = itemChildClickListener
-            setLoadMoreView(CustomLoadMoreView())
-            setOnLoadMoreListener({ loadMore() }, collectRecyclerView)
+            setOnItemChildClickListener(this@CollectFragment.itemChildClickListener)
+            loadMoreModule.run {
+                loadMoreView = CustomLoadMoreView()
+                setOnLoadMoreListener { loadMore() }
+            }
         }
         collectRecyclerView.adapter = articleAdapter
 
@@ -70,10 +74,10 @@ class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
                 ViewGroup, false)
         val emptyTv = emptyView.findViewById<TextView>(R.id.emptyTv)
         emptyTv.text = getString(R.string.no_collection)
-        articleAdapter.emptyView = emptyView
+        articleAdapter.setEmptyView( emptyView)
     }
 
-    private val itemChildClickListener = BaseQuickAdapter.OnItemChildClickListener { _, view, position ->
+    private val itemChildClickListener = OnItemChildClickListener { _, view, position ->
         when (view.id) {
             R.id.collectIv -> {
                 articleAdapter.run {
@@ -89,7 +93,7 @@ class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
     }
 
     private fun refresh() {
-        articleAdapter.setEnableLoadMore(false)
+        articleAdapter.loadMoreModule.isEnableLoadMore = false
         mViewModel.getCollectArticleList(true)
     }
 
@@ -106,24 +110,26 @@ class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
                 it.showSuccess?.let { list ->
                     list.datas.forEach { it.collect = true }
                     articleAdapter.run {
-                        if (it.isRefresh) replaceData(list.datas)
+                        if (it.isRefresh) setList(list.datas)
                         else addData(list.datas)
-                        setEnableLoadMore(true)
-                        loadMoreComplete()
+                        loadMoreModule.run {
+                            isEnableLoadMore = true
+                            loadMoreComplete()
+                        }
                     }
                 }
-    
-                if (it.showEnd) articleAdapter.loadMoreEnd()
-    
+
+                if (it.showEnd) articleAdapter.loadMoreModule.loadMoreEnd()
+
                 it.showError?.let { message ->
                     activity?.toast(if (message.isBlank()) "Net error" else message)
                 }
             })
         }
     }
-    
+
     private fun onBack() {
         findNavController().navigateUp()
     }
-    
+
 }

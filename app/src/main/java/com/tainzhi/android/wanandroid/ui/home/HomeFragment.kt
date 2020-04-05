@@ -9,11 +9,12 @@ import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.chad.library.adapter.base.BaseQuickAdapter
+import com.chad.library.adapter.base.listener.OnItemChildClickListener
 import com.tainzhi.android.wanandroid.R
 import com.tainzhi.android.wanandroid.adapter.HomeArticleAdapter
 import com.tainzhi.android.wanandroid.base.ui.BaseVMFragment
 import com.tainzhi.android.wanandroid.bean.Banner
+import com.tainzhi.android.wanandroid.databinding.ItemArticleBinding
 import com.tainzhi.android.wanandroid.ui.ArticleViewModel
 import com.tainzhi.android.wanandroid.ui.BrowserFragmentDirections
 import com.tainzhi.android.wanandroid.util.GlideImageLoader
@@ -36,7 +37,8 @@ import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class HomeFragment : BaseVMFragment<ArticleViewModel>() {
     private val isLogin by Preference(Preference.KEY_IS_LOGIN, false)
-    private val homeArticleAdapter by lazy { HomeArticleAdapter() }
+    private val homeArticleAdapter by lazy { HomeArticleAdapter<ItemArticleBinding>(R.layout.item_article, BR
+        .article) }
     private val bannerImages = mutableListOf<String>()
     private val bannerTitles = mutableListOf<String>()
     private val bannerUrls = mutableListOf<String>()
@@ -74,16 +76,18 @@ class HomeFragment : BaseVMFragment<ArticleViewModel>() {
                         .link)
                 findNavController().navigate(action)
             }
-            onItemChildClickListener = this@HomeFragment.onItemChildClickListener
+            setOnItemChildClickListener(this@HomeFragment.onItemChildClickListener)
             if (headerLayoutCount > 0) removeAllHeaderView()
             addHeaderView(banner)
-            setLoadMoreView(CustomLoadMoreView())
-            setOnLoadMoreListener({ loadMore() }, homeRecyclerView)
+            loadMoreModule.run {
+                loadMoreView = CustomLoadMoreView()
+                setOnLoadMoreListener { loadMore() }
+            }
         }
         homeRecyclerView.adapter = homeArticleAdapter
     }
 
-    private val onItemChildClickListener = BaseQuickAdapter.OnItemChildClickListener { _, view, position ->
+    private val onItemChildClickListener = OnItemChildClickListener { _, view, position ->
         when (view.id) {
             R.id.collectIv -> {
                 if (isLogin) {
@@ -96,7 +100,7 @@ class HomeFragment : BaseVMFragment<ArticleViewModel>() {
                     }
                 } else {
                     Navigation.findNavController(homeRecyclerView).navigate(R.id
-                                                                                    .action_tabHostFragment_to_login)
+                            .action_tabHostFragment_to_login)
                 }
             }
         }
@@ -123,7 +127,7 @@ class HomeFragment : BaseVMFragment<ArticleViewModel>() {
     }
 
     fun refresh() {
-        homeArticleAdapter.setEnableLoadMore(false)
+        homeArticleAdapter.loadMoreModule.isEnableLoadMore = false
         mViewModel.getBanners()
         mViewModel.getHomeArticleList(true)
     }
@@ -142,12 +146,14 @@ class HomeFragment : BaseVMFragment<ArticleViewModel>() {
                     homeArticleAdapter.run {
                         if (it.isRefresh) replaceData(list.datas)
                         else addData(list.datas)
-                        setEnableLoadMore(true)
-                        loadMoreComplete()
+                        loadMoreModule.run {
+                            isEnableLoadMore = true
+                            loadMoreComplete()
+                        }
                     }
                 }
 
-                if (it.showEnd) homeArticleAdapter.loadMoreEnd()
+                if (it.showEnd) homeArticleAdapter.loadMoreModule.loadMoreEnd()
 
                 it.showError?.let { message ->
                     activity?.toast(if (message.isBlank()) "Net error" else message)
@@ -167,13 +173,13 @@ class HomeFragment : BaseVMFragment<ArticleViewModel>() {
                 .setBannerTitles(bannerTitles)
         banner.start()
     }
-    
+
     override fun onResume() {
         super.onResume()
         homeRefreshLayout.isEnabled = true
         banner.startAutoPlay()
     }
-    
+
     override fun onPause() {
         super.onPause()
         homeRefreshLayout.isEnabled = false
