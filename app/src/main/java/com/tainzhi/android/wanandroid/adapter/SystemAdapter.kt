@@ -2,6 +2,7 @@ package com.tainzhi.android.wanandroid.adapter
 
 import androidx.databinding.ViewDataBinding
 import com.chad.library.adapter.base.BaseQuickAdapter
+import com.chad.library.adapter.base.module.LoadMoreModule
 import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
 import com.tainzhi.android.wanandroid.bean.SystemParent
 
@@ -14,7 +15,7 @@ import com.tainzhi.android.wanandroid.bean.SystemParent
 
 class SystemAdapter<T : ViewDataBinding>(layoutResId: Int, val br: Int) :
         BaseQuickAdapter<SystemParent,
-                BaseDataBindingHolder<T>>(layoutResId) {
+                BaseDataBindingHolder<T>>(layoutResId), LoadMoreModule {
 
     override fun convert(holder: BaseDataBindingHolder<T>, item: SystemParent) {
         holder.dataBinding?.apply {
@@ -22,20 +23,5 @@ class SystemAdapter<T : ViewDataBinding>(layoutResId: Int, val br: Int) :
             executePendingBindings()
         }
     }
-    // private var showCollect = true
-    //
-    // fun showCollect(showCollect: Boolean) {
-    //     this.showCollect = showCollect
-    // }
-    //
-    // override fun convert(helper: BaseBindAdapter.BindViewHolder, item: Article) {
-    //     super.convert(helper, item)
-    //     helper.addOnClickListener(R.id.collectIv)
-    //     helper.setVisible(R.id.collectIv, showCollect)
-    //     if (item.collect) {
-    //         helper.getView<ImageView>(R.id.collectIv).setImageResource(R.drawable.ic_collect_check_24)
-    //     } else {
-    //         helper.getView<ImageView>(R.id.collectIv).setImageResource(R.drawable.ic_collect_unchecked_24)
-    //     }
-    // }
+     private var showCollect = true
 }
