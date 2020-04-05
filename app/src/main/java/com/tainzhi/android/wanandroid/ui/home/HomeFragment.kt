@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.listener.OnItemChildClickListener
 import com.tainzhi.android.wanandroid.R
+import com.tainzhi.android.wanandroid.BR
 import com.tainzhi.android.wanandroid.adapter.HomeArticleAdapter
 import com.tainzhi.android.wanandroid.base.ui.BaseVMFragment
 import com.tainzhi.android.wanandroid.bean.Banner
@@ -126,7 +127,7 @@ class HomeFragment : BaseVMFragment<ArticleViewModel>() {
         }
     }
 
-    fun refresh() {
+    private fun refresh() {
         homeArticleAdapter.loadMoreModule.isEnableLoadMore = false
         mViewModel.getBanners()
         mViewModel.getHomeArticleList(true)
@@ -144,7 +145,7 @@ class HomeFragment : BaseVMFragment<ArticleViewModel>() {
 
                 it.showSuccess?.let { list ->
                     homeArticleAdapter.run {
-                        if (it.isRefresh) replaceData(list.datas)
+                        if (it.isRefresh) setList(list.datas)
                         else addData(list.datas)
                         loadMoreModule.run {
                             isEnableLoadMore = true

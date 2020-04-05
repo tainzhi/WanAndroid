@@ -114,7 +114,7 @@ class NavigationFragment : BaseVMFragment<NavigationViewModel>() {
         this.navigationList.addAll(navigationList)
         tabLayout.setTabAdapter(tabAdapter)
         
-        navigationAdapter.setNewData(navigationList)
+        navigationAdapter.setNewInstance(navigationList.toMutableList())
     }
     
     private val scrollListener = object : RecyclerView.OnScrollListener() {

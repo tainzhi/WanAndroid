@@ -5,10 +5,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tainzhi.android.wanandroid.BR
 import com.tainzhi.android.wanandroid.R
-import com.tainzhi.android.wanandroid.base.ui.BaseBindAdapter
+import com.tainzhi.android.wanandroid.adapter.HomeArticleAdapter
 import com.tainzhi.android.wanandroid.base.ui.BaseVMFragment
-import com.tainzhi.android.wanandroid.bean.Article
 import com.tainzhi.android.wanandroid.databinding.FragmentSquareBinding
+import com.tainzhi.android.wanandroid.databinding.ItemSquareBinding
 import com.tainzhi.android.wanandroid.util.toast
 import com.tainzhi.android.wanandroid.view.CustomLoadMoreView
 import com.tainzhi.android.wanandroid.view.SpaceItemDecoration
@@ -17,7 +17,8 @@ import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class SquareFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
 
-    private val squareAdapter by lazy { BaseBindAdapter<Article>(R.layout.item_square, BR.article) }
+    private val squareAdapter by lazy { HomeArticleAdapter<ItemSquareBinding>(R.layout.item_square, BR
+            .article) }
 
     override fun getLayoutResId() = R.layout.fragment_square
 
@@ -42,8 +43,10 @@ class SquareFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
                         .link)
                 findNavController().navigate(action)
             }
-            setLoadMoreView(CustomLoadMoreView())
-            setOnLoadMoreListener({ loadMore() }, squareRecyclerView)
+            loadMoreModule.run {
+                loadMoreView = CustomLoadMoreView()
+                setOnLoadMoreListener { loadMore() }
+            }
         }
         squareRecyclerView.run {
             layoutManager = LinearLayoutManager(context)
@@ -57,7 +60,7 @@ class SquareFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
     }
 
     private fun refresh() {
-        squareAdapter.setEnableLoadMore(false)
+        squareAdapter.loadMoreModule.isEnableLoadMore = false
         mViewModel.getSquareArticleList(true)
     }
 
@@ -66,14 +69,16 @@ class SquareFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
 
             it.showSuccess?.let { list ->
                 squareAdapter.run {
-                    if (it.isRefresh) replaceData(list.datas)
+                    if (it.isRefresh) setList(list.datas)
                     else addData(list.datas)
-                    setEnableLoadMore(true)
-                    loadMoreComplete()
+                    loadMoreModule.run {
+                        isEnableLoadMore = true
+                        loadMoreComplete()
+                    }
                 }
             }
     
-            if (it.showEnd) squareAdapter.loadMoreEnd()
+            if (it.showEnd) squareAdapter.loadMoreModule.loadMoreEnd()
     
             it.showError?.let { message ->
                 activity?.toast(if (message.isBlank()) "Net error" else message)

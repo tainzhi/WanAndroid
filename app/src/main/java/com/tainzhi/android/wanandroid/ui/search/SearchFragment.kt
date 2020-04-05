@@ -13,25 +13,27 @@ import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.chad.library.adapter.base.BaseQuickAdapter
+import com.chad.library.adapter.base.listener.OnItemChildClickListener
 import com.tainzhi.android.wanandroid.R
+import com.tainzhi.android.wanandroid.BR
 import com.tainzhi.android.wanandroid.adapter.HomeArticleAdapter
 import com.tainzhi.android.wanandroid.base.ui.BaseVMFragment
 import com.tainzhi.android.wanandroid.bean.Hot
+import com.tainzhi.android.wanandroid.databinding.ItemArticleBinding
 import com.tainzhi.android.wanandroid.ui.BrowserFragmentDirections
 import com.tainzhi.android.wanandroid.util.Preference
 import com.tainzhi.android.wanandroid.view.CustomLoadMoreView
 import com.tainzhi.android.wanandroid.view.SpaceItemDecoration
 import com.zhy.view.flowlayout.FlowLayout
 import com.zhy.view.flowlayout.TagAdapter
-import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_search.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class SearchFragment : BaseVMFragment<SearchViewModel>() {
 
     private val isLogin by Preference(Preference.KEY_IS_LOGIN, false)
-    private val searchAdapter by lazy { HomeArticleAdapter() }
+    private val searchAdapter by lazy { HomeArticleAdapter<ItemArticleBinding>(R.layout
+            .item_article, BR.article) }
     private var key = ""
     private val searchHistoryList = mutableListOf<String>()
     private val hotList = mutableListOf<Hot>()
@@ -66,7 +68,7 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
     override fun initVM(): SearchViewModel = getViewModel()
 
     private fun refresh() {
-        searchAdapter.setEnableLoadMore(false)
+        searchAdapter.loadMoreModule.isEnableLoadMore = false
         mViewModel.searchHot(true, key)
     }
 
@@ -80,15 +82,17 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
                         .link)
                 findNavController().navigate(action)
             }
-            onItemChildClickListener = this@SearchFragment.onItemChildClickListener
-            setLoadMoreView(CustomLoadMoreView())
-            setOnLoadMoreListener({ loadMore() }, homeRecyclerView)
+            setOnItemChildClickListener(this@SearchFragment.onItemChildClickListener)
+            loadMoreModule.run {
+                loadMoreView = CustomLoadMoreView()
+                setOnLoadMoreListener{ loadMore() }
+            }
         }
         searchRecyclerView.adapter = searchAdapter
         val emptyView = layoutInflater.inflate(R.layout.view_empty, searchRecyclerView.parent as ViewGroup, false)
         val emptyTv = emptyView.findViewById<TextView>(R.id.emptyTv)
         emptyTv.text = getString(R.string.try_another_key)
-        searchAdapter.emptyView = emptyView
+        searchAdapter.setEmptyView(emptyView)
     }
 
     private fun loadMore() {
@@ -101,7 +105,7 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
         mViewModel.getWebSites()
     }
 
-    private val onItemChildClickListener = BaseQuickAdapter.OnItemChildClickListener { _, view, position ->
+    private val onItemChildClickListener = OnItemChildClickListener { _, view, position ->
         when (view.id) {
             R.id.collectIv -> {
                 if (isLogin) {
@@ -210,14 +214,16 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
 
             it.showSuccess?.let { list ->
                 searchAdapter.run {
-                    if (it.isRefresh) replaceData(list.datas)
+                    if (it.isRefresh) setList(list.datas)
                     else addData(list.datas)
-                    setEnableLoadMore(true)
-                    loadMoreComplete()
+                    loadMoreModule.run {
+                        isEnableLoadMore = true
+                        loadMoreComplete()
+                    }
                 }
             }
 
-            if (it.showEnd) searchAdapter.loadMoreEnd()
+            if (it.showEnd) searchAdapter.loadMoreModule.loadMoreEnd()
 
             it.showSearchHistory?.let { data ->
                 searchHistoryList.clear()
@@ -255,7 +261,7 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
         override fun handleOnBackPressed() {
             // 如果是在搜索结果页面，那么返回，将隐藏搜索结果页面，显示热搜页面
             if (searchAdapter.data.size != 0) {
-                searchAdapter.setNewData(null)
+                searchAdapter.setList(null)
                 searchRecyclerView.visibility = View.INVISIBLE
                 hotContent.visibility = View.VISIBLE
                 // 更新搜索记录

@@ -5,12 +5,11 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.chad.library.adapter.base.BaseQuickAdapter
 import com.tainzhi.android.wanandroid.BR
 import com.tainzhi.android.wanandroid.R
-import com.tainzhi.android.wanandroid.base.ui.BaseBindAdapter
+import com.tainzhi.android.wanandroid.adapter.SystemAdapter
 import com.tainzhi.android.wanandroid.base.ui.BaseVMFragment
-import com.tainzhi.android.wanandroid.bean.SystemParent
+import com.tainzhi.android.wanandroid.databinding.ItemSystemBinding
 import com.tainzhi.android.wanandroid.ui.main.TabHostFragmentDirections
 import com.tainzhi.android.wanandroid.util.toast
 import com.tainzhi.android.wanandroid.view.SpaceItemDecoration
@@ -22,7 +21,10 @@ import org.koin.androidx.viewmodel.ext.android.getViewModel
  * 体系
  */
 class SystemFragment : BaseVMFragment<SystemViewModel>() {
-    private val systemAdapter by lazy { BaseBindAdapter<SystemParent>(R.layout.item_system, BR.systemParent) }
+    private val systemAdapter by lazy {
+        SystemAdapter<ItemSystemBinding>(R.layout.item_system, BR
+                .systemParent)
+    }
 
     override fun getLayoutResId() = R.layout.fragment_system
 
@@ -44,9 +46,9 @@ class SystemFragment : BaseVMFragment<SystemViewModel>() {
             adapter = systemAdapter
         }
 
-        systemAdapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener { _, _, position ->
+        systemAdapter.setOnItemChildClickListener {  _, _, position ->
             val action = TabHostFragmentDirections.actionSystemFragmentToSystemTypeNormalFragment(systemAdapter
-                                                                                                          .data[position])
+                    .data[position])
             findNavController().navigate(action)
         }
 
@@ -59,24 +61,24 @@ class SystemFragment : BaseVMFragment<SystemViewModel>() {
     private fun refresh() {
         mViewModel.getSystemTypes()
     }
-    
+
     override fun startObserve() {
         mViewModel.run {
             uiState.observe(viewLifecycleOwner, Observer {
                 systemRefreshLayout.isRefreshing = it.showLoading
-                
-                it.showSuccess?.let { list -> systemAdapter.replaceData(list) }
-                
+
+                it.showSuccess?.let { list -> systemAdapter.setList(list) }
+
                 it.showError?.let { message -> activity?.toast(message) }
             })
         }
     }
-    
+
     override fun onResume() {
         super.onResume()
         systemRefreshLayout.isEnabled = true
     }
-    
+
     override fun onStop() {
         super.onStop()
         systemRefreshLayout.isEnabled = false

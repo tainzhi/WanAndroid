@@ -7,10 +7,12 @@ import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.chad.library.adapter.base.BaseQuickAdapter
+import com.chad.library.adapter.base.listener.OnItemChildClickListener
 import com.tainzhi.android.wanandroid.R
+import com.tainzhi.android.wanandroid.BR
 import com.tainzhi.android.wanandroid.adapter.HomeArticleAdapter
 import com.tainzhi.android.wanandroid.base.ui.BaseVMFragment
+import com.tainzhi.android.wanandroid.databinding.ItemArticleBinding
 import com.tainzhi.android.wanandroid.util.Preference
 import com.tainzhi.android.wanandroid.util.toast
 import com.tainzhi.android.wanandroid.view.CustomLoadMoreView
@@ -24,7 +26,8 @@ class SystemTypeFragment : BaseVMFragment<ArticleViewModel>() {
 
     private val cid by lazy { arguments?.getInt(CID) }
     private val isBlog by lazy { arguments?.getBoolean(BLOG) ?: false } // 区分是体系下的文章列表还是公众号下的文章列表
-    private val systemTypeAdapter by lazy { HomeArticleAdapter() }
+    private val systemTypeAdapter by lazy { HomeArticleAdapter<ItemArticleBinding>(R.layout.item_article, BR
+            .article) }
 
     companion object {
         private const val CID = "cid"
@@ -65,10 +68,12 @@ class SystemTypeFragment : BaseVMFragment<ArticleViewModel>() {
                         .link)
                 findNavController().navigate(action)
             }
-            onItemChildClickListener = this@SystemTypeFragment.onItemChildClickListener
+            setOnItemChildClickListener(this@SystemTypeFragment.onItemChildClickListener)
 
-            setLoadMoreView(CustomLoadMoreView())
-            setOnLoadMoreListener({ loadMore() }, systemTypeRecyclerView)
+            loadMoreModule.run {
+                loadMoreView = CustomLoadMoreView()
+                setOnLoadMoreListener { loadMore() }
+            }
         }
         systemTypeRecyclerView.run {
             layoutManager = LinearLayoutManager(context)
@@ -77,7 +82,7 @@ class SystemTypeFragment : BaseVMFragment<ArticleViewModel>() {
         }
     }
 
-    private val onItemChildClickListener = BaseQuickAdapter.OnItemChildClickListener { _, view, position ->
+    private val onItemChildClickListener = OnItemChildClickListener { _, view, position ->
         when (view.id) {
             R.id.collectIv -> {
                 if (isLogin) {
@@ -101,7 +106,7 @@ class SystemTypeFragment : BaseVMFragment<ArticleViewModel>() {
     }
 
     private fun refresh() {
-        systemTypeAdapter.setEnableLoadMore(false)
+        systemTypeAdapter.loadMoreModule.isEnableLoadMore = false
         loadData(true)
     }
 
@@ -121,14 +126,16 @@ class SystemTypeFragment : BaseVMFragment<ArticleViewModel>() {
 
             it.showSuccess?.let { list ->
                 systemTypeAdapter.run {
-                    if (it.isRefresh) replaceData(list.datas)
+                    if (it.isRefresh) setList(list.datas)
                     else addData(list.datas)
-                    setEnableLoadMore(true)
-                    loadMoreComplete()
+                    loadMoreModule.run{
+                        isEnableLoadMore = true
+                        loadMoreComplete()
+                    }
                 }
             }
 
-            if (it.showEnd) systemTypeAdapter.loadMoreEnd()
+            if (it.showEnd) systemTypeAdapter.loadMoreModule.loadMoreEnd()
 
             it.showError?.let { message ->
                 activity?.toast(if (message.isBlank()) "Net error" else message)
