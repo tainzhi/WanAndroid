@@ -36,6 +36,7 @@ class HomeArticleAdapter :
             addChildClickViewIds(R.id.collectIv)
             executePendingBindings()
         }
+        holder.setVisible(R.id.collectIv, showCollect)
     }
      private var showCollect = true
 

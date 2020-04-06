@@ -86,10 +86,6 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
             }
         }
         searchRecyclerView.adapter = searchAdapter
-        val emptyView = layoutInflater.inflate(R.layout.view_empty, searchRecyclerView.parent as ViewGroup, false)
-        val emptyTv = emptyView.findViewById<TextView>(R.id.emptyTv)
-        emptyTv.text = getString(R.string.try_another_key)
-        searchAdapter.setEmptyView(emptyView)
     }
 
     private fun loadMore() {
@@ -219,6 +215,13 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
                     }
                 }
             }
+
+//            if (it.showSuccess == null && !(it.showLoading)) {
+//                val emptyView = layoutInflater.inflate(R.layout.view_empty, searchRecyclerView.parent as ViewGroup, false)
+//                val emptyTv = emptyView.findViewById<TextView>(R.id.emptyTv)
+//                emptyTv.text = getString(R.string.try_another_key)
+//                searchAdapter.setEmptyView(emptyView)
+//            }
 
             if (it.showEnd) searchAdapter.loadMoreModule.loadMoreEnd()
 

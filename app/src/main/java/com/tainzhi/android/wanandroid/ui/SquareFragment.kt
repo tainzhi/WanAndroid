@@ -32,6 +32,7 @@ class SquareFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
 
     private fun initRecyclerView() {
         squareAdapter.run {
+            showCollect(false)
             setOnItemClickListener { _, _, position ->
                 mViewModel.insertBrowseHistory(squareAdapter.data[position])
 

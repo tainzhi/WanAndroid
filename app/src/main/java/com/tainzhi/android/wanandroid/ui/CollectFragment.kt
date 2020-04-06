@@ -67,12 +67,6 @@ class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
             }
         }
         collectRecyclerView.adapter = articleAdapter
-
-        val emptyView = layoutInflater.inflate(R.layout.view_empty, collectRecyclerView.parent as
-                ViewGroup, false)
-        val emptyTv = emptyView.findViewById<TextView>(R.id.emptyTv)
-        emptyTv.text = getString(R.string.no_collection)
-        articleAdapter.setEmptyView( emptyView)
     }
 
     private val itemChildClickListener = OnItemChildClickListener { _, view, position ->
@@ -115,6 +109,14 @@ class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
                             loadMoreComplete()
                         }
                     }
+                }
+
+                if (it.showError != null && !(it.showLoading)) {
+                    val emptyView = layoutInflater.inflate(R.layout.view_empty, collectRecyclerView.parent as
+                            ViewGroup, false)
+                    val emptyTv = emptyView.findViewById<TextView>(R.id.emptyTv)
+                    emptyTv.text = getString(R.string.no_collection)
+                    articleAdapter.setEmptyView(emptyView)
                 }
 
                 if (it.showEnd) articleAdapter.loadMoreModule.loadMoreEnd()
