@@ -15,11 +15,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.listener.OnItemChildClickListener
 import com.tainzhi.android.wanandroid.R
-import com.tainzhi.android.wanandroid.BR
 import com.tainzhi.android.wanandroid.adapter.HomeArticleAdapter
 import com.tainzhi.android.wanandroid.base.ui.BaseVMFragment
 import com.tainzhi.android.wanandroid.bean.Hot
-import com.tainzhi.android.wanandroid.databinding.ItemArticleBinding
 import com.tainzhi.android.wanandroid.ui.BrowserFragmentDirections
 import com.tainzhi.android.wanandroid.util.Preference
 import com.tainzhi.android.wanandroid.view.CustomLoadMoreView
@@ -32,8 +30,7 @@ import org.koin.androidx.viewmodel.ext.android.getViewModel
 class SearchFragment : BaseVMFragment<SearchViewModel>() {
 
     private val isLogin by Preference(Preference.KEY_IS_LOGIN, false)
-    private val searchAdapter by lazy { HomeArticleAdapter<ItemArticleBinding>(R.layout
-            .item_article, BR.article) }
+    private val searchAdapter by lazy { HomeArticleAdapter() }
     private var key = ""
     private val searchHistoryList = mutableListOf<String>()
     private val hotList = mutableListOf<Hot>()
@@ -43,7 +40,7 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
     override fun getLayoutResId() = R.layout.fragment_search
 
     override fun initView() {
-    
+
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, onBackPressed)
 
         searchRecyclerView.run {
@@ -85,7 +82,7 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
             setOnItemChildClickListener(this@SearchFragment.onItemChildClickListener)
             loadMoreModule.run {
                 loadMoreView = CustomLoadMoreView()
-                setOnLoadMoreListener{ loadMore() }
+                setOnLoadMoreListener { loadMore() }
             }
         }
         searchRecyclerView.adapter = searchAdapter
@@ -118,7 +115,7 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
                     }
                 } else {
                     Navigation.findNavController(searchRecyclerView).navigate(R.id
-                                                                                      .action_tabHostFragment_to_login)
+                            .action_tabHostFragment_to_login)
                 }
             }
         }
@@ -236,27 +233,27 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
                 hotList.addAll(data)
                 hotTagLayout.adapter.notifyDataChanged()
             }
-    
+
             it.showWebSites?.let { data ->
                 webSitesList.clear()
                 webSitesList.addAll(data)
                 webTagLayout.adapter.notifyDataChanged()
             }
-    
+
         })
-    
+
     }
-    
+
     override fun onResume() {
         super.onResume()
         searchRefreshLayout.isEnabled = true
     }
-    
+
     override fun onPause() {
         super.onPause()
         searchRefreshLayout.isEnabled = false
     }
-    
+
     private val onBackPressed = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
             // 如果是在搜索结果页面，那么返回，将隐藏搜索结果页面，显示热搜页面

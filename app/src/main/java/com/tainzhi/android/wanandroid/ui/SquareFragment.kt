@@ -3,12 +3,10 @@ package com.tainzhi.android.wanandroid.ui
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.tainzhi.android.wanandroid.BR
 import com.tainzhi.android.wanandroid.R
 import com.tainzhi.android.wanandroid.adapter.HomeArticleAdapter
 import com.tainzhi.android.wanandroid.base.ui.BaseVMFragment
 import com.tainzhi.android.wanandroid.databinding.FragmentSquareBinding
-import com.tainzhi.android.wanandroid.databinding.ItemSquareBinding
 import com.tainzhi.android.wanandroid.util.toast
 import com.tainzhi.android.wanandroid.view.CustomLoadMoreView
 import com.tainzhi.android.wanandroid.view.SpaceItemDecoration
@@ -17,8 +15,7 @@ import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class SquareFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
 
-    private val squareAdapter by lazy { HomeArticleAdapter<ItemSquareBinding>(R.layout.item_square, BR
-            .article) }
+    private val squareAdapter by lazy { HomeArticleAdapter() }
 
     override fun getLayoutResId() = R.layout.fragment_square
 

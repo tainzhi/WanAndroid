@@ -11,11 +11,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.listener.OnItemChildClickListener
 import com.tainzhi.android.wanandroid.R
-import com.tainzhi.android.wanandroid.BR
 import com.tainzhi.android.wanandroid.adapter.HomeArticleAdapter
 import com.tainzhi.android.wanandroid.base.ui.BaseVMFragment
 import com.tainzhi.android.wanandroid.bean.Banner
-import com.tainzhi.android.wanandroid.databinding.ItemArticleBinding
 import com.tainzhi.android.wanandroid.ui.ArticleViewModel
 import com.tainzhi.android.wanandroid.ui.BrowserFragmentDirections
 import com.tainzhi.android.wanandroid.util.GlideImageLoader
@@ -38,8 +36,7 @@ import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class HomeFragment : BaseVMFragment<ArticleViewModel>() {
     private val isLogin by Preference(Preference.KEY_IS_LOGIN, false)
-    private val homeArticleAdapter by lazy { HomeArticleAdapter<ItemArticleBinding>(R.layout.item_article, BR
-        .article) }
+    private val homeArticleAdapter by lazy { HomeArticleAdapter() }
     private val bannerImages = mutableListOf<String>()
     private val bannerTitles = mutableListOf<String>()
     private val bannerUrls = mutableListOf<String>()

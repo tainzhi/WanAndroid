@@ -1,6 +1,7 @@
 package com.tainzhi.android.wanandroid.binding
 
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.VectorDrawable
 import android.text.Editable
 import android.text.Html
 import android.text.TextWatcher
@@ -44,6 +45,11 @@ fun bindGoneUnless(view: View, gone: Boolean) {
 @BindingAdapter("htmlText")
 fun bindHtmlText(view:TextView,html:String){
     view.text = if (fromN()) Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY) else Html.fromHtml(html)
+}
+
+@BindingAdapter("srcVectorDrawable")
+fun bindImage(imageView: ImageView, srcId: Int) {
+    imageView.setImageResource(srcId)
 }
 
 @BindingAdapter(

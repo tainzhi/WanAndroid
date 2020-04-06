@@ -11,11 +11,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.listener.OnItemChildClickListener
 import com.tainzhi.android.wanandroid.R
-import com.tainzhi.android.wanandroid.BR
 import com.tainzhi.android.wanandroid.adapter.HomeArticleAdapter
 import com.tainzhi.android.wanandroid.base.ui.BaseVMFragment
 import com.tainzhi.android.wanandroid.databinding.FragmentCollectBinding
-import com.tainzhi.android.wanandroid.databinding.ItemArticleBinding
 import com.tainzhi.android.wanandroid.util.toast
 import com.tainzhi.android.wanandroid.view.CustomLoadMoreView
 import com.tainzhi.android.wanandroid.view.SpaceItemDecoration
@@ -24,8 +22,7 @@ import kotlinx.android.synthetic.main.fragment_collect.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
-    private val articleAdapter by lazy { HomeArticleAdapter<ItemArticleBinding>(R.layout
-            .item_article, BR.article) }
+    private val articleAdapter by lazy { HomeArticleAdapter() }
     override fun getLayoutResId() = R.layout.fragment_collect
 
     override fun initVM(): ArticleViewModel = getViewModel()

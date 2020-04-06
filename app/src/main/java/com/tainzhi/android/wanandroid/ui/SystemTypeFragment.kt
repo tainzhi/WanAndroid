@@ -9,10 +9,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.listener.OnItemChildClickListener
 import com.tainzhi.android.wanandroid.R
-import com.tainzhi.android.wanandroid.BR
 import com.tainzhi.android.wanandroid.adapter.HomeArticleAdapter
 import com.tainzhi.android.wanandroid.base.ui.BaseVMFragment
-import com.tainzhi.android.wanandroid.databinding.ItemArticleBinding
 import com.tainzhi.android.wanandroid.util.Preference
 import com.tainzhi.android.wanandroid.util.toast
 import com.tainzhi.android.wanandroid.view.CustomLoadMoreView
@@ -26,8 +24,7 @@ class SystemTypeFragment : BaseVMFragment<ArticleViewModel>() {
 
     private val cid by lazy { arguments?.getInt(CID) }
     private val isBlog by lazy { arguments?.getBoolean(BLOG) ?: false } // 区分是体系下的文章列表还是公众号下的文章列表
-    private val systemTypeAdapter by lazy { HomeArticleAdapter<ItemArticleBinding>(R.layout.item_article, BR
-            .article) }
+    private val systemTypeAdapter by lazy { HomeArticleAdapter() }
 
     companion object {
         private const val CID = "cid"
@@ -95,7 +92,7 @@ class SystemTypeFragment : BaseVMFragment<ArticleViewModel>() {
                     }
                 } else {
                     Navigation.findNavController(systemTypeRecyclerView).navigate(R.id
-                                                                                          .action_tabHostFragment_to_login)
+                            .action_tabHostFragment_to_login)
                 }
             }
         }
@@ -128,7 +125,7 @@ class SystemTypeFragment : BaseVMFragment<ArticleViewModel>() {
                 systemTypeAdapter.run {
                     if (it.isRefresh) setList(list.datas)
                     else addData(list.datas)
-                    loadMoreModule.run{
+                    loadMoreModule.run {
                         isEnableLoadMore = true
                         loadMoreComplete()
                     }

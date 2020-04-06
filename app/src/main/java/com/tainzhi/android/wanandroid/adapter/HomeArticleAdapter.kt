@@ -1,7 +1,12 @@
 package com.tainzhi.android.wanandroid.adapter
 
+import android.view.View
 import android.widget.ImageView
+import androidx.databinding.Observable
+import androidx.databinding.ObservableBoolean
 import androidx.databinding.ViewDataBinding
+import com.chad.library.BR
+import com.chad.library.adapter.base.BaseBinderAdapter
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.module.LoadMoreModule
 import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
@@ -17,29 +22,24 @@ import com.tainzhi.android.wanandroid.di.databaseModule
  * @description:
  **/
 
-class HomeArticleAdapter<T: ViewDataBinding>(layoutResId: Int, val br: Int) :
+class HomeArticleAdapter :
         BaseQuickAdapter<Article,
-        BaseDataBindingHolder<T>>(layoutResId), LoadMoreModule {
+        BaseDataBindingHolder<ItemArticleBinding>>(R.layout.item_article), LoadMoreModule {
 
-    override fun convert(holder: BaseDataBindingHolder<T>, item: Article) {
+
+    override fun convert(holder: BaseDataBindingHolder<ItemArticleBinding>, item: Article) {
         holder.dataBinding?.apply {
-            setVariable(br, item)
+            // setVariable(br, item)
+            // setVariable(BR.collect, ObservableBoolean(item.collect))
+            article = item
+            collect = ObservableBoolean(item.collect)
+            addChildClickViewIds(R.id.collectIv)
             executePendingBindings()
         }
-//        holder.run {
-//            setVisible(R.id.collectIv, showCollect)
-//            addChildClickViewIds(R.id.collectIv)
-//            if (item.collect) {
-//                holder.getView<ImageView>(R.id.collectIv).setImageResource(R.drawable.ic_collect_check_24)
-//            } else {
-//                holder.getView<ImageView>(R.id.collectIv).setImageResource(R.drawable.ic_collect_unchecked_24)
-//            }
-//        }
     }
      private var showCollect = true
 
      fun showCollect(showCollect: Boolean) {
          this.showCollect = showCollect
      }
-
 }

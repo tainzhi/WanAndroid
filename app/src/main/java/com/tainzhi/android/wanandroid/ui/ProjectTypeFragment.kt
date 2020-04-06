@@ -9,10 +9,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.listener.OnItemChildClickListener
 import com.tainzhi.android.wanandroid.R
-import com.tainzhi.android.wanandroid.BR
 import com.tainzhi.android.wanandroid.adapter.HomeArticleAdapter
 import com.tainzhi.android.wanandroid.base.ui.BaseVMFragment
-import com.tainzhi.android.wanandroid.databinding.ItemProjectBinding
 import com.tainzhi.android.wanandroid.util.Preference
 import com.tainzhi.android.wanandroid.view.CustomLoadMoreView
 import com.tainzhi.android.wanandroid.view.SpaceItemDecoration
@@ -31,8 +29,7 @@ class ProjectTypeFragment : BaseVMFragment<ArticleViewModel>() {
     private val isLogin by Preference(Preference.KEY_IS_LOGIN, false)
     private val cid by lazy { arguments?.getInt(CID) }
     private val isLated by lazy { arguments?.getBoolean(LASTED) }
-    private val projectAdapter by lazy { HomeArticleAdapter<ItemProjectBinding>(R.layout.item_project, BR
-            .article) }
+    private val projectAdapter by lazy { HomeArticleAdapter() }
 
     companion object {
         private const val CID = "cid"
