@@ -77,8 +77,7 @@ class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
                         collect = !collect
                         mViewModel.collectArticle(originId, collect)
                     }
-                    data.removeAt(position)
-                    notifyItemRemoved(position)
+                    remove(position)
                 }
             }
         }
@@ -116,7 +115,7 @@ class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
                             ViewGroup, false)
                     val emptyTv = emptyView.findViewById<TextView>(R.id.emptyTv)
                     emptyTv.text = getString(R.string.no_collection)
-                    articleAdapter.setEmptyView(emptyView)
+                    //articleAdapter.setEmptyView(emptyView)
                 }
 
                 if (it.showEnd) articleAdapter.loadMoreModule.loadMoreEnd()

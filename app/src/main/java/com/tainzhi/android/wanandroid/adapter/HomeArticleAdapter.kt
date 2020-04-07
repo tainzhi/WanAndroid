@@ -26,6 +26,11 @@ class HomeArticleAdapter :
         BaseQuickAdapter<Article,
         BaseDataBindingHolder<ItemArticleBinding>>(R.layout.item_article), LoadMoreModule {
 
+    init {
+        // 必须在constructor添加child 点击事件,否则第一个item不能响应click event
+        addChildClickViewIds(R.id.collectIv)
+    }
+
 
     override fun convert(holder: BaseDataBindingHolder<ItemArticleBinding>, item: Article) {
         holder.dataBinding?.apply {
@@ -33,7 +38,6 @@ class HomeArticleAdapter :
             // setVariable(BR.collect, ObservableBoolean(item.collect))
             article = item
             collect = ObservableBoolean(item.collect)
-            addChildClickViewIds(R.id.collectIv)
             executePendingBindings()
         }
         holder.setVisible(R.id.collectIv, showCollect)
