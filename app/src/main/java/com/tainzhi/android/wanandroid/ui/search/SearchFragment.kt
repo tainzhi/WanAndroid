@@ -56,8 +56,8 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
         }
 
         searchView.run {
-            //            isIconified = false
-//            onActionViewExpanded()
+            // isIconified = false
+            // onActionViewExpanded()
             setOnQueryTextListener(onQueryTextListener)
         }
     }
@@ -216,12 +216,17 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
                 }
             }
 
-//            if (it.showSuccess == null && !(it.showLoading)) {
-//                val emptyView = layoutInflater.inflate(R.layout.view_empty, searchRecyclerView.parent as ViewGroup, false)
-//                val emptyTv = emptyView.findViewById<TextView>(R.id.emptyTv)
-//                emptyTv.text = getString(R.string.try_another_key)
-//                searchAdapter.setEmptyView(emptyView)
-//            }
+            if (it.showLoading) {
+                searchAdapter.removeEmptyView()
+                searchAdapter.isUseEmpty = false
+            } else {
+                if (it.showSuccess == null && !it.showHot) {
+                    val emptyView = layoutInflater.inflate(R.layout.view_empty, searchRecyclerView.parent as ViewGroup, false)
+                    val emptyTv = emptyView.findViewById<TextView>(R.id.emptyTv)
+                    emptyTv.text = getString(R.string.try_another_key)
+                    searchAdapter.setEmptyView(emptyView)
+                }
+            }
 
             if (it.showEnd) searchAdapter.loadMoreModule.loadMoreEnd()
 
@@ -260,8 +265,13 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
     private val onBackPressed = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
             // 如果是在搜索结果页面，那么返回，将隐藏搜索结果页面，显示热搜页面
-            if (searchAdapter.data.size != 0) {
+            // 如果显示空EmptyView
+            if (searchAdapter.data.size != 0 ||
+                    searchAdapter.isUseEmpty){
+                // 对于空EmtyView按back键需要remove
                 searchAdapter.setList(null)
+                searchAdapter.isUseEmpty = false
+
                 searchRecyclerView.visibility = View.INVISIBLE
                 hotContent.visibility = View.VISIBLE
                 // 更新搜索记录
