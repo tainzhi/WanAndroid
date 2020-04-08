@@ -46,7 +46,7 @@ class SystemFragment : BaseVMFragment<SystemViewModel>() {
             adapter = systemAdapter
         }
 
-        systemAdapter.setOnItemChildClickListener {  _, _, position ->
+        systemAdapter.setOnItemClickListener {   _, _, position ->
             val action = TabHostFragmentDirections.actionSystemFragmentToSystemTypeNormalFragment(systemAdapter
                     .data[position])
             findNavController().navigate(action)
