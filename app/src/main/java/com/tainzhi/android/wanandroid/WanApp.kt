@@ -4,6 +4,7 @@ import ReleaseCrashTimberTree
 import android.app.Application
 import android.content.Context
 import cat.ereza.customactivityoncrash.config.CaocConfig
+import com.didichuxing.doraemonkit.DoraemonKit
 import com.franmontiel.persistentcookiejar.PersistentCookieJar
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor
@@ -57,6 +58,8 @@ class WanApp : Application() {
     
         initCrashActivity()
         initBugly()
+
+        DoraemonKit.install(this)
     }
     
     private fun initCrashActivity() {

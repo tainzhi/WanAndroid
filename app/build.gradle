@@ -139,6 +139,7 @@ dependencies {
     kapt Libs.Glide.compiler
 
     debugImplementation Libs.leakCanary
+    debugImplementation(Libs.DoKit.debugVersion)
 
     implementation Libs.timber
     implementation Libs.baseRecyclerViewAdapterHelper
