@@ -44,8 +44,6 @@ abstract class BaseRetorfitClient {
         return Retrofit.Builder()
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
-//                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-//                .addCallAdapterFactory(CoroutineCallAdapterFactory.invoke())
                 .baseUrl(baseUrl)
                 .build().create(serviceClass)
     }

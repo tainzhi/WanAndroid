@@ -105,6 +105,8 @@ class ArticleViewModel(
 
             } else if (result is Result.Error) {
                 emitArticleUiState(showLoading = false, showError = result.exception.message)
+            } else if (result is Result.NetUnavailable) {
+                emitArticleUiState(showLoading = false, showError = result.exception.message)
             }
         }
     }

@@ -4,6 +4,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.coroutineScope
 import timber.log.Timber
 import java.io.IOException
+import java.net.UnknownHostException
 
 /**
  * @author:       tainzhi
@@ -23,7 +24,12 @@ open class BaseRepository {
             call()
         } catch (e: Exception) {
             Timber.w(e.toString())
-            Result.Error(e)
+            // 无网络
+            if (e is UnknownHostException) {
+                Result.NetUnavailable(UnknownHostException("network unavaiable"))
+            } else {
+                Result.Error(e)
+            }
         }
     }
 

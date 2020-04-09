@@ -26,28 +26,28 @@ object WanClient : BaseRetorfitClient() {
         val cache = Cache(httpCacheDirectory, cacheSize)
         builder.cache(cache)
                 .cookieJar(WanApp.cookieJar)
-                .addInterceptor { chain ->
-                    var request = chain.request()
-                    if (!NetWorkUtils.isNetworkAvailable(WanApp.CONTEXT)) {
-                        request = request.newBuilder()
-                                .cacheControl(CacheControl.FORCE_CACHE)
-                                .build()
-                    }
-                    val response = chain.proceed(request)
-                    if (!NetWorkUtils.isNetworkAvailable(WanApp.CONTEXT)) {
-                        val maxAge = 60 * 60
-                        response.newBuilder()
-                                .removeHeader("Pragma")
-                                .header("Cache-Control", "public, max-age=$maxAge")
-                                .build()
-                    } else {
-                        val maxStale = 60 * 60 * 24 * 28 // tolerate 4-weeks stale
-                        response.newBuilder()
-                                .removeHeader("Pragma")
-                                .header("Cache-Control", "public, only-if-cached, max-stale=$maxStale")
-                                .build()
-                    }
-                    response
-                }
+                // .addInterceptor { chain ->
+                //     var request = chain.request()
+                //     if (!NetWorkUtils.isNetworkAvailable(WanApp.CONTEXT)) {
+                //         request = request.newBuilder()
+                //                 .cacheControl(CacheControl.FORCE_CACHE)
+                //                 .build()
+                //     }
+                //     val response = chain.proceed(request)
+                //     if (!NetWorkUtils.isNetworkAvailable(WanApp.CONTEXT)) {
+                //         val maxAge = 60 * 60
+                //         response.newBuilder()
+                //                 .removeHeader("Pragma")
+                //                 .header("Cache-Control", "public, max-age=$maxAge")
+                //                 .build()
+                //     } else {
+                //         val maxStale = 60 * 60 * 24 * 28 // tolerate 4-weeks stale
+                //         response.newBuilder()
+                //                 .removeHeader("Pragma")
+                //                 .header("Cache-Control", "public, only-if-cached, max-stale=$maxStale")
+                //                 .build()
+                //     }
+                //     response
+                // }
     }
 }
