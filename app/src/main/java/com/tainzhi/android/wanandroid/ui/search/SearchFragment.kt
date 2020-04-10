@@ -14,6 +14,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.listener.OnItemChildClickListener
+import com.kennyc.view.MultiStateView
 import com.tainzhi.android.wanandroid.R
 import com.tainzhi.android.wanandroid.adapter.HomeArticleAdapter
 import com.tainzhi.android.wanandroid.base.ui.BaseVMFragment
@@ -214,21 +215,15 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
                         loadMoreComplete()
                     }
                 }
+                searchMultiStateView.viewState = MultiStateView.ViewState.CONTENT
             }
 
-            if (it.showLoading) {
-                searchAdapter.removeEmptyView()
-                searchAdapter.isUseEmpty = false
-            } else {
-                if (it.showSuccess == null && !it.showHot) {
-                    val emptyView = layoutInflater.inflate(R.layout.view_empty, searchRecyclerView.parent as ViewGroup, false)
-                    val emptyTv = emptyView.findViewById<TextView>(R.id.emptyTv)
-                    emptyTv.text = getString(R.string.try_another_key)
-                    searchAdapter.setEmptyView(emptyView)
+            if (it.showEnd) {
+                if (searchAdapter.data.isEmpty() && !it.showHot) {
+                    searchMultiStateView.viewState = MultiStateView.ViewState.EMPTY
                 }
+                searchAdapter.loadMoreModule.loadMoreEnd()
             }
-
-            if (it.showEnd) searchAdapter.loadMoreModule.loadMoreEnd()
 
             it.showSearchHistory?.let { data ->
                 searchHistoryList.clear()
@@ -265,13 +260,10 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
     private val onBackPressed = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
             // 如果是在搜索结果页面，那么返回，将隐藏搜索结果页面，显示热搜页面
-            // 如果显示空EmptyView
             if (searchAdapter.data.size != 0 ||
-                    searchAdapter.isUseEmpty){
-                // 对于空EmtyView按back键需要remove
+                    searchMultiStateView.viewState != MultiStateView.ViewState.CONTENT) {
+                searchMultiStateView.viewState = MultiStateView.ViewState.CONTENT
                 searchAdapter.setList(null)
-                searchAdapter.isUseEmpty = false
-
                 searchRecyclerView.visibility = View.INVISIBLE
                 hotContent.visibility = View.VISIBLE
                 // 更新搜索记录

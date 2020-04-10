@@ -38,7 +38,7 @@ class SearchViewModel(private val searchRepository: SearchRepository,
                 val articleList = result.data
                 if (articleList.offset >= articleList.total) {
                     emitArticleUiState(showLoading = false, showEnd = true)
-                   // return@withContext
+                   return@launch
                 }
                 currentPage++
                 emitArticleUiState(showLoading = false, showSuccess = articleList, isRefresh = isRefresh)
