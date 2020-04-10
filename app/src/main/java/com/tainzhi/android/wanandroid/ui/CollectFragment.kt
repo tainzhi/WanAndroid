@@ -1,6 +1,7 @@
 package com.tainzhi.android.wanandroid.ui
 
 import android.content.Context
+import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.activity.addCallback
@@ -10,6 +11,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.listener.OnItemChildClickListener
+import com.kennyc.view.MultiStateView
 import com.tainzhi.android.wanandroid.R
 import com.tainzhi.android.wanandroid.adapter.HomeArticleAdapter
 import com.tainzhi.android.wanandroid.base.ui.BaseVMFragment
@@ -98,28 +100,21 @@ class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
 
             uiState.observe(viewLifecycleOwner, Observer {
 
-                if (it.showLoading) {
-                    articleAdapter.removeEmptyView()
-                } else {
-                    if (it.showSuccess != null) {
-                        it.showSuccess?.let { list ->
-                            list.datas.forEach { it.collect = true }
-                            articleAdapter.run {
-                                if (it.isRefresh) setList(list.datas)
-                                else addData(list.datas)
-                                loadMoreModule.run {
-                                    isEnableLoadMore = true
-                                    loadMoreComplete()
-                                }
-                            }
+                it.showSuccess?.let { list ->
+                    collectMultiStateView.viewState = MultiStateView.ViewState.CONTENT
+                    list.datas.forEach { it.collect = true }
+                    articleAdapter.run {
+                        if (it.isRefresh) setList(list.datas)
+                        else addData(list.datas)
+                        loadMoreModule.run {
+                            isEnableLoadMore = true
+                            loadMoreComplete()
                         }
-
-                    } else {
-                        val emptyView = layoutInflater.inflate(R.layout.view_empty, collectRecyclerView.parent as
-                                ViewGroup, false)
-                        val emptyTv = emptyView.findViewById<TextView>(R.id.emptyTv)
-                        emptyTv.text = getString(R.string.no_collection)
-                        articleAdapter.setEmptyView(emptyView)
+                    }
+                }
+                if (!it.showLoading) {
+                    if (articleAdapter.data.isEmpty()) {
+                        collectMultiStateView.viewState = MultiStateView.ViewState.EMPTY
                     }
                 }
 
@@ -127,6 +122,7 @@ class CollectFragment : BaseVMFragment<ArticleViewModel>(useBinding = true) {
 
                 it.showError?.let { message ->
                     activity?.toast(if (message.isBlank()) "Net error" else message)
+                    collectMultiStateView.viewState = MultiStateView.ViewState.ERROR
                 }
             })
         }

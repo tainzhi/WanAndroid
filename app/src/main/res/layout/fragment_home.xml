@@ -1,21 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/homeRefreshLayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/homeRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_article">
-
-    </androidx.recyclerview.widget.RecyclerView>
-
-
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/homeRefreshLayout"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+	
+	<com.kennyc.view.MultiStateView
+		android:id="@+id/homeMultiStateView"
+		app:msv_emptyView="@layout/view_empty"
+		app:msv_errorView="@layout/view_network_error"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+		
+		<androidx.recyclerview.widget.RecyclerView
+			android:id="@+id/homeRecyclerView"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+			tools:listitem="@layout/item_article">
+		
+		</androidx.recyclerview.widget.RecyclerView>
+	
+	
+	</com.kennyc.view.MultiStateView>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

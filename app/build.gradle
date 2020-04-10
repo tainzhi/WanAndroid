@@ -151,6 +151,7 @@ dependencies {
     implementation Libs.appUpdate
     implementation Libs.activityOnCrash
     implementation Libs.buglyCrashReport
+    implementation(Libs.multiStateView)
 }
 
 

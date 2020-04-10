@@ -75,4 +75,6 @@
     <string name="delete">Delete</string>
     <string name="undo">UNDO</string>
     <string name="remove_item_msg">This item has been removed!</string>
+	<string name="no_network_check_and_retry">No Network, check and retry</string>
+    <string name="no_data">No data</string>
 </resources>

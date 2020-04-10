@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -22,6 +23,12 @@
             onRefresh="@{() -> viewModel.getCollectArticleList(true)}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+            <com.kennyc.view.MultiStateView
+                android:id="@+id/collectMultiStateView"
+                app:msv_emptyView="@layout/view_empty"
+                app:msv_errorView="@layout/view_network_error"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/collectRecyclerView"
@@ -30,6 +37,7 @@
                 tools:listitem="@layout/item_article">
 
             </androidx.recyclerview.widget.RecyclerView>
+            </com.kennyc.view.MultiStateView>
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 

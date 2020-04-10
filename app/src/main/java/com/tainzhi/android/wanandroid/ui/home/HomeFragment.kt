@@ -10,6 +10,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.listener.OnItemChildClickListener
+import com.kennyc.view.MultiStateView
 import com.tainzhi.android.wanandroid.R
 import com.tainzhi.android.wanandroid.adapter.HomeArticleAdapter
 import com.tainzhi.android.wanandroid.base.ui.BaseVMFragment
@@ -141,6 +142,7 @@ class HomeFragment : BaseVMFragment<ArticleViewModel>() {
                 homeRefreshLayout.isRefreshing = it.showLoading
 
                 it.showSuccess?.let { list ->
+                    homeMultiStateView.viewState = MultiStateView.ViewState.CONTENT
                     homeArticleAdapter.run {
                         if (it.isRefresh) setList(list.datas)
                         else addData(list.datas)
@@ -155,6 +157,7 @@ class HomeFragment : BaseVMFragment<ArticleViewModel>() {
 
                 it.showError?.let { message ->
                     activity?.toast(if (message.isBlank()) "Net error" else message)
+                    homeMultiStateView.viewState = MultiStateView.ViewState.ERROR
                 }
 
             })

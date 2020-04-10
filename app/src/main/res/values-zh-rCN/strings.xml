@@ -74,4 +74,6 @@
     <string name="delete">删除</string>
     <string name="undo">取消</string>
     <string name="remove_item_msg">这条记录已经被删除</string>
+	<string name="no_network_check_and_retry">没有网络, 请检查网络并刷新</string>
+    <string name="no_data">没有数据</string>
 </resources>

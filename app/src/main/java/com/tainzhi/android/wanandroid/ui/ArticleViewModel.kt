@@ -68,8 +68,10 @@ class ArticleViewModel(
 
     fun collectArticle(articleId: Int, boolean: Boolean) {
         launch {
+            emitArticleUiState(showLoading = true)
             if (boolean) collectRepository.collectArticle(articleId)
             else collectRepository.unCollectArticle(articleId)
+            emitArticleUiState(showLoading = false)
         }
     }
 
@@ -97,7 +99,7 @@ class ArticleViewModel(
             if (result is Result.Success) {
                 val articleList = result.data
                 if (articleList.offset >= articleList.total) {
-                    emitArticleUiState(showLoading = false, showEnd = true)
+                    emitArticleUiState(showLoading = false, showSuccess = articleList,showEnd = true)
                     return@launch
                 }
                 currentPage++

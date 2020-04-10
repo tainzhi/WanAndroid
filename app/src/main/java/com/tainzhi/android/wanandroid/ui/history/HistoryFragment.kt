@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
+import com.kennyc.view.MultiStateView
 import com.tainzhi.android.wanandroid.R
 import com.tainzhi.android.wanandroid.adapter.HistoryAdapter
 import com.tainzhi.android.wanandroid.adapter.RecyclerItemTouchHelper
@@ -23,6 +24,7 @@ import com.tainzhi.android.wanandroid.util.visible
 import com.tainzhi.android.wanandroid.view.SpaceItemDecoration
 import kotlinx.android.synthetic.main.common_toolbar.*
 import kotlinx.android.synthetic.main.fragment_history.*
+import kotlinx.android.synthetic.main.fragment_home.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class HistoryFragment : BaseVMFragment<HistoryViewModel>(useBinding = true) {
@@ -92,11 +94,9 @@ class HistoryFragment : BaseVMFragment<HistoryViewModel>(useBinding = true) {
 
     private fun showEmptyView(show: Boolean) {
         if (show) {
-            historyRecyclerView.gone()
-            historyEmptyListCl.visible()
+            historyMultiStateView.viewState = MultiStateView.ViewState.EMPTY
         } else {
-            historyRecyclerView.visible()
-            historyEmptyListCl.gone()
+            historyMultiStateView.viewState = MultiStateView.ViewState.CONTENT
         }
     }
 
