@@ -41,6 +41,7 @@ class SplashActivity : BaseActivity() {
     override fun initData() {
         launch {
             delay(2000L)
+            splashRecyclerView.stopScroll()
             finish()
             startKtxActivity<MainActivity>()
         }

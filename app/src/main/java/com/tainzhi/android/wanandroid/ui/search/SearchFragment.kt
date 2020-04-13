@@ -1,9 +1,13 @@
 package com.tainzhi.android.wanandroid.ui.search
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.content.Context
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import android.view.ViewAnimationUtils
+import android.view.animation.DecelerateInterpolator
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.SearchView
@@ -21,12 +25,15 @@ import com.tainzhi.android.wanandroid.base.ui.BaseVMFragment
 import com.tainzhi.android.wanandroid.bean.Hot
 import com.tainzhi.android.wanandroid.ui.BrowserFragmentDirections
 import com.tainzhi.android.wanandroid.util.Preference
+import com.tainzhi.android.wanandroid.util.exitCircularReveal
+import com.tainzhi.android.wanandroid.util.startCircularReveal
 import com.tainzhi.android.wanandroid.view.CustomLoadMoreView
 import com.tainzhi.android.wanandroid.view.SpaceItemDecoration
 import com.zhy.view.flowlayout.FlowLayout
 import com.zhy.view.flowlayout.TagAdapter
 import kotlinx.android.synthetic.main.fragment_search.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
+import kotlin.math.hypot
 
 class SearchFragment : BaseVMFragment<SearchViewModel>() {
 
@@ -61,6 +68,12 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
             // onActionViewExpanded()
             setOnQueryTextListener(onQueryTextListener)
         }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        // 不能在这里设定CircularReveal的中心, 此时view.right, view.bottom全部为0
+        view.startCircularReveal()
     }
 
     override fun initVM(): SearchViewModel = getViewModel()
@@ -269,8 +282,10 @@ class SearchFragment : BaseVMFragment<SearchViewModel>() {
                 // 更新搜索记录
                 mViewModel.getSearchHistory()
             } else {
+                view?.exitCircularReveal(view!!.right, view!!.top) {
+                    // popBackStack()没有放置在这里, 是因为可能出现Search页面会重现
+                }
                 findNavController().popBackStack()
-                isEnabled = false
             }
         }
     }

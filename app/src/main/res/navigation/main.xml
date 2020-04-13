@@ -27,11 +27,7 @@
             app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_tabHostFragment_to_searchFragment"
-            app:destination="@id/searchFragment"
-            app:enterAnim="@anim/scale_in"
-            app:exitAnim="@anim/alpha_out"
-            app:popEnterAnim="@anim/alpha_in"
-            app:popExitAnim="@anim/scale_out" />
+            app:destination="@id/searchFragment"/>
         <action
             android:id="@+id/action_tabHostFragment_to_settingsFragment"
             app:destination="@id/settingsFragment"
