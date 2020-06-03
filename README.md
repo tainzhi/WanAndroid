@@ -52,6 +52,7 @@
 # Todo
 - [] 参考[android developer/testing](https://developer.android.com/training/testing)添加各种测试
 - [] 参考[android developer/performance](https://developer.android.com/topic/performance)优化app
+- [] 参考 android-architecture-components/GithubBrowserSample 缓存处理
 - [] 内存泄漏处理
 - [] [github action](./.github/workflow/release_gitee.yml):
   不能自动执行；[README](./.github/workflow/README.md)中记录了git push tag后触发
