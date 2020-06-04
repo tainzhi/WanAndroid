@@ -15,7 +15,8 @@ plugins {
 }
 
 apply {
-    from("../test_dependencies.gradle")
+    // // 读取另一个gradle.kts
+    // from("../test_dependencies.gradle.kts")
 }
 
 val byteOut = ByteArrayOutputStream()
@@ -173,6 +174,42 @@ dependencies {
     implementation(Libs.activityOnCrash)
     implementation(Libs.buglyCrashReport)
     implementation(Libs.multiStateView)
+    
+    
+    
+    ///////////////////////////////////////////////////////////////////////////
+    // 以下是 unit test 依赖
+    ///////////////////////////////////////////////////////////////////////////
+    testImplementation(Libs.junit)
+    testImplementation(Libs.Mockito.core)
+    testImplementation(Libs.Koin.test)
+    testImplementation(Libs.Coroutines.test)
+    testImplementation(Libs.AndroidX.Test.core)
+    testImplementation(Libs.AndroidX.archCoreTesting)
+    testImplementation(Libs.Google.truth)
+    
+    ///////////////////////////////////////////////////////////////////////////
+    // 以下是 android test 依赖
+    ///////////////////////////////////////////////////////////////////////////
+    // Koin for Unit test and instrumented test
+    androidTestImplementation(Libs.Koin.test)
+    androidTestImplementation(Libs.Coroutines.test)
+    
+    androidTestImplementation(Libs.AndroidX.archCoreTesting)
+    // Core Library
+    androidTestImplementation(Libs.AndroidX.Test.core)
+    // Required for instrumen(ed tests, AndroidJUnitRunner and JUnit Rules
+    androidTestImplementation(Libs.AndroidX.Test.runner)
+    androidTestImplementation(Libs.AndroidX.Test.rules)
+    androidTestImplementation(Libs.AndroidX.Test.Ext.junit)
+    // assertion
+    androidTestImplementation(Libs.AndroidX.Test.Ext.truth)
+    androidTestImplementation(Libs.Google.truth)
+    // espresso
+    androidTestImplementation(Libs.AndroidX.Test.Espresso.core)
+    androidTestImplementation(Libs.AndroidX.Test.Espresso.contrib)
+    androidTestImplementation(Libs.AndroidX.Test.Espresso.intents)
+
 }
 
 // task("updateReleaseApk") {
@@ -188,7 +225,7 @@ fun getOutputFileName(
 ): String {
     return productFlavor.applicationId + buildType.applicationIdSuffix +
             "-" + productFlavor.versionName +
-            "-" + productFlavor.versionCode +
+            // "-" + productFlavor.versionCode +
             ".apk"
 }
 
