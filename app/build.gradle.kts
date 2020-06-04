@@ -222,27 +222,30 @@ fun gitDescribeVersion(): String {
 // 默认缺少打包时间和更新描述，在这里添加
 // 并添加下载路径
 // 我要把包通过github action上传到 https://gitee.com/qinmen/GithubServer/WanAndroid 方便下载
-// fun addDownloadUrl(updateDescription: String) {
-//     val currentTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
-//     val targetFile = file("app/build/outputs/apk/release/output.json")
-//     val packageJson = com.google.gson.JsonParser().parse(targetFile.readText()).asJsonObject
-//     val gson = com.google.gson.Gson()
-//     packageJson.apply {
-// //
-// //     }
-// //     // val inputFile = File(inputJsonPath)
-// //     // val json = groovy.json.JsonSlurper().parseText(inputFile.text)
-// //     // val apkFileName = json.elements[0].outputFile
-// //     // val versionCode = json.elements[0].versionCode
-// //     // val downloadUrl = "https://gitee.com/qinmen/GithubServer/raw/master/WanAndroid" + apkFileName
-// //     // val backupDownloadUrl = "https://github.com/tainzhi/WanAndroid/releases/download/" + gitVersionTag() + "/" + apkFileName
-// //     // val dataMap = [ "versionCode": versionCode,
-// //     //                 "description": updateDescription,
-// //     //                 "url": downloadUrl,
-// //     //                 "url_backup": backupDownloadUrl,
-// //     //                 "time": currentTime,
-// //     //                 "apkName": apkFileName]
-// //     // def updateMap = [ "errorCode": 0, "data": dataMap, "errorMsg": ""]
-// //     val outputJsonPath = "app/build/outputs/apk/release/update.json"
-// //     // (File(outputJsonPath)).write(new JsonOutput().toJson(updateMap))
-// }
+fun addDownloadUrl(updateDescription: String) {
+    // val currentTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
+    // val targetFile = file("app/build/outputs/apk/release/output.json")
+    // val packageJson = com.google.gson.JsonParser().parse(targetFile.readText()).asJsonObject
+    // val gson = com.google.gson.Gson()
+    // packageJson.apply {
+    //     val apkFileName = get("outputFile").asString
+    //     val versionCode = get("versionCode").asString
+    //     val downloadUrl = "https://gitee.com/qinmen/GithubServer/raw/master/WanAndroid$apkFileName"
+    //     // val backupDownloadUrl = "https://github.com/tainzhi/WanAndroid/releases/download/" + gitVersionTag() + "/" + apkFileName
+    //     // val dataMap = [ "versionCode": versionCode,
+    //     //                 "description": updateDescription,
+    //     //                 "url": downloadUrl,
+    //     //                 "url_backup": backupDownloadUrl,
+    //     //                 "time": currentTime,
+    //     //                 "apkName": apkFileName]
+    // }
+    // // val dataMap = [ "versionCode": versionCode,
+    // //                 "description": updateDescription,
+    // //                 "url": downloadUrl,
+    // //                 "url_backup": backupDownloadUrl,
+    // //                 "time": currentTime,
+    // //                 "apkName": apkFileName]
+    // // def updateMap = [ "errorCode": 0, "data": dataMap, "errorMsg": ""]
+    // val outputJsonPath = "app/build/outputs/apk/release/update.json"
+    // // (File(outputJsonPath)).write(new JsonOutput().toJson(updateMap))
+}
