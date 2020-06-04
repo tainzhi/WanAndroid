@@ -1,24 +1,24 @@
 import com.tainzhi.android.buildsrc.Libs
-import org.jetbrains.kotlin.konan.properties.Properties
+import java.io.ByteArrayOutputStream
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 
 plugins {
     id("com.android.application")
+    kotlin("android")
+    kotlin("kapt")
+    kotlin("android.extensions")
+    // kotlin("plugin.serialization")
     id("androidx.navigation.safeargs.kotlin")
     id("bugly")
-    kotlin("android")
-    kotlin("android.extensions")
-    kotlin("plugin.serialization")
-    kotlin("kapt")
 }
 
 apply {
     from("../test_dependencies.gradle")
 }
 
-val byteOut = org.apache.commons.io.output.ByteArrayOutputStream()
+val byteOut = ByteArrayOutputStream()
 exec {
     commandLine = "git rev-list HEAD --first-parent --count".split(" ")
     standardOutput = byteOut
@@ -28,22 +28,29 @@ val version = gitDescribeVersion()
 
 android {
     signingConfigs {
-        //加载资源
-        val properties = Properties()
-        val inputStream = project.rootProject.file("local.properties").inputStream()
-        properties.load(inputStream)
-        
-        // 读取文件
-        val releaseKeyStoreFile = properties.getProperty("release_keyStoreFile")
-        // 读取字段
-        val releaseKeyAlias = properties.getProperty("release_keyAlias")
-        val releaseKeyPassword = properties.getProperty("release_keyPassword")
-        val releaseKeyStorePassword = properties.getProperty("release_keyStorePassword")
+        getByName("debug") {
+            // debug版本默认不签名
+            // storeFile = file("../android.keystore")
+        }
+    
+        create("stagging") {
+            storeFile = file("../android.keystore")
+            // #签名密码
+            storePassword = "123456"
+            // #签名别名
+            keyAlias = "android"
+            // #签名别名密码
+            keyPassword = "tainzhi"
+        }
+    
         create("release") {
-            storeFile = file(releaseKeyStoreFile)
-            storePassword = releaseKeyStorePassword
-            keyAlias = releaseKeyAlias
-            keyPassword = releaseKeyPassword
+            storeFile = file("../android.keystore")
+            // #签名密码
+            storePassword = "123456"
+            // #签名别名
+            keyAlias = "android"
+            // #签名别名密码
+            keyPassword = "tainzhi"
         }
     }
     compileSdkVersion(Libs.Version.compileSdkVersion)
@@ -70,30 +77,32 @@ android {
         getByName("debug") {
             // 默认值 true
             // isDebuggable = true
+            applicationIdSuffix = ".debug"
+            signingConfigs["debug"]
+        }
+        create("stagging") {
+            applicationIdSuffix = ".stagging"
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            signingConfigs["stagging"]
         }
         getByName("release") {
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-            signingConfig = signingConfigs.getByName("release")
+            signingConfigs["release"]
         }
     }
     
-    // productFlavors {
-    // android.applicationVariants.all { variant ->
-    //     variant.outputs.all {
-    //         outputFileName = "QWanAndroid_${variant.versionName}${variant.flavorName}_${variant.buildType.name}.apk"
-    //     }
-    // }
-    // }
-    
     applicationVariants.all {
-        outputs.map {
-            it as com.android.build.gradle.internal.api.BaseVariantOutputImpl
+        val outputFileName = getOutputFileName(
+                defaultConfig,
+                buildType = buildTypes.getByName(name)
+        )
+    
+        outputs.forEach { output ->
+            check(output is com.android.build.gradle.internal.api.ApkVariantOutputImpl)
+            output.outputFileName = outputFileName
         }
-                .forEach { output ->
-                    output.outputFileName = "QWanAndroid_${defaultConfig.versionName}${defaultConfig.buildConfigFields}.apk"
-                }
     }
     
     compileOptions {
@@ -150,7 +159,8 @@ dependencies {
     kapt(Libs.Glide.compiler)
     
     debugImplementation(Libs.leakCanary)
-    debugImplementation(Libs.DoKit.debugVersion)
+    // debugImplementation(Libs.DoKit.debugVersion)
+    // releaseImplementation(Libs.DoKit.releaseVersion)
     
     implementation(Libs.timber)
     implementation(Libs.baseRecyclerViewAdapterHelper)
@@ -165,56 +175,74 @@ dependencies {
     implementation(Libs.multiStateView)
 }
 
-task("updateReleaseApk") {
-    // 升级内容以 \n 分割
-    val updateDescription = "1.修改了UI逻辑\n2.fix some fatal bug\n3.添加bug上报\n4.混淆代码\n5.添加Crash页面"
-    addDownloadUrl(updateDescription)
-}.dependsOn("assembleRelease")
+// task("updateReleaseApk") {
+//     // 升级内容以 \n 分割
+//     val updateDescription = "1.修改了UI逻辑\n2.fix some fatal bug\n3.添加bug上报\n4.混淆代码\n5.添加Crash页面"
+//     addDownloadUrl(updateDescription)
+// }.dependsOn("assembleRelease")
+
+
+fun getOutputFileName(
+        productFlavor: com.android.builder.model.ProductFlavor,
+        buildType: com.android.build.gradle.internal.dsl.BuildType
+): String {
+    return productFlavor.applicationId + buildType.applicationIdSuffix +
+            "-" + productFlavor.versionName +
+            "-" + productFlavor.versionCode +
+            ".apk"
+}
+
 
 // after you run `git tag`, then you can retrieve it
 fun gitDescribeVersion(): String {
     
-    val stdOut = org.apache.commons.io.output.ByteArrayOutputStream()
+    val stdOut = ByteArrayOutputStream()
     
     exec {
-        commandLine("git", "describe", "--tags", "--long", "--always", "--match", "[0-9].[0-9]*")
+        // commandLine("git", "describe", "--tags", "--long", "--always", "--match", "[0-9].[0-9]*")
+        commandLine("git", "describe", "--tags", "--long", "--always")
         standardOutput = stdOut
         workingDir = rootDir
     }
     
     val describe = stdOut.toString().trim()
-    val gitDescribeMatchRegex = """(\d+)\.(\d+)-(\d+)-.*""".toRegex()
+    val gitDescribeMatchRegex = """(.+)\.(\d+)-(\d+)-.*""".toRegex()
     
     return gitDescribeMatchRegex.matchEntire(describe)
             ?.destructured
             ?.let { (major, minor, patch) ->
+                println("$major.$minor.$patch")
                 "$major.$minor.$patch"
             }
             ?: throw GradleException("Cannot parse git describe '$describe'")
 }
 
-//
-// // assembleRelease后会在app/build/outpus/apk/release/目录下生成apk和outpus.json
-// // outpus.json已经有apk的一些信息，比如versionCode和versionNumber
-// // 默认缺少打包时间和更新描述，在这里添加
-// // 并添加下载路径
-// // 我要把包通过github action上传到 https://gitee.com/qinmen/GithubServer/WanAndroid 方便下载
-fun addDownloadUrl(updateDescription: String) {
-    val currentTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
-    val inputJsonPath = "app/build/outputs/apk/release/output.json"
-    val inputFile = File(inputJsonPath)
-    val json = groovy.json.JsonSlurper().parseText(inputFile.text)
-    val apkFileName = json.elements[0].outputFile
-    val versionCode = json.elements[0].versionCode
-    val downloadUrl = "https://gitee.com/qinmen/GithubServer/raw/master/WanAndroid" + apkFileName
-    val backupDownloadUrl = "https://github.com/tainzhi/WanAndroid/releases/download/" + gitVersionTag() + "/" + apkFileName
-    // val dataMap = [ "versionCode": versionCode,
-    //                 "description": updateDescription,
-    //                 "url": downloadUrl,
-    //                 "url_backup": backupDownloadUrl,
-    //                 "time": currentTime,
-    //                 "apkName": apkFileName]
-    // def updateMap = [ "errorCode": 0, "data": dataMap, "errorMsg": ""]
-    val outputJsonPath = "app/build/outputs/apk/release/update.json"
-    // (File(outputJsonPath)).write(new JsonOutput().toJson(updateMap))
-}
+// assembleRelease后会在app/build/outpus/apk/release/目录下生成apk和outpus.json
+// outpus.json已经有apk的一些信息，比如versionCode和versionNumber
+// 默认缺少打包时间和更新描述，在这里添加
+// 并添加下载路径
+// 我要把包通过github action上传到 https://gitee.com/qinmen/GithubServer/WanAndroid 方便下载
+// fun addDownloadUrl(updateDescription: String) {
+//     val currentTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
+//     val targetFile = file("app/build/outputs/apk/release/output.json")
+//     val packageJson = com.google.gson.JsonParser().parse(targetFile.readText()).asJsonObject
+//     val gson = com.google.gson.Gson()
+//     packageJson.apply {
+// //
+// //     }
+// //     // val inputFile = File(inputJsonPath)
+// //     // val json = groovy.json.JsonSlurper().parseText(inputFile.text)
+// //     // val apkFileName = json.elements[0].outputFile
+// //     // val versionCode = json.elements[0].versionCode
+// //     // val downloadUrl = "https://gitee.com/qinmen/GithubServer/raw/master/WanAndroid" + apkFileName
+// //     // val backupDownloadUrl = "https://github.com/tainzhi/WanAndroid/releases/download/" + gitVersionTag() + "/" + apkFileName
+// //     // val dataMap = [ "versionCode": versionCode,
+// //     //                 "description": updateDescription,
+// //     //                 "url": downloadUrl,
+// //     //                 "url_backup": backupDownloadUrl,
+// //     //                 "time": currentTime,
+// //     //                 "apkName": apkFileName]
+// //     // def updateMap = [ "errorCode": 0, "data": dataMap, "errorMsg": ""]
+// //     val outputJsonPath = "app/build/outputs/apk/release/update.json"
+// //     // (File(outputJsonPath)).write(new JsonOutput().toJson(updateMap))
+// }
