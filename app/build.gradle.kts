@@ -63,6 +63,7 @@ android {
         targetSdkVersion(Libs.Version.targetSdkVersion)
         versionCode = verCode
         versionName = version
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         
         // 第三方库 AppUpdate
         // 每个应用拥有不同的authorities，防止相同在同一个手机上无法同时安装
