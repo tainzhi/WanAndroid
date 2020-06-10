@@ -1,3 +1,4 @@
+
 <h1 align="left">玩安卓</h1></br>
     <p align="center">
     MVVM+Coroutine+koin实现的<a href="https://wanandroid.com/blog/show/2">玩安卓</a>
@@ -15,9 +16,11 @@
 <!-- vim-markdown-toc -->
 # ScreenShot
 <p align="left">
-     <img src="./images/demo1.gif" alt="项目demo" width="30%">
-     <img src="./images/demo2.gif" alt="项目demo" width="30%">
+     <img src="https://cdn.nlark.com/yuque/0/2020/gif/988705/1591753968955-ed3f7b4a-0278-4f0f-bdb5-ad2bc275c481.gif" alt="项目demo" width="30%">
+     <img src="https://cdn.nlark.com/yuque/0/2020/gif/988705/1591753980249-19255ab5-a2de-4d82-b411-f634b79b0b11.gif" alt="项目demo" width="30%">
 </p>
+
+> 因为github加载图片缓慢,所以图片放置在[语雀](https://www.yuque.com/qingmeng-f01iq/psvvuq/vyu0ee)
 
 # APK下载
 [WanAndroid](https://gitee.com/qinmen/WanAndroidServer)
@@ -64,6 +67,7 @@
 - [x] 公众号文章无法查看
 
 # 致谢
+- [WanAndroidMVVM](https://github.com/wangjianxiandev/WanAndroidMVVM)
 - [wanandorid-lulu](https://github.com/lulululbj/wanandroid/): MVVM+koin, 我的项目就是从学习ta开始
 - [Wandroid-iceCola7](https://github.com/iceCola7/WanAndroid): 多种主题切换, 完成度比较高, 基于MVP+EventBus
 - [WanAndroid-goweii](https://github.com/goweii/WanAndroid): 离线缓存, 稍后阅读, 滑动返回等
