@@ -2,7 +2,7 @@ package com.tainzhi.android.wanandroid.utils
 
 import android.app.Application
 import android.content.Context
-import com.tainzhi.android.wanandroid.CoroutinesDispatcherProvider
+import com.tainzhi.android.common.CoroutinesDispatcherProvider
 import com.tainzhi.android.wanandroid.testAppModule
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi

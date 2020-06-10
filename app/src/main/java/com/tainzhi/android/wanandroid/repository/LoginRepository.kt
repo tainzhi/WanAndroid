@@ -3,8 +3,8 @@ package com.tainzhi.android.wanandroid.repository
 import com.google.gson.Gson
 import com.tainzhi.android.wanandroid.WanApp
 import com.tainzhi.android.wanandroid.api.WanClient.service
-import com.tainzhi.android.wanandroid.base.BaseRepository
-import com.tainzhi.android.wanandroid.base.Result
+import com.tainzhi.android.common.base.BaseRepository
+import com.tainzhi.android.common.base.Result
 import com.tainzhi.android.wanandroid.bean.User
 import com.tainzhi.android.wanandroid.util.Preference
 

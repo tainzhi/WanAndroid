@@ -5,9 +5,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tainzhi.android.wanandroid.R
 import com.tainzhi.android.wanandroid.adapter.HomeArticleAdapter
-import com.tainzhi.android.wanandroid.base.ui.BaseVMFragment
+import com.tainzhi.android.common.base.ui.BaseVMFragment
+import com.tainzhi.android.common.util.toast
 import com.tainzhi.android.wanandroid.databinding.FragmentSquareBinding
-import com.tainzhi.android.wanandroid.util.toast
 import com.tainzhi.android.wanandroid.view.CustomLoadMoreView
 import com.tainzhi.android.wanandroid.view.SpaceItemDecoration
 import kotlinx.android.synthetic.main.fragment_square.*

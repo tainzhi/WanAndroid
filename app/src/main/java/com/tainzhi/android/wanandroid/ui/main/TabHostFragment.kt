@@ -9,13 +9,15 @@ import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.tainzhi.android.wanandroid.R
 import com.tainzhi.android.wanandroid.R.string
-import com.tainzhi.android.wanandroid.base.ui.BaseVMFragment
+import com.tainzhi.android.common.base.ui.BaseVMFragment
+import com.tainzhi.android.common.util.toast
 import com.tainzhi.android.wanandroid.databinding.FragmentTabHostBinding
 import com.tainzhi.android.wanandroid.ui.BlogFragment
 import com.tainzhi.android.wanandroid.ui.MainFragment
 import com.tainzhi.android.wanandroid.ui.project.ProjectFragment
 import com.tainzhi.android.wanandroid.util.UpdateUtils
-import com.tainzhi.android.wanandroid.util.toast
+import kotlinx.android.synthetic.main.common_toolbar.*
+import kotlinx.android.synthetic.main.common_toolbar.toolbar
 import kotlinx.android.synthetic.main.fragment_tab_host.*
 import kotlinx.android.synthetic.main.main_drawer_nav_content_layout.*
 import org.koin.android.ext.android.get

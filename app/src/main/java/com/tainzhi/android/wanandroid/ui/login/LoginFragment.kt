@@ -7,9 +7,9 @@ import androidx.activity.addCallback
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.tainzhi.android.wanandroid.R
-import com.tainzhi.android.wanandroid.base.ui.BaseVMFragment
+import com.tainzhi.android.common.base.ui.BaseVMFragment
+import com.tainzhi.android.common.util.toast
 import com.tainzhi.android.wanandroid.databinding.FragmentLoginBinding
-import com.tainzhi.android.wanandroid.util.toast
 import kotlinx.android.synthetic.main.common_toolbar.*
 import kotlinx.android.synthetic.main.fragment_login.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
@@ -18,7 +18,7 @@ class LoginFragment : BaseVMFragment<LoginViewModel>(useBinding = true) {
 
     override fun getLayoutResId() = R.layout.fragment_login
 
-    override fun initVM(): LoginViewModel = activity!!.getViewModel()
+    override fun initVM(): LoginViewModel = requireActivity().getViewModel()
 
     override fun initView() {
         toolbar.setTitle(R.string.login)

@@ -1,8 +1,8 @@
 package com.tainzhi.android.wanandroid.repository
 
 import com.tainzhi.android.wanandroid.api.WanClient
-import com.tainzhi.android.wanandroid.base.BaseRepository
-import com.tainzhi.android.wanandroid.base.Result
+import com.tainzhi.android.common.base.BaseRepository
+import com.tainzhi.android.common.base.Result
 import com.tainzhi.android.wanandroid.bean.ArticleList
 
 /**

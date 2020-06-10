@@ -2,7 +2,8 @@ package com.tainzhi.android.wanandroid.util
 
 import android.app.Activity
 import com.tainzhi.android.wanandroid.R
-import com.tainzhi.android.wanandroid.base.Response
+import com.tainzhi.android.common.base.Response
+import com.tainzhi.android.common.util.toast
 import com.tainzhi.android.wanandroid.bean.SystemChild
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.coroutineScope

@@ -4,9 +4,9 @@ package com.tainzhi.android.wanandroid.ui
 import cat.ereza.customactivityoncrash.CustomActivityOnCrash
 import cat.ereza.customactivityoncrash.config.CaocConfig
 import com.tainzhi.android.wanandroid.R
-import com.tainzhi.android.wanandroid.base.ui.BaseActivity
-import com.tainzhi.android.wanandroid.util.gone
-import com.tainzhi.android.wanandroid.util.visible
+import com.tainzhi.android.common.base.ui.BaseActivity
+import com.tainzhi.android.common.util.gone
+import com.tainzhi.android.common.util.visible
 import kotlinx.android.synthetic.main.activity_crash.*
 
 /**

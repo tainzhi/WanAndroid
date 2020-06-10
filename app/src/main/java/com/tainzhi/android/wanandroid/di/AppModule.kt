@@ -2,7 +2,7 @@ package com.tainzhi.android.wanandroid.di
 
 import android.app.Application
 import androidx.room.Room
-import com.tainzhi.android.wanandroid.CoroutinesDispatcherProvider
+import com.tainzhi.android.common.CoroutinesDispatcherProvider
 import com.tainzhi.android.wanandroid.api.WanClient
 import com.tainzhi.android.wanandroid.api.WanService
 import com.tainzhi.android.wanandroid.db.HistoryDao

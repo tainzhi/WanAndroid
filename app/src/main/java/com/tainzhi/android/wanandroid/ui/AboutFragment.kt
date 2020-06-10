@@ -11,9 +11,13 @@ import androidx.activity.addCallback
 import androidx.navigation.fragment.findNavController
 import com.tainzhi.android.wanandroid.BuildConfig
 import com.tainzhi.android.wanandroid.R
-import com.tainzhi.android.wanandroid.base.ui.BaseFragment
+import com.tainzhi.android.common.base.ui.BaseFragment
 import com.tainzhi.android.wanandroid.bean.UpdateInfo
-import com.tainzhi.android.wanandroid.util.*
+import com.tainzhi.android.common.util.*
+import com.tainzhi.android.wanandroid.WanApp
+import com.tainzhi.android.wanandroid.util.GITHUB_PAGE
+import com.tainzhi.android.wanandroid.util.ISSUE_URL
+import com.tainzhi.android.wanandroid.util.UpdateUtils
 import com.tainzhi.android.wanandroid.view.MeDialog
 import de.psdev.licensesdialog.LicensesDialog
 import de.psdev.licensesdialog.licenses.ApacheSoftwareLicense20
@@ -99,7 +103,7 @@ class AboutFragment : BaseFragment() {
      * 检查是否有新版本可以下载
      */
     private fun checkUpdate() {
-        val currVersionCode = AppInfoUtils.getVersionCode()
+        val currVersionCode = AppInfoUtils.getVersionCode(WanApp.CONTEXT)
         val updateInfo = MemoryCache.instance?.get(MemoryCache.KEY_UPDATE_INFO) as? UpdateInfo
         if (updateInfo == null || currVersionCode >= updateInfo.versionCode) {
             AlertDialog.Builder(activity)

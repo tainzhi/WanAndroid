@@ -5,13 +5,13 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.tainzhi.android.common.base.ui.BaseVMFragment
+import com.tainzhi.android.common.util.toast
 import com.tainzhi.android.wanandroid.BR
 import com.tainzhi.android.wanandroid.R
 import com.tainzhi.android.wanandroid.adapter.SystemAdapter
-import com.tainzhi.android.wanandroid.base.ui.BaseVMFragment
 import com.tainzhi.android.wanandroid.databinding.ItemSystemBinding
 import com.tainzhi.android.wanandroid.ui.main.TabHostFragmentDirections
-import com.tainzhi.android.wanandroid.util.toast
 import com.tainzhi.android.wanandroid.view.SpaceItemDecoration
 import kotlinx.android.synthetic.main.fragment_system.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel

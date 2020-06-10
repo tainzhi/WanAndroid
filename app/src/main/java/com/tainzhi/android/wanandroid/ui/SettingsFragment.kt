@@ -6,7 +6,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.tainzhi.android.wanandroid.R
 import com.tainzhi.android.wanandroid.WanApp
-import com.tainzhi.android.wanandroid.base.ui.BaseFragment
+import com.tainzhi.android.common.base.ui.BaseFragment
 import kotlinx.android.synthetic.main.common_toolbar.*
 import kotlinx.android.synthetic.main.fragment_settings.*
 

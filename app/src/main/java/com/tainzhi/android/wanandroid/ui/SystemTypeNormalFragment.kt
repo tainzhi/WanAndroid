@@ -6,7 +6,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import com.tainzhi.android.wanandroid.R
-import com.tainzhi.android.wanandroid.base.ui.BaseFragment
+import com.tainzhi.android.common.base.ui.BaseFragment
 import com.tainzhi.android.wanandroid.bean.SystemParent
 import kotlinx.android.synthetic.main.common_toolbar.*
 import kotlinx.android.synthetic.main.fragment_system_type_normal.*

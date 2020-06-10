@@ -126,6 +126,7 @@ bugly {
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
+    implementation(project(":common"))
     
     implementation(Libs.Kotlin.stdlib)
     implementation(Libs.AndroidX.appcompat)

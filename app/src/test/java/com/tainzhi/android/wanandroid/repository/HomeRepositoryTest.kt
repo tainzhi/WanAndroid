@@ -1,14 +1,9 @@
 package com.tainzhi.android.wanandroid.repository
 
-import com.tainzhi.android.wanandroid.base.Result
+import com.tainzhi.android.common.base.Result
 import com.tainzhi.android.wanandroid.utils.MainCoroutineScopeRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.runBlockingTest
-import net.bytebuddy.matcher.ElementMatchers.`is`
-import org.hamcrest.CoreMatchers.equalTo
-import org.junit.After
-import org.junit.Before
 import org.junit.Test
 import org.koin.test.KoinTest
 

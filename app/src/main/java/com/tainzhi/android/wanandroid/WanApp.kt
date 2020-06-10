@@ -1,6 +1,5 @@
 package com.tainzhi.android.wanandroid
 
-import ReleaseCrashTimberTree
 import android.app.Application
 import android.content.Context
 import cat.ereza.customactivityoncrash.config.CaocConfig
@@ -13,6 +12,7 @@ import com.tainzhi.android.wanandroid.di.appModule
 import com.tainzhi.android.wanandroid.repository.PreferenceRepository
 import com.tainzhi.android.wanandroid.ui.CrashActivity
 import com.tainzhi.android.wanandroid.ui.MainActivity
+import com.tainzhi.android.wanandroid.util.ReleaseCrashTimberTree
 import com.tencent.bugly.crashreport.CrashReport
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger

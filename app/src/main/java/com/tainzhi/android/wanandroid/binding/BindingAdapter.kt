@@ -1,7 +1,6 @@
 package com.tainzhi.android.wanandroid.binding
 
 import android.graphics.drawable.Drawable
-import android.graphics.drawable.VectorDrawable
 import android.text.Editable
 import android.text.Html
 import android.text.TextWatcher
@@ -13,6 +12,7 @@ import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestListener
+import com.tainzhi.android.common.util.fromN
 import com.tainzhi.android.wanandroid.bean.Article
 import java.text.SimpleDateFormat
 import java.util.*

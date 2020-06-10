@@ -13,14 +13,14 @@ import com.chad.library.adapter.base.listener.OnItemChildClickListener
 import com.kennyc.view.MultiStateView
 import com.tainzhi.android.wanandroid.R
 import com.tainzhi.android.wanandroid.adapter.HomeArticleAdapter
-import com.tainzhi.android.wanandroid.base.ui.BaseVMFragment
+import com.tainzhi.android.common.base.ui.BaseVMFragment
 import com.tainzhi.android.wanandroid.bean.Banner
 import com.tainzhi.android.wanandroid.ui.ArticleViewModel
 import com.tainzhi.android.wanandroid.ui.BrowserFragmentDirections
 import com.tainzhi.android.wanandroid.util.GlideImageLoader
 import com.tainzhi.android.wanandroid.util.Preference
-import com.tainzhi.android.wanandroid.util.dp2px
-import com.tainzhi.android.wanandroid.util.toast
+import com.tainzhi.android.common.util.dp2px
+import com.tainzhi.android.common.util.toast
 import com.tainzhi.android.wanandroid.view.CustomLoadMoreView
 import com.tainzhi.android.wanandroid.view.SpaceItemDecoration
 import com.youth.banner.BannerConfig

@@ -1,6 +1,6 @@
 package com.tainzhi.android.wanandroid.api
 
-import com.tainzhi.android.wanandroid.base.Response
+import com.tainzhi.android.common.base.Response
 import com.tainzhi.android.wanandroid.bean.*
 import retrofit2.http.*
 

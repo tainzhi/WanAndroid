@@ -7,10 +7,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSmoothScroller
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE
+import com.tainzhi.android.common.base.ui.BaseVMFragment
 import com.tainzhi.android.wanandroid.R
 import com.tainzhi.android.wanandroid.adapter.NavigationAdapter
 import com.tainzhi.android.wanandroid.adapter.VerticalTabAdapter
-import com.tainzhi.android.wanandroid.base.ui.BaseVMFragment
 import com.tainzhi.android.wanandroid.bean.Navigation
 import com.tainzhi.android.wanandroid.ui.BrowserFragmentDirections
 import com.tainzhi.android.wanandroid.view.SpaceItemDecoration

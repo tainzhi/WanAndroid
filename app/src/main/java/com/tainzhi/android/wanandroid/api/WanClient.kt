@@ -1,10 +1,8 @@
 package com.tainzhi.android.wanandroid.api
 
 import com.tainzhi.android.wanandroid.WanApp
-import com.tainzhi.android.wanandroid.base.BaseRetorfitClient
-import com.tainzhi.android.wanandroid.util.NetWorkUtils
+import com.tainzhi.android.common.base.BaseRetrofitClient
 import okhttp3.Cache
-import okhttp3.CacheControl
 import okhttp3.OkHttpClient
 import java.io.File
 
@@ -15,7 +13,7 @@ import java.io.File
  * @description:
  **/
 
-object WanClient : BaseRetorfitClient() {
+object WanClient : BaseRetrofitClient() {
 
     val service by lazy { getService(WanService::class.java, WanService.BASE_URL) }
 

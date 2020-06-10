@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.Config
 import androidx.paging.toLiveData
-import com.tainzhi.android.wanandroid.CoroutinesDispatcherProvider
-import com.tainzhi.android.wanandroid.base.ui.BaseViewModel
+import com.tainzhi.android.common.CoroutinesDispatcherProvider
+import com.tainzhi.android.common.base.ui.BaseViewModel
 import com.tainzhi.android.wanandroid.bean.Article
 import com.tainzhi.android.wanandroid.bean.BrowseHistory
 import com.tainzhi.android.wanandroid.db.HistoryDao

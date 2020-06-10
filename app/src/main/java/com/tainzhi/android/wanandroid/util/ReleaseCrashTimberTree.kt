@@ -1,3 +1,5 @@
+package com.tainzhi.android.wanandroid.util
+
 import android.util.Log
 import androidx.annotation.NonNull
 import timber.log.Timber

@@ -2,16 +2,16 @@ package com.tainzhi.android.wanandroid.ui.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.tainzhi.android.wanandroid.CoroutinesDispatcherProvider
+import com.tainzhi.android.common.CoroutinesDispatcherProvider
 import com.tainzhi.android.wanandroid.WanApp
-import com.tainzhi.android.wanandroid.base.Result
-import com.tainzhi.android.wanandroid.base.ui.BaseViewModel
+import com.tainzhi.android.common.base.Result
+import com.tainzhi.android.common.base.ui.BaseViewModel
 import com.tainzhi.android.wanandroid.bean.UpdateInfo
 import com.tainzhi.android.wanandroid.bean.User
 import com.tainzhi.android.wanandroid.db.HistoryDao
 import com.tainzhi.android.wanandroid.repository.LoginRepository
 import com.tainzhi.android.wanandroid.repository.MainRepository
-import com.tainzhi.android.wanandroid.util.MemoryCache
+import com.tainzhi.android.common.util.MemoryCache
 import com.tainzhi.android.wanandroid.util.Preference
 import com.tainzhi.android.wanandroid.util.UpdateUtils
 

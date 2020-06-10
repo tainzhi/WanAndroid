@@ -4,9 +4,9 @@ import android.text.Html
 import android.view.WindowManager
 import com.tainzhi.android.wanandroid.R
 import com.tainzhi.android.wanandroid.adapter.SplashAdapter
-import com.tainzhi.android.wanandroid.base.ui.BaseActivity
-import com.tainzhi.android.wanandroid.binding.fromN
-import com.tainzhi.android.wanandroid.util.startKtxActivity
+import com.tainzhi.android.common.base.ui.BaseActivity
+import com.tainzhi.android.common.util.fromN
+import com.tainzhi.android.common.util.startKtxActivity
 import com.tainzhi.android.wanandroid.view.ScrollLinearLayoutManager
 import kotlinx.android.synthetic.main.activity_splash.*
 import kotlinx.coroutines.delay

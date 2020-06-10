@@ -1,9 +1,6 @@
 package com.tainzhi.android.wanandroid.ui
 
 import android.content.Context
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
 import androidx.activity.addCallback
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
@@ -14,9 +11,9 @@ import com.chad.library.adapter.base.listener.OnItemChildClickListener
 import com.kennyc.view.MultiStateView
 import com.tainzhi.android.wanandroid.R
 import com.tainzhi.android.wanandroid.adapter.HomeArticleAdapter
-import com.tainzhi.android.wanandroid.base.ui.BaseVMFragment
+import com.tainzhi.android.common.base.ui.BaseVMFragment
+import com.tainzhi.android.common.util.toast
 import com.tainzhi.android.wanandroid.databinding.FragmentCollectBinding
-import com.tainzhi.android.wanandroid.util.toast
 import com.tainzhi.android.wanandroid.view.CustomLoadMoreView
 import com.tainzhi.android.wanandroid.view.SpaceItemDecoration
 import kotlinx.android.synthetic.main.common_toolbar.*

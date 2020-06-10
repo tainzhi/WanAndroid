@@ -5,7 +5,9 @@ import android.graphics.Color
 import androidx.core.content.ContextCompat
 import com.azhon.appupdate.config.UpdateConfiguration
 import com.azhon.appupdate.manager.DownloadManager
+import com.tainzhi.android.common.util.AppInfoUtils
 import com.tainzhi.android.wanandroid.R
+import com.tainzhi.android.wanandroid.WanApp
 import com.tainzhi.android.wanandroid.bean.UpdateInfo
 import java.util.*
 
@@ -38,8 +40,8 @@ class UpdateUtils private constructor() {
         return currTime - ignoreLastTime > ignoreDuration
     }
 
-    fun isNewest(versionCode: Int): Boolean {
-        val currCode: Int = AppInfoUtils.getVersionCode()
+    private fun isNewest(versionCode: Int): Boolean {
+        val currCode: Int = AppInfoUtils.getVersionCode(WanApp.CONTEXT)
         return versionCode > currCode
     }
 

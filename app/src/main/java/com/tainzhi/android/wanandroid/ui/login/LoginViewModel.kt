@@ -3,10 +3,10 @@ package com.tainzhi.android.wanandroid.ui.login
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.tainzhi.android.wanandroid.CoroutinesDispatcherProvider
+import com.tainzhi.android.common.CoroutinesDispatcherProvider
 import com.tainzhi.android.wanandroid.WanApp
-import com.tainzhi.android.wanandroid.base.Result
-import com.tainzhi.android.wanandroid.base.ui.BaseViewModel
+import com.tainzhi.android.common.base.Result
+import com.tainzhi.android.common.base.ui.BaseViewModel
 import com.tainzhi.android.wanandroid.bean.User
 import com.tainzhi.android.wanandroid.repository.LoginRepository
 
