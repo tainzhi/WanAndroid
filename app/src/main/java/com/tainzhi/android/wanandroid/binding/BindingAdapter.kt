@@ -1,6 +1,5 @@
 package com.tainzhi.android.wanandroid.binding
 
-import android.graphics.drawable.Drawable
 import android.text.Editable
 import android.text.Html
 import android.text.TextWatcher
@@ -9,9 +8,6 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.bumptech.glide.request.RequestListener
 import com.tainzhi.android.common.util.fromN
 import com.tainzhi.android.wanandroid.bean.Article
 import java.text.SimpleDateFormat
@@ -52,45 +48,6 @@ fun bindImage(imageView: ImageView, srcId: Int) {
     imageView.setImageResource(srcId)
 }
 
-@BindingAdapter(
-        "imageUrl",
-        "imagePlaceholder",
-        "circleCropImage",
-        "crossFadeImage",
-        "overrideImageWidth",
-        "overrideImageHeight",
-        "imageLoadListener",
-        requireAll = false
-)
-fun bindImage(
-        imageView: ImageView,
-        imageUrl: String?,
-        placeholder: Int? = null,
-        circleCrop: Boolean? = false,
-        crossFade: Boolean? = false,
-        overrideWidth: Int? = null,
-        overrideHeight: Int? = null,
-        listener: RequestListener<Drawable>?
-) {
-    if (imageUrl == null) return
-    var request = Glide.with(imageView.context).load(imageUrl)
-    if (placeholder != null) {
-        request = request.placeholder(placeholder)
-    }
-    if (circleCrop == true) {
-        request = request.circleCrop()
-    }
-    if (crossFade == true) {
-        request = request.transition(DrawableTransitionOptions.withCrossFade())
-    }
-    if (overrideWidth != null && overrideHeight != null) {
-        request = request.override(overrideWidth, overrideHeight)
-    }
-    if (listener != null) {
-        request = request.listener(listener)
-    }
-    request.into(imageView)
-}
 
 @BindingAdapter(value = ["afterTextChanged"])
 fun EditText.afterTextChanged(action: () -> Unit) {

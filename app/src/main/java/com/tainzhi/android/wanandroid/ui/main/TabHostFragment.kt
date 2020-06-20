@@ -4,13 +4,14 @@ import android.content.Context
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.tainzhi.android.wanandroid.R
-import com.tainzhi.android.wanandroid.R.string
 import com.tainzhi.android.common.base.ui.BaseVMFragment
 import com.tainzhi.android.common.util.toast
+import com.tainzhi.android.wanandroid.R
+import com.tainzhi.android.wanandroid.R.string
 import com.tainzhi.android.wanandroid.databinding.FragmentTabHostBinding
 import com.tainzhi.android.wanandroid.ui.BlogFragment
 import com.tainzhi.android.wanandroid.ui.MainFragment
@@ -38,7 +39,7 @@ class TabHostFragment : BaseVMFragment<TabHostViewModel>(useBinding = true) {
     
     private var exitTime = 0L
     
-    private val fragmentList = listOf(tabHostFragment, blogFragment, projectFragment)
+    private val fragmentList = listOf<Fragment>(tabHostFragment, blogFragment, projectFragment)
     
     override fun getLayoutResId() = R.layout.fragment_tab_host
     

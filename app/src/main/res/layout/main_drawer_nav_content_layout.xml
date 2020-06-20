@@ -24,13 +24,13 @@
             android:layout_height="176dp"
             android:src="@drawable/side_nav_bar"
             app:layout_constraintTop_toTopOf="parent" />
-
+    
         <ImageView
             android:id="@+id/userImageIv"
-            imagePlaceholder="@{appR.drawable.ic_user}"
-            imageUrl="@{viewModel.user.icon}"
             android:layout_width="80dp"
             android:layout_height="80dp"
+            imageUrl="@{viewModel.user.icon}"
+            imagePlaceholder="@{appR.drawable.ic_user}"
             android:layout_marginTop="30dp"
             android:clickable="@{!viewModel.isLogin}"
             android:paddingTop="@dimen/margin_small"

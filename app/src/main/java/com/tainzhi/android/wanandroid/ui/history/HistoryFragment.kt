@@ -11,14 +11,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.kennyc.view.MultiStateView
+import com.tainzhi.android.common.base.ui.BaseVMFragment
+import com.tainzhi.android.common.util.autoClearedValue
 import com.tainzhi.android.wanandroid.R
 import com.tainzhi.android.wanandroid.adapter.HistoryAdapter
 import com.tainzhi.android.wanandroid.adapter.RecyclerItemTouchHelper
-import com.tainzhi.android.common.base.ui.BaseVMFragment
 import com.tainzhi.android.wanandroid.bean.BrowseHistory
 import com.tainzhi.android.wanandroid.databinding.FragmentHistoryBinding
 import com.tainzhi.android.wanandroid.ui.BrowserFragmentDirections
-import com.tainzhi.android.common.util.autoCleardValue
 import com.tainzhi.android.wanandroid.view.SpaceItemDecoration
 import kotlinx.android.synthetic.main.common_toolbar.*
 import kotlinx.android.synthetic.main.fragment_history.*
@@ -26,7 +26,7 @@ import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class HistoryFragment : BaseVMFragment<HistoryViewModel>(useBinding = true) {
 
-    private var historyAdapter by autoCleardValue<HistoryAdapter>()
+    private var historyAdapter by autoClearedValue<HistoryAdapter>()
 
     override fun getLayoutResId() = R.layout.fragment_history
 
