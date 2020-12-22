@@ -35,7 +35,6 @@ jobs:
           BASE_NAME: $(for i in *apk; do echo $i | sed 's/.apk//'; done)
         run: |
           cd ${{ env.RELEASE_APK_DIR }}
-#          echo "::set-env name=BASE_NAME::$(for i in *apk; do echo $i | sed 's/.apk//'; done)"
           cd -
       - name: sign release apk
         uses: r0adkll/sign-android-release@v1
