@@ -34,16 +34,6 @@ android {
             // storeFile = file("../android.keystore")
         }
     
-        create("stagging") {
-            storeFile = file("../android.keystore")
-            // #签名密码
-            storePassword = "123456"
-            // #签名别名
-            keyAlias = "android"
-            // #签名别名密码
-            keyPassword = "tainzhi"
-        }
-    
         create("release") {
             storeFile = file("../android.keystore")
             // #签名密码
@@ -81,11 +71,6 @@ android {
             // isDebuggable = true
             applicationIdSuffix = ".debug"
             signingConfigs["debug"]
-        }
-        create("stagging") {
-            applicationIdSuffix = ".stagging"
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-            signingConfigs["stagging"]
         }
         getByName("release") {
             isMinifyEnabled = true

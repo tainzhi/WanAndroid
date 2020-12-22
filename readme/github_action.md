@@ -1,3 +1,20 @@
+# github action基本用法
+触发条件: 推送tag时
+```bash
+on:
+  push:
+    tags:
+      - '*'
+```
+触发条件: master分支发送push事件
+```bash
+
+on:
+  push:
+    branches:
+      - master
+```
+
 # info
 - 使用github action完成自动打包签名后上传到github release assets
 - 把编译的apk和相关的升级信息update.json通过上传到[gitee](https://gitee.com/qinmen/GithubServer/tree/master/WanAndroid)
