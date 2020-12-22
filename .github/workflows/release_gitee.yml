@@ -10,7 +10,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code with submodule
+      - name: Checkout code with submodule directory
         uses: actions/checkout@v2
         with:
           submodules: true
@@ -35,7 +35,7 @@ jobs:
           BASE_NAME: $(for i in *apk; do echo $i | sed 's/.apk//'; done)
         run: |
           cd ${{ env.RELEASE_APK_DIR }}
-          echo "::set-env name=BASE_NAME::$(for i in *apk; do echo $i | sed 's/.apk//'; done)"
+#          echo "::set-env name=BASE_NAME::$(for i in *apk; do echo $i | sed 's/.apk//'; done)"
           cd -
       - name: sign release apk
         uses: r0adkll/sign-android-release@v1
