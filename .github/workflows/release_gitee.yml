@@ -29,6 +29,8 @@ jobs:
         run: |
           ./gradlew assembleRelease
       - name: get apk basekname
+        env:
+          BASE_NAME: $(for i in *apk; do echo $i | sed 's/.apk//'; done)
         run: |
           cd ${{ env.RELEASE_APK_DIR }}
           echo "::set-env name=BASE_NAME::$(for i in *apk; do echo $i | sed 's/.apk//'; done)"
@@ -41,24 +43,24 @@ jobs:
           alias: ${{ secrets.ALIAS }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
-      - name: set gitee private key
-        uses: kielabokkie/ssh-key-and-known-hosts-action@v1
-        with:
-          ssh-private-key: ${{ secrets.GITEE_PRIVATE_KEY }}
-          ssh-host: gitee.com
-      - name: clone GithubServer form gitee
-        run:  |
-          cd ..
-          git clone git@gitee.com:qinmen/GithubServer.git
-          cp ${{ env.REPO }}/${{ env.SIGNED_RELEASE_FILE }} GithubServer/${{ env.REPO }}/${{ env.BASE_NAME }}.apk
-          # 复制app/build/outputs/apk/release/update.json复制到Server目录，方便上传
-          cp ${{ env.REPO }}/${{ env.RELEASE_APK_DIR }}/update.json GithubServer/${{ env.REPO }}
-          cd GithubServer
-          git config --local user.email "qinmen"
-          git config --local user.name "qfq61@qq.com"
-          git add . && git commit -m "add "${{ env.BASE_NAME }}.apk
-          git push origin master
-          cd ../${{ env.REPO }}
+#      - name: set gitee private key
+#        uses: kielabokkie/ssh-key-and-known-hosts-action@v1
+#        with:
+#          ssh-private-key: ${{ secrets.GITEE_PRIVATE_KEY }}
+#          ssh-host: gitee.com
+#      - name: clone GithubServer form gitee
+#        run:  |
+#          cd ..
+#          git clone git@gitee.com:qinmen/GithubServer.git
+#          cp ${{ env.REPO }}/${{ env.SIGNED_RELEASE_FILE }} GithubServer/${{ env.REPO }}/${{ env.BASE_NAME }}.apk
+#          # 复制app/build/outputs/apk/release/update.json复制到Server目录，方便上传
+#          cp ${{ env.REPO }}/${{ env.RELEASE_APK_DIR }}/update.json GithubServer/${{ env.REPO }}
+#          cd GithubServer
+#          git config --local user.email "qinmen"
+#          git config --local user.name "qfq61@qq.com"
+#          git add . && git commit -m "add "${{ env.BASE_NAME }}.apk
+#          git push origin master
+#          cd ../${{ env.REPO }}
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1

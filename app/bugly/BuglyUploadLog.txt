@@ -6,3 +6,23 @@ file=/Users/muqing/AndroidPorjects/WanAndroid/app/build/outputs/mapping/release/
 sha1=5779e6c926a50deb820a41bab1546d4e864c6d66
 appId=25c0753a52
 
+file=/Users/muqing/AndroidPorjects/QWanAndroid/app/build/outputs/mapping/release/mapping.txt
+sha1=214c5a635267180377843ceb85e5e781decc5af7
+appId=25c0753a52
+
+file=/Users/muqing/AndroidPorjects/QWanAndroid/app/build/outputs/mapping/release/mapping.txt
+sha1=214c5a635267180377843ceb85e5e781decc5af7
+appId=25c0753a52
+
+file=/Users/muqing/AndroidPorjects/QWanAndroid/app/build/outputs/mapping/release/mapping.txt
+sha1=214c5a635267180377843ceb85e5e781decc5af7
+appId=25c0753a52
+
+file=/Users/muqing/AndroidPorjects/QWanAndroid/app/build/outputs/mapping/release/mapping.txt
+sha1=214c5a635267180377843ceb85e5e781decc5af7
+appId=25c0753a52
+
+file=/Users/muqing/AndroidPorjects/QWanAndroid/app/build/outputs/mapping/release/mapping.txt
+sha1=214c5a635267180377843ceb85e5e781decc5af7
+appId=25c0753a52
+

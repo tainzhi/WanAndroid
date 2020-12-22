@@ -28,22 +28,22 @@ val verCode = String(byteOut.toByteArray()).trim().toInt()
 val version = gitDescribeVersion()
 
 android {
-    signingConfigs {
-        getByName("debug") {
-            // debug版本默认不签名
-            // storeFile = file("../android.keystore")
-        }
-    
-        create("release") {
-            storeFile = file("../android.keystore")
-            // #签名密码
-            storePassword = "123456"
-            // #签名别名
-            keyAlias = "android"
-            // #签名别名密码
-            keyPassword = "tainzhi"
-        }
-    }
+    // signingConfigs {
+    //     getByName("debug") {
+    //         // debug版本默认不签名
+    //         // storeFile = file("../android.keystore")
+    //     }
+    //
+    //     create("release") {
+    //         storeFile = file("../android.keystore")
+    //         // #签名密码
+    //         storePassword = "123456"
+    //         // #签名别名
+    //         keyAlias = "android"
+    //         // #签名别名密码
+    //         keyPassword = "tainzhi"
+    //     }
+    // }
     compileSdkVersion(Libs.Version.compileSdkVersion)
     buildToolsVersion(Libs.Version.buildToolsVersion)
     
@@ -70,13 +70,13 @@ android {
             // 默认值 true
             // isDebuggable = true
             applicationIdSuffix = ".debug"
-            signingConfigs["debug"]
+            // signingConfigs["debug"]
         }
         getByName("release") {
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-            signingConfigs["release"]
+            // signingConfigs["release"]
         }
     }
     
@@ -273,7 +273,7 @@ fun addDownloadUrl(updateDescription: String) {
     // val outputJsonPath = "app/build/outputs/apk/release/update.json"
     // // (File(outputJsonPath)).write(new JsonOutput().toJson(updateMap))
 }
-
-task("mytest") {
-    println("hello")
-}
+//
+// task("mytest") {
+//     println("hello")
+// }
