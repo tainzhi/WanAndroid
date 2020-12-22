@@ -231,6 +231,7 @@ fun gitDescribeVersion(): String {
     
     val describe = stdOut.toString().trim()
     val gitDescribeMatchRegex = """(.+)\.(\d+)-(\d+)-.*""".toRegex()
+    println("describe: ${describe}")
     
     return gitDescribeMatchRegex.matchEntire(describe)
             ?.destructured
@@ -239,6 +240,10 @@ fun gitDescribeVersion(): String {
                 "$major.$minor.$patch"
             }
             ?: throw GradleException("Cannot parse git describe '$describe'")
+}
+
+task("mytest") {
+    println(gitDescribeVersion())
 }
 
 // assembleRelease后会在app/build/outpus/apk/release/目录下生成apk和outpus.json
@@ -273,7 +278,3 @@ fun addDownloadUrl(updateDescription: String) {
     // val outputJsonPath = "app/build/outputs/apk/release/update.json"
     // // (File(outputJsonPath)).write(new JsonOutput().toJson(updateMap))
 }
-//
-// task("mytest") {
-//     println("hello")
-// }
