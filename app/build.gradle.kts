@@ -288,3 +288,7 @@ fun addDownloadUrl(updateDescription: String) {
     // val outputJsonPath = "app/build/outputs/apk/release/update.json"
     // // (File(outputJsonPath)).write(new JsonOutput().toJson(updateMap))
 }
+
+task("mytest") {
+    println("hello")
+}
