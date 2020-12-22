@@ -1,5 +1,3 @@
-import com.tainzhi.android.buildsrc.Libs
-
 buildscript {
     repositories {
         google()
