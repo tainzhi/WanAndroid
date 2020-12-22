@@ -30,8 +30,6 @@ jobs:
       - name: assemble release apk
         run: |
           echo "current $(pwd)"
-          cd ${{ GITHUB_WORKSPACE }}
-          echo "current $(pwd)"
           ./gradlew assembleRelease
       - name: get apk basekname
         env:
