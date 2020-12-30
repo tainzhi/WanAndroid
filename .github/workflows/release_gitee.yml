@@ -10,6 +10,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: debug github action with tmate
+        uses: actions/checkout@v2
+      - name: setup tmate session
+        uses: mxschmitt/action-tmate@v3
       - name: Checkout code with submodule directory
         uses: actions/checkout@v2
         with:
