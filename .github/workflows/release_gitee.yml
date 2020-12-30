@@ -17,6 +17,7 @@ jobs:
       - name: Checkout code with submodule directory
         uses: actions/checkout@v2
         with:
+          ref: master
           submodules: true
 #      - name: set environemnt
 #        env:
@@ -33,14 +34,6 @@ jobs:
           java-version: 1.8
       - name: assemble release apk
         run: |
-          if [[ "$GITHUB_REF" = refs/heads/* ]]; then
-              export VERSIONING_GIT_BRANCH=${GITHUB_REF#refs/heads/};
-          elif [[ "$GITHUB_REF" = refs/tags/* ]]; then
-              export VERSIONING_GIT_TAG=${GITHUB_REF#refs/tags/};
-          elif [[ "$GITHUB_REF" = refs/pull/*/merge ]]; then
-              export VERSIONING_GIT_BRANCH=${GITHUB_REF#refs/};
-              VERSIONING_GIT_BRANCH=${VERSIONING_GIT_BRANCH%/merge};
-          fi
           ./gradlew assembleRelease
       - name: get apk basekname
         env:
