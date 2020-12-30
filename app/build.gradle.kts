@@ -1,7 +1,5 @@
 import com.tainzhi.android.buildsrc.Libs
 import java.io.ByteArrayOutputStream
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
 
 plugins {
@@ -12,20 +10,21 @@ plugins {
     // kotlin("plugin.serialization")
     id("androidx.navigation.safeargs.kotlin")
     id("bugly")
+    id("io.wusa.semver-git-plugin").version("2.3.7")
+    // id("com.palantir.git-version").version("0.12.3")
 }
 
-apply {
-    // // 读取另一个gradle.kts
-    // from("../test_dependencies.gradle.kts")
-}
+// apply {
+//     // // 读取另一个gradle.kts
+//     // from("../test_dependencies.gradle.kts")
+// }
+
 
 val byteOut = ByteArrayOutputStream()
 exec {
     commandLine = "git rev-list HEAD --first-parent --count".split(" ")
     standardOutput = byteOut
 }
-val verCode = String(byteOut.toByteArray()).trim().toInt()
-val version = gitDescribeVersion()
 
 android {
     // signingConfigs {
@@ -51,10 +50,9 @@ android {
         applicationId = "com.tainzhi.android.wanandroid"
         minSdkVersion(Libs.Version.minSdkVersion)
         targetSdkVersion(Libs.Version.targetSdkVersion)
-        versionCode = verCode
-        versionName = version
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        
+        versionCode = semver.info.count
+        versionName = semver.info.lastTag
+
         // 第三方库 AppUpdate
         // 每个应用拥有不同的authorities，防止相同在同一个手机上无法同时安装
         val _id = applicationId ?: ""
@@ -243,7 +241,8 @@ fun gitDescribeVersion(): String {
 }
 
 task("mytest") {
-    println(gitDescribeVersion())
+    println("${semver.info.lastTag}")
+    println("${semver.info.count}")
 }
 
 // assembleRelease后会在app/build/outpus/apk/release/目录下生成apk和outpus.json
