@@ -1,7 +1,6 @@
 import com.tainzhi.android.buildsrc.Libs
 import java.io.ByteArrayOutputStream
 
-
 plugins {
     id("com.android.application")
     kotlin("android")
@@ -9,16 +8,11 @@ plugins {
     kotlin("android.extensions")
     // kotlin("plugin.serialization")
     id("androidx.navigation.safeargs.kotlin")
-    id("bugly")
+    // id("bugly")
     id("io.wusa.semver-git-plugin").version("2.3.7")
-    // id("com.palantir.git-version").version("0.12.3")
+    id("com.tainzhi.android.plugin.upload")
 }
-
-// apply {
-//     // // 读取另一个gradle.kts
-//     // from("../test_dependencies.gradle.kts")
-// }
-
+// apply(plugin = "com.tainzhi.android.plugin.upload")
 
 val byteOut = ByteArrayOutputStream()
 exec {
@@ -43,15 +37,16 @@ android {
     //         keyPassword = "tainzhi"
     //     }
     // }
-    compileSdkVersion(Libs.Version.compileSdkVersion)
-    buildToolsVersion(Libs.Version.buildToolsVersion)
-    
+    compileSdkVersion(Libs.Configs.compileSdkVersion)
+    buildToolsVersion(Libs.Configs.buildToolsVersion)
+
     defaultConfig {
         applicationId = "com.tainzhi.android.wanandroid"
-        minSdkVersion(Libs.Version.minSdkVersion)
-        targetSdkVersion(Libs.Version.targetSdkVersion)
+        minSdkVersion(Libs.Configs.minSdkVersion)
+        targetSdkVersion(Libs.Configs.targetSdkVersion)
         versionCode = semver.info.count
         versionName = semver.info.lastTag
+        flavorDimensions("1")
 
         // 第三方库 AppUpdate
         // 每个应用拥有不同的authorities，防止相同在同一个手机上无法同时安装
@@ -77,40 +72,64 @@ android {
             // signingConfigs["release"]
         }
     }
-    
-    applicationVariants.all {
-        val outputFileName = getOutputFileName(
-                defaultConfig,
-                buildType = buildTypes.getByName(name)
-        )
-    
-        outputs.forEach { output ->
-            check(output is com.android.build.gradle.internal.api.ApkVariantOutputImpl)
-            output.outputFileName = outputFileName
+
+    productFlavors {
+        create("pgy") {
+            // dimension = ""
         }
     }
-    
+
+    applicationVariants.all {
+        // val outputFileName = getOutputFileName(
+        //         defaultConfig,
+        //         buildType = buildTypes.getByName(name)
+        // )
+        //
+        outputs.forEach { output ->
+            check(output is com.android.build.gradle.internal.api.ApkVariantOutputImpl)
+            if (output is com.android.build.gradle.internal.api.ApkVariantOutputImpl) {
+                if (buildType.name == "debug") {
+                    output.outputFileName =
+                        "QWanAndroid_${flavorName}_${versionName}_${buildType.name}.apk"
+                } else if (buildType.name == "release") {
+                    output.outputFileName = "QWanAndroid_${flavorName}_${versionName}.apk"
+                }
+            }
+            // output.outputFileName = outputFileName
+        }
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
-    
+
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
+        useIR = true
+    }
+
+    adbOptions {
+        timeOutInMs = 20 * 60 * 1000  // 20 minutes
+        installOptions("-d", "-t")
     }
 
 }
-
-bugly {
-    appId = "25c0753a52"
-    appKey = "2c72a2dc-57af-47c2-be10-c6f592cc743f"
-    // debug = true
+uploadConfig {
+    apiKey = "99d9f637f9ca00b7ef97cdb2cdabd8ac"
+    updateDescription = "fix gradle && upload"
 }
+
+// bugly {
+//     appId = "25c0753a52"
+//     appKey = "2c72a2dc-57af-47c2-be10-c6f592cc743f"
+//     // debug = true
+// }
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
+
     implementation(project(":common"))
-    
     implementation(Libs.Kotlin.stdlib)
     implementation(Libs.AndroidX.appcompat)
     implementation(Libs.AndroidX.coreKtx)
@@ -128,26 +147,26 @@ dependencies {
     kapt(Libs.AndroidX.Room.compiler)
     implementation(Libs.AndroidX.Paging.runtime)
     implementation(Libs.AndroidX.Paging.runtimeKtx)
-    
+
     implementation(Libs.Google.material)
-    
+
     implementation(Libs.Coroutines.android)
-    
+
     implementation(Libs.Koin.scope)
     implementation(Libs.Koin.viewmodel)
-    
+
     implementation(Libs.Retrofit.retrofit)
     implementation(Libs.Retrofit.gsonConverter)
     implementation(Libs.OkHttp.loggingInterceptor)
     implementation(Libs.cookietar)
-    
+
     implementation(Libs.Glide.glide)
     kapt(Libs.Glide.compiler)
-    
+
     debugImplementation(Libs.leakCanary)
     // debugImplementation(Libs.DoKit.debugVersion)
     // releaseImplementation(Libs.DoKit.releaseVersion)
-    
+
     implementation(Libs.timber)
     implementation(Libs.baseRecyclerViewAdapterHelper)
     implementation(Libs.youthBanner)
@@ -157,11 +176,9 @@ dependencies {
     implementation(Libs.licenseDialog)
     implementation(Libs.appUpdate)
     implementation(Libs.activityOnCrash)
-    implementation(Libs.buglyCrashReport)
+    // implementation(Libs.buglyCrashReport)
     implementation(Libs.multiStateView)
-    
-    
-    
+
     ///////////////////////////////////////////////////////////////////////////
     // 以下是 unit test 依赖
     ///////////////////////////////////////////////////////////////////////////
@@ -172,14 +189,14 @@ dependencies {
     testImplementation(Libs.AndroidX.Test.core)
     testImplementation(Libs.AndroidX.archCoreTesting)
     testImplementation(Libs.Google.truth)
-    
+
     ///////////////////////////////////////////////////////////////////////////
     // 以下是 android test 依赖
     ///////////////////////////////////////////////////////////////////////////
     // Koin for Unit test and instrumented test
     androidTestImplementation(Libs.Koin.test)
     androidTestImplementation(Libs.Coroutines.test)
-    
+
     androidTestImplementation(Libs.AndroidX.archCoreTesting)
     // Core Library
     androidTestImplementation(Libs.AndroidX.Test.core)
@@ -203,46 +220,14 @@ dependencies {
 //     addDownloadUrl(updateDescription)
 // }.dependsOn("assembleRelease")
 
-
 fun getOutputFileName(
-        productFlavor: com.android.builder.model.ProductFlavor,
-        buildType: com.android.build.gradle.internal.dsl.BuildType
+    productFlavor: com.android.builder.model.ProductFlavor,
+    buildType: com.android.build.gradle.internal.dsl.BuildType
 ): String {
     return productFlavor.applicationId + buildType.applicationIdSuffix +
             "-" + productFlavor.versionName +
             // "-" + productFlavor.versionCode +
             ".apk"
-}
-
-
-// after you run `git tag`, then you can retrieve it
-fun gitDescribeVersion(): String {
-    
-    val stdOut = ByteArrayOutputStream()
-    
-    exec {
-        // commandLine("git", "describe", "--tags", "--long", "--always", "--match", "[0-9].[0-9]*")
-        commandLine("git", "describe", "--tags", "--long", "--always")
-        standardOutput = stdOut
-        workingDir = rootDir
-    }
-    
-    val describe = stdOut.toString().trim()
-    val gitDescribeMatchRegex = """(.+)\.(\d+)-(\d+)-.*""".toRegex()
-    println("describe: ${describe}")
-    
-    return gitDescribeMatchRegex.matchEntire(describe)
-            ?.destructured
-            ?.let { (major, minor, patch) ->
-                println("$major.$minor.$patch")
-                "$major.$minor.$patch"
-            }
-            ?: throw GradleException("Cannot parse git describe '$describe'")
-}
-
-task("mytest") {
-    println("${semver.info.lastTag}")
-    println("${semver.info.count}")
 }
 
 // assembleRelease后会在app/build/outpus/apk/release/目录下生成apk和outpus.json
