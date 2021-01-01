@@ -10,7 +10,7 @@ plugins {
     id("androidx.navigation.safeargs.kotlin")
     // id("bugly")
     id("io.wusa.semver-git-plugin").version("2.3.7")
-    id("com.tainzhi.android.plugin.upload")
+    id("com.tainzhi.android.plugin.autoupload")
 }
 // apply(plugin = "com.tainzhi.android.plugin.upload")
 
@@ -115,9 +115,15 @@ android {
     }
 
 }
-uploadConfig {
+autoUpload {
     apiKey = "99d9f637f9ca00b7ef97cdb2cdabd8ac"
-    updateDescription = "fix gradle && upload"
+    flavor = "pgy"
+    buildType = "release"
+    updateDescription =
+    """
+        1. 使用自定义plugin上传
+        2. 修改相关依赖
+    """.trimIndent()
 }
 
 // bugly {
