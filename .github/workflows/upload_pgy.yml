@@ -27,11 +27,9 @@ jobs:
         run: |
           ./gradlew assembleRelease
       - name: get apk basekname
-        env:
-          BASE_NAME: $(for i in *apk; do echo $i | sed 's/.apk//'; done)
         run: |
           cd ${{ env.RELEASE_APK_DIR }}
-          cd -
+          echo "BASE_NAME=`for i in *apk; do echo $i | sed 's/.apk//'; done`" >> $GITHUB_ENV
       - name: sign release apk
         uses: r0adkll/sign-android-release@v1
         with:
